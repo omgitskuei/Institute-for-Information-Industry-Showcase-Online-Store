@@ -1,4 +1,3 @@
-ProductBean.java
 package model;
  
 import java.util.Date;
@@ -24,14 +23,14 @@ public class ProductBean {
 	private String ProductDescription;
 	private byte[] ProductImg;
 	private Date ProductTimestamp;
-	private String Category;
+	private String ProductCategory;
 	
 	
 	public ProductBean() {
 	}
  
  
-	public ProductBean(String ProductName, float ProductPrice,int ProductStock,String ProductDescription,byte[] ProductImg,Date ProductTimestamp,String Category) {
+	public ProductBean(String ProductName, float ProductPrice,int ProductStock,String ProductDescription,byte[] ProductImg,Date ProductTimestamp,String ProductCategory) {
 		
 	this.ProductName = ProductName;
 	this.ProductPrice = ProductPrice;
@@ -39,7 +38,7 @@ public class ProductBean {
 	this.ProductDescription = ProductDescription;
 	this.ProductImg = ProductImg;
 	this.ProductTimestamp = ProductTimestamp;
-	this.Category = Category;
+	this.ProductCategory = ProductCategory;
 	
 }
  
@@ -111,13 +110,13 @@ public class ProductBean {
 		this.ProductTimestamp = productTimestamp;
 	}
  
-	@Column(name="Category")
-	public String getCategory() {
-		return Category;
+	@Column(name="ProductCategory")
+	public String getProductCategory() {
+		return ProductCategory;
 	}
  
-	public void setCategory(String category) {
-		this.Category = category;
+	public void setProductCategory(String productCategory) {
+		this.ProductCategory = productCategory;
 	}
 	
 	

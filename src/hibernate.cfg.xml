@@ -27,7 +27,6 @@
         <mapping class="model.SettingBean"/>
         <mapping class="model.ProductBean"/>
         <mapping class="model.OrderBean"/>
-        <mapping class="model.OrderDetailsBean"/>
 
     </session-factory>
 </hibernate-configuration>
