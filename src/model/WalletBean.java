@@ -52,6 +52,7 @@ public class WalletBean {
 	public void setWalletAmount(float walletAmount) {
 		this.walletAmount = walletAmount;
 	}
+<<<<<<< HEAD
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -63,4 +64,10 @@ public class WalletBean {
 		this.userBean = userBean;
 	}
 
+=======
+	
+	testpush
+	
+	
+>>>>>>> b11f9adfd4d76130e19ede981ea61e4e342f4b1f
 }
