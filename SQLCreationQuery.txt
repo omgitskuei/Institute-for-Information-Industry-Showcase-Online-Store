@@ -1,0 +1,85 @@
+-- (1)
+CREATE database EEIT111FinalProjectDB
+GO
+ 
+-- (2)
+use EEIT111FinalProjectDB
+GO
+ 
+-- (3.a.)OneToOne
+CREATE table UsersTable (
+userID int Identity(1,1) Primary Key Not NULL,
+userEmail NVarchar(50) Not NULL, 	-- Required for login
+userPwd NVarchar(50) Not NULL, 	-- Required for login
+admin int DEFAULT '0' Not NULL 
+)
+GO
+ 
+-- (3.b.)OneToOne
+CREATE table ProfilesTable(
+userID int primary key not null references UsersTable(userID),
+profileFullName NVarchar(50),
+profileJoinDate datetime Not NULL,	-- Will automatically set value to Now with Java.time.LocalDateTime.now();
+profileBirthdate datetime,
+profileSex char(1),
+profilePhone NVarchar(50) Not NULL,
+profileAddress NVarchar(50),	-- NULL allowed when updating Profile, but NOT NULL for checkout
+profileVIP int DEFAULT '0' Not NULL,  	-- Defaults to '0' for 'NO, user is NOT VIP'
+)
+GO
+ 
+-- (3.c.)OneToOne
+CREATE table WalletsTable(
+userID int primary key not null references UsersTable(userID),
+walletAmount decimal(18, 2) DEFAULT '0.0' Not NULL,	-- Defaults to $0.0 in Wallet
+)
+GO
+ 
+-- (3.d.)
+CREATE table SettingsTable(
+settingID int Identity(1,1) Primary Key Not NULL,
+userID int Foreign Key REFERENCES UsersTable(userID) Not NULL,
+settingSecurityQ NVarchar(50), 	-- Will use frontend dropdown menu to limit question choices
+settingSecurityA NVarchar(50), 	-- Lets users come up with any String answer, bar special characters
+settingDisplayName NVarchar(50), 	-- User can make display name for added security
+settingsAllowMetadata int DEFAULT '1' Not NULL	-- Defaults to '1' for 'YES, allow Usage data collection'
+)
+GO
+ 
+-- (3.e.)
+CREATE table ProductsTable(
+ProductID int Identity(1,1) Primary Key Not NULL,
+ProductName NVarchar(50)  Not NULL,
+ProductPrice decimal(18, 2) Not NULL,
+ProductStock int Not NULL,
+ProductDescription NVarchar(50),
+ProductImg varbinary(MAX) Not NULL,
+ProductTimestamp Date Not NULL,
+ProductCategory NVarchar(50) Not NULL
+)
+GO
+ 
+-- (3.f.)
+CREATE table OrdersTable(
+OrderID int Identity(1, 1) Primary Key NOT NULL,
+UserID int Foreign KEY REFERENCES UsersTable(UserID),
+Total int NOT NULL,
+MailingAddress nVarchar(max) NOT NULL,
+MailingPhone nVarchar(50) NOT NULL,
+OrderTime date Not NULL --用程式1
+)
+GO
+ 
+-- (3.g.)
+CREATE table OrderDetailsTable(
+OrderDetailID int Identity(1,1) Primary Key Not NULL,
+ProductID int Foreign Key REFERENCES ProductsTable(ProductID) Not NULL,
+ProductCount int Not NULL,
+OrderID int Foreign Key REFERENCES OrdersTable(OrderID) Not NULL,
+)
+GO
+
+--程式1:
+--DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+--LocalDateTime now = LocalDateTime.now();
+--System.out.println(dtf.format(now));  
