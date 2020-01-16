@@ -35,6 +35,7 @@ public class WalletBean {
 		this.walletAmount = walletAmount;
 	}
 	
+	testpush
 	
 	
 }
