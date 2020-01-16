@@ -1,22 +1,21 @@
-ProductBean.java
 package model;
- 
+
 import java.util.Date;
- 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
 import org.springframework.stereotype.Component;
- 
+
 @Entity
 @Table(name = "ProductsTable")
 @Component
 public class ProductBean {
- 
+
 	private int ProductID;
 	private String ProductName;
 	private float ProductPrice;
@@ -25,102 +24,95 @@ public class ProductBean {
 	private byte[] ProductImg;
 	private Date ProductTimestamp;
 	private String Category;
-	
-	
+
 	public ProductBean() {
 	}
- 
- 
-	public ProductBean(String ProductName, float ProductPrice,int ProductStock,String ProductDescription,byte[] ProductImg,Date ProductTimestamp,String Category) {
-		
-	this.ProductName = ProductName;
-	this.ProductPrice = ProductPrice;
-	this.ProductStock = ProductStock;
-	this.ProductDescription = ProductDescription;
-	this.ProductImg = ProductImg;
-	this.ProductTimestamp = ProductTimestamp;
-	this.Category = Category;
-	
-}
- 
- 
-	
-	
+
+	public ProductBean(String ProductName, float ProductPrice, int ProductStock, String ProductDescription,
+			byte[] ProductImg, Date ProductTimestamp, String Category) {
+
+		this.ProductName = ProductName;
+		this.ProductPrice = ProductPrice;
+		this.ProductStock = ProductStock;
+		this.ProductDescription = ProductDescription;
+		this.ProductImg = ProductImg;
+		this.ProductTimestamp = ProductTimestamp;
+		this.Category = Category;
+
+	}
+
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getProductID() {
 		return ProductID;
 	}
- 
+
 	public void setProductID(int productID) {
 		this.ProductID = productID;
 	}
- 
-	@Column(name="ProductName")
+
+	@Column(name = "ProductName")
 	public String getProductName() {
 		return ProductName;
 	}
- 
+
 	public void setProductName(String productName) {
 		this.ProductName = productName;
 	}
- 
-	@Column(name="ProductPric")
+
+	@Column(name = "ProductPric")
 	public float getProductPrice() {
 		return ProductPrice;
 	}
- 
+
 	public void setProductPrice(float productPrice) {
 		this.ProductPrice = productPrice;
 	}
- 
-	@Column(name="ProductStock")
+
+	@Column(name = "ProductStock")
 	public int getProductStock() {
 		return ProductStock;
 	}
- 
+
 	public void setProductStock(int productStock) {
 		this.ProductStock = productStock;
 	}
- 
-	@Column(name="ProductDescription")
+
+	@Column(name = "ProductDescription")
 	public String getProductDescription() {
 		return ProductDescription;
 	}
- 
+
 	public void setProductDescription(String productDescription) {
 		this.ProductDescription = productDescription;
 	}
- 
-	@Column(name="ProductImg")
+
+	@Column(name = "ProductImg")
 	public byte[] getProductImg() {
 		return ProductImg;
 	}
- 
+
 	public void setProductImg(byte[] productImg) {
 		this.ProductImg = productImg;
 	}
- 
-	@Column(name="ProductTimestamp")
+
+	@Column(name = "ProductTimestamp")
 	public Date getProductTimestamp() {
 		return ProductTimestamp;
 	}
- 
+
 	public void setProductTimestamp(Date productTimestamp) {
 		this.ProductTimestamp = productTimestamp;
 	}
- 
-	@Column(name="Category")
+
+	@Column(name = "Category")
 	public String getCategory() {
 		return Category;
 	}
- 
+
 	public void setCategory(String category) {
 		this.Category = category;
 	}
-	
-	
- 
- 
+
 }
