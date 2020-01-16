@@ -1,7 +1,5 @@
 package model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,11 +12,11 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "OrderBean")
+@Table(name = "OrdersTable")
 @Component
 public class OrderBean {
-	private int orderId;
-	private int userId;
+	private int orderID;
+	private int userID;
 	private int total;
 	private String mailingAddress;
 	private String mailingPhone;
@@ -27,8 +25,8 @@ public class OrderBean {
 	public OrderBean() {
 	}
 
-	public OrderBean(int newUserId, int newTotal, String newMailingAddress, String newMailingPhone, Date newOrderTime) {
-		this.userId=newUserId;
+	public OrderBean(int newUserID, int newTotal, String newMailingAddress, String newMailingPhone, Date newOrderTime) {
+		this.userID=newUserID;
 		this.total=newTotal;
 		this.mailingAddress = newMailingAddress;
 		this.mailingPhone = newMailingPhone;
@@ -38,21 +36,21 @@ public class OrderBean {
 	@Id
 	@Column(name="ORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getOrderId() {
-		return orderId;
+	public int getOrderID() {
+		return orderID;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderId(int newOrderID) {
+		this.orderID = newOrderID;
 	}
 
 	@Column(name = "USERID")
-	public int getUserId() {
-		return userId;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserId(int newUserID) {
+		this.userID = newUserID;
 	}
 
 	@Column(name = "TOTAL")
@@ -60,8 +58,8 @@ public class OrderBean {
 		return total;
 	}
 
-	public void setTotal(int total) {
-		this.total = total;
+	public void setTotal(int newTotal) {
+		this.total = newTotal;
 	}
 
 	@Column(name = "MAILINGADDRESS")
@@ -69,8 +67,8 @@ public class OrderBean {
 		return mailingAddress;
 	}
 
-	public void setMailingAddress(String mailingAddress) {
-		this.mailingAddress = mailingAddress;
+	public void setMailingAddress(String newMailingAddress) {
+		this.mailingAddress = newMailingAddress;
 	}
 
 	@Column(name = "MAILINGPHONE")
@@ -78,8 +76,8 @@ public class OrderBean {
 		return mailingPhone;
 	}
 
-	public void setMailingPhone(String mailingPhone) {
-		this.mailingPhone = mailingPhone;
+	public void setMailingPhone(String newMailingPhone) {
+		this.mailingPhone = newMailingPhone;
 	}
 
 	@Column(name = "ORDERTIME")
@@ -87,8 +85,8 @@ public class OrderBean {
 		return orderTime;
 	}
 
-	public void setOrderTime(Date orderTime) {
-		this.orderTime = orderTime;
+	public void setOrderTime(Date newOrderTime) {
+		this.orderTime = newOrderTime;
 	}
 
 }
