@@ -40,20 +40,20 @@ public class UserBeanService {
 		boolean validEmail = newUserEmail.contains("@");
 		
 		
-		
-		boolean validPwd;
-		// Test if passed UserBean is not empty
-		if (validEmail==true && validPwd==true) {
-			uDAO.insertUser(newUser);
-			System.out.println("FINISH: UserBeanService.insert(UserBean insertThisUser)");
-			// Return True, for SUCCESSFUL INSERT
-			return true;
-		} else {
-			System.out.println("ERROR: Insert UserBean FAILED; UserBean insertThisUser == null.");
-			System.out.println("FINISH: UserBeanService.insertUser(UserBean insertThisUser)");
-			// Return False, for FAILED INSERT
-			return false;
-		}
+//		
+//		boolean validPwd;
+//		// Test if passed UserBean is not empty
+//		if (validEmail==true && validPwd==true) {
+//			uDAO.insertUser(newUser);
+//			System.out.println("FINISH: UserBeanService.insert(UserBean insertThisUser)");
+//			// Return True, for SUCCESSFUL INSERT
+//			return true;
+//		} else {
+//			System.out.println("ERROR: Insert UserBean FAILED; UserBean insertThisUser == null.");
+//			System.out.println("FINISH: UserBeanService.insertUser(UserBean insertThisUser)");
+//			// Return False, for FAILED INSERT
+//			return false;
+//		}
 	}
 
 	
