@@ -1,6 +1,6 @@
 package model;
 
-
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProductBeanDAO {
+public class ProductBeanDAO implements ProductBeanDAOInterface {
 
 	private SessionFactory sessionFactory;
 
@@ -19,10 +19,11 @@ public class ProductBeanDAO {
 	public ProductBeanDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	public boolean insertUser(ProductBean insertThisProduct) {
+
+	@Override
+	public boolean insertProduct(ProductBean insertThisProduct) {
 		// Create new Session
-		System.out.println("BEGIN: ProductBeanDAO.insertProduct(ProductBean insertThisUser)");
+		System.out.println("BEGIN: ProductBeanDAO.insertProduct(ProductBean insertThisProduct)");
 		Session session = sessionFactory.getCurrentSession();
 		// Test if passed ProductBean is not empty
 		if (insertThisProduct != null) {
@@ -30,7 +31,7 @@ public class ProductBeanDAO {
 			// Insert the passed ProductBean
 			session.save(insertThisProduct);
 			System.out.println("ProductBean Inserted:");
-			
+
 			System.out.println("ProductName: " + insertThisProduct.getProductName());
 			System.out.println("ProductPrice: " + insertThisProduct.getProductPrice());
 			System.out.println("ProductStock: " + insertThisProduct.getProductStock());
@@ -38,8 +39,8 @@ public class ProductBeanDAO {
 			System.out.println("ProductImg: " + insertThisProduct.getProductImg());
 			System.out.println("ProductTimestamp: " + insertThisProduct.getProductTimestamp());
 			System.out.println("ProductCategory: " + insertThisProduct.getProductCategory());
-			
-			System.out.println("FINISH: UserBeanDAO.inserProduct(ProductBean insertThisProduct)");
+
+			System.out.println("FINISH: ProductBeanDAO.inserProduct(ProductBean insertThisProduct)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
 		}
@@ -52,26 +53,23 @@ public class ProductBeanDAO {
 	@Override
 	public ProductBean selectProduct(ProductBean selectThisProduct) {
 		// Get current Session
-		System.out.println("Begin: ProductBeanDAO.selecUser(ProductBean selectThisProduct)");
+		System.out.println("Begin: ProductBeanDAO.selecProduct(ProductBean selectThisProduct)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if selecThisUser is null
 		if (selectThisProduct != null) {
-			// Try to find selectThisUser
+			// Try to find selectThisProduct
 			ProductBean existingProduct = session.get(ProductBean.class, selectThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, return the result ProductBean existingProduct
-				System.out.println("Finish: ProductBeanDAO.selecUser(ProductBean selectThisProduct)");
+				System.out.println("Finish: ProductBeanDAO.selecProduct(ProductBean selectThisProduct)");
 				return existingProduct;
 			}
 		}
-		//existingProduct returned null meaning selectThisProduct was not found
-		System.out.println("Finish: ProductBeanDAO.selecUser(ProductBean selectThisProduct)");
+		// existingProduct returned null meaning selectThisProduct was not found
+		System.out.println("Finish: ProductBeanDAO.selecProductr(ProductBean selectThisProduct)");
 		return null;
 	}
 
-	
-	
-	
 	// Override tag is only used if supertype ProductBeanDAOInterface ...
 	// ... also has this method.
 	// @Override
@@ -94,7 +92,6 @@ public class ProductBeanDAO {
 			System.out.println(results.get(index).getProductImg());
 			System.out.println(results.get(index).getProductTimestamp());
 			System.out.println(results.get(index).getProductCategory());
-			
 		}
 		// Return List results
 		System.out.println("Finish: ProductBeanDAO.selectAll()");
@@ -102,46 +99,184 @@ public class ProductBeanDAO {
 	}
 
 	@Override
-	public boolean updateEmail(ProductBean updateThisProduct, String newEmail) {
+	public boolean updateProductName(ProductBean updateThisProduct, String newProductName) {
 		// Get current Session
-		System.out.println("Begin: ProductBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductName(ProductBean updateThisProduct, String newProductName)");
 		Session session = sessionFactory.getCurrentSession();
-		// Check if updateThisUser is null
+		// Check if updateThisProduct is null
 		if (updateThisProduct != null) {
-			// Try to find updateThisUser
-			UserBean existingUser = session.get(UserBean.class, updateThisProduct.getUserID());
-			if (existingUser != null) {
-				// If found, update Email and return True
-				String oldEmail = existingUser.getUserEmail();
-				existingUser.setUserEmail(newEmail);
-				System.out.println("Finish: UserBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductName and return True
+				String oldProductName = existingProduct.getProductName();
+				existingProduct.setProductName(newProductName);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductName(ProductBean updateThisProductr, String newProductName)");
 				return true;
 			}
 		}
-		// Return False because 1) updateThisUser was null OR 2) existingUser was null
-		System.out.println("Finish: UserBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductName(ProductBean updateThisProduct, String newProductName)");
 		return false;
 	}
 
 	@Override
-	public boolean updatePwd(UserBean updateThisUser, String newPwd) {
+	public boolean updateProductPrice(ProductBean updateThisProduct, int newProductPrice) {
 		// Get current Session
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductPrice(ProductBean updateThisProduct, int newProductPrice)");
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("Begin: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
-		// Check if updateThisUser is null
-		if (updateThisUser != null) {
-			// Try to find updateThisUser
-			UserBean existingUser = session.get(UserBean.class, updateThisUser.getUserID());
-			if (existingUser != null) {
-				// If found, update Pwd and return True
-				String oldPwd = existingUser.getUserPwd();
-				existingUser.setUserPwd(newPwd);
-				System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductPrice and return True
+				float oldProductPrice = existingProduct.getProductPrice();
+				existingProduct.setProductPrice(newProductPrice);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductPrice(ProductBean updateThisProductr, int newProductPrice)");
 				return true;
 			}
 		}
-		// Return False because 1) updateThisUser was null OR 2) existingUser was null
-		System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductPrice(ProductBean updateThisProduct, int newProductPrice)");
+		return false;
+	}
+
+	@Override
+	public boolean updateProductStock(ProductBean updateThisProduct, int newProductStock) {
+		// Get current Session
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductStock(ProductBean updateThisProduct, int newProductStock)");
+		Session session = sessionFactory.getCurrentSession();
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductStock and return True
+				int oldProductStock = existingProduct.getProductStock();
+				existingProduct.setProductStock(newProductStock);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductStock(ProductBean updateThisProductr, int newProductStock)");
+				return true;
+			}
+		}
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductStock(ProductBean updateThisProduct, int newProductStock/)");
+		return false;
+	}
+
+	@Override
+	public boolean updateProductDescription(ProductBean updateThisProduct, String newProductDescription) {
+		// Get current Session
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductDescription(ProductBean updateThisProduct, String newProductDescription)");
+		Session session = sessionFactory.getCurrentSession();
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductDescription and return True
+				String oldProductName = existingProduct.getProductDescription();
+				existingProduct.setProductDescription(newProductDescription);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductDescription(ProductBean updateThisProductr, String newProductDescription)");
+				return true;
+			}
+		}
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductDescription(ProductBean updateThisProduct, String newProductDescription)");
+		return false;
+	}
+
+	@Override
+	public boolean updateProductImg(ProductBean updateThisProduct, byte[] newProductImg) {
+		// Get current Session
+		System.out
+				.println("Begin: ProductBeanDAO.updateProductImg(ProductBean updateThisProduct, byte[] newProductImg)");
+		Session session = sessionFactory.getCurrentSession();
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductImg and return True
+				byte[] oldProductImg = existingProduct.getProductImg();
+				existingProduct.setProductImg(newProductImg);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductImg(ProductBean updateThisProductr, byte[] newProductImg)");
+				return true;
+			}
+		}
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductImg(ProductBean updateThisProduct, byte[] newProductImg)");
+		return false;
+	}
+
+	@Override
+	public boolean updateProductTimestamp(ProductBean updateThisProduct, Date newProductTimestamp) {
+		// Get current Session
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductTimestamp(ProductBean updateThisProduct, DATE newProductTimestamp)");
+		Session session = sessionFactory.getCurrentSession();
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductTimestamp and return True
+				Date oldProductTimestamp = existingProduct.getProductTimestamp();
+				existingProduct.setProductTimestamp(newProductTimestamp);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductTimestamp(ProductBean updateThisProductr, DATE newProductTimestamp)");
+				return true;
+			}
+		}
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductTimestamp(ProductBean updateThisProduct, byte[] newProductTimestamp)");
+		return false;
+	}
+
+	@Override
+	public boolean updateProductCategory(ProductBean updateThisProduct, String newProductCategory) {
+		// Get current Session
+		System.out.println(
+				"Begin: ProductBeanDAO.updateProductCategory(ProductBean updateThisProduct, String newProductCategory)");
+		Session session = sessionFactory.getCurrentSession();
+		// Check if updateThisProduct is null
+		if (updateThisProduct != null) {
+			// Try to find updateThisProduct
+			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
+			if (existingProduct != null) {
+				// If found, update ProductCategory and return True
+				String oldProductName = existingProduct.getProductCategory();
+				existingProduct.setProductCategory(newProductCategory);
+				System.out.println(
+						"Finish: ProductBeanDAO.updateProductCategory(ProductBean updateThisProductr, String newProductCategory)");
+				return true;
+			}
+		}
+		// Return False because 1) updateThisProduct was null OR 2) existingProduct was
+		// null
+		System.out.println(
+				"Finish: ProductBeanDAO.updateProductCategory(ProductBean updateThisProduct, String newProductCategory)");
 		return false;
 	}
 
@@ -152,19 +287,22 @@ public class ProductBeanDAO {
 		// Check if deleteThisUser is null
 		if (deleteThisProduct != null) {
 			// Try to find deleteThisUser
-			UserBean existingProduct = session.get(ProductBean.class, deleteThisProduct.getProductID());
+			ProductBean existingProduct = session.get(ProductBean.class, deleteThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, delete, return True
-				int deletedUserID = existingProduct.getProductrID();
-				String deleted = existingProduct.get();
-				String deleted = existingProduct.getd();
-				int deleted = existingProduct.get();
+				int deletedProductID = existingProduct.getProductID();
+				String deletedProductName = existingProduct.getProductName();
+				float deletedProductPrice = existingProduct.getProductPrice();
+				int deletedProductStock = existingProduct.getProductStock();
+				String deletedProductDescription = existingProduct.getProductDescription();
+				byte[] deletedProductImg = existingProduct.getProductImg();
+				Date deletedProductTimestamp = existingProduct.getProductTimestamp();
+				String deletedProductCategory = existingProduct.getProductCategory();
 				session.delete(existingProduct);
 				return true;
 			}
+
 		}
-		// Return False because 1) updateThisProduct was null OR 2) existingProduct was null
 		return false;
 	}
-
 }
