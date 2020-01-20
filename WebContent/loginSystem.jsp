@@ -4,7 +4,7 @@
 <form action="<c:url value="/checkLogin.controller" />" method="post">
 	<table>
 		<tr>
-			<td>Name:test</td>
+			<td>Name:</td>
 			<td><input type="text" name="username"></td>
 			<td>${errors.name}</td>
 		</tr>
