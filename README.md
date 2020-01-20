@@ -17,7 +17,7 @@ This project should demonstrate application of back-end development technical sk
 ...more inc.
 
 ## Members/Contributors
-Kuei - omgitskuei | Thomas Lu - Thomas85198 | Alex - alexslashland | Jerry - studentmkp | Zach - CHIA-HAOKUO
+Kuei - omgitskuei | Thomas Lu - Thomas85198 | Alex - alexslashland | Jerry - studentmkp | Zach - CHIA-HAOKUO | Aming -mingjuang
 
 ## Links
 Our [Github repository](https://github.com/omgitskuei/EEIT111FinalProject).
