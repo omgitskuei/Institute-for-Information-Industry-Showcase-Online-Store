@@ -12,6 +12,5 @@
 		<tr>
 			<td><input type="submit"></td>
 		</tr>
-		123
 	</table>
 </form>
