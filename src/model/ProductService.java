@@ -24,8 +24,11 @@ public class ProductService {
 	public ProductService(ProductBeanDAO prDao) {
 		this.prDao = prDao;
 	}
-	
-	
+
+	public boolean insert(ProductBean bean) {
+		return prDao.insertProduct(bean);
+	}
+
 	public ProductBean select(ProductBean bean) {
 		return prDao.selectProduct(selectThisProduct);
 	}
@@ -55,4 +58,5 @@ public class ProductService {
 	public boolean updateProductCategory(ProductBean bean) {
 		return prDao.updateProductCategory(updateThisProduct, newProductCategory);
 	}
+
 }
