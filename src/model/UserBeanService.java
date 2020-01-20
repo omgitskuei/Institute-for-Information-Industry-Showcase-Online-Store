@@ -28,19 +28,74 @@ public class UserBeanService {
 	// Validity means checking all user inputs (specifically userEmail, userPwd)
 	public boolean insert(UserBean newUser) {
 		System.out.println("BEGIN: UserBeanService.insert(UserBean insertThisUser)");
-
-		
-		String pwd = newUser.getUserPwd();
+		// Get values from newUser for validation
 		String email = newUser.getUserEmail();
-		
-		validatePwd(pwd);
-		validateEmail(email);
-		
+		String pwd = newUser.getUserPwd();
+		boolean success = false;
+		// Validate values
+		if (validatePwd(email) && validateEmail(pwd)) {
+			System.out.println("Email & Pwd valid");
+			success = uDAO.insertUser(newUser); //Returns true
+		} else {
+			System.out.println("Email && Pwd invalid");
+		}
 		
 		System.out.println("FINISH: UserBeanService.insert(UserBean insertThisUser)");
+		return success;
+	}
+	
+	public UserBean select(UserBean selectThisUser) {
+		System.out.println("BEGIN: UserBeanService.select(UserBean insertThisUser)");
+		// Get values for validation
+		String email = selectThisUser.getUserEmail();
+		String pwd = selectThisUser.getUserPwd();
+		// Validate values, if not valid email & password, don't bother selecting
+		if (validateEmail(email) && validateEmail(pwd)) {
+			System.out.println("Email && Pwd valid");
+			return uDAO.selectUser(selectThisUser);
+		} else {
+			System.out.println("Email && Pwd invalid");
+		}
+		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
+		return null;
+	}
+	
+	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
+		System.out.println("BEGIN: UserBeanService.updateEmail(UserBean insertThisUser)");
+		// Validate values, if not valid, don't bother with update
+		if (validateEmail(newEmail)) {
+			System.out.println("New Email valid");
+			return uDAO.updateEmail(updateThisUser, newEmail);
+		} else {
+			System.out.println("New Email valid");
+		}
+		System.out.println("FINISH: UserBeanService.updateEmail(UserBean insertThisUser)");
 		return false;
 	}
-
+	
+	public boolean updatePwd(UserBean updateThisUser, String newPwd) {
+		System.out.println("BEGIN: UserBeanService.updatePwd(UserBean insertThisUser)");
+		// Validate values, if not valid, don't bother with update
+		if (validatePwd(newPwd)) {
+			System.out.println("New Password valid");
+			return uDAO.updatePwd(updateThisUser, newPwd);
+		} else {
+			System.out.println("New Password valid");
+		}
+		System.out.println("FINISH: UserBeanService.updatePwd(UserBean insertThisUser)");
+		return false;
+	}
+	
+	public boolean delete(UserBean deleteThisUser) {
+		System.out.println("BEGIN: UserBeanService.delete(UserBean insertThisUser)");
+		// Check if the deleted user exists before trying to delete it
+		if (uDAO.selectUser(deleteThisUser)!=null) {
+			return uDAO.deleteUser(deleteThisUser);
+		}
+		System.out.println("FINISH: UserBeanService.delete(UserBean insertThisUser)");
+		return false;
+	}
+	
 	private static boolean validateEmail(String email) {
 		//email = "kuei.feng.tungchris@gmail.com";
 
