@@ -41,6 +41,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 	@Override
 	public WalletBean selectWallet(WalletBean selectThisWallet) {
 		// Get current Session
+		System.out.println("BEGIN: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if selectThisWallet is null
 		if (selectThisWallet != null) {
@@ -48,16 +49,21 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			WalletBean existingWallet = session.get(WalletBean.class, selectThisWallet.getUserID());
 			if (existingWallet != null) {
 				// If found, return the result WalletBean existingWallet
+				System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 				return existingWallet;
 			}
+			System.out.println("ERROR: Select WalletBean FAILED; WalletBean existingWallet == null.");
 		}
 		// existingWallet returned null meaning selectThisWallet was not found
+		System.out.println("ERROR: Select WalletBean FAILED; WalletBean selectThisWallet == null.");
+		System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 		return null;
 	}
 
 	@Override
 	public boolean updateWallet(WalletBean updateThisWallet, float newwalletAmount) {
 		// Get current Session
+		System.out.println("BEGIN: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if updateThisWallet is null
 		if (updateThisWallet != null) {
@@ -67,17 +73,21 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, update Wallets and return True
 				float oldwalletAmount = existingWallet.getWalletAmount();
 				existingWallet.setWalletAmount(newwalletAmount);
+				System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 				return true;
 			}
+			System.out.println("ERROR: Update WalletBean FAILED; WalletBean existingWallet == null.");
 		}
 		// Return False because 1) updateThisWallet was null OR 2) existingWallet was
 		// null
+		System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 		return false;
 	}
 
 	@Override
 	public boolean deleteWallet(WalletBean deleteThisWallet) {
 		// Get current Session
+		System.out.println("BEGIN: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if deleteThisWallet is null
 		if (deleteThisWallet != null) {
@@ -87,11 +97,14 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, delete, return True
 				float deletewalletAmount = existingWallet.getWalletAmount();
 				session.delete(existingWallet);
+				System.out.println("FINISH: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 				return true;
 			}
+			System.out.println("ERROR: Delete WalletBean FAILED; WalletBean existingWallet == null.");
 		}
 		// Return False because 1) updateThisWallet was null OR 2) existingWallet was
 		// null
+		System.out.println("FINISH: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 		return false;
 	}
 
