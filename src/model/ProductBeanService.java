@@ -1,5 +1,5 @@
 package model;
 
-public interface ProductBeanService {
+public class ProductBeanService {
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class WalletBeanDAO implements WalletBeanInterface {
+public class WalletBeanDAO implements WalletBeanDAOInterface {
 
 	private SessionFactory sessionFactory;
 
