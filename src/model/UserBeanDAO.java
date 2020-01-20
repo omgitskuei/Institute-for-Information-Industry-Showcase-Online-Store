@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserBeanDAO implements UserBeanDAOInterface {
 
+	// Variables: Local Fields
 	private SessionFactory sessionFactory;
 
 	@Autowired
@@ -53,11 +54,13 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 			UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserID());
 			if (existingUser != null) {
 				// If found, return the result UserBean existingUser
+				System.out.println("User Found - Returning User "+ existingUser.getUserID());
 				System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
 				return existingUser;
 			}
 		}
 		// existingUser returned null meaning selectThisUser was not found
+		System.out.println("updateThisUser OR existingUser was NULL");
 		System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
 		return null;
 	}
@@ -80,6 +83,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 			System.out.println(results.get(index).getUserEmail());
 			System.out.println(results.get(index).getUserPwd());
 			System.out.println(results.get(index).getAdmin());
+			System.out.println();
 		}
 		// Return List results
 		System.out.println("Finish: UserBeanDAO.selectAll()");
@@ -99,11 +103,13 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				// If found, update Email and return True
 				String oldEmail = existingUser.getUserEmail();
 				existingUser.setUserEmail(newEmail);
+				System.out.println("User email " + oldEmail + " updated to " + existingUser.getUserEmail());
 				System.out.println("Finish: UserBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
 				return true;
 			}
 		}
 		// Return False because 1) updateThisUser was null OR 2) existingUser was null
+		System.out.println("updateThisUser OR existingUser was NULL");
 		System.out.println("Finish: UserBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
 		return false;
 	}
@@ -121,11 +127,13 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				// If found, update Pwd and return True
 				String oldPwd = existingUser.getUserPwd();
 				existingUser.setUserPwd(newPwd);
+				System.out.println("User password UPDATED " +oldPwd+ " to " + existingUser.getUserPwd());
 				System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
 				return true;
 			}
 		}
 		// Return False because 1) updateThisUser was null OR 2) existingUser was null
+		System.out.println("updateThisUser OR existingUser was NULL");
 		System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
 		return false;
 	}
@@ -133,6 +141,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 	@Override
 	public boolean deleteUser(UserBean deleteThisUser) {
 		// Get current Session
+		System.out.println("Begin: UserBeanDAO.deleteUser(UserBean deleteThisUser)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if deleteThisUser is null
 		if (deleteThisUser != null) {
@@ -145,10 +154,18 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				String deletedUserPwd = existingUser.getUserPwd();
 				int deletedUserAdmin = existingUser.getAdmin();
 				session.delete(existingUser);
+				System.out.println("User DELETED:");
+				System.out.println("User ID: " + deletedUserID);
+				System.out.println("User Email: " + deletedUserEmail);
+				System.out.println("User Pwd: " + deletedUserPwd);
+				System.out.println("User Admin: " + deletedUserAdmin);
+				System.out.println("Finish: UserBeanDAO.deleteUser(UserBean deleteThisUser)");
 				return true;
 			}
 		}
 		// Return False because 1) updateThisUser was null OR 2) existingUser was null
+		System.out.println("updateThisUser OR existingUser was NULL");
+		System.out.println("Finish: UserBeanDAO.deleteUser(UserBean deleteThisUser)");
 		return false;
 	}
 

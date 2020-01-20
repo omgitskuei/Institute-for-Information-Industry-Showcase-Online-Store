@@ -1,3 +1,7 @@
+theme: jekyll-theme-minimal
+title: Welcome to EEIT111FinalProject
+description: Feel free to bookmark this page for easy access to our project, and updates 
+
 # Welcome to EEIT111FinalProject
 
 This is Taiwan 資策會 Digital Talent Cultivation Center/Digital Education Institute, EEIT Class 111 Java development class Team 1 Final Project. It's an online shopping cart website.
@@ -17,7 +21,7 @@ This project should demonstrate application of back-end development technical sk
 ...more inc.
 
 ## Members/Contributors
-Kuei - omgitskuei | Thomas Lu - Thomas85198 | Alex - alexslashland | Jerry - studentmkp | Zach - CHIA-HAOKUO | Aming -mingjuang
+Kuei - omgitskuei | Thomas Lu - Thomas85198
 
 ## Links
 Our [Github repository](https://github.com/omgitskuei/EEIT111FinalProject).

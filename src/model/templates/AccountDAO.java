@@ -1,4 +1,4 @@
-package model;
+package model.templates;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

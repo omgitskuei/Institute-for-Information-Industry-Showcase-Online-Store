@@ -25,4 +25,6 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
-*.yml
+
+# Mac useless file
+.DS_Store
