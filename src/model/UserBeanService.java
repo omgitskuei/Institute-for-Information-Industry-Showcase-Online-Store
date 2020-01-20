@@ -135,15 +135,9 @@ public class UserBeanService {
 					// A valid email cannot begin or end on "."
 					if (!(dotIndexes.contains(0) || dotIndexes.contains(email.length()-1))) {
 						// Domain must comply with LDH rule (letters, digits, hyphen)
-						if ( !(domain.contains("!") && domain.contains("@") && domain.contains("#")
-								&& domain.contains("$") && domain.contains("%") && domain.contains("^")
-								&& domain.contains("&") && domain.contains("*") && domain.contains("(")
-								&& domain.contains(")") && domain.contains("~") && domain.contains("+")
-								&& domain.contains("=") && domain.contains("[") && domain.contains("]")
-								&& domain.contains("{") && domain.contains("}") && domain.contains("|")
-								&& domain.contains(";") && domain.contains("'") && domain.contains(",")
-								&& domain.contains("?") && domain.contains("/") && domain.contains("\\")
-								&& domain.contains("<") && domain.contains(">") && domain.contains("`"))) {
+						// AKA, Domain must NOT contain Special Characters, not including "."
+						CheckSubstring util = new CheckSubstring();
+						if ( util.countSpecialCharacters(domain)==0 ) {
 							// Domain must contain one "."
 							if (domain.contains(".")) {
 								boolean noConsecutiveDotsFlag = true;
