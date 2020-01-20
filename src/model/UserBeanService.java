@@ -2,26 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import util.CheckSubstring;
 
-@Repository
+@Service
 public class UserBeanService {
 
 	// Variables: Local Fields
-	private SessionFactory sessionFactory;
-	UserBeanDAO uDAO;
+	private UserBeanDAO uDAO;
 	
 	// Constructors
 	@Autowired
-	public UserBeanService(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-		// Create a new UserBeanDAO
-		uDAO = new UserBeanDAO(sessionFactory);
+	public UserBeanService(UserBeanDAO uDAO) {
+		this.uDAO = uDAO;
 	}
 	
 	// Test Validity* of newUser before doing UserBeanDAO.insertUser(UserBean)
