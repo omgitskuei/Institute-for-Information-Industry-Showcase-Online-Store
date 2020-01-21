@@ -28,7 +28,11 @@ public class ProductService {
 	public boolean insert(ProductBean bean) {
 		return prDao.insertProduct(bean);
 	}
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	public ProductBean select(ProductBean bean) {
 		return prDao.selectProduct(selectThisProduct);
 	}
