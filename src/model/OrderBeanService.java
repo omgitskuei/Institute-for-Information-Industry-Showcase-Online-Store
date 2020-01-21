@@ -56,10 +56,8 @@ public class OrderBeanService {
 
 	private static boolean validateAddress(String thisAddress) {
 		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(thisAddress);
-			if(countSpec >1) {
+		try {			
+			if(thisAddress.length()>1) {
 				valid = true;
 			}
 		} catch (Exception e) {
