@@ -125,7 +125,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 	}
 
 	@Override
-	public boolean updateProductPrice(ProductBean updateThisProduct, int newProductPrice) {
+	public boolean updateProductPrice(ProductBean updateThisProduct, float newProductPrice) {
 		// Get current Session
 		System.out.println(
 				"Begin: ProductBeanDAO.updateProductPrice(ProductBean updateThisProduct, int newProductPrice)");

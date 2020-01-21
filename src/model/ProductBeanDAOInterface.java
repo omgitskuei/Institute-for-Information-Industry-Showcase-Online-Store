@@ -10,12 +10,13 @@ public interface ProductBeanDAOInterface {
 	public ProductBean selectProduct(ProductBean selectThisProduct);
 	// U.pdate
 	public boolean updateProductName(ProductBean updateThisProduct, String ProductName);
-	public boolean updateProductPrice(ProductBean updateThisProduct, int ProductPrice);
-	public boolean updateProductStock(ProductBean updateThisProduct, int ProductStockl);
+	public boolean updateProductPrice(ProductBean updateThisProduct, float ProductPrice);
+	public boolean updateProductStock(ProductBean updateThisProduct, int ProductStock);
 	public boolean updateProductDescription(ProductBean updateThisProduct, String ProductDescription);
 	public boolean updateProductImg(ProductBean updateThisProduct, byte[] ProductImg);
 	public boolean updateProductTimestamp(ProductBean updateThisProduct, Date ProductTimestamp);
 	public boolean updateProductCategory(ProductBean updateThisProduct, String ProductCategory);
 	// D.elete
 	public boolean deleteProduct(ProductBean deleteThisProduct);
+	
 }
