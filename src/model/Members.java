@@ -1,4 +1,4 @@
-package model.templates;
+package model;
 
 public class Members {
 	private String memberName;

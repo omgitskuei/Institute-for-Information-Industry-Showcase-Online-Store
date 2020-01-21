@@ -49,11 +49,11 @@ public class ProfileBeanService {
 		try {
 			CheckSubstring util = new CheckSubstring();
 			int countSpec = util.countSpecialCharacters(fullName);
-			if(countSpec >1) {
-				
+			if(countSpec==0) {
+				valid = true;
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return valid;
 	}
@@ -63,11 +63,12 @@ public class ProfileBeanService {
 		try {
 			CheckSubstring util = new CheckSubstring();
 			int countSpec = util.countSpecialCharacters(sex);
-			if(countSpec >1) {
-				
+			// Sex is a letter "m", "f", etc. No Special characters, only 1 letter
+			if(countSpec==0 && sex.length()==1) {
+				valid = true;
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return valid;
 	}
@@ -75,10 +76,10 @@ public class ProfileBeanService {
 	private static boolean validatePhone(String phone) {
 		boolean valid = false;
 		try {
+			// checks to make sure only numbers have been entered
 			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(phone);
-			if(countSpec >1) {
-				
+			if(util.countNums(phone)==phone.length()) {
+				valid = true;
 			}
 		} catch (Exception e) {
 
@@ -91,8 +92,8 @@ public class ProfileBeanService {
 		try {
 			CheckSubstring util = new CheckSubstring();
 			int countSpec = util.countSpecialCharacters(address);
-			if(countSpec >1) {
-				
+			if(countSpec>1) {
+				valid = true;
 			}
 		} catch (Exception e) {
 

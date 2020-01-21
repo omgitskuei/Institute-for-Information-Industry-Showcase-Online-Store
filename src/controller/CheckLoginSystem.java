@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.templates.Account;
-import model.templates.AccountService;
+import model.Account;
+import model.AccountService;
 
 @Controller
 @SessionAttributes(names = {"user", "pwd", "errors"})

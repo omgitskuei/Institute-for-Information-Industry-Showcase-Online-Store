@@ -18,8 +18,9 @@
         <property name="format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
         
-        <mapping class="model.Account"/>
-        <mapping class="model.Picture"/>
+        <mapping class="model.templates.Account"/>
+        <mapping class="model.templates.Picture"/>
+        <mapping class="model.templates.Members"/>
         
         <mapping class="model.UserBean"/>
         <mapping class="model.ProfileBean"/>
