@@ -26,8 +26,6 @@ public class ProductService {
 	public ProductService(ProductBeanDAO prDao) {
 		this.prDao = prDao;
 	}
-
-
 	public boolean insert(ProductBean bean) {
 		return prDao.insertProduct(bean);
 	}
