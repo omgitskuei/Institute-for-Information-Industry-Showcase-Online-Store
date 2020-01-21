@@ -20,7 +20,7 @@ public class SettingBean {
 	private String settingSecurityQ;  
 	private String settingSecurityA;  	
 	private String settingDisplayName; 	
-	private boolean settingAllowMetadata;
+	private boolean settingAllowMetadata=true;
 
 	// Constructor
 	public SettingBean() {
@@ -80,12 +80,12 @@ public class SettingBean {
 		this.settingDisplayName = settingDisplayName;
 	}
 	@Column(name="settingAllowMetadata")
-	public boolean getSettingsAllowMetadata() {
+	public boolean getSettingAllowMetadata() {
 		return settingAllowMetadata;
 	}
 
-	public void setSettingsAllowMetadata(boolean settingsAllowMetadata) {
-		this.settingAllowMetadata = settingsAllowMetadata;
+	public void setSettingAllowMetadata(boolean settingAllowMetadata) {
+		this.settingAllowMetadata = settingAllowMetadata;
 	}
 
 	
