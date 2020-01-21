@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "ProductsTable")
 @Component
 public class ProductBean {
-
+	// Local Variables
 	private int ProductID;
 	private String ProductName;
 	private float ProductPrice;
@@ -24,7 +24,8 @@ public class ProductBean {
 	private byte[] ProductImg;
 	private Date ProductTimestamp;
 	private String ProductCategory;
-
+	
+	// Constructors
 	public ProductBean() {
 	}
 
@@ -41,8 +42,9 @@ public class ProductBean {
 
 	}
 
+	// Getters / Setters
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ProductID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getProductID() {
 		return ProductID;
@@ -61,7 +63,7 @@ public class ProductBean {
 		this.ProductName = productName;
 	}
 
-	@Column(name = "ProductPric")
+	@Column(name = "ProductPrice")
 	public float getProductPrice() {
 		return ProductPrice;
 	}

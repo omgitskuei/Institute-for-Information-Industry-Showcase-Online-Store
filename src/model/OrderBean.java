@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "OrdersTable")
 @Component
 public class OrderBean {
+	// Local Variables
 	private int orderID;
 	private int userID;
 	private int total;
@@ -22,6 +23,7 @@ public class OrderBean {
 	private String mailingPhone;
 	private Date orderTime;
 
+	// Constructors
 	public OrderBean() {
 	}
 
@@ -32,7 +34,8 @@ public class OrderBean {
 		this.mailingPhone = newMailingPhone;
 		this.orderTime=newOrderTime;
 	}
-
+	
+	// Getter/Setters
 	@Id
 	@Column(name="ORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

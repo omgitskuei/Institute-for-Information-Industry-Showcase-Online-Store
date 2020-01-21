@@ -71,6 +71,4 @@ public class OrderDetailsBean {
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
-
-
 }
