@@ -43,7 +43,7 @@ public class OrderBean {
 		return orderID;
 	}
 
-	public void setOrderId(int newOrderID) {
+	public void setOrderID(int newOrderID) {
 		this.orderID = newOrderID;
 	}
 
@@ -52,7 +52,7 @@ public class OrderBean {
 		return userID;
 	}
 
-	public void setUserId(int newUserID) {
+	public void setUserID(int newUserID) {
 		this.userID = newUserID;
 	}
 
