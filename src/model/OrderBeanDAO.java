@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderBeanDAO implements OrderBeanDAOInterface {
 
+	// Variables
 	private SessionFactory sessionFactory;
 
 	@Autowired
@@ -22,6 +23,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 
 	@Override
 	public boolean insertOrder(OrderBean insertThisOrder) {
+		// Create new Session
 		System.out.println("BEGIN: OrderBeanDAO.insertOrder(OrderBean insertOrderBean)");
 		Session session = sessionFactory.getCurrentSession();
 
@@ -49,6 +51,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		if(selectThisOrder!=null) {
 			OrderBean existingOrder=session.get(OrderBean.class, selectThisOrder.getOrderID());
 			if(existingOrder!=null) {
+				System.out.println("Order found: OrderID "+ existingOrder.getOrderID()+", Total "+existingOrder.getTotal());
 				System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
 				return existingOrder;
 			}
@@ -87,7 +90,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 			if(existingOrder!=null) {
 				int oldTotal=existingOrder.getTotal();
 				existingOrder.setTotal(newTotal);
-				
+				System.out.println("Order Total updated from "+oldTotal+" to "+existingOrder.getTotal());
 				System.out.println("FINISH: OrderBeanDAO.updateTotal(OrderBean updateThisOrder, int newTotal)");
 				return true;
 			}
@@ -105,7 +108,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 			if(existingOrder!=null) {
 				String oldMailingAddress=existingOrder.getMailingAddress();
 				existingOrder.setMailingAddress(newMailingAddress);
-				
+				System.out.println("Order Mailing Address updated from "+oldMailingAddress+" to "+existingOrder.getMailingAddress());
 				System.out.println("FINISH: OrderBeanDAO.updateMailingAddress(OrderBean updateThisOrder, String newMailingAddress)");
 				return true;
 			}
@@ -123,7 +126,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 			if(existingOrder!=null) {
 				String oldMailingPhone=existingOrder.getMailingPhone();
 				existingOrder.setMailingPhone(newMailingPhone);
-				
+				System.out.println("Order Mailing Phone number Updated to "+oldMailingPhone+" to "+existingOrder.getMailingPhone());
 				System.out.println("FINISH: OrderBeanDAO.updateMailingPhone(OrderBean updateThisOrder, String newMailingPhone)");
 				return true;
 			}
@@ -140,24 +143,20 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 			OrderBean existingOrder=session.get(OrderBean.class, deleteThisOrder.getClass());
 			if(existingOrder!=null) {
 				int deleteOrderID=existingOrder.getOrderID();
-				System.out.println("FINISH: "+deleteOrderID);
-				
 				int deleteUserID=existingOrder.getUserID();
-				System.out.println("FINISH: "+deleteUserID);
-				
 				int deleteTotal=existingOrder.getTotal();
-				System.out.println("FINISH: "+deleteTotal);
-				
 				String deleteMailingAddress=existingOrder.getMailingAddress();
-				System.out.println("FINISH: "+deleteMailingAddress);
-				
 				String deleteMailingPhone=existingOrder.getMailingPhone();
-				System.out.println("FINISH: "+deleteMailingPhone);
-				
 				Date deleteOrderTime=existingOrder.getOrderTime();
-				System.out.println("FINISH: "+deleteOrderTime);
 				
 				session.delete(existingOrder);
+				System.out.println("Order DELETED:");
+				System.out.println("OrderID"+deleteOrderID);
+				System.out.println("UserID: "+deleteUserID);
+				System.out.println("Total: "+deleteTotal);
+				System.out.println("MailingAddress: "+deleteMailingAddress);
+				System.out.println("MailingPhone: "+deleteMailingPhone);
+				System.out.println("DeleteOrderTime: "+deleteOrderTime);
 				System.out.println("FINISH: OrderBeanDAO.deleteOrder(OrderBean deleteThisOrder)");
 				return true;
 			}

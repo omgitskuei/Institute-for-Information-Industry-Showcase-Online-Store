@@ -92,8 +92,6 @@ public class UserBeanService {
 	}
 	
 	private static boolean validateEmail(String email) {
-		//email = "kuei.feng.tungchris@gmail.com";
-
 		// Partition email string based on email syntax; localpart@domain
 		String localpart = email.substring(0, email.indexOf("@"));
 		String domain = email.substring(email.indexOf("@") + 1, email.length());

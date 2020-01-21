@@ -49,6 +49,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			WalletBean existingWallet = session.get(WalletBean.class, selectThisWallet.getUserID());
 			if (existingWallet != null) {
 				// If found, return the result WalletBean existingWallet
+				System.out.println("Wallet Selected: ID"+existingWallet.getUserID()+" Amount"+existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 				return existingWallet;
 			}
@@ -61,7 +62,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 	}
 
 	@Override
-	public boolean updateWallet(WalletBean updateThisWallet, float newwalletAmount) {
+	public boolean updateWalletAmount(WalletBean updateThisWallet, float newwalletAmount) {
 		// Get current Session
 		System.out.println("BEGIN: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 		Session session = sessionFactory.getCurrentSession();
@@ -71,8 +72,10 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			WalletBean existingWallet = session.get(WalletBean.class, updateThisWallet.getUserID());
 			if (existingWallet != null) {
 				// If found, update Wallets and return True
-				float oldwalletAmount = existingWallet.getWalletAmount();
+				float oldWalletAmount = existingWallet.getWalletAmount();
 				existingWallet.setWalletAmount(newwalletAmount);
+				System.out.println("Wallet Amount updated: ID"+existingWallet.getUserID());
+				System.out.println(" Old Amount"+oldWalletAmount+" New Amount"+existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 				return true;
 			}
@@ -95,8 +98,9 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			WalletBean existingWallet = session.get(WalletBean.class, deleteThisWallet.getUserID());
 			if (existingWallet != null) {
 				// If found, delete, return True
-				float deletewalletAmount = existingWallet.getWalletAmount();
+				float deletedWalletAmount = existingWallet.getWalletAmount();
 				session.delete(existingWallet);
+				System.out.println("Wallet Deleted: Previously had amount "+deletedWalletAmount+" in wallet");
 				System.out.println("FINISH: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 				return true;
 			}
@@ -107,7 +111,4 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 		System.out.println("FINISH: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 		return false;
 	}
-
-	
-
 }

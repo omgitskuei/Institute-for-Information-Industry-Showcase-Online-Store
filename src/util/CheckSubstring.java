@@ -1,5 +1,6 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,5 +76,17 @@ public class CheckSubstring {
 			}
 		}
 		return counter;
+	}
+	
+	public ArrayList<String> delimitAtDot(String delimitThisString) {
+		int dotIndex = delimitThisString.indexOf(".");
+		String beforeDot = delimitThisString.substring(0, dotIndex);
+		String afterDot = delimitThisString.substring(dotIndex+1, delimitThisString.length());
+		
+		ArrayList<String> delimitedString = new ArrayList<String>();
+		
+		delimitedString.add(beforeDot);
+		delimitedString.add(afterDot);
+		return delimitedString;
 	}
 }
