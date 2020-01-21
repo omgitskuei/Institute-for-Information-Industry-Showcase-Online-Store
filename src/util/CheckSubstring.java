@@ -79,6 +79,7 @@ public class CheckSubstring {
 	}
 	
 	public ArrayList<String> delimitAtDot(String delimitThisString) {
+		// Makes substrings, split at "."
 		int dotIndex = delimitThisString.indexOf(".");
 		String beforeDot = delimitThisString.substring(0, dotIndex);
 		String afterDot = delimitThisString.substring(dotIndex+1, delimitThisString.length());

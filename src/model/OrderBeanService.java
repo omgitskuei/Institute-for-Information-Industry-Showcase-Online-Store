@@ -3,6 +3,8 @@ package model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import util.CheckSubstring;
+
 @Service
 public class OrderBeanService {
 	// Variables: Local Fields
@@ -33,7 +35,11 @@ public class OrderBeanService {
 	private static boolean validateAddress(String thisAddress) {
 		boolean valid = false;
 		try {
-
+			CheckSubstring util = new CheckSubstring();
+			int countSpec = util.countSpecialCharacters(thisAddress);
+			if(countSpec >1) {
+				
+			}
 		} catch (Exception e) {
 
 		}
