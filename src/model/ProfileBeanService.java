@@ -21,15 +21,13 @@ public class ProfileBeanService {
 	
 	// Test validity of ProfileBean user input
 	// Validity means making sure values make sense
-	public boolean  insert(ProfileBean newProfile) {
+	public boolean insert(ProfileBean newProfile) {
 		System.out.println("BEGIN: ProfileBeanService.insert(ProfileBean newProfile)");
 		// Get values from newProfile for validation
 		String fullName = newProfile.getProfileFullName();
-		Date birthday = newProfile.getProfileBirthdate();
 		String sex = newProfile.getProfileSex();
 		String phone = newProfile.getProfilePhone();
 		String address = newProfile.getProfileAddress();
-		int userVIP = newProfile.getProfileVIP();
 		
 		// TODO JOIN DATE LocalDateTime.now(), there is a type problemg
 		
@@ -42,6 +40,18 @@ public class ProfileBeanService {
 		
 		System.out.println("FINISH: ProfileBeanService.insert(ProfileBean newProfile)");
 		return success;
+	}
+	
+	public boolean updateBirthdate(ProfileBean thisBean) {
+		boolean valid = false;
+		Date birthdate = thisBean.getProfileBirthdate();
+		
+		if () {
+			pDAO.updateBirthdate(thisBean, birthdate);
+		} else {
+			;
+		}
+		return valid;
 	}
 	
 	private static boolean validateFullName(String fullName) {
