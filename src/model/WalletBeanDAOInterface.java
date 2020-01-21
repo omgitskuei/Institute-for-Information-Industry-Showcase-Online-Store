@@ -7,7 +7,7 @@ public interface WalletBeanDAOInterface {
 	// R.ead
 	public WalletBean selectWallet(WalletBean selectThisWallet);
 	// U.pdate
-	public boolean updateWallet(WalletBean updateThisWallet, float newWalletAmount);
+	public boolean updateWalletAmount(WalletBean updateThisWallet, float newWalletAmount);
 	// D.elete
 	public boolean deleteWallet(WalletBean deleteThisWallet);
 }
