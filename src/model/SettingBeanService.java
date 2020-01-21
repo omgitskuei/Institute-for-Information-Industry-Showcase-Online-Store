@@ -31,15 +31,30 @@ public class SettingBeanService {
 		System.out.println("FINISH: SettingBeanService.insert(SettingBean)");
 		return success;
 	}
+	
+	public boolean updateDisplayName(SettingBean updateThisBean) {
+		System.out.println("BEGIN: SettingBeanService.updateDisplayName(SettingBean)");
+		// Local variables
+		boolean success = false;
+		String displayName = updateThisBean.getSettingDisplayName();
+		// Validate input values
+		if (validateDisplayName(displayName)) {
+			success = true;
+			System.out.println("Valid Display Name");
+			sDAO.updateSettingDisplayName(updateThisBean, displayName);
+		}
+		System.out.println("FINISH: SettingBeanService.updateDisplayName(SettingBean)");
+		return success;
+	}
 
 	// Make sure Display Name doesn't have special Letters
 	private static boolean validateDisplayName(String thisName) {
 		boolean valid = false;
 		try {
-			// Count how many special characters
+			// Count how many special characters, and DisplayName must be longer than 6 char
 			CheckSubstring util = new CheckSubstring();
 			int countSpec = util.countSpecialCharacters(thisName);
-			if(countSpec==0) {
+			if(countSpec==0 && thisName.length()>6) {
 				valid = true;
 			}
 		} catch (Exception e) {

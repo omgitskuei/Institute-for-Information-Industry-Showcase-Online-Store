@@ -59,6 +59,21 @@ public class CheckSubstring {
 		}
 		return counter;
 	}
+	
+	public int countSpaces(String checkThisString) {
+		// Define counter
+		int counter = 0;
+		// For each letter of String checkThisString, ...
+		for (int index = 0; index < checkThisString.length(); index++) {
+			// ... Match the letter to a space
+			String letter = checkThisString.substring(index, index + 1);
+			// If a space is found, add 1 to counter
+			if (letter.equals(" ")) {
+				counter++;
+			}
+		}
+		return counter;
+	}
 
 	public int countNums(String checkThisString) {
 		// Define counter
