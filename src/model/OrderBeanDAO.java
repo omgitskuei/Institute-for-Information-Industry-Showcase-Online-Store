@@ -47,18 +47,34 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 	@Override
 	public OrderBean selectOrder(OrderBean selectThisOrder) {
 		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
-		Session session = sessionFactory.getCurrentSession();
-		if(selectThisOrder!=null) {
-			
-			OrderBean existingOrder=session.get(OrderBean.class, selectThisOrder.getOrderID());
-			
-			
-			if(existingOrder!=null) {
-				System.out.println("Order found: OrderID "+ existingOrder.getOrderID()+", Total "+existingOrder.getTotal());
-				System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
-				return existingOrder;
+
+		try {
+			if(selectThisOrder!=null) {
+				System.out.println("Looking for this order: ");
+				System.out.println("OrderID:"+selectThisOrder.getOrderID());
+				System.out.println("orderUserID:"+selectThisOrder.getUserID());
+				System.out.println("orderTotal:"+selectThisOrder.getTotal());
+				System.out.println("orderMailingAddress:"+selectThisOrder.getMailingAddress());
+				System.out.println("orderMailingPhone:"+selectThisOrder.getMailingPhone());
+				System.out.println("OrderTime:"+selectThisOrder.getOrderTime());
+				
+				Session session = sessionFactory.getCurrentSession();
+				String hqlString="FROM OrderBean WHERE userID=:thisID";
+				Query q=session.createQuery(hqlString);
+				q.setParameter("thisID:", selectThisOrder.getUserID());
+				OrderBean existingOrder=(OrderBean)q.uniqueResult();
+				
+				if(existingOrder!=null) {
+					System.out.println("Order found: OrderID "+ existingOrder.getOrderID()+", Total "+existingOrder.getTotal());
+					System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
+					return existingOrder;
+				}
 			}
-		}
+		}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 		System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
 		return null;
 	}
