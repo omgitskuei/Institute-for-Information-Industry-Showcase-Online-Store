@@ -51,13 +51,13 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 				// Try to find selectThisUser
 				System.out.println("Looking for this Profile:");
 				System.out.println("UserID:" + selectThisProfile.getUserID());
-				System.out.println("UserEmail:" + selectThisProfile.getProfileFullName());
-				System.out.println("UserPwd:" + selectThisProfile.getProfileJoinDate());
-				System.out.println("UserAdmin:" + selectThisProfile.getProfileBirthdate());
-				System.out.println("UserAdmin:" + selectThisProfile.getProfileSex());
-				System.out.println("UserAdmin:" + selectThisProfile.getProfilePhone());
-				System.out.println("UserAdmin:" + selectThisProfile.getProfileAddress());
-				System.out.println("UserAdmin:" + selectThisProfile.getProfileVIP());
+				System.out.println("ProfileFullName:" + selectThisProfile.getProfileFullName());
+				System.out.println("ProfileJoinDate:" + selectThisProfile.getProfileJoinDate());
+				System.out.println("ProfileBirthdate:" + selectThisProfile.getProfileBirthdate());
+				System.out.println("ProfileSex:" + selectThisProfile.getProfileSex());
+				System.out.println("ProfilePhone:" + selectThisProfile.getProfilePhone());
+				System.out.println("ProfileAddress:" + selectThisProfile.getProfileAddress());
+				System.out.println("ProfileVIP:" + selectThisProfile.getProfileVIP());
 
 				Session session = sessionFactory.getCurrentSession();
 				String hqlString = "from ProfileBean where profileFullName=:thisFullName and profileJoinDate=:thisJoinDate and profileBirthdate=:thisBirthdate and profileSex=:thisSex and profilePhone=:thisPhone and profileAddress=:thisAddress and profileVIP=:thisVIP ";
