@@ -2,6 +2,7 @@ package model.wallet;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -42,15 +43,21 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 	public WalletBean selectWallet(WalletBean selectThisWallet) {
 		// Get current Session
 		System.out.println("BEGIN: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
-		Session session = sessionFactory.getCurrentSession();
+		
 		// Check if selectThisWallet is null
 		if (selectThisWallet != null) {
 			// Try to find selectThisWallet
+			System.out.println("Looking for this Wallet:");
 			
+			Session session = sessionFactory.getCurrentSession();
 			
 			// HQL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			String hqlString = "from WalletBean where walletAmount=:thisWallet";
+			Query q = session.createQuery(hqlString);
+			q.setParameter("thisWallet", selectThisWallet.getWalletAmount());
 			
-			WalletBean existingWallet = session.get(WalletBean.class, selectThisWallet.getUserID());
+			WalletBean existingWallet = (WalletBean) q.uniqueResult();
+			
 			if (existingWallet != null) {
 				// If found, return the result WalletBean existingWallet
 				System.out.println("Wallet Selected: ID"+existingWallet.getUserID()+" Amount"+existingWallet.getWalletAmount());
