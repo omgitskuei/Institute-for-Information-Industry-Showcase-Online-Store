@@ -46,19 +46,36 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 	@Override
 	public UserBean selectUser(UserBean selectThisUser) {
 		// Get current Session
-		System.out.println("Begin: UserBeanDAO.selecUser(UserBean selectThisUser)");
-		Session session = sessionFactory.getCurrentSession();
+		System.out.println("Begin: UserBeanDAO.selectUser(UserBean selectThisUser)");
 		// Check if selecThisUser is null
-		if (selectThisUser != null) {
-			// Try to find selectThisUser
-			UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserID());
-			if (existingUser != null) {
-				// If found, return the result UserBean existingUser
-				System.out.println("User Found - Returning User "+ existingUser.getUserID());
-				System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
-				return existingUser;
+		try {
+			if (selectThisUser != null) {
+				// Try to find selectThisUser
+				System.out.println("Looking for this user:");
+				System.out.println("UserID:"+selectThisUser.getUserID());
+				System.out.println("UserEmail:"+selectThisUser.getUserEmail());
+				System.out.println("UserPwd:"+selectThisUser.getUserPwd());
+				System.out.println("UserAdmin:"+selectThisUser.getAdmin());
+				
+				Session session = sessionFactory.getCurrentSession();
+				String hqlString = "from UserBean where userEmail=:thisEmail and userPwd=:thisPwd";
+				Query q = session.createQuery(hqlString);
+				q.setParameter("thisEmail", selectThisUser.getUserEmail());
+				q.setParameter("thisPwd", selectThisUser.getUserPwd());
+				UserBean existingUser = (UserBean) q.uniqueResult();
+				
+				//UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserEmail());
+				if (existingUser != null) {
+					// If found, return the result UserBean existingUser
+					System.out.println("User Found - Returning User "+ existingUser.getUserID());
+					System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
+					return existingUser;
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		// existingUser returned null meaning selectThisUser was not found
 		System.out.println("updateThisUser OR existingUser was NULL");
 		System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
