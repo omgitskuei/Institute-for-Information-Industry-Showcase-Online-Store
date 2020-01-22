@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.userBean.UserBean;
-import model.userBean.UserBeanDAO;
-import model.userBean.UserBeanService;
+import model.user.UserBean;
+import model.user.UserBeanDAO;
+import model.user.UserBeanService;
 
 @Controller
 @SessionAttributes(names = {"user", "pwd", "errors"})
@@ -30,7 +30,7 @@ public class AdminLoginController {
 	}
 	
 	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path="/AdminLoginController.controller", method = RequestMethod.POST)
+	@RequestMapping(path="/controller.AdminLoginController", method = RequestMethod.POST)
 	public String processAction(@RequestParam(name = "userEmail") String userEmail, 
 			                    @RequestParam(name = "userPwd") String userPwd,
 			                    Model m) {

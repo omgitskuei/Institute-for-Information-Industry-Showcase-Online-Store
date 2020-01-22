@@ -32,13 +32,13 @@
 	<context:annotation-config />
 	<!--使用annotation組態的類別放在model套件內 -->
 	<context:component-scan base-package="model" />
-	<context:component-scan base-package="model.userBean" />
-	<context:component-scan base-package="model.orderBean" />
-	<context:component-scan base-package="model.orderDetailsBean" />
-	<context:component-scan base-package="model.productBean" />
-	<context:component-scan base-package="model.profileBean" />
-	<context:component-scan base-package="model.settingBean" />
-	<context:component-scan base-package="model.walletBean" />
+	<context:component-scan base-package="model.user.userBean" />
+	<context:component-scan base-package="model.order" />
+	<context:component-scan base-package="model.orderDetails" />
+	<context:component-scan base-package="model.product" />
+	<context:component-scan base-package="model.profile" />
+	<context:component-scan base-package="model.setting" />
+	<context:component-scan base-package="model.wallet" />
 	
 	
 	<mvc:annotation-driven></mvc:annotation-driven>
