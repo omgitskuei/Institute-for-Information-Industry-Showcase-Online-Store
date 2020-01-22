@@ -5,6 +5,8 @@
 <title>Welcome</title>
 </head>
 <body>
-	<h3>Success <br/>${user} ${pwd}</h3>
+<h1>Account Dashboard</h1>
+	<h3>Welcome, <br/>${userEmail} ${userPwd}</h3>
+	
 </body>
 </html>

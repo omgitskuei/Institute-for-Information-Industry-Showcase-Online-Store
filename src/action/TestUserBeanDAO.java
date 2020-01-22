@@ -5,8 +5,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import model.UserBean;
-import model.UserBeanDAO;
+import model.userBean.UserBean;
+import model.userBean.UserBeanDAO;
 
 public class TestUserBeanDAO {
 

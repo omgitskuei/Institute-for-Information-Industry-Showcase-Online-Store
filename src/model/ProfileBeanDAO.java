@@ -41,18 +41,45 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	@Override
 	public ProfileBean selectProfile(ProfileBean selectThisProfile) {
 		System.out.println("Begin: ProfileBeanDAO.selectProfile(ProfileBean insertThisProfile)");
-		// Get current Session
-		Session session = sessionFactory.getCurrentSession();
+
 		// Check if selectThisProfile is null
-		if (selectThisProfile != null) {
-			// Try to find selectProfileThisUser
-			ProfileBean existingProfile = session.get(ProfileBean.class, selectThisProfile.getUserID());
-			if (existingProfile != null) {
-				// If found, return the result ProfileBean existingProfile
-				System.out.println("Profile Found - Returnung Profile" + existingProfile.getUserID());
-				System.out.println("Finish: ProfileBeanDAO.selectProfile(ProfileBean insertThisProfile)");
-				return existingProfile;
+		try {
+			if (selectThisProfile != null) {
+				// Try to find selectThisUser
+				System.out.println("Looking for this Profile:");
+				System.out.println("UserID:" + selectThisProfile.getUserID());
+				System.out.println("UserEmail:" + selectThisProfile.getProfileFullName());
+				System.out.println("UserPwd:" + selectThisProfile.getProfileJoinDate());
+				System.out.println("UserAdmin:" + selectThisProfile.getProfileBirthdate());
+				System.out.println("UserAdmin:" + selectThisProfile.getProfileSex());
+				System.out.println("UserAdmin:" + selectThisProfile.getProfilePhone());
+				System.out.println("UserAdmin:" + selectThisProfile.getProfileAddress());
+				System.out.println("UserAdmin:" + selectThisProfile.getProfileVIP());
+
+				Session session = sessionFactory.getCurrentSession();
+				String hqlString = "from ProfileBean where profileFullName=:thisFullName and profileJoinDate=:thisJoinDate and profileBirthdate=:thisBirthdate and profileSex=:thisSex and profilePhone=:thisPhone and profileAddress=:thisAddress and profileVIP=:thisVIP ";
+				Query q = session.createQuery(hqlString);
+				q.setParameter("thisFullName", selectThisProfile.getProfileFullName());
+				q.setParameter("thisJoinDate", selectThisProfile.getProfileJoinDate());
+				q.setParameter("thisBirthdate", selectThisProfile.getProfileBirthdate());
+				q.setParameter("thisSex", selectThisProfile.getProfileSex());
+				q.setParameter("thisPhone", selectThisProfile.getProfilePhone());
+				q.setParameter("thisAddress", selectThisProfile.getProfileAddress());
+				q.setParameter("thisVIP", selectThisProfile.getProfileVIP());
+
+				ProfileBean existingPrifile = (ProfileBean) q.uniqueResult();
+
+				// UserBean existingUser = session.get(UserBean.class,
+				// selectThisUser.getUserEmail());
+				if (existingPrifile != null) {
+					// If found, return the result UserBean existingUser
+					System.out.println("User Found - Returning User " + existingPrifile.getUserID());
+					System.out.println("Finish: UserBeanDAO.selecProfile(ProfileBean selectThisProfile)");
+					return existingPrifile;
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		// existingProfile returned null meaning selectThisProfile was not found
 		System.out.println("updateThisProfile OR existingProfile was NULL");
