@@ -54,14 +54,34 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 	public ProductBean selectProduct(ProductBean selectThisProduct) {
 		// Get current Session
 		System.out.println("Begin: ProductBeanDAO.selectProduct(ProductBean selectThisProduct)");
-		Session session = sessionFactory.getCurrentSession();
+		
 		// Check if selectThisUser is null
 		if (selectThisProduct != null) {
 			// Try to find selectThisProduct
+			System.out.println("Looking for this Product: ");
+			System.out.println("Product ID:" + selectThisProduct.getProductID());
+			System.out.println("Product Name:" + selectThisProduct.getProductName());
+			System.out.println("Product Price:" + selectThisProduct.getProductPrice());
+			System.out.println("Product Stock:" + selectThisProduct.getProductStock());
+			System.out.println("Product Description:" + selectThisProduct.getProductDescription());
+			System.out.println("Product Img:" + selectThisProduct.getProductImg());
+			System.out.println("Product Timestamp:" + selectThisProduct.getProductTimestamp());
+			System.out.println("Product Category:" + selectThisProduct.getProductCategory());
 			
+			Session session = sessionFactory.getCurrentSession();
 			//**************************** HQL
-			ProductBean existingProduct = session.get(ProductBean.class, selectThisProduct.getProductID());
+			String hqlString = "from ProductBean where ProductID=:thisProductID and ProductName=:thisProductName and ProductPrice=:thisProductPrice and ProductStock=:thisProductStock and ProductDescription=:thisProductDescription and ProductImg=:thisProductImg and ProductTimestamp=:thisProductTimestamp and ProductCategory=:thisProductCategory";
+			Query q = session.createQuery(hqlString);
+			q.setParameter("thisProductID", selectThisProduct.getProductID());
+			q.setParameter("thisProductName", selectThisProduct.getProductName());
+			q.setParameter("thisProductPrice", selectThisProduct.getProductPrice());
+			q.setParameter("thisProductStock", selectThisProduct.getProductStock());
+			q.setParameter("thisProductDescription", selectThisProduct.getProductDescription());
+			q.setParameter("thisProductImg", selectThisProduct.getProductImg());
+			q.setParameter("thisProductTimestamp", selectThisProduct.getProductTimestamp());
+			q.setParameter("thisProductCategory", selectThisProduct.getProductCategory());
 			
+			ProductBean existingProduct = (ProductBean) q.uniqueResult();
 			
 			if (existingProduct != null) {
 				// If found, return the result ProductBean existingProduct
