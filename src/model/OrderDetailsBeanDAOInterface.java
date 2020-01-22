@@ -7,9 +7,9 @@ public interface OrderDetailsBeanDAOInterface {
 	// R.ead
 	public OrderDetailsBean selectOrderDetails(OrderDetailsBean selectThisOrderDetails);
 	// U.pdate
-	public boolean updateProductID(OrderDetailsBean updateThisOrderDetail);
-	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail);
-	public boolean updateOrderID(OrderDetailsBean updateThisOrderDetail);
+	public boolean updateProductID(OrderDetailsBean updateThisOrderDetail, int newProductID);
+	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount);
+	public boolean updateOrderID(OrderDetailsBean updateThisOrderDetail, int newOrderID);
 	// D.elete
 	public boolean deleteOrderDetails(OrderDetailsBean deteleThisOrderDetails);
 }

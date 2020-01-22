@@ -40,7 +40,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			System.out.println("ProductTimestamp: " + insertThisProduct.getProductTimestamp());
 			System.out.println("ProductCategory: " + insertThisProduct.getProductCategory());
 
-			System.out.println("FINISH: ProductBeanDAO.inserProduct(ProductBean insertThisProduct)");
+			System.out.println("FINISH: ProductBeanDAO.insertProduct(ProductBean insertThisProduct)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
 		}
@@ -53,20 +53,20 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 	@Override
 	public ProductBean selectProduct(ProductBean selectThisProduct) {
 		// Get current Session
-		System.out.println("Begin: ProductBeanDAO.selecProduct(ProductBean selectThisProduct)");
+		System.out.println("Begin: ProductBeanDAO.selectProduct(ProductBean selectThisProduct)");
 		Session session = sessionFactory.getCurrentSession();
-		// Check if selecThisUser is null
+		// Check if selectThisUser is null
 		if (selectThisProduct != null) {
 			// Try to find selectThisProduct
 			ProductBean existingProduct = session.get(ProductBean.class, selectThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, return the result ProductBean existingProduct
-				System.out.println("Finish: ProductBeanDAO.selecProduct(ProductBean selectThisProduct)");
+				System.out.println("Finish: ProductBeanDAO.selectProduct(ProductBean selectThisProduct)");
 				return existingProduct;
 			}
 		}
 		// existingProduct returned null meaning selectThisProduct was not found
-		System.out.println("Finish: ProductBeanDAO.selecProductr(ProductBean selectThisProduct)");
+		System.out.println("Finish: ProductBeanDAO.selectProductr(ProductBean selectThisProduct)");
 		return null;
 	}
 
@@ -165,7 +165,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				int oldProductStock = existingProduct.getProductStock();
 				existingProduct.setProductStock(newProductStock);
 				System.out.println(
-						"Finish: ProductBeanDAO.updateProductStock(ProductBean updateThisProductr, int newProductStock)");
+						"Finish: ProductBeanDAO.updateProductStock(ProductBean updateThisProduct, int newProductStock)");
 				return true;
 			}
 		}
