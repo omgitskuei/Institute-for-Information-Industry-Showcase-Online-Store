@@ -62,6 +62,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 				Session session = sessionFactory.getCurrentSession();
 				String hqlString = "from ProfileBean where profileFullName=:thisFullName and profileJoinDate=:thisJoinDate and profileBirthdate=:thisBirthdate and profileSex=:thisSex and profilePhone=:thisPhone and profileAddress=:thisAddress and profileVIP=:thisVIP ";
 				Query q = session.createQuery(hqlString);
+				q.setParameter("thisUserID", selectThisProfile.getUserID());
 				q.setParameter("thisFullName", selectThisProfile.getProfileFullName());
 				q.setParameter("thisJoinDate", selectThisProfile.getProfileJoinDate());
 				q.setParameter("thisBirthdate", selectThisProfile.getProfileBirthdate());
@@ -70,15 +71,14 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 				q.setParameter("thisAddress", selectThisProfile.getProfileAddress());
 				q.setParameter("thisVIP", selectThisProfile.getProfileVIP());
 
-				ProfileBean existingPrifile = (ProfileBean) q.uniqueResult();
+				ProfileBean existingProfile = (ProfileBean) q.uniqueResult();
 
-				// UserBean existingUser = session.get(UserBean.class,
-				// selectThisUser.getUserEmail());
-				if (existingPrifile != null) {
-					// If found, return the result UserBean existingUser
-					System.out.println("User Found - Returning User " + existingPrifile.getUserID());
-					System.out.println("Finish: UserBeanDAO.selecProfile(ProfileBean selectThisProfile)");
-					return existingPrifile;
+			
+				if (existingProfile != null) {
+					// If found, return the result ProfileBean existingProfile
+					System.out.println("Profile Found - Returning User " + existingProfile.getUserID());
+					System.out.println("Finish: ProfileBeanDAO.selecProfile(ProfileBean selectThisProfile)");
+					return existingProfile;
 				}
 			}
 		} catch (Exception e) {
