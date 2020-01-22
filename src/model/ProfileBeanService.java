@@ -30,11 +30,13 @@ public class ProfileBeanService {
 		String address = newProfile.getProfileAddress();
 		
 		// TODO JOIN DATE LocalDateTime.now(), there is a type problemg
+		Date birthDate = newProfile.getProfileBirthdate();
+		
 		
 		boolean success = false;
 		// Validate values
 		// not yet check : joinDate, birthday, userVIP
-		if (validateFullName(fullName) && validateSex(sex) && validatePhone(phone) && validateAddress(address)) {
+		if (validateFullName(fullName) && validateSex(sex) && validatePhone(phone) && validateAddress(address) && validateBirthdate(birthdate)) {
 			pDAO.insertProfile(newProfile);
 		}
 		
@@ -46,7 +48,7 @@ public class ProfileBeanService {
 		boolean valid = false;
 		Date birthdate = thisBean.getProfileBirthdate();
 		
-		if () {
+		if (v) {
 			pDAO.updateBirthdate(thisBean, birthdate);
 		} else {
 			;
@@ -110,5 +112,7 @@ public class ProfileBeanService {
 		}
 		return valid;
 	}
+	
+	private static boolean validateBirth
 	
 }

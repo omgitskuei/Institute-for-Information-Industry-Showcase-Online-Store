@@ -13,4 +13,10 @@ public class OrderDetailsBeanService {
 	public OrderDetailsBeanService(OrderDetailsBeanDAO odDAO) {
 		this.odDAO = odDAO;
 	}
+	
+	// Test validity of OrderDetailsBean user input
+	public boolean insert() {
+		boolean success;
+		return success;
+	}
 }
