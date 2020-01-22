@@ -49,7 +49,10 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
 		Session session = sessionFactory.getCurrentSession();
 		if(selectThisOrder!=null) {
+			
 			OrderBean existingOrder=session.get(OrderBean.class, selectThisOrder.getOrderID());
+			
+			
 			if(existingOrder!=null) {
 				System.out.println("Order found: OrderID "+ existingOrder.getOrderID()+", Total "+existingOrder.getTotal());
 				System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
