@@ -92,4 +92,12 @@ public class OrderBean {
 		this.orderTime = newOrderTime;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "OrderBean [orderID=" + orderID + ", userID=" + userID + ", total=" + total + ", mailingAddress="
+//				+ mailingAddress + ", mailingPhone=" + mailingPhone + ", orderTime=" + orderTime + "]";
+//	}
+	
+	
+
 }
