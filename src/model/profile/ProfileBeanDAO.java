@@ -13,13 +13,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 
+	// Local fields
 	private SessionFactory sessionFactory;
 
+	// Constructors
 	@Autowired
 	public ProfileBeanDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
+	// CRUD methods
 	@Override
 	public boolean insertProfile(ProfileBean insertThisProfile) {
 		// Create new Session

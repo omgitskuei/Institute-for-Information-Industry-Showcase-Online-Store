@@ -19,7 +19,7 @@ public class OrderBeanService {
 	// Test validity of OrderBean user input
 	// Validity means making sure values make sense
 	public boolean insert(OrderBean insertThisBean) {
-		System.out.println("BEGIN: OrderBeanService.insert(OrderBean oDAO)");
+		System.out.println("BEGIN: OrderBeanService.insert(OrderBean)");
 		// Local variables
 		boolean success = false;
 		String address = insertThisBean.getMailingAddress();
@@ -27,30 +27,39 @@ public class OrderBeanService {
 		// Validate input values
 		if (validateAddress(address) && validatePhone(phone)) {
 			oDAO.insertOrder(insertThisBean);
+			System.out.println("Insert successful");
+		} else {
+			System.out.println("Insert failed");
 		}
-		System.out.println("FINISH: OrderBeanService.insert(OrderBean oDAO)");
+		System.out.println("FINISH: OrderBeanService.insert(OrderBean)");
 		return success;
 	}
 	
 	public boolean updateAddress(OrderBean thisBean) {
+		System.out.println("BEGIN: OrderBeanService.updateAddress(OrderBean)");
 		boolean success = false;
 		if (validateAddress(thisBean.getMailingAddress())) {
 			success = true;
 			oDAO.updateMailingAddress(thisBean, thisBean.getMailingAddress());
+			System.out.println("Update successful");
 		} else {
 			System.out.println("Update failed");
 		}
+		System.out.println("FINISH: OrderBeanService.updateAddress(OrderBean)");
 		return success;
 	}
 	
 	public boolean updatePhone(OrderBean thisBean) {
+		System.out.println("BEGIN: OrderBeanService.updatePhone(OrderBean)");
 		boolean success = false;
 		if (validatePhone(thisBean.getMailingPhone())) {
 			success = true;
 			oDAO.updateMailingPhone(thisBean, thisBean.getMailingPhone());
+			System.out.println("Update successful");
 		} else {
 			System.out.println("Update failed");
 		}
+		System.out.println("BEGIN: OrderBeanService.updatePhone(OrderBean)");
 		return success;
 	}
 

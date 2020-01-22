@@ -1,5 +1,6 @@
 package model.profile;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,22 @@ public class ProfileBeanService {
 		System.out.println("FINISH: ProfileBeanService.insert(ProfileBean newProfile)");
 		return success;
 	}
+	
+	private static boolean validateFullName(String fullName) {
+		boolean valid = false;
+		try {
+			CheckSubstring util = new CheckSubstring();
+			int countSpec = util.countSpecialCharacters(fullName);
+			int countNum = util.countNums(fullName);
+			ArrayList<String> dotIndexes = util.delimitAtDot(fullName);
+			if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+				valid = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return valid;
+	}
 
 	public boolean validBirthdate(Date birthDate) {
 		boolean valid = false;
@@ -50,20 +67,6 @@ public class ProfileBeanService {
 				valid = true;
 			} else {
 				valid = false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return valid;
-	}
-
-	private static boolean validateFullName(String fullName) {
-		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(fullName);
-			if (countSpec == 0) {
-				valid = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

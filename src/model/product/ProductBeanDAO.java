@@ -58,7 +58,11 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		// Check if selectThisUser is null
 		if (selectThisProduct != null) {
 			// Try to find selectThisProduct
+			
+			//**************************** HQL
 			ProductBean existingProduct = session.get(ProductBean.class, selectThisProduct.getProductID());
+			
+			
 			if (existingProduct != null) {
 				// If found, return the result ProductBean existingProduct
 				System.out.println("Finish: ProductBeanDAO.selectProduct(ProductBean selectThisProduct)");

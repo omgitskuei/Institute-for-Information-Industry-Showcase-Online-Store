@@ -46,6 +46,10 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 		// Check if selectThisWallet is null
 		if (selectThisWallet != null) {
 			// Try to find selectThisWallet
+			
+			
+			// HQL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
 			WalletBean existingWallet = session.get(WalletBean.class, selectThisWallet.getUserID());
 			if (existingWallet != null) {
 				// If found, return the result WalletBean existingWallet

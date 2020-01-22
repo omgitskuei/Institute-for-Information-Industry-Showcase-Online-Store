@@ -28,16 +28,16 @@ public class OrderBean {
 	}
 
 	public OrderBean(int newUserID, int newTotal, String newMailingAddress, String newMailingPhone, Date newOrderTime) {
-		this.userID=newUserID;
-		this.total=newTotal;
+		this.userID = newUserID;
+		this.total = newTotal;
 		this.mailingAddress = newMailingAddress;
 		this.mailingPhone = newMailingPhone;
-		this.orderTime=newOrderTime;
+		this.orderTime = newOrderTime;
 	}
-	
+
 	// Getter/Setters
 	@Id
-	@Column(name="ORDERID")
+	@Column(name = "ORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getOrderID() {
 		return orderID;
@@ -91,13 +91,4 @@ public class OrderBean {
 	public void setOrderTime(Date newOrderTime) {
 		this.orderTime = newOrderTime;
 	}
-
-//	@Override
-//	public String toString() {
-//		return "OrderBean [orderID=" + orderID + ", userID=" + userID + ", total=" + total + ", mailingAddress="
-//				+ mailingAddress + ", mailingPhone=" + mailingPhone + ", orderTime=" + orderTime + "]";
-//	}
-	
-	
-
 }

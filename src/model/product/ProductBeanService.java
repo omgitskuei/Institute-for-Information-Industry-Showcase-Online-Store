@@ -17,9 +17,6 @@ public class ProductBeanService {
 		this.prDao = prDao;
 	}
 	
-	
-	
-	
 	public boolean insert(ProductBean newProduct) {
 		System.out.println("BEGIN: ProductService.insert(Product insertThisProduct)");
 		// Get values from newUser for validation

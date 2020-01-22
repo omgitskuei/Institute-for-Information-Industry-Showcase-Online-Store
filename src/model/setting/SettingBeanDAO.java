@@ -137,6 +137,8 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 		if(deleteThisSetting!=null) {
 			SettingBean existingSetting=session.get(SettingBean.class, deleteThisSetting.getClass());
 			if(existingSetting!=null) {
+				
+				// TO DO Fix this please: consult ProfileDAO.deleteProfile()
 				int deleteSettingID=existingSetting.getSettingID();
 				System.out.println("FINISH: "+deleteSettingID);
 				
