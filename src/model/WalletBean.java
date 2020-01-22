@@ -13,6 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Component;
 
+import model.userBean.UserBean;
+
 @Entity
 @Table(name = "WalletsTable")
 @Component
