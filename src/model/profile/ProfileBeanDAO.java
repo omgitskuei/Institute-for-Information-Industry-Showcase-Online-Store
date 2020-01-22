@@ -62,7 +62,6 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 				Session session = sessionFactory.getCurrentSession();
 				String hqlString = "from ProfileBean where profileFullName=:thisFullName and profileJoinDate=:thisJoinDate and profileBirthdate=:thisBirthdate and profileSex=:thisSex and profilePhone=:thisPhone and profileAddress=:thisAddress and profileVIP=:thisVIP ";
 				Query q = session.createQuery(hqlString);
-				q.setParameter("thisUserID", selectThisProfile.getUserID());
 				q.setParameter("thisFullName", selectThisProfile.getProfileFullName());
 				q.setParameter("thisJoinDate", selectThisProfile.getProfileJoinDate());
 				q.setParameter("thisBirthdate", selectThisProfile.getProfileBirthdate());
