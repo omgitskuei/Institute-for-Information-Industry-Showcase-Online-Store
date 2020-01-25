@@ -3,6 +3,7 @@ package model.setting;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -42,10 +43,22 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 	@Override
 	public SettingBean selectSetting(SettingBean selectThisSetting) {
 		System.out.println("BEGIN: SettingBeanDAO.selectSetting(SettingBean selectThisSetting)");
+		
+	if(selectThisSetting != null) {	
 		Session session = sessionFactory.getCurrentSession();
+		// HQL
+		String hqlString = "from SettingBean where settingID=:thisSettingID and userID=:thisUserID and settingSecurityQ=:thisSettingSecurityQ and settingSecurityA=:thisSettingSecurityA and settingDisplayName=:thisSettingDisplayName and settingAllowMetadata=thisSettingAllowMetadata";
+		Query q = session.createQuery(hqlString);
+		q.setParameter("thisSettingID", selectThisSetting.getSettingID());
+		q.setParameter("thisSettingID", selectThisSetting.getUserID());
+		q.setParameter("thisSettingID", selectThisSetting.getSettingSecurityQ());
+		q.setParameter("thisSettingID", selectThisSetting.getSettingSecurityA());
+		q.setParameter("thisSettingID", selectThisSetting.getSettingDisplayName());
+		q.setParameter("thisSettingID", selectThisSetting.getSettingAllowMetadata());
+		
+		SettingBean existingSetting = (SettingBean) q.uniqueResult();
+		
 		if(selectThisSetting!=null) {
-			SettingBean existingSetting=session.get(SettingBean.class, selectThisSetting.getSettingID());
-			if(existingSetting!=null) {
 				System.out.println("FINISH: SettingBeanDAO.selectSetting(OrderBean selectThisSetting)");
 				return existingSetting;
 			}
