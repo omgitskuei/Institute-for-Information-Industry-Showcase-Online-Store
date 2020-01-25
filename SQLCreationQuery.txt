@@ -63,7 +63,7 @@ GO
 CREATE table OrdersTable(
 OrderID int Identity(1, 1) Primary Key NOT NULL,
 UserID int Foreign KEY REFERENCES UsersTable(UserID),
-Total int NOT NULL,
+Total decimal(18,2) NOT NULL,
 MailingAddress nVarchar(max) NOT NULL,
 MailingPhone nVarchar(50) NOT NULL,
 OrderTime date Not NULL --用程式1
