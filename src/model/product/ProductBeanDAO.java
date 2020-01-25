@@ -69,7 +69,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			System.out.println("Product Category:" + selectThisProduct.getProductCategory());
 			
 			Session session = sessionFactory.getCurrentSession();
-			//**************************** HQL
+			// HQL
 			String hqlString = "from ProductBean where ProductID=:thisProductID and ProductName=:thisProductName and ProductPrice=:thisProductPrice and ProductStock=:thisProductStock and ProductDescription=:thisProductDescription and ProductImg=:thisProductImg and ProductTimestamp=:thisProductTimestamp and ProductCategory=:thisProductCategory";
 			Query q = session.createQuery(hqlString);
 			q.setParameter("thisProductID", selectThisProduct.getProductID());

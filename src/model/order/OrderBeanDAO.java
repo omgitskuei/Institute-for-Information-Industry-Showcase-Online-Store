@@ -59,11 +59,13 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 				System.out.println("orderMailingAddress:" + selectThisOrder.getMailingAddress());
 				System.out.println("orderMailingPhone:" + selectThisOrder.getMailingPhone());
 				System.out.println("OrderTime:" + selectThisOrder.getOrderTime());
-
+				
 				Session session = sessionFactory.getCurrentSession();
-				String hqlString = "FROM OrderBean WHERE userID=:thisID";
+				// Hibernate Query Language 
+				String hqlString = "FROM OrderBean WHERE UserID=:thisID AND Total=thisTotal";
 				Query q = session.createQuery(hqlString);
-				q.setParameter("thisID:", selectThisOrder.getUserID());
+				q.setParameter("thisID", selectThisOrder.getUserID());
+				q.setParameter("thisTotal", selectThisOrder.getTotal());
 				OrderBean existingOrder = (OrderBean) q.uniqueResult();
 
 				if (existingOrder != null) {
