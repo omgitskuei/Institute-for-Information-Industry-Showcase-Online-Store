@@ -2,9 +2,12 @@ package model.orderDetails;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import model.user.UserBean;
 
 /* TODO
 *
@@ -117,10 +120,17 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface{
 		// Get current Session
 		System.out.println(
 				"Begin: OrderDetailsBeanDAO.update");
-		Session session = sessionFactory.getCurrentSession();
 		// Check if updateThisProduct is null
 		if (updateThisOrderDetail != null) {
 			// Try to find updateThisProduct
+			
+			Session session = sessionFactory.getCurrentSession();
+			String hqlString = "from UserBean where userEmail=:thisEmail and userPwd=:thisPwd";
+			Query q = session.createQuery(hqlString);
+			q.setParameter("thisEmail", selectThisUser.getUserEmail());
+			q.setParameter("thisPwd", selectThisUser.getUserPwd());
+			UserBean existingUser = (UserBean) q.uniqueResult();
+			
 			OrderDetailsBean existingOrderDetails = session.get(OrderDetailsBean.class, updateThisOrderDetail.getOrderID());
 			if (existingOrderDetails != null) {
 				// If found, update OrderID and return True
