@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -19,15 +20,14 @@ public class OrderDetailsBean {
 	private int orderDetailID;
 	private int productID;
 	private int productCount;
+	@OneToMany(mappedBy="OrderBean")
 	private int orderID;
 	
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
-		
 	}
 
 	public OrderDetailsBean(int productID, int productCount, int orderID) {
-		super();
 		this.productID = productID;
 		this.productCount = productCount;
 		this.orderID = orderID;
