@@ -3,7 +3,7 @@ package action;
 import java.util.Date;
 
 import util.GetRuntimeInput;
-import util.Timestamp;
+import util.GetDateOrTime;
 
 public class TestUtil {
 	public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class TestUtil {
 		GetRuntimeInput util = new GetRuntimeInput();
 		String input = util.getConsoleInputBR("Input String:");
 		
-		Timestamp util1 = new Timestamp();
+		GetDateOrTime util1 = new GetDateOrTime();
 		for (int index=0;index< Integer.parseInt(input);index++) {
 			Date d = util1.generateDate();
 			System.out.println(d);

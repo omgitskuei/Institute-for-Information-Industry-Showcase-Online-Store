@@ -65,7 +65,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			System.out.println("Product Stock:" + selectThisProduct.getProductStock());
 			System.out.println("Product Description:" + selectThisProduct.getProductDescription());
 			System.out.println("Product Img:" + selectThisProduct.getProductImg());
-			System.out.println("Product Timestamp:" + selectThisProduct.getProductTimestamp());
+			System.out.println("Product GetDateOrTime:" + selectThisProduct.getProductTimestamp());
 			System.out.println("Product Category:" + selectThisProduct.getProductCategory());
 			
 			Session session = sessionFactory.getCurrentSession();

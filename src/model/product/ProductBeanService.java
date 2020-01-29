@@ -135,10 +135,10 @@ public class ProductBeanService {
 		System.out.println("BEGIN: ProductService.updateProductTimestamp(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
 		if (checkTimestamp(newProductTimestamp)) {
-			System.out.println("New Timestamp valid");
+			System.out.println("New GetDateOrTime valid");
 			return prDao.updateProductTimestamp(updateThisProduct, newProductTimestamp);
 		} else {
-			System.out.println("New Timestamp valid");
+			System.out.println("New GetDateOrTime valid");
 		}
 		System.out.println("FINISH: ProductService.updaete(Product insertThisProduct)");
 		return false;

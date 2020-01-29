@@ -6,7 +6,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-public class Timestamp {
+public class GetDateOrTime {
 	
 	// Generate current date 
 	public Date generateDate() {
@@ -15,7 +15,7 @@ public class Timestamp {
 		// Format the new date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		// Console trail
-		System.out.println("Timestamp generated: "+dateFormat.format(newDate)); //prints out current Date
+		System.out.println("GetDateOrTime generated: "+dateFormat.format(newDate)); //prints out current Date
 		return newDate;
 	}
 	
@@ -26,7 +26,7 @@ public class Timestamp {
 		// Format the new local date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		// Console trail
-		System.out.println("Timestamp generated: "+dateFormat.format(generatedLocalDate)); //prints out current Date
+		System.out.println("GetDateOrTime generated: "+dateFormat.format(generatedLocalDate)); //prints out current Date
 		return generatedLocalDate;
 	}
 	
