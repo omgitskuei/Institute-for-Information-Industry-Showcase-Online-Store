@@ -43,6 +43,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		return false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public UserBean selectUser(UserBean selectThisUser) {
 		// Get current Session
@@ -85,6 +86,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 	// Override tag is only used if supertype UserBeanDAOInterface ...
 	// ... also has this method.
 	// @Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<UserBean> selectAll() {
 		// Get current Session
 		System.out.println("Begin: UserBeanDAO.selectAll()");

@@ -3,72 +3,143 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.user.UserBean;
-import model.user.UserBeanDAO;
 import model.user.UserBeanService;
 
 @Controller
-@SessionAttributes(names = {"user", "pwd", "errors"})
+@SessionAttributes(names = { "userEmail", "userPwd", "rememberMe" })
 public class AdminLoginController {
 
-	// Which Service am I using for this Controller?
-	//private UserBeanDAO DAO;
 	private UserBeanService service;
+	private HttpServletResponse response;
 
 	@Autowired
-	public AdminLoginController(UserBeanService service) {
-		//this.DAO = thisDAO;
+	public AdminLoginController(UserBeanService service, HttpServletResponse response) {
 		this.service = service;
-	}
-	
-	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path="/controller.AdminLoginController", method = RequestMethod.POST)
-	public String processAction(@RequestParam(name = "userEmail") String userEmail, 
-			                    @RequestParam(name = "userPwd") String userPwd,
-			                    Model m) {
-		
-		System.out.println("BEGIN: /AdminLoginController.controller");
-		
-		Map<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
-		
-		// Check for user not inputting anything
-		if(userEmail==null || userEmail.length()==0) {
-			errors.put("emailError", "Email is required");
-			System.out.println("Email error");
-		}
-		// Check for user not inputting anything
-		if(userPwd==null || userPwd.length()==0) {
-			errors.put("pwdError", "Password is required");
-			System.out.println("Password error");
-		}
-		// There are error messages, return to previous page with error messages
-		if(errors!=null && !errors.isEmpty()) {
-			System.out.println("Returning to loginSystem with error messages");
-			return "loginSystem2";
-		}
-		
-		// Add variables for hqlString on UserBeanDAO.selectUser
-		m.addAttribute("userEmail", userEmail);
-		m.addAttribute("userPwd", userPwd);
-		// Do UserBeanService.select(UserBean a UserBean with userEmail, userPwd)
-		UserBean foundBean = service.select(new UserBean(userEmail, userPwd, 1));
-		System.out.println("THIS IS FOUNDBEAN: "+foundBean);
-		
-		if(foundBean != null) {
-			return "loginSuccess";
-		}		
-		
-		errors.put("msgError", "username or password is not correct");
-		return "loginSystem2";
+		this.response = response;
 	}
 
+	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.GET)
+	public String processActionGET(@RequestParam(name = "userEmail") String uEmail,
+			@RequestParam(name = "userPwd") String uPwd,
+			Model nextPage) {
+		System.out.println(" > GET METHOD CALLED <");
+		
+		System.out.println("USER INPUT INVALID: Returning to AdminLogin");
+		Map<String, String> errors = new HashMap<String, String>();
+		if(uEmail==null || uEmail.length()==0) {
+			errors.put("emailError", "Email is required");
+		}
+		
+		if(uPwd==null || uPwd.length()==0) {
+			errors.put("pwdError", "Password is required");
+		}
+		nextPage.addAttribute("errors", errors);
+		return "AdminLogin";
+	}
+	
+	
+	// URL address for this controller, method POST/GET, what data fields
+	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.POST)
+	public String processAction(@RequestParam(name = "userEmail") String uEmail,
+			@RequestParam(name = "userPwd") String uPwd,
+			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
+			Model nextPage) {
+
+		System.out.println("BEGIN /controller.AdminIndexController");
+		System.out.println("User input: ");
+		System.out.println("Email = " + uEmail);
+		System.out.println("Password = " + uPwd);
+		System.out.println("Remember Me = " + remMe);
+		System.out.println("");
+
+		// Check for empty input
+		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
+			
+			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
+			if (remMe == true) {
+				System.out.println("MAKING COOKIE");
+				writeLoginCookie(uEmail, nextPage, response);
+			}
+			
+			// Turn user input into a persistence bean
+			UserBean bean = new UserBean();
+			bean.setUserEmail(uEmail);
+			bean.setUserPwd(uPwd);
+			bean.setAdmin(1);
+			// Use bean to use UserBeanService service
+			UserBean results = service.select(bean);
+			System.out.println("Service.select(bean) RESULTS: ");
+			System.out.println("Class = " + results.getClass());
+			System.out.println("User ID = " + results.getUserID());
+			System.out.println("Email = " + results.getUserEmail());
+			System.out.println("Password = " + results.getUserPwd());
+			System.out.println("Admin = " + results.getAdmin());
+			System.out.println("");
+			// If match found, return
+			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
+			if (results.getUserEmail().equals(uEmail) && results.getUserPwd().equals(uPwd) && results.getAdmin() == 1) {
+				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
+				nextPage.addAttribute("loggedInUserEmail", uEmail);
+				nextPage.addAttribute("loggedInUserPwd", uPwd);
+				return "AdminDashboard";
+			}
+			// If match NOT found, return to previous page AdminLogin
+			else {
+				System.out.println("USER NOT FOUND: Returning to AdminLogin");
+				Map<String, String> errors = new HashMap<String, String>();
+				if(uEmail==null || uEmail.length()==0) {
+					errors.put("notFoundError", "Incorrect Email or Password");
+				}
+				nextPage.addAttribute("errors", errors);
+				return "AdminLogin";
+			}
+		}
+		// One of the User's input is empty, return to previous page with error messages
+		else {
+			System.out.println("USER INPUT INVALID: Returning to AdminLogin");
+			Map<String, String> errors = new HashMap<String, String>();
+			if(uEmail==null || uEmail.length()==0) {
+				errors.put("emailError", "Email is required");
+			}
+			
+			if(uPwd==null || uPwd.length()<8) {
+				errors.put("pwdError", "Password is too short");
+				if(uPwd==null || uPwd.length()==0) {
+					errors.put("pwdError", "Password is required");
+				}
+			}
+			
+			nextPage.addAttribute("errors", errors);
+			return "AdminLogin";
+		}
+	}
+
+	@RequestMapping("/writeAdminLoginCookie")
+	private String writeLoginCookie(
+			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") String email,
+			Model nextPage, HttpServletResponse response) {
+		// ^ name is synonymous to 'value'
+		response.addCookie(new Cookie("adminLoginCookie", email));
+		return "writeLoginCookie";
+	}
+
+	@RequestMapping("/readAdminLoginCookie")
+	public String readLoginCookie(
+			@CookieValue(value = "adminLoginCookie", required = false, defaultValue = "user@domain.com") String loginCookie) {
+
+		return "readCookie";
+	}
 }

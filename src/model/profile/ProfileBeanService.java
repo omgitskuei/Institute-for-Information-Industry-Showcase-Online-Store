@@ -45,18 +45,22 @@ public class ProfileBeanService {
 	
 	private static boolean validateFullName(String fullName) {
 		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(fullName);
-			int countNum = util.countNums(fullName);
-			ArrayList<String> dotIndexes = util.delimitAtDot(fullName);
-			if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
-				valid = true;
+		if (fullName != null) {
+			try {
+				CheckSubstring util = new CheckSubstring();
+				int countSpec = util.countSpecialCharacters(fullName);
+				int countNum = util.countNums(fullName);
+				ArrayList<String> dotIndexes = util.delimitAtDot(fullName);
+				if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+					valid = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return valid;
+		} else {
+			return valid;
 		}
-		return valid;
 	}
 
 	public boolean validBirthdate(Date birthDate) {
@@ -76,45 +80,57 @@ public class ProfileBeanService {
 
 	private static boolean validateSex(String sex) {
 		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(sex);
-			// Sex is a letter "m", "f", etc. No Special characters, only 1 letter
-			if (countSpec == 0 && sex.length() == 1) {
-				valid = true;
+		if ( sex != null) {
+			try {
+				CheckSubstring util = new CheckSubstring();
+				int countSpec = util.countSpecialCharacters(sex);
+				// Sex is a letter "m", "f", etc. No Special characters, only 1 letter
+				if (countSpec == 0 && sex.length() == 1) {
+					valid = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return valid;
+		} else {
+			return valid;
 		}
-		return valid;
 	}
 
 	private static boolean validatePhone(String phone) {
 		boolean valid = false;
-		try {
-			// checks to make sure only numbers have been entered
-			CheckSubstring util = new CheckSubstring();
-			if (util.countNums(phone) == phone.length()) {
-				valid = true;
+		if (phone != null) {
+			try {
+				// checks to make sure only numbers have been entered
+				CheckSubstring util = new CheckSubstring();
+				if (util.countNums(phone) == phone.length()) {
+					valid = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return valid;
+		} else {
+			return valid;
 		}
-		return valid;
 	}
 
 	private static boolean validateAddress(String address) {
 		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			int countSpec = util.countSpecialCharacters(address);
-			if (countSpec > 1) {
-				valid = true;
+		if (address != null) {
+			try {
+				CheckSubstring util = new CheckSubstring();
+				int countSpec = util.countSpecialCharacters(address);
+				if (countSpec > 1) {
+					valid = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return valid;
+		} else {
+			return valid;
 		}
-		return valid;
 	}
 
 }

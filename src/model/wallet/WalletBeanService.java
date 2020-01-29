@@ -50,15 +50,16 @@ public class WalletBeanService {
 			ArrayList<String> delimitedThisMoney = util.delimitAtDot(thisMoneyString);
 			// If user entered a number with <= the number of digits allowed, success = TRUE
 			if (validCurrencyDecimals <= delimitedThisMoney.get(1).length()) {
-				System.out.println("Wallet Amount has valid num of decimals");
-				System.out.println("FINISH: WalletBeanService.validateMoney(float)");
+				System.out.println("VALID WALLET AMOUNT");
 				success = true;
+			} else {
+				System.out.println("ERROR: INVALID MONEY AMOUNT");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("ERROR: INVALID MONEY AMOUNT");
+		
 		System.out.println("FINISH: WalletBeanService.validateMoney(float)");
 		return success;
 	}

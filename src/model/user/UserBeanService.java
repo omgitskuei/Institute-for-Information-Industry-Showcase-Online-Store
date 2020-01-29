@@ -45,14 +45,16 @@ public class UserBeanService {
 		String email = selectThisUser.getUserEmail();
 		String pwd = selectThisUser.getUserPwd();
 		// Validate values, if not valid email & password, don't bother selecting
-		if (validateEmail(email) && validateEmail(pwd)) {
-			System.out.println("Email && Pwd valid");
-			return uDAO.selectUser(selectThisUser);
+		if (validateEmail(email)) {
+			if (validatePwd(pwd) ) {
+				System.out.println("Email && Pwd valid");
+				return uDAO.selectUser(selectThisUser);
+			}
 		} else {
 			System.out.println("Email && Pwd invalid");
 		}
 		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
-		return null;
+		return selectThisUser;
 	}
 	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
@@ -91,7 +93,8 @@ public class UserBeanService {
 		return false;
 	}
 	
-	private static boolean validateEmail(String email) {
+	private boolean validateEmail(String email) {
+		System.out.println("BEGIN: validateEmail");
 		// Partition email string based on email syntax; localpart@domain
 		String localpart = email.substring(0, email.indexOf("@"));
 		String domain = email.substring(email.indexOf("@") + 1, email.length());
@@ -120,7 +123,9 @@ public class UserBeanService {
 					dotIndexes.add(index);
 				}
 			}
-			System.out.println(dotIndexes);
+			System.out.println("how many @s in email = "+countAt);
+			System.out.println("how many spaces in email = "+noSpaces);
+			System.out.println("index of dots in email = "+dotIndexes);
 			// A valid email must have "@" and can only have one "@"
 			if (countAt == 1) {
 				// A valid email must have no spaces
@@ -134,10 +139,13 @@ public class UserBeanService {
 							// Domain must contain one "."
 							if (domain.contains(".")) {
 								boolean noConsecutiveDotsFlag = true;
-								// Domain cannot have any consecutive dots
-								for (int index=0;index<dotIndexes.size()-1;index++) {
-									if ((dotIndexes.get(index+1)-dotIndexes.get(index))==1) {
-										noConsecutiveDotsFlag = false;
+								// If there's more than 1 dot, Domain cannot have any consecutive dots
+								if (dotIndexes.size()>1) {
+									System.out.println("More than 1 dot in email");
+									for (int index=0;index<dotIndexes.size()-1;index++) {
+										if ((dotIndexes.get(index+1)-dotIndexes.get(index))==1) {
+											noConsecutiveDotsFlag = false;
+										}
 									}
 								}
 								if(noConsecutiveDotsFlag) {
@@ -165,40 +173,43 @@ public class UserBeanService {
 		return false;
 	}
 	
-	public static boolean validatePwd(String pwd) {
+	public boolean validatePwd(String pwd) {
 		System.out.println("Begin: validatePwd(String)");
-		// A valid password must have >=8 characters
-		if (pwd.length()>=8) {
-			// Partition pwd into substrings of each character
-			ArrayList<String> pwdEachChar = new ArrayList<String>();
-			for (int index = 0; index < pwd.length(); index++) {
-				pwdEachChar.add(pwd.substring(index, index+1));
-				
-			}
-			// A valid password must NOT contain spaces
-			if (!(pwdEachChar.contains(" "))) {
-				// A valid password must contain >=1 special characters
-				// A valid password must contain >=1 Capitalized letters
-				// A valid password must contain >=1 Lower-case letters
-				CheckSubstring util = new CheckSubstring();
-				if (util.countCapLetters(pwd)>=1 && util.countLowLetters(pwd)>=1 && util.countSpecialCharacters(pwd)>=1) {
-					// A valid password must contain >=1 numbers
-					if (util.countNums(pwd)>=1) {
-						System.out.println("Valid Input: Pwd");
-						return true;
+		try {
+			// A valid password must have >=8 characters
+			if (pwd.length()>=8) {
+				// Partition pwd into substrings of each character
+				ArrayList<String> pwdEachChar = new ArrayList<String>();
+				for (int index = 0; index < pwd.length(); index++) {
+					pwdEachChar.add(pwd.substring(index, index+1));
+				}
+				// A valid password must NOT contain spaces
+				if (!(pwdEachChar.contains(" "))) {
+					// A valid password must contain >=1 special characters
+					// A valid password must contain >=1 Capitalized letters
+					// A valid password must contain >=1 Lower-case letters
+					CheckSubstring util = new CheckSubstring();
+					if (util.countCapLetters(pwd)>=1 && util.countLowLetters(pwd)>=1 && util.countSpecialCharacters(pwd)>=1) {
+						// A valid password must contain >=1 numbers
+						if (util.countNums(pwd)>=1) {
+							System.out.println("Valid Input: Pwd");
+							return true;
+						} else {
+							System.out.println("Invalid Input: Pwd must contain at least one number");
+						}
 					} else {
-						System.out.println("Invalid Input: Pwd must contain at least one number");
+						System.out.println("Invalid Input: Pwd must contain at least one Special character, Capital letter, and Lower-case letter");
 					}
 				} else {
-					System.out.println("Invalid Input: Pwd must contain at least one Special character, Capital letter, and Lower-case letter");
+					System.out.println("Invalid Input: Pwd must not contain spaces");
 				}
 			} else {
-				System.out.println("Invalid Input: Pwd must not contain spaces");
+				System.out.println("Invalid Input: Pwd must be longer than 8 characters");
 			}
-		} else {
-			System.out.println("Invalid Input: Pwd must be longer than 8 characters");
+			System.out.println("Finish: validatePwd(String)");
+			return false;
+		} catch (Exception e) {
+			return false;
 		}
-		System.out.println("Finish: validatePwd(String)");
-		return false;
 	}
 }
