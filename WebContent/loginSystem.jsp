@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h3>Form</h3>
 <h1>ADMIN LOGIN</h1>
-<form action="<c:url value="/AdminLoginController.controller" />" method="post">
+<form action="<c:url value="/checkLogin.controller" />" method="post">
 	<table>
 		<!-- Email text field -->
 		<tr>
