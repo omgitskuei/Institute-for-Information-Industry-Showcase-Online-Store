@@ -17,7 +17,7 @@ public class AdminUsersManagementController {
 	}
 
 	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.AdminIndexController", method = RequestMethod.POST)
+	@RequestMapping(path = "/controller.AdminUsersManagementController", method = RequestMethod.POST)
 	public String processAction( Model nextPage) {
 		System.out.println("Directing to AdminLogin");
 		return "AdminLogin";
