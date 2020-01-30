@@ -42,7 +42,44 @@ public class ProfileBeanService {
 		System.out.println("FINISH: ProfileBeanService.insert(ProfileBean newProfile)");
 		return success;
 	}
+
+	public ProfileBean select(ProfileBean newProfile) {
+		ProfileBean results = new ProfileBean();
+		results = pDAO.selectProfile(newProfile);
+		return results;
+	}
+
+	public boolean updateFullName(ProfileBean thisPB) {
+		boolean success = false;
+		// See if thisPB values are valid
+		String newFullName = thisPB.getProfileFullName();
+		if( validateFullName(newFullName) ) {
+			ProfileBean result = pDAO.selectProfile(thisPB);
+			success = pDAO.updateFullName(result, newFullName );
+		}
+		// See if thisPB exists in DB
+		return success;
+	}
 	
+	public boolean updateAddress(ProfileBean thisPB) {
+		boolean success = false;
+		// See if thisPB values are valid
+		String newAddress = thisPB.getProfileAddress();
+		if( validateAddress(newAddress) ) {
+			ProfileBean result = pDAO.selectProfile(thisPB);
+			success = pDAO.updateFullName(result, newAddress );
+		}
+		// See if thisPB exists in DB
+		return success;
+	}
+
+	public boolean delete(ProfileBean thisPB) {
+		boolean success = false;
+		// See if thisPB exists in DB
+
+		return success;
+	}
+
 	private static boolean validateFullName(String fullName) {
 		boolean valid = false;
 		if (fullName != null) {
@@ -51,7 +88,7 @@ public class ProfileBeanService {
 				int countSpec = util.countSpecialCharacters(fullName);
 				int countNum = util.countNums(fullName);
 				ArrayList<String> dotIndexes = util.delimitAtDot(fullName);
-				if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+				if (countSpec == 0 && countNum == 0 && dotIndexes.size() == 0) {
 					valid = true;
 				}
 			} catch (Exception e) {
@@ -65,7 +102,7 @@ public class ProfileBeanService {
 
 	public boolean validBirthdate(Date birthDate) {
 		boolean valid = false;
-		
+
 		try {
 			if (birthDate != null) {
 				valid = true;
@@ -80,7 +117,7 @@ public class ProfileBeanService {
 
 	private static boolean validateSex(String sex) {
 		boolean valid = false;
-		if ( sex != null) {
+		if (sex != null) {
 			try {
 				CheckSubstring util = new CheckSubstring();
 				int countSpec = util.countSpecialCharacters(sex);
