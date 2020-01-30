@@ -1,10 +1,13 @@
 package model.product;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import util.CheckSubstring;
 
 @Service
 public class ProductBeanService {
@@ -31,7 +34,7 @@ public class ProductBeanService {
 		
 		
 		// Validate values
-		if (checkName(Name) && checkPrice(Price) && checkStock(Stock) && checkDescription(Description) && checkImg(Img) && checkTimestamp(Timestamp) && checkCategory(Category)) {
+		if (validName(Name) && validPrice(Price) && validStock(Stock) && validDescription(Description) && validImg(Img) && validTimestamp(Timestamp) && validCategory(Category)) {
 			System.out.println("correct");
 			flag = prDao.insertProduct(newProduct); //Returns true
 		} else {
@@ -52,7 +55,7 @@ public class ProductBeanService {
 		Date Timestamp = selectThisProduct.getProductTimestamp();
 		String Category = selectThisProduct.getProductCategory();
 		// Validate values
-		if (checkName(Name) && checkPrice(Price) && checkStock(Stock) && checkDescription(Description) && checkImg(Img) && checkTimestamp(Timestamp) && checkCategory(Category)) {
+		if (validName(Name) && validPrice(Price) && validStock(Stock) && validDescription(Description) && validImg(Img) && validTimestamp(Timestamp) && validCategory(Category)) {
 			System.out.println("correct");
 			return prDao.selectProduct(selectThisProduct);
 		} else {
@@ -65,7 +68,7 @@ public class ProductBeanService {
 	public boolean updateProductName(ProductBean updateThisProduct, String newProductName) {
 		System.out.println("BEGIN: ProductService.updateProductName(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkName(newProductName)) {
+		if (validName(newProductName)) {
 			System.out.println("New Name valid");
 			return prDao.updateProductName(updateThisProduct, newProductName);
 		} else {
@@ -79,7 +82,7 @@ public class ProductBeanService {
 	public boolean updateProductPrice(ProductBean updateThisProduct, float newProductPrice) {
 		System.out.println("BEGIN: ProductService.updateProductPrice(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkPrice(newProductPrice)) {
+		if (validPrice(newProductPrice)) {
 			System.out.println("New Price valid");
 			return prDao.updateProductPrice(updateThisProduct, newProductPrice);
 		} else {
@@ -93,7 +96,7 @@ public class ProductBeanService {
 	public boolean updateProductStock(ProductBean updateThisProduct, int newProductStock) {
 		System.out.println("BEGIN: ProductService.updateProductStock(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkStock(newProductStock)) {
+		if (validStock(newProductStock)) {
 			System.out.println("New Stock valid");
 			return prDao.updateProductStock(updateThisProduct, newProductStock);
 		} else {
@@ -107,7 +110,7 @@ public class ProductBeanService {
 	public boolean updateProductDescription(ProductBean updateThisProduct, String newProductDescription) {
 		System.out.println("BEGIN: ProductService.updateProductDescription(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkDescription(newProductDescription)) {
+		if (validDescription(newProductDescription)) {
 			System.out.println("New Description valid");
 			return prDao.updateProductDescription(updateThisProduct, newProductDescription);
 		} else {
@@ -121,7 +124,7 @@ public class ProductBeanService {
 	public boolean updateProductImg(ProductBean updateThisProduct, byte[] newProductImg) {
 		System.out.println("BEGIN: ProductService.updateProductImg(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkImg(newProductImg)) {
+		if (validImg(newProductImg)) {
 			System.out.println("New Img valid");
 			return prDao.updateProductImg(updateThisProduct, newProductImg);
 		} else {
@@ -134,7 +137,7 @@ public class ProductBeanService {
 	public boolean updateProductTimestamp(ProductBean updateThisProduct, Date newProductTimestamp) {
 		System.out.println("BEGIN: ProductService.updateProductTimestamp(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkTimestamp(newProductTimestamp)) {
+		if (validTimestamp(newProductTimestamp)) {
 			System.out.println("New GetDateOrTime valid");
 			return prDao.updateProductTimestamp(updateThisProduct, newProductTimestamp);
 		} else {
@@ -148,7 +151,7 @@ public class ProductBeanService {
 	public boolean updateProductCategory(ProductBean updateThisProduct, String newProductCategory) {
 		System.out.println("BEGIN: ProductService.updateProductCategory(ProductBean insertThisProduct)");
 		// Validate values, if not valid, don't bother with update
-		if (checkCategory(newProductCategory)) {
+		if (validCategory(newProductCategory)) {
 			System.out.println("New Category valid");
 			return prDao.updateProductCategory(updateThisProduct, newProductCategory);
 		} else {
@@ -160,37 +163,132 @@ public class ProductBeanService {
 	
 	
 	
-private static boolean checkName(String Name) {
-	return false;
+private static boolean validName(String Name) {
+	boolean valid = false;
+	if (Name != null) {
+		try {
+			CheckSubstring util = new CheckSubstring();
+			int countSpec = util.countSpecialCharacters(Name);
+			int countNum = util.countNums(Name);
+			ArrayList<String> dotIndexes = util.delimitAtDot(Name);
+			if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+				valid = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return valid;
+	} else {
+		return valid;
+	}
 	}
 	
-private static boolean checkPrice(float Price) {
-	return false;
+private static boolean validPrice(float Price) {
+	boolean valid = false;
+	
+	try {
+		String  ThisPrice = Float.toString( Price);
+		if (ThisPrice !=null) {
+			valid = true;
+		} else {
+			valid = false;
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return valid;
 		
 	}
 
-private static boolean checkStock(int Stock) {
-	return false;
+private static boolean validStock(int Stock) {
+boolean valid = false;
+	
+	try {
+		String  ThisStock = Float.toString( Stock);
+		if (ThisStock != null) {
+			valid = true;
+		} else {
+			valid = false;
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return valid;
+		
 	
 }
 
-private static boolean checkDescription(String Description) {
-	return false;
+private static boolean validDescription(String Description) {
+	boolean valid = false;
+	if (Description != null) {
+		try {
+			CheckSubstring util = new CheckSubstring();
+			int countSpec = util.countSpecialCharacters(Description);
+			int countNum = util.countNums(Description);
+			ArrayList<String> dotIndexes = util.delimitAtDot(Description);
+			if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+				valid = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return valid;
+	} else {
+		return valid;
+	}
 	
 }
 
-private static boolean checkImg(byte[] Img) {
-	return false;
+private static boolean validImg(byte[] Img) {
+	boolean valid = false;
+	
+	try {
+		if (Img != null) {
+			valid = true;
+		} else {
+			valid = false;
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return valid;
 	
 }
 
-private static boolean checkTimestamp(Date Timestamp) {
-	return false;
+private static boolean validTimestamp(Date Timestamp) {
+	boolean valid = false;
+	
+	try {
+		if (Timestamp != null) {
+			valid = true;
+		} else {
+			valid = false;
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return valid;
 	
 }
 
-private static boolean checkCategory(String Category) {
-	return false;
+private static boolean validCategory(String Category) {
+	boolean valid = false;
+	if (Category != null) {
+		try {
+			CheckSubstring util = new CheckSubstring();
+			int countSpec = util.countSpecialCharacters(Category);
+			int countNum = util.countNums(Category);
+			ArrayList<String> dotIndexes = util.delimitAtDot(Category);
+			if (countSpec == 0 && countNum == 0 && dotIndexes.size()==0) {
+				valid = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return valid;
+	} else {
+		return valid;
+	}
 	
 }
 	
