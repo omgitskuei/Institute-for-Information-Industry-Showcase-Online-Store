@@ -58,7 +58,7 @@ public class AdminLoginController {
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			Model nextPage) {
 
-		System.out.println("BEGIN /controller.AdminIndexController");
+		System.out.println("BEGIN /controller.AdminLoginController");
 		System.out.println("User input: ");
 		System.out.println("Email = " + uEmail);
 		System.out.println("Password = " + uPwd);
@@ -90,7 +90,8 @@ public class AdminLoginController {
 			System.out.println("");
 			// If match found, return
 			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
-			if (results.getUserEmail().equals(uEmail) && results.getUserPwd().equals(uPwd) && results.getAdmin() == 1) {
+
+			if (results.getUserID()!=0) {
 				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
@@ -100,9 +101,7 @@ public class AdminLoginController {
 			else {
 				System.out.println("USER NOT FOUND: Returning to AdminLogin");
 				Map<String, String> errors = new HashMap<String, String>();
-				if(uEmail==null || uEmail.length()==0) {
-					errors.put("notFoundError", "Incorrect Email or Password");
-				}
+				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
 				return "AdminLogin";
 			}
@@ -145,7 +144,7 @@ public class AdminLoginController {
 	
 	// Write Logout 
 	@RequestMapping(path = "/controller.AdminLogoutController", method = RequestMethod.POST)
-	public String processAction( Model nextPage) {
+	public String processActionLogout( Model nextPage) {
 		System.out.println("Directing to Login Page");
 		return "AdminLogin";
 	}

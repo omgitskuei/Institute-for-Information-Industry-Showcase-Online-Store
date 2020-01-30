@@ -42,20 +42,26 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav">
             <li class="nav-item px-2">
-              <a href="inventories.html" class="nav-link">庫存管理</a>
+             <form class="form nav-link" name="DirectInventoryForm" action=<jstl:url value="/controller.AdminInventoryController" />
+        method="post" >
+        	<input type="submit" class="btn btn-primary btn-sm mt-1" title="Admin Inventory Button" name="adminInventoryButton" value="庫存管理">
+        	</form>
             </li>
+            <form class="form nav-link" name="DirectOrderForm" action=<jstl:url value="/controller.AdminOrderController" />
+        method="post" >
+        	<input type="submit" class="btn btn- btn-sm mt-1" title="Admin Order Button" name="adminOrderButton" value="訂單管理">
+        	</form>
             <li class="nav-item px-2">
-              <a href="orders.html" class="nav-link">訂單管理</a>
-            </li>
-            <li class="nav-item px-2">
-              <a href="users.html" class="nav-link">使用者管理</a>
+              <form class="form nav-link" name="DirectUserForm" action=<jstl:url value="/controller.AdminUserController" />
+        method="post" >
+        	<input type="submit" class="btn btn-warning text-black btn-sm mt-1" title="Admin User Button" name="adminUserButton" value="使用者管理">
             </li>
           </ul>
   
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mr-3">
              <span class="nav-link">
-                <i class="fas fa-user"></i> Welcome ${loggedInUserEmail}
+                <i class="fas fa-user"></i> Welcome ${userEmail}
               </span>
             </li>
             <li class="nav-item">
@@ -95,7 +101,7 @@
         </a>
       </div>
       <div class="col-md-3">
-        <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#addUserModal">
+        <a href="#" class="btn btn-warning btn-block text-black" data-toggle="modal" data-target="#addUserModal">
           <i class="fas fa-plus"></i> 新增使用者
         </a>
       </div>
@@ -213,7 +219,7 @@
             <h4 class="display-4">
               <i class="fas fa-users"></i> 4
             </h4>
-            <a href="users.html" class="btn btn-outline-light btn-sm">檢視</a>
+            <a href="<jstl:url value = "/controller.ProfileController"/>" class="btn btn-outline-light btn-sm" > Show Profile </a>
           </div>
         </div>
       </div>
