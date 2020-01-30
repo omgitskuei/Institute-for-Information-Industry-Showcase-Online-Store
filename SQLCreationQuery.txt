@@ -42,7 +42,7 @@ userID int Foreign Key REFERENCES UsersTable(userID) Not NULL,
 settingSecurityQ NVarchar(50), 	-- Will use frontend dropdown menu to limit question choices
 settingSecurityA NVarchar(50), 	-- Lets users come up with any String answer, bar special characters
 settingDisplayName NVarchar(50), 	-- User can make display name for added security
-settingsAllowMetadata int DEFAULT '1' Not NULL	-- Defaults to '1' for 'YES, allow Usage data collection'
+settingAllowMetadata int DEFAULT '1' Not NULL	-- Defaults to '1' for 'YES, allow Usage data collection'
 )
 GO
  
