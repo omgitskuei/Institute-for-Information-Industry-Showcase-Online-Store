@@ -64,7 +64,7 @@
            <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
-                  <input type="text" class="form-control" name="userEmail">
+                  <input type="email" class="form-control" name="userEmail">
                   <span id="emailErrorSpan">${errors.emailError}</span>
                 </div>
                 <div class="form-group">
@@ -75,7 +75,8 @@
                 <div class="form-group ml-4">
                   <input class="form-check-input" type="checkbox" id="inlineFormCheck"/>
             	  <label class="form-check-label" for="FormCheck">
-             		記住帳號密碼
+             		記住帳號密碼  <br>
+             		${errors.notFoundError}
             	  </label>
                 </div>
                 <input type="submit" value="Login" class="btn btn-primary btn-block">

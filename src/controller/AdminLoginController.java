@@ -100,9 +100,7 @@ public class AdminLoginController {
 			else {
 				System.out.println("USER NOT FOUND: Returning to AdminLogin");
 				Map<String, String> errors = new HashMap<String, String>();
-				if(uEmail==null || uEmail.length()==0) {
-					errors.put("notFoundError", "Incorrect Email or Password");
-				}
+				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
 				return "AdminLogin";
 			}
