@@ -58,7 +58,7 @@ public class AdminLoginController {
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			Model nextPage) {
 
-		System.out.println("BEGIN /controller.AdminIndexController");
+		System.out.println("BEGIN /controller.AdminLoginController");
 		System.out.println("User input: ");
 		System.out.println("Email = " + uEmail);
 		System.out.println("Password = " + uPwd);
@@ -91,8 +91,8 @@ public class AdminLoginController {
 			// If match found, return
 			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
 			if (results.getUserEmail().equals(uEmail) && results.getUserPwd().equals(uPwd) && results.getAdmin() == 1) {
-				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
-				nextPage.addAttribute("loggedInUserEmail", uEmail);
+				System.out.println("AUTHENTICATED: Directing to AdminIndex");			
+				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
 				return "AdminIndex";
 			}
@@ -145,7 +145,7 @@ public class AdminLoginController {
 	
 	// Write Logout 
 	@RequestMapping(path = "/controller.AdminLogoutController", method = RequestMethod.POST)
-	public String processAction( Model nextPage) {
+	public String processActionLogout( Model nextPage) {
 		System.out.println("Directing to Login Page");
 		return "AdminLogin";
 	}

@@ -4,7 +4,8 @@ go
 INSERT INTO UsersTable(userEmail,userPwd,admin)
 VALUES ('kueifengtung@gmail.com', 'Testing123!', 1),
 	   ('leon123@yahoo.com.tw', '!1Password', 0), 
-	   ('zachomg@hotmail.com', 'Qq1!qwer', 0)
+	   ('zachomg@hotmail.com', 'Qq1!qwer', 0),
+	   ('thomas2793@yahoo.com.tw', 'Thomas85198', 1)
 go
 
 INSERT INTO ProfilesTable(userID,profileFullName,profileJoinDate,profileBirthdate,profileSex,profilePhone,profileAddress,profileVIP)
