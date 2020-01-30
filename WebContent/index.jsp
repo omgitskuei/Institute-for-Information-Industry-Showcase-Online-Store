@@ -25,5 +25,6 @@ Search bar
 	</form>
 
 	<a href="<jstl:url value = "/controller.ProfileController"/>" > Show Profile </a>
+	<a href="<jstl:url value = "/controller.AdminOrdersController"/>" > Admin order </a>
 </body>
 </html>
