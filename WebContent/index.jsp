@@ -14,7 +14,7 @@ Products
 User Login
 
 Search bar
-		<form class="form" name="loginForm" action=<jstl:url value="controller.searchBar" />
+		<form class="form" name="searchForm" action=<jstl:url value="controller.searchBar" />
         method="post" >
 
 			<input type="search" title="Products search bar" name="SearchBar"></input>
