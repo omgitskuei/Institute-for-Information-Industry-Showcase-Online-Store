@@ -90,7 +90,7 @@ public class AdminLoginController {
 			System.out.println("");
 			// If match found, return
 			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
-			if (results.getUserEmail().equals(uEmail) && results.getUserPwd().equals(uPwd) && results.getAdmin() == 1) {
+			if (results.getUserID()!=0) {
 				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
