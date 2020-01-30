@@ -18,6 +18,12 @@ public class ProfileController {
 	@Autowired
 	ProfileBeanDAO dao;
 	
+    @RequestMapping("/controller.AddUserProfile")    
+    public String addUser(Model m){    
+        m.addAttribute("command", new ProfileBean());  
+        return "ProfileAdding";   
+    } 
+	
 	@RequestMapping(path = "/controller.ProfileController")
 	public String showProfile(Model m) {
         List<ProfileBean> list=dao.selectAll();    
