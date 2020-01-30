@@ -1,0 +1,48 @@
+use EEIT111FinalProjectDB
+go
+
+INSERT INTO UsersTable(userEmail,userPwd,admin)
+VALUES ('kueifengtung@gmail.com', 'Testing123!', 1),
+	   ('leon123@yahoo.com.tw', '!1Password', 0), 
+	   ('zachomg@hotmail.com', 'Qq1!qwer', 0)
+go
+
+INSERT INTO ProfilesTable(userID,profileFullName,profileJoinDate,profileBirthdate,profileSex,profilePhone,profileAddress,profileVIP)
+VALUES (1,'Kuei-Feng Tung','2019-11-13','1993-01-01','m','0999-221-112','Taipei',1),
+	   (2,'Leon McLeon','2020-01-14','1994-02-13','m','0983-221-131','Taichung',0),
+	   (3,'Zach Ong','2019-11-13','1993-01-01','m','0999-221-112','Kaohsiung',0)
+go 
+
+INSERT INTO WalletsTable(userID,walletAmount)
+VALUES (1,0.00),
+	   (2,1300.00), 
+	   (3,999.99)
+go
+
+INSERT INTO SettingsTable(userID,settingSecurityQ,settingSecurityA,settingDisplayName,settingsAllowMetadata)
+VALUES (1,'What is my dog''s name?','nodog','omgitsk',0),
+	   (2,'Favorite color','Blue','leon01',1),
+	   (3,'my word','pineapples','MuchWowDoge',1)
+go
+
+INSERT INTO ProductsTable(ProductName,ProductPrice,ProductStock,ProductDescription,ProductImg,ProductTimestamp,ProductCategory)
+VALUES ('牛蕃茄',25,8,'新鮮牛蕃茄',0000000000000,'2020-01-01','蕃茄'),
+	   ('朝天椒',67,30,'超辣朝天椒',0110101010101,'2020-01-15','辣椒'),
+	   ('玉米筍',80,20,'甘甜玉米筍',001111111111,'2020-01-28','玉米')
+go
+
+INSERT INTO OrdersTable(UserID,Total,MailingAddress,MailingPhone,OrderTime)
+VALUES (2,50,'Taichung','0983-221-131','2020-01-2'),
+	   (2,172,'Tainan','0910-123-456','2020-01-15'),
+	   (3,331,'Kaohsiung','0977-234-450','2020-01-29')
+go
+
+INSERT INTO OrderDetailsTable(ProductID,ProductCount,OrderID)
+VALUES (1,2,1),
+	   (1,1,2),
+	   (2,1,2),
+	   (3,1,2),
+	   (1,2,3),
+	   (2,3,3),
+	   (3,1,3)
+go
