@@ -4,12 +4,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import model.user.UserBean;
 
 @Entity
 @Table(name = "ProfilesTable")
@@ -25,6 +30,8 @@ public class ProfileBean {
 	private String profilePhone;
 	private String profileAddress;
 	private int profileVIP;
+//	OneToOne關係目前用不到先關閉
+//	private UserBean userBean;
 
 	// Constructors
 	public ProfileBean() {
@@ -108,5 +115,15 @@ public class ProfileBean {
 	public void setProfileVIP(int profileVIP) {
 		this.profileVIP = profileVIP;
 	}
+//	OneToOne關係目前用不到先關閉
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	public UserBean getUserBean() {
+//		return userBean;
+//	}
+//
+//	public void setUserBean(UserBean userBean) {
+//		this.userBean = userBean;
+//	}
 
 }
