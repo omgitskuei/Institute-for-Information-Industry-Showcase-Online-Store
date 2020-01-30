@@ -1,13 +1,19 @@
 package model.user;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import model.profile.ProfileBean;
+import model.wallet.WalletBean;
 
 @Entity
 @Table(name = "UsersTable")
@@ -19,6 +25,9 @@ public class UserBean {
 	private String userEmail;
 	private String userPwd;
 	private int admin;
+//	OneToOne關係目前用不到先關閉
+//	private WalletBean walletBean;
+//	private ProfileBean profileBean;
 	
 	// Constructors
 	public UserBean() {
@@ -64,5 +73,23 @@ public class UserBean {
 	public void setAdmin(int newAdmin) {
 		this.admin=newAdmin;
 	}
+//	OneToOne關係目前用不到先關閉
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
+//	public WalletBean getWalletBean() {
+//		return walletBean;
+//	}
+//
+//	public void setWalletBean(WalletBean walletBean) {
+//		this.walletBean = walletBean;
+//	}
+//
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
+//	public ProfileBean getProfileBean() {
+//		return profileBean;
+//	}
+//
+//	public void setProfileBean(ProfileBean profileBean) {
+//		this.profileBean = profileBean;
+//	}
 	
 }

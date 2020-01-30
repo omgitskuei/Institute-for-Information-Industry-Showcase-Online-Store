@@ -23,7 +23,8 @@ public class WalletBean {
 	// Variables, matches table columns
 	private int userID;
 	private float walletAmount;
-	private UserBean userBean;
+//	OneToOne關係目前用不到先關閉
+//	private UserBean userBean;
 
 	// Constructors
 	public WalletBean() {
@@ -54,17 +55,15 @@ public class WalletBean {
 	public void setWalletAmount(float walletAmount) {
 		this.walletAmount = walletAmount;
 	}
-
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
-
+//	OneToOne關係目前用不到先關閉
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	public UserBean getUserBean() {
+//		return userBean;
+//	}
+//
+//	public void setUserBean(UserBean userBean) {
+//		this.userBean = userBean;
+//	}
 
 }

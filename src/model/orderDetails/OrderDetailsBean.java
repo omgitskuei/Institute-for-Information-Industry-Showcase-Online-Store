@@ -2,13 +2,17 @@ package model.orderDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import model.order.OrderBean;
 
 // match table
 @Entity
@@ -20,8 +24,9 @@ public class OrderDetailsBean {
 	private int orderDetailID;
 	private int productID;
 	private int productCount;
-	@OneToMany(mappedBy="OrderBean")
 	private int orderID;
+	//ManyToOne
+	private OrderBean OrdersTable;
 	
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
@@ -71,4 +76,15 @@ public class OrderDetailsBean {
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORDERID")
+	public OrderBean getOrdersTable() {
+		return OrdersTable;
+	}
+
+	public void setOrdersTable(OrderBean ordersTable) {
+		OrdersTable = ordersTable;
+	}
+	
 }
