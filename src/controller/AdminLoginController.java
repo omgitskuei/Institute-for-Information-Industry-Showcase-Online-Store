@@ -94,7 +94,7 @@ public class AdminLoginController {
 				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
-				return "AdminDashboard";
+				return "AdminIndex";
 			}
 			// If match NOT found, return to previous page AdminLogin
 			else {
@@ -142,4 +142,12 @@ public class AdminLoginController {
 
 		return "readCookie";
 	}
+	
+	// Write Logout 
+	@RequestMapping(path = "/controller.AdminLogoutController", method = RequestMethod.POST)
+	public String processAction( Model nextPage) {
+		System.out.println("Directing to Login Page");
+		return "AdminLogin";
+	}
+
 }

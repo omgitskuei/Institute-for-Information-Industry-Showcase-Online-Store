@@ -18,8 +18,8 @@ public class AdminIndexController {
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/controller.AdminIndexController", method = RequestMethod.POST)
 	public String processAction( Model nextPage) {
-		System.out.println("Directing to AdminLogin");
-		return "AdminLogin";
+		System.out.println("Directing to Adminindex");
+		return "AdminIndex";
 	}
 
 
