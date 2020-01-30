@@ -11,19 +11,16 @@
 </head>
 <body>
 	This is the homepage Products User Login Search bar
-	<form class="form" name="loginForm"
-		action=<jstl:url value="controller.searchBar" /> method="post">
+	<form class="form" name="loginForm" action=<jstl:url value="controller.searchBar" /> method="post"></form>
 
 		<input type="search" title="Products search bar" name="SearchBar"></input>
-
-
-Search bar
-		<form class="form" name="searchForm" action=<jstl:url value="controller.searchBar" />
-        method="post" >
-
-
-	</form>
-
+			Search bar
+		<form class="form" name="searchForm" action=<jstl:url value="controller.searchBar" /> method="post" >
+        
+        </form>
+	
+	<a href="viewemp">View Employees</a>  
+	
 	<a href="<jstl:url value = "/controller.ProfileController"/>" > Show Profile </a>
 	<a href="<jstl:url value = "/controller.AdminOrdersController"/>" > Admin order </a>
 </body>
