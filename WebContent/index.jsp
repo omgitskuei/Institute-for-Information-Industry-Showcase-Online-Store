@@ -16,8 +16,11 @@
 
 		<input type="search" title="Products search bar" name="SearchBar"></input>
 
-		<input type="submit" title="Search Button" name="adminSignInButton"
-			value="search"> <span></span>
+
+Search bar
+		<form class="form" name="searchForm" action=<jstl:url value="controller.searchBar" />
+        method="post" >
+
 
 	</form>
 

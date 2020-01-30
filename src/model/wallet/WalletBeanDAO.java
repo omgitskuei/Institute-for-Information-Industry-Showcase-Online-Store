@@ -51,7 +51,6 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			
 			Session session = sessionFactory.getCurrentSession();
 			
-			// HQL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			String hqlString = "from WalletBean where walletAmount=:thisWallet";
 			Query q = session.createQuery(hqlString);
 			q.setParameter("thisWallet", selectThisWallet.getWalletAmount());
