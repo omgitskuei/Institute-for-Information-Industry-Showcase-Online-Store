@@ -30,26 +30,6 @@ public class AdminLoginController {
 		this.service = service;
 		this.response = response;
 	}
-
-	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.GET)
-	public String processActionGET(@RequestParam(name = "userEmail") String uEmail,
-			@RequestParam(name = "userPwd") String uPwd,
-			Model nextPage) {
-		System.out.println(" > GET METHOD CALLED <");
-		
-		System.out.println("USER INPUT INVALID: Returning to AdminLogin");
-		Map<String, String> errors = new HashMap<String, String>();
-		if(uEmail==null || uEmail.length()==0) {
-			errors.put("emailError", "Email is required");
-		}
-		
-		if(uPwd==null || uPwd.length()==0) {
-			errors.put("pwdError", "Password is required");
-		}
-		nextPage.addAttribute("errors", errors);
-		return "AdminLogin";
-	}
-	
 	
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.POST)
@@ -82,28 +62,28 @@ public class AdminLoginController {
 			// Use bean to use UserBeanService service
 			UserBean results = service.select(bean);
 			System.out.println("Service.select(bean) RESULTS: ");
-			System.out.println("Class = " + results.getClass());
-			System.out.println("User ID = " + results.getUserID());
-			System.out.println("Email = " + results.getUserEmail());
-			System.out.println("Password = " + results.getUserPwd());
-			System.out.println("Admin = " + results.getAdmin());
-			System.out.println("");
-			// If match found, return
-			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
-
-			if (results.getUserID()!=0) {
-				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
-				nextPage.addAttribute("loggedInUserEmail", uEmail);
-				nextPage.addAttribute("loggedInUserPwd", uPwd);
-				return "AdminIndex";
-			}
-			// If match NOT found, return to previous page AdminLogin
-			else {
+			if (results == null || results.getUserID()==0) {
+				// Match not found
+				// If match NOT found, return to previous page AdminLogin
 				System.out.println("USER NOT FOUND: Returning to AdminLogin");
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
 				return "AdminLogin";
+			} else {
+				// If match found, return
+				// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
+				System.out.println("Class = " + results.getClass());
+				System.out.println("User ID = " + results.getUserID());
+				System.out.println("Email = " + results.getUserEmail());
+				System.out.println("Password = " + results.getUserPwd());
+				System.out.println("Admin = " + results.getAdmin());
+				System.out.println("");
+
+				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
+				nextPage.addAttribute("loggedInUserEmail", uEmail);
+				nextPage.addAttribute("loggedInUserPwd", uPwd);
+				return "AdminIndex";
 			}
 		}
 		// One of the User's input is empty, return to previous page with error messages
