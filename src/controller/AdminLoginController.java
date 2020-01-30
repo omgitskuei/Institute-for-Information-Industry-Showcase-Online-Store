@@ -90,9 +90,10 @@ public class AdminLoginController {
 			System.out.println("");
 			// If match found, return
 			// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
-			if (results.getUserEmail().equals(uEmail) && results.getUserPwd().equals(uPwd) && results.getAdmin() == 1) {
-				System.out.println("AUTHENTICATED: Directing to AdminIndex");			
-				nextPage.addAttribute("userEmail", uEmail);
+
+			if (results.getUserID()!=0) {
+				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
+				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
 				return "AdminIndex";
 			}
@@ -100,9 +101,7 @@ public class AdminLoginController {
 			else {
 				System.out.println("USER NOT FOUND: Returning to AdminLogin");
 				Map<String, String> errors = new HashMap<String, String>();
-				if(uEmail==null || uEmail.length()==0) {
-					errors.put("notFoundError", "Incorrect Email or Password");
-				}
+				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
 				return "AdminLogin";
 			}
