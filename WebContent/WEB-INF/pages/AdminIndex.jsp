@@ -54,17 +54,15 @@
   
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mr-3">
-              <form class="form" name="loginForm" action=<jstl:url value="/controller.AdminIndexController" />
-        		method="post" >
-        	<input class="btn btn-info" type="submit" title="Admin Login Button"name="adminSignInButton" value="登入">
-        	<span></span>
-
-        </form>
+             <span class="nav-link">
+                <i class="fas fa-user"></i> Welcome ${loggedInUserEmail}
+              </span>
             </li>
             <li class="nav-item">
-              <a href="login.html" class="nav-link">
-                <i class="fas fa-user-times"></i> 登出
-              </a>
+             <form class="form" name="logoutForm" action=<jstl:url value="/controller.AdminLogoutController" />
+        method="post" >
+        	<input type="submit" class="btn btn-danger btn-sm mt-1" title="Admin Logout Button" name="adminLogoutButton" value="登出">
+        </form>
             </li>
           </ul>
         </div>
