@@ -6,6 +6,7 @@ import java.util.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import model.Account;
 import util.CheckSubstring;
 
 @Service
@@ -17,6 +18,16 @@ public class WalletBeanService {
 	@Autowired
 	public WalletBeanService(WalletBeanDAO wDAO) {
 		this.wDAO = wDAO;
+	}
+	
+	public boolean insert(WalletBean thisBean) {
+		return wDAO.insertWallet(thisBean);
+	}
+	public boolean delete(WalletBean thisBean) {
+		return wDAO.deleteWallet(thisBean);
+	}
+	public WalletBean select(WalletBean thisBean) {
+		return wDAO.selectWallet(thisBean);
 	}
 	
 	// Test validity* of Wallet amount changes

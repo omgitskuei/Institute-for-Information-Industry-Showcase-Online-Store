@@ -21,4 +21,7 @@ public class AdminIndexController {
 		System.out.println("Directing to AdminLogin");
 		return "AdminLogin";
 	}
+
+
+
 }
