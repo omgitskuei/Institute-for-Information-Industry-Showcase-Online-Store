@@ -58,7 +58,7 @@ public class AdminLoginController {
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			Model nextPage) {
 
-		System.out.println("BEGIN /controller.AdminIndexController");
+		System.out.println("BEGIN /controller.AdminLoginController");
 		System.out.println("User input: ");
 		System.out.println("Email = " + uEmail);
 		System.out.println("Password = " + uPwd);

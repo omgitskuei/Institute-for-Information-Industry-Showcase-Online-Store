@@ -64,7 +64,7 @@
            <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
-                  <input type="text" class="form-control" name="userEmail">
+                  <input type="email" class="form-control" name="userEmail">
                   <span id="emailErrorSpan">${errors.emailError}</span>
                 </div>
                 <div class="form-group">
