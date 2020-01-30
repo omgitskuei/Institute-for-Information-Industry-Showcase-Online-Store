@@ -1,15 +1,22 @@
 package model.order;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import model.orderDetails.OrderDetailsBean;
 
 @Entity
 @Table(name = "OrdersTable")
@@ -22,7 +29,9 @@ public class OrderBean {
 	private String mailingAddress;
 	private String mailingPhone;
 	private Date orderTime;
-
+	//OneToMany
+	private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
+                
 	// Constructors
 	public OrderBean() {
 	}
@@ -91,4 +100,14 @@ public class OrderBean {
 	public void setOrderTime(Date newOrderTime) {
 		this.orderTime = newOrderTime;
 	}
+	//OneToMany
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "OrdersTable", cascade = CascadeType.ALL)
+	public Set<OrderDetailsBean> getOrderDetailsBeans() {
+		return orderDetailsBeans;
+	}
+
+	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
+		this.orderDetailsBeans = orderDetailsBeans;
+	}
+		
 }
