@@ -32,7 +32,9 @@ public class SettingBeanService {
 		System.out.println("FINISH: SettingBeanService.insert(SettingBean)");
 		return success;
 	}
-	
+	public SettingBean select(SettingBean selectThisSetting) {
+		return sDAO.selectSetting(selectThisSetting);
+	}
 	public boolean updateDisplayName(SettingBean updateThisBean) {
 		System.out.println("BEGIN: SettingBeanService.updateDisplayName(SettingBean)");
 		// Local variables

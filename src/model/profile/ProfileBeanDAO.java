@@ -60,15 +60,9 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 				System.out.println("ProfileVIP:" + selectThisProfile.getProfileVIP());
 
 				Session session = sessionFactory.getCurrentSession();
-				String hqlString = "from ProfileBean where profileFullName=:thisFullName and profileJoinDate=:thisJoinDate and profileBirthdate=:thisBirthdate and profileSex=:thisSex and profilePhone=:thisPhone and profileAddress=:thisAddress and profileVIP=:thisVIP ";
+				String hqlString = "from ProfileBean where userID=:thisUserID";
 				Query q = session.createQuery(hqlString);
-				q.setParameter("thisFullName", selectThisProfile.getProfileFullName());
-				q.setParameter("thisJoinDate", selectThisProfile.getProfileJoinDate());
-				q.setParameter("thisBirthdate", selectThisProfile.getProfileBirthdate());
-				q.setParameter("thisSex", selectThisProfile.getProfileSex());
-				q.setParameter("thisPhone", selectThisProfile.getProfilePhone());
-				q.setParameter("thisAddress", selectThisProfile.getProfileAddress());
-				q.setParameter("thisVIP", selectThisProfile.getProfileVIP());
+				q.setParameter("thisUserID", selectThisProfile.getUserID());
 
 				ProfileBean existingProfile = (ProfileBean) q.uniqueResult();
 

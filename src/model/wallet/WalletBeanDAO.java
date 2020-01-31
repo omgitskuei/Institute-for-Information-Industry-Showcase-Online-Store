@@ -51,9 +51,9 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			
 			Session session = sessionFactory.getCurrentSession();
 			
-			String hqlString = "from WalletBean where walletAmount=:thisWallet";
+			String hqlString = "from WalletBean where userID=:thisUserID";
 			Query q = session.createQuery(hqlString);
-			q.setParameter("thisWallet", selectThisWallet.getWalletAmount());
+			q.setParameter("thisUserID", selectThisWallet.getUserID());
 			
 			WalletBean existingWallet = (WalletBean) q.uniqueResult();
 			
