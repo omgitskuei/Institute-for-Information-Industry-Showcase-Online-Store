@@ -17,11 +17,11 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        
+        <!--  
         <mapping class="model.Account"/>
         <mapping class="model.Picture"/>
         <mapping class="model.Members"/>
-        
+        -->
         <mapping class="model.user.UserBean"/>
         <mapping class="model.profile.ProfileBean"/>
         <mapping class="model.wallet.WalletBean"/>

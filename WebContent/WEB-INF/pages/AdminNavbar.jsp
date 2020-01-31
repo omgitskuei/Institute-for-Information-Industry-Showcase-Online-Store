@@ -37,7 +37,7 @@
       <div class="container">
         <form class="form"  name="DirectInventoryForm" action=<jstl:url value="/controller.AdminRedirectController" />
         method="post" >
-        	<input type="submit" style="background-color: transparent;" class="nav-brand btn btn-lg mt-1 text-white" title="Admin Inventory Button" name="adminInventoryButton" value="管理者">
+        	<input type="submit" style="background-color: transparent;" class="nav-brand btn btn-lg mt-1 text-white" title="Admin Index Button" name="adminIndexButton" value="管理者">
         	</button>
         </form>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
