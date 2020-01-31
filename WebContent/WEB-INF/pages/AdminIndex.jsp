@@ -101,10 +101,17 @@
                 <td>EMPTY</td>
                 <td>EMPTY</td>
                 <td>
-                  <a href="details.html" class="btn btn-secondary">
+                  <!-- <a href="/controller.AdminInventoryDetailController" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
-                </td>
+                  </a> -->
+				  <form class="form" name="DirectInventoryDetailForm"
+					action=<jstl:url value="/controller.AdminInventoryDetailController" />
+					method="post">
+				  <input type="submit"
+				   class="btn btn-secondary" title="Admin InventoryDetail Button"
+				    name="adminInventoryDetailButton" value="詳細資訊">
+				  </form>
+			   </td>
               </tr>
               <tr>
                 <td>2</td>
@@ -115,9 +122,13 @@
                 <td>EMPTY</td>
                 <td>EMPTY</td>
                 <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
+                   <form class="form" name="DirectInventoryDetailForm"
+					action=<jstl:url value="/controller.AdminInventoryDetailController" />
+					method="post">
+				  <input type="submit"
+				   class="btn btn-secondary" title="Admin InventoryDetail Button"
+				    name="adminInventoryDetailButton" value="詳細資訊">
+				  </form>
                 </td>
               </tr>
               <tr>
@@ -129,9 +140,13 @@
                 <td>EMPTY</td>
                 <td>EMPTY</td>
                 <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
+                   <form class="form" name="DirectInventoryDetailForm"
+					action=<jstl:url value="/controller.AdminInventoryDetailController" />
+					method="post">
+				  <input type="submit"
+				   class="btn btn-secondary" title="Admin InventoryDetail Button"
+				    name="adminInventoryDetailButton" value="詳細資訊">
+				  </form>
                 </td>
               </tr>
               <tr>
@@ -143,15 +158,20 @@
                 <td>EMPTY</td>
                 <td>EMPTY</td>
                 <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
+                   <form class="form" name="DirectInventoryDetailForm"
+					action=<jstl:url value="/controller.AdminInventoryDetailController" />
+					method="post">
+				  <input type="submit"
+				   class="btn btn-secondary" title="Admin InventoryDetail Button"
+				    name="adminInventoryDetailButton" value="詳細資訊">
+				  </form>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+      
       <div class="col-md-3">
         <div class="card text-center bg-primary text-white mb-3">
           <div class="card-body">
