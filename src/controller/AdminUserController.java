@@ -18,12 +18,10 @@ public class AdminUserController {
 
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/controller.AdminUserController", method = RequestMethod.POST)
-	public String processAction(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
-		System.out.println("Directing to AdminUser");
-//		nextPage.addAttribute("userEmail", uEmail);
-		return "AdminUser";
+	public String processAction(@SessionAttribute("userEmail") String uEmail) {
+		System.out.println("Directing to AdminOrder");
+		return "AdminUser2";
 	}
-
 
 
 }

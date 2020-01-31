@@ -33,48 +33,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-      <div class="container">
-        <a href="index.html" class="navbar-brand">管理者</a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav">
-            <li class="nav-item px-2">
-             <form class="form nav-link" name="DirectInventoryForm" action=<jstl:url value="/controller.AdminInventoryController" />
-        method="post" >
-        	<input type="submit" class="btn btn-primary btn-sm mt-1" title="Admin Inventory Button" name="adminInventoryButton" value="庫存管理">
-        	</form>
-            </li>
-            <form class="form nav-link" name="DirectOrderForm" action=<jstl:url value="/controller.AdminOrderController" />
-        method="post" >
-        	<input type="submit" class="btn btn- btn-sm mt-1" title="Admin Order Button" name="adminOrderButton" value="訂單管理">
-        	</form>
-            <li class="nav-item px-2">
-              <form class="form nav-link" name="DirectUserForm" action=<jstl:url value="/controller.AdminUserController" />
-        method="post" >
-        	<input type="submit" class="btn btn-warning text-black btn-sm mt-1" title="Admin User Button" name="adminUserButton" value="使用者管理">
-            </li>
-          </ul>
-  
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mr-3">
-             <span class="nav-link">
-                <i class="fas fa-user"></i> Welcome ${userEmail}
-              </span>
-            </li>
-            <li class="nav-item">
-             <form class="form" name="logoutForm" action=<jstl:url value="/controller.AdminLogoutController" />
-        method="post" >
-        	<input type="submit" class="btn btn-danger btn-sm mt-1" title="Admin Logout Button" name="adminLogoutButton" value="登出">
-        </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  
+<!-- NAVBAR -->
+<%@include file="/WEB-INF/pages/AdminNavbar.jsp" %>
 <!-- HEADER -->
 <header id="main-header" class="py-2 bg-primary text-white">
   <div class="container">
@@ -188,7 +148,7 @@
           <nav class="ml-4">
               <ul class="pagination">
                   <li class="page-item disabled">
-                      <a href="#" class="page-link">Previous</a>
+                      <a href="#" class="page-link">上一頁</a>
                   </li>
                   <li class="page-item active">
                       <a href="#" class="page-link">1</a>
@@ -200,7 +160,7 @@
                     <a href="#" class="page-link">3</a>
                  </li>
                 <li class="page-item">
-                    <a href="#" class="page-link">Next</a>
+                    <a href="#" class="page-link">下一頁</a>
                 </li>
               </ul>
           </nav>
@@ -211,20 +171,8 @@
 </section>
 
 <!-- FOOTER -->
-<footer id="main-footer" class="bg-dark text-white mt-5 p-5">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <p class="lead text-center">
-          Copyright &copy;
-          <span id="year"></span>
-          FarmVille
-        </p>
-      </div>
-    </div>
-  </div>
+<%@include file="/WEB-INF/pages/AdminFooter2.jsp" %>
 
-</footer>
 
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>

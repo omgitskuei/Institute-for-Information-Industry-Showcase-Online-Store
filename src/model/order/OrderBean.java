@@ -30,7 +30,7 @@ public class OrderBean {
 	private String mailingPhone;
 	private Date orderTime;
 	//OneToMany
-	private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
+	// private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
                 
 	// Constructors
 	public OrderBean() {
@@ -101,13 +101,13 @@ public class OrderBean {
 		this.orderTime = newOrderTime;
 	}
 	//OneToMany
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "OrdersTable", cascade = CascadeType.ALL)
-	public Set<OrderDetailsBean> getOrderDetailsBeans() {
-		return orderDetailsBeans;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "OrdersTable", cascade = CascadeType.ALL)
+//	public Set<OrderDetailsBean> getOrderDetailsBeans() {
+//		return orderDetailsBeans;
+//	}
 
-	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
-		this.orderDetailsBeans = orderDetailsBeans;
-	}
+//	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
+//		this.orderDetailsBeans = orderDetailsBeans;
+//	}
 		
 }

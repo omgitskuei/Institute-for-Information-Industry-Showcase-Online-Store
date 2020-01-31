@@ -80,7 +80,8 @@ public class AdminLoginController {
 				System.out.println("Admin = " + results.getAdmin());
 				System.out.println("");
 
-				System.out.println("AUTHENTICATED: Directing to AdminDashboard");
+				System.out.println("AUTHENTICATED: Directing to AdminIndex");
+				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
 				return "AdminIndex";
@@ -122,11 +123,7 @@ public class AdminLoginController {
 		return "readCookie";
 	}
 	
-	// Write Logout 
-	@RequestMapping(path = "/controller.AdminLogoutController", method = RequestMethod.POST)
-	public String processActionLogout( Model nextPage) {
-		System.out.println("Directing to Login Page");
-		return "AdminLogin";
-	}
+
+
 
 }

@@ -26,7 +26,7 @@
 <body>
  	<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
       <div class="container">
-        <a href="index.html" class="navbar-brand">管理者</a>
+        <span class="navbar-brand">管理者</span>
       </div>
     </nav>
 
@@ -79,7 +79,7 @@
              		${errors.notFoundError}
             	  </label>
                 </div>
-                <input type="submit" value="Login" class="btn btn-primary btn-block">
+                <input type="submit" value="登入" class="btn btn-primary btn-block">
             </form>
             </div>
         </div>
@@ -89,46 +89,8 @@
 </section>
 
 <!-- FOOTER -->
-<footer id="main-footer" class="bg-dark text-white mt-5 p-5">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <p class="lead text-center">
-          Copyright &copy;
-          <span id="year"></span>
-          FarmVille
-        </p>
-      </div>
-    </div>
-  </div>
-
-</footer>
+<%@include file="/WEB-INF/pages/AdminFooter2.jsp"%>
 			
-		<%-- 	<!-- Form input fields -->
-			<label>Email Address:</label>
-			<input type="email" id="myEmailInput" name="userEmail" placeholder="user@domain.com" inputmode="email" onblur="blurFunction()">
-			<span id="emailErrorSpan">${errors.emailError}</span>
-			<br></br>
-			
-			<label>Password:</label>
-			<input type="password" id="myPwdInput" name="userPwd" onblur="blurFunction1()">
-			<span id="pwdErrorSpan">${errors.pwdError}</span>
-			<br></br>
-			
-			<label>Remember Me:</label>
-			<input type="checkbox" name="rememberMe">
-			<span></span>
-			<br></br>
-			
-			<!-- Form buttons -->
-			<label></label>
-			<input type="submit" name="submitBtn" value="Submit">
-			<span>${errors.notFoundError}</span>
-			
-			<label></label>
-			<input type="reset" name="resetBtn">
-			<span></span>
-		</form> --%>
 
 </body>
 
@@ -144,25 +106,6 @@
     $('#year').text(new Date().getFullYear());
 
   </script>
-<script>
-// No focus = Changes the background color of input
-function blurFunction() {
-	var email1 = document.getElementById("myEmailInput").value;
-	if (email1 === "") {
-		document.getElementById("myEmailInput").style.background = "#CD5C5C";
-	} else {
-		document.getElementById("myEmailInput").style.background = "";
-	}
-}
-function blurFunction1() {
-	var pwd1 = document.getElementById("myPwdInput").value;
-	if (pwd1 === "") {
-		document.getElementById("myPwdInput").style.background = "#CD5C5C";
-	} else {
-		document.getElementById("myPwdInput").style.background = "";
-	}
-}
-</script>
 
 
 </html>
