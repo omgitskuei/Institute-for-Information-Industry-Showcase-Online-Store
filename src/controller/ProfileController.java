@@ -17,12 +17,13 @@ public class ProfileController {
 	
 	@Autowired
 	ProfileBeanDAO dao;
-	
-    @RequestMapping("/controller.AddUserProfile")    
-    public String addUser(Model m){    
-        m.addAttribute("command", new ProfileBean());  
-        return "ProfileAdding";   
-    } 
+
+//    使用者不用這個，可以等 Admin 那邊增加後刪除。
+//    @RequestMapping("/controller.AddUserProfile")    
+//    public String addUser(Model m){    
+//        m.addAttribute("command", new ProfileBean());  
+//        return "ProfileAdding";   
+//    } 
 	
 	@RequestMapping(path = "/controller.ProfileController")
 	public String showProfile(Model m) {
