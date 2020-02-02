@@ -52,7 +52,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		try {
 			if (selectThisUser != null) {
 				// Try to find selectThisUser
-				System.out.println("Looking for this user:");
+				System.out.println("QUERY:");
 				System.out.println("UserID:"+selectThisUser.getUserID());
 				System.out.println("UserEmail:"+selectThisUser.getUserEmail());
 				System.out.println("UserPwd:"+selectThisUser.getUserPwd());
@@ -64,6 +64,12 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				q.setParameter("thisEmail", selectThisUser.getUserEmail());
 				q.setParameter("thisPwd", selectThisUser.getUserPwd());
 				UserBean existingUser = (UserBean) q.uniqueResult();
+				
+				System.out.println("Query RESULTS:");
+				System.out.println("UserID:"+existingUser.getUserID());
+				System.out.println("UserEmail:"+existingUser.getUserEmail());
+				System.out.println("UserPwd:"+existingUser.getUserPwd());
+				System.out.println("UserAdmin:"+existingUser.getAdmin());
 				
 				//UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserEmail());
 				if (existingUser != null) {
@@ -81,6 +87,30 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		System.out.println("updateThisUser OR existingUser was NULL");
 		System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
 		return null;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public int selectUserIDByEmail(String email) {
+		System.out.println("BEGIN: UserBeanDAO.selectUserIDByEmail(String)");
+		System.out.println("Looking for user with this email:"+email);
+
+		Session session = sessionFactory.getCurrentSession();
+		String hqlString = "from UserBean where userEmail=:thisEmail";
+		Query q = session.createQuery(hqlString);
+		q.setParameter("thisEmail", email);
+		UserBean existingUser = (UserBean) q.uniqueResult();
+		
+		if (existingUser != null) {
+			int userID = existingUser.getUserID();
+			System.out.println("Result: "+userID);
+			System.out.println("FINISH: UserBeanDAO.selectUserIDByEmail(String)");
+			return userID;
+		} else {
+			System.out.println("User with this email ["+email+"] NOT FOUND.");
+			System.out.println("Result: 0");
+			System.out.println("FINISH: UserBeanDAO.selectUserIDByEmail(String)");
+			return 0;
+		}
 	}
 
 	// Override tag is only used if supertype UserBeanDAOInterface ...
