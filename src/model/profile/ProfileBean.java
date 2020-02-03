@@ -29,7 +29,7 @@ public class ProfileBean {
 	private String profileSex;
 	private String profilePhone;
 	private String profileAddress;
-	private int profileVIP;
+	private int profileVIP=0;
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 
