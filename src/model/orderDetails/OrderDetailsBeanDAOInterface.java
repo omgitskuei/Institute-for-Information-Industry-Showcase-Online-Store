@@ -5,7 +5,7 @@ public interface OrderDetailsBeanDAOInterface {
 	// C.reate
 	public boolean insertOrderDetails(OrderDetailsBean insertThisOrderDetails);
 	// R.ead
-	public OrderDetailsBean selectOrderDetails(OrderDetailsBean selectThisOrderDetails);
+	public OrderDetailsBean selectOrderDetails(int orderID);
 	// U.pdate
 	public boolean updateProductID(OrderDetailsBean updateThisOrderDetail, int newProductID);
 	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount);
