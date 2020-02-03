@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductBean {
 	// Local Variables
-	private int ProductID;
-	private String ProductName;
-	private float ProductPrice;
-	private int ProductStock;
+	private int ProductID;		// Not NULL
+	private String ProductName;		// Not NULL
+	private float ProductPrice;		// Not NULL
+	private int ProductStock;		// Not NULL
 	private String ProductDescription;
-	private byte[] ProductImg;
-	private Date ProductTimestamp;
-	private String ProductCategory;
+	private byte[] ProductImg;		// Not NULL
+	private Date ProductTimestamp;		// Not NULL
+	private String ProductCategory;		// Not NULL
 	
 	// Constructors
 	public ProductBean() {

@@ -21,8 +21,8 @@ import model.user.UserBean;
 public class WalletBean {
 
 	// Variables, matches table columns
-	private int userID;
-	private float walletAmount;
+	private int userID;		// Not NULL
+	private float walletAmount;		// Not NULL
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 

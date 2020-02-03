@@ -44,9 +44,6 @@ public class AdminLoginController {
 		System.out.println("Password = " + uPwd);
 		System.out.println("Remember Me = " + remMe);
 		System.out.println("");
-
-		
-		
 		
 		// Check for empty input
 		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {

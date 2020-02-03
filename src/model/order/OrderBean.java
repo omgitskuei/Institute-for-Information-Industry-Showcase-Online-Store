@@ -23,12 +23,12 @@ import model.orderDetails.OrderDetailsBean;
 @Component
 public class OrderBean {
 	// Local Variables
-	private int orderID;
-	private int userID;
-	private int total;
-	private String mailingAddress;
-	private String mailingPhone;
-	private Date orderTime;
+	private int orderID;		// Not NULL
+	private int userID;		// Not NULL
+	private int total;		// Not NULL
+	private String mailingAddress;		// Not NULL
+	private String mailingPhone;		// Not NULL
+	private Date orderTime;		// Not NULL
 	//OneToMany
 	// private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
                 
