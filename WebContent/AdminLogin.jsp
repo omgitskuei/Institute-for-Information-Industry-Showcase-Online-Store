@@ -64,22 +64,23 @@
            <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
-                  <input type="email" class="form-control" name="userEmail">
+                  <input type="email" class="form-control" name="userEmail" id="userEmail">
                   <span id="emailErrorSpan">${errors.emailError}</span>
                 </div>
                 <div class="form-group">
                   <label for="password">密碼</label>
-                  <input type="password" class="form-control" name="userPwd">
+                  <input type="password" class="form-control" name="userPwd" id="userPwd">
                   <span id="pwdErrorSpan">${errors.pwdError}</span>
                 </div>
                 <div class="form-group ml-4">
-                  <input class="form-check-input" type="checkbox" id="inlineFormCheck"/>
+                  <input class="form-check-input" type="checkbox" id="inlineFormCheck"  name="rememberMe" id="rememberMe" />
             	  <label class="form-check-label" for="FormCheck">
              		記住帳號密碼  <br>
              		${errors.notFoundError}
             	  </label>
                 </div>
-                <input type="submit" value="Login" class="btn btn-primary btn-block">
+                <input type="submit" value="登入" class="btn btn-primary btn-block">
+                	<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
             </form>
             </div>
         </div>
@@ -87,6 +88,41 @@
     </div>
   </div>
 </section>
+
+<!-- SIGN UP MODAL -->
+<div class="modal" id="signUpModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">註冊</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="email">電子信箱</label>
+                <input type="email" placeholder="電子信箱" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">密碼</label>
+                <input type="password" placeholder="密碼" class="form-control">
+              </div>
+            </form>
+            <form>
+            <div class="form-group">
+                <label for="password2">確認密碼</label>
+                <input type="password" placeholder="確認密碼" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">送出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/pages/AdminFooter2.jsp"%>
@@ -104,6 +140,22 @@
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
+    
+    // Function of Cookie to Remember Email 
+    // 如果判斷cookieu有值把密碼給他
+    $(function(){
+    	$("#userEmail").keyup(function(){
+    		var userEmail = $("#userEmail").val();
+    		if(userEmail != ""){
+    			var userPwd = $.cookie(userEmail);
+    			if(userPwd!=null){
+    				$("#userPwd").val(userPwd);
+    				$("#rememberMe").attr(checked, true);
+    			}
+    			
+    		})
+    	})
+    })
 
   </script>
 

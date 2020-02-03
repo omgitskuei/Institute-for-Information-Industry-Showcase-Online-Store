@@ -47,7 +47,7 @@
 </header>
 
 <!-- ACTIONS -->
-<section id="actions" class="py-4 mb-4 bg-light">
+<section id="actions" class="py-4 bg-light">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -68,6 +68,37 @@
     </div>
   </div>
 </section>
+
+<!-- SEARCH -->
+<section id="search" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 ml-auto">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="搜尋...">
+            <div class="input-group-append">
+                <button class="btn btn-primary">搜尋</button>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6 ml-auto">
+      	<div class="form-group">
+      		<select name="#" id="theme" class="form-control">
+      			<option>搜尋全部...</option>
+      			<option>商品名稱</option>
+      			<option>商品類別</option>
+      			<option>訂單編號</option>
+      			<option>寄送方式</option>
+      			<option>買家帳號</option>
+      			<option>付款方式</option>
+      			<option>電子郵件</option>
+      			<option>身份</option>
+      		</select>
+      	</div>
+      </div>
+     </div>
+    </div>
+   </section>
 
 <!-- INVENTORY -->
 <section id="inventory">
@@ -365,8 +396,7 @@
           <div class="form-group">
             <label for="orderPayMethod">身份</label>
             <select class="form-control">
-              <option value="">賣家</option>
-              <option value="">買家</option>
+              <option value="">一般使用者</option>
               <option value="">管理者</option>
             </select>
            </div>
