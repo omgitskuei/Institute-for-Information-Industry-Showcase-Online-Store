@@ -46,8 +46,6 @@ public class AdminLoginController {
 		System.out.println("");
 
 		
-		if ()
-		
 		
 		
 		// Check for empty input
