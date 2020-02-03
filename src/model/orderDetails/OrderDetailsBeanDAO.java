@@ -82,6 +82,36 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 
 	}
 
+	public OrderDetailsBean selectOrderDetails(OrderDetailsBean bean) {
+		// Create new Session
+		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean)");
+
+		System.out.println("Looking for OrderDetail with Order ID:" + bean.getOrderID());
+
+		Session session = sessionFactory.getCurrentSession();
+		String hqlString = "FROM OrderDetailBean WHERE OrderID=thisOrderID";
+		Query q = session.createQuery(hqlString);
+		q.setParameter("thisOrderID", bean.getOrderID());
+		OrderDetailsBean existingOrderDetail = (OrderDetailsBean) q.uniqueResult();
+
+		if (existingOrderDetail != null) {
+			System.out.println("OrderDetail found: ");
+			System.out.println("OrderDetail ID: " + existingOrderDetail.getOrderDetailID());
+			System.out.println("Product ID: " + existingOrderDetail.getProductID());
+			System.out.println("Product Count: " + existingOrderDetail.getProductCount());
+			System.out.println("Order ID: " + existingOrderDetail.getOrderID());
+
+			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			return existingOrderDetail;
+		} else {
+			System.out.println("ERROR: OrderDetail NOT FOUND");
+			System.out.println("OrderDetailsBean not found, query returned NULL");
+			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			return null;
+		}
+
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<OrderDetailsBean> selectAll() {
 		System.out.println("BEGIN: OrderDetailsBeanDAO.selectAll()");
