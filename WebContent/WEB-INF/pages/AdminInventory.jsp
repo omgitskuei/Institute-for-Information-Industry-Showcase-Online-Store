@@ -104,7 +104,7 @@
 					method="post">
 				  <form:input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="修改" />
+				    name="adminInventoryDetailButton" path="*" value="修改" />
 				  </form:form>
                 </td>
                 	<td>
@@ -113,7 +113,7 @@
 					method="post">
 				  <form:input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="修改" />
+				    name="adminInventoryDetailButton" path="*" value="修改" />
 				  </form:form>
                 </td>
                 	<td>
