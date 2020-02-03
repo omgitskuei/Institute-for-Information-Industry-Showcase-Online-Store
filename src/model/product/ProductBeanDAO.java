@@ -31,7 +31,6 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			// Insert the passed ProductBean
 			session.save(insertThisProduct);
 			System.out.println("ProductBean Inserted:");
-
 			System.out.println("ProductName: " + insertThisProduct.getProductName());
 			System.out.println("ProductPrice: " + insertThisProduct.getProductPrice());
 			System.out.println("ProductStock: " + insertThisProduct.getProductStock());
@@ -43,11 +42,12 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			System.out.println("FINISH: ProductBeanDAO.insertProduct(ProductBean insertThisProduct)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
+		} else {
+			System.out.println("ERROR: Insert ProductBean FAILED; ProductBean insertThisProduct == null.");
+			System.out.println("FINISH: ProductBeanDAO.insertProduct(ProductBean insertThisProduct)");
+			// Return False, for FAILED INSERT
+			return false;
 		}
-		System.out.println("ERROR: Insert ProductBean FAILED; ProductBean insertThisProduct == null.");
-		System.out.println("FINISH: ProductBeanDAO.insertProduct(ProductBean insertThisProduct)");
-		// Return False, for FAILED INSERT
-		return false;
 	}
 
 	@Override

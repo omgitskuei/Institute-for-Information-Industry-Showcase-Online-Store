@@ -39,6 +39,7 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 		return false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public SettingBean selectSetting(SettingBean selectThisSetting) {
 		System.out.println("BEGIN: SettingBeanDAO.selectSetting(SettingBean selectThisSetting)");
@@ -48,12 +49,12 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 			// HQL
 			String hqlString = "from SettingBean where userID=:thisUserID";
 			Query q = session.createQuery(hqlString);
-			q.setParameter("thisSettingID", selectThisSetting.getUserID());
+			q.setParameter("thisUserID", selectThisSetting.getUserID());
 
 			SettingBean existingSetting = (SettingBean) q.uniqueResult();
 
 			if (existingSetting != null) {
-				System.out.println("SelectSetting Found, SettingID: "+existingSetting.getSettingID());
+				System.out.println("SelectSetting Found, SettingID: " + existingSetting.getSettingID());
 				System.out.println("FINISH: SettingBeanDAO.selectSetting(OrderBean selectThisSetting)");
 				return existingSetting;
 			}
@@ -64,92 +65,115 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 		return null;
 	}
 
-	@Override
-	public boolean updateSettingSecurityQ(SettingBean updateThisSetting, String newSettingSecurityQ) {
-		System.out.println(
-				"BEGIN: OrderBeanDAO.updateSettingSecurityQ(SettingBean updateThisSetting, String newSettingSecurityQ)");
+	@SuppressWarnings("rawtypes")
+	public SettingBean selectSetting(int userID) {
+		System.out.println("BEGIN: SettingBeanDAO.selectSetting(int userID)");
 		Session session = sessionFactory.getCurrentSession();
-		if (updateThisSetting != null) {
-			SettingBean existingSetting = session.get(SettingBean.class, updateThisSetting.getSettingID());
-			if (existingSetting != null) {
-				String oldSettingSecurityQ = existingSetting.getSettingSecurityQ();
-				existingSetting.setSettingSecurityQ(newSettingSecurityQ);
+		String hqlString = "from SettingBean where userID=:thisUserID";
+		Query q = session.createQuery(hqlString);
+		q.setParameter("thisUserID", userID);
 
-				System.out.println(
-						"FINISH: SettingBean.updateSettingSecurityQ(SettingBean updateThisSetting, String newSettingSecurityQ)");
-				return true;
-			}
+		SettingBean existingSetting = (SettingBean) q.uniqueResult();
+
+		if (existingSetting != null) {
+			System.out.println("Setting FOUND, SettingID: " + existingSetting.getSettingID());
+			System.out.println("FINISH: SettingBeanDAO.selectSetting(int userID)");
+			return existingSetting;
 		}
-		System.out.println(
-				"FINISH: SettingBean.updateSettingSecurityQ(SettingBean updateThisSetting, String newSettingSecurityQ)");
-
-		return false;
+		System.out.println("FINISH: SettingBeanDAO.selectSetting(int userID)");
+		return null;
 	}
 
 	@Override
-	public boolean updateSettingSecurityA(SettingBean updateThisSetting, String newSettingSecurityA) {
-		System.out.println(
-				"BEGIN: SettingBeanDAO.updateSettingSecurityA(OrderBean updateThisSetting, String newSettingSecurityA)");
+	public boolean updateSettingSecurityQ(SettingBean updateThisSetting, String newQ) {
+		System.out.println("BEGIN: OrderBeanDAO.updateSettingSecurityQ(SettingBean, String)");
+		Session session = sessionFactory.getCurrentSession();
+
+		SettingBean existingSetting = session.get(SettingBean.class, updateThisSetting.getSettingID());
+		if (existingSetting != null) {
+			String oldQ = existingSetting.getSettingSecurityQ();
+			existingSetting.setSettingSecurityQ(newQ);
+			System.out.println("Setting Security Q UPDATED from " + oldQ + " to " + newQ);
+			System.out.println("FINISH: SettingBean.updateSettingSecurityQ(SettingBean, String)");
+			return true;
+		} else {
+			System.out.println("ERROR: Update failed; SettingBean NOT FOUND");
+			System.out.println("FINISH: SettingBean.updateSettingSecurityQ(SettingBean , String )");
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateSettingSecurityA(SettingBean updateThisSetting, String newA) {
+		System.out.println("BEGIN: SettingBeanDAO.updateSettingSecurityA(OrderBean, String)");
 		Session session = sessionFactory.getCurrentSession();
 		if (updateThisSetting != null) {
 			SettingBean existingSetting = session.get(SettingBean.class, updateThisSetting.getSettingID());
 			if (existingSetting != null) {
-				String oldSettingSecurityA = existingSetting.getSettingSecurityA();
-				existingSetting.setSettingSecurityA(newSettingSecurityA);
-
-				System.out.println(
-						"FINISH: SettingBean.updateSettingSecurityA(SettingBean updateThisSetting, String newSettingSecurityA)");
+				String oldA = existingSetting.getSettingSecurityA();
+				existingSetting.setSettingSecurityA(newA);
+				System.out.println("Setting Security Answer UPDATED from " + oldA + " to " + newA);
+				System.out.println("FINISH: SettingBean.updateSettingSecurityA(SettingBean, String)");
 				return true;
+			} else {
+				System.out.println("ERROR: SettingBean NOT FOUND");
+				System.out.println("FINISH: SettingBean.updateSettingSecurityA(SettingBean, String)");
+				return false;
 			}
+		} else {
+			System.out.println("ERROR: Passed SettingBean is NULL");
+			System.out.println("FINISH: SettingBean.updateSettingSecurityA(SettingBean, String)");
+			return false;
 		}
-		System.out.println(
-				"FINISH: SettingBean.updateSettingSecurityA(SettingBean updateThisSetting, String newSettingSecurityA)");
-
-		return false;
 	}
 
 	@Override
 	public boolean updateSettingDisplayName(SettingBean updateThisSetting, String newSettingDisplayName) {
-		System.out.println(
-				"BEGIN: SettingBeanDAO.updateSettingDisplayName(SettingBean updateThisSetting, String newSettingDisplayName)");
+		System.out.println("BEGIN: SettingBeanDAO.updateSettingDisplayName(SettingBean, String)");
 		Session session = sessionFactory.getCurrentSession();
 		if (updateThisSetting != null) {
 			SettingBean existingSetting = session.get(SettingBean.class, updateThisSetting.getSettingID());
 			if (existingSetting != null) {
-				String oldSettingDisplayName = existingSetting.getSettingDisplayName();
+				String oldName = existingSetting.getSettingDisplayName();
 				existingSetting.setSettingDisplayName(newSettingDisplayName);
-
-				System.out.println(
-						"FINISH: SettingBean.updateSettingDisplayName(SettingBean updateThisSetting, String newSettingDisplayName)");
+				System.out.println("Setting Display name UPDATED from " + oldName + " to " + newSettingDisplayName);
+				System.out.println("FINISH: SettingBean.updateSettingDisplayName(SettingBean, String)");
 				return true;
+			} else {
+				System.out.println("ERROR: SettingBean NOT FOUND");
+				System.out.println("FINISH: SettingBean.updateSettingDisplayName(SettingBean, String)");
+				return false;
 			}
+		} else {
+			System.out.println("ERROR: Passed SettingBean is NULL");
+			System.out.println("FINISH: SettingBean.updateSettingDisplayName(SettingBean, String)");
+			return false;
 		}
-		System.out.println(
-				"FINISH: SettingBean.updateSettingDisplayName(SettingBean updateThisSetting, String newSettingDisplayName)");
-
-		return false;
 	}
 
 	@Override
 	public boolean updateSettingAllowMetadata(SettingBean updateThisSetting, boolean newSettingAllowMetadata) {
-		System.out.println(
-				"BEGIN: SettingBeanDAO.updateSettingAllowMetadata(SettingBean updateThisSetting, boolean newSettingAllowMetadata)");
+		System.out.println("BEGIN: SettingBeanDAO.updateSettingAllowMetadata(SettingBean, boolean)");
 		Session session = sessionFactory.getCurrentSession();
 		if (updateThisSetting != null) {
 			SettingBean existingSetting = session.get(SettingBean.class, updateThisSetting.getSettingID());
 			if (existingSetting != null) {
-				boolean oldSettingAllowMetadata = existingSetting.getSettingAllowMetadata();
+				boolean oldAllow = existingSetting.getSettingAllowMetadata();
 				existingSetting.setSettingAllowMetadata(newSettingAllowMetadata);
-
-				System.out.println(
-						"FINISH: SettingBean.updateSettingAllowMetadata(SettingBean updateThisSetting, boolean newSettingAllowMetadata)");
+				System.out.println("Setting AllowMetadata Updated from "+oldAllow+" to "+newSettingAllowMetadata);
+				System.out.println("FINISH: SettingBean.updateSettingAllowMetadata(SettingBean, boolean)");
 				return true;
+			} else {
+				System.out.println("ERROR: SettingBean NOT FOUND");
+				System.out.println("FINISH: SettingBean.updateSettingAllowMetadata(SettingBean, boolean)");
+				return false;
 			}
+		} else {
+			System.out.println("ERROR: Passed SettingBean is NULL");
+			System.out.println("FINISH: SettingBean.updateSettingDisplayName(SettingBean, boolean)");
+			return false;
 		}
-		System.out.println(
-				"FINISH: SettingBean.updateSettingDisplayName(SettingBean updateThisSetting, boolean newSettingAllowMetadata)");
-
-		return false;
+		
 	}
 
 	@Override
@@ -162,30 +186,32 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 
 				// TO DO Fix this please: consult ProfileDAO.deleteProfile()
 				int deleteSettingID = existingSetting.getSettingID();
-				System.out.println("FINISH: " + deleteSettingID);
-
 				int deleteUserID = existingSetting.getUserID();
-				System.out.println("FINISH: " + deleteUserID);
-
 				String deleteSettingSecurityQ = existingSetting.getSettingSecurityQ();
-				System.out.println("FINISH: " + deleteSettingSecurityQ);
-
 				String deleteSettingSecurityA = existingSetting.getSettingSecurityA();
-				System.out.println("FINISH: " + deleteSettingSecurityA);
-
 				String deleteSettingDisplayName = existingSetting.getSettingDisplayName();
-				System.out.println("FINISH: " + deleteSettingDisplayName);
-
 				boolean deleteSettingAllowMetadata = existingSetting.getSettingAllowMetadata();
-				System.out.println("FINISH: " + deleteSettingAllowMetadata);
 
 				session.delete(existingSetting);
+				System.out.println("Deleted Setting:");
+				System.out.println("Setting ID: " + deleteSettingID);
+				System.out.println("User ID: " + deleteUserID);
+				System.out.println("Security Q: " + deleteSettingSecurityQ);
+				System.out.println("Security A: " + deleteSettingSecurityA);
+				System.out.println("Display Name: " + deleteSettingDisplayName);
+				System.out.println("Allow Metadata: " + deleteSettingAllowMetadata);
 				System.out.println("FINISH: SettingBeanDAO.deleteSetting(SettingBean deleteThisSetting)");
 				return true;
+			} else {
+				System.out.println("ERROR: SettingBean NOT FOUND");
+				System.out.println("FINISH: SettingBeanDAO.deleteSetting(SettingBean deleteThisSetting)");
+				return false;
 			}
+		} else {
+			System.out.println("ERROR: SettingBean was NULL");
+			System.out.println("FINISH: SettingBeanDAO.deleteSetting(SettingBean deleteThisSetting)");
+			return false;
 		}
-		System.out.println("FINISH: SettingBeanDAO.deleteSetting(SettingBean deleteThisSetting)");
-		return false;
 	}
 
 }
