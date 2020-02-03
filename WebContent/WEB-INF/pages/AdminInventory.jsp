@@ -9,6 +9,7 @@
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 
@@ -98,22 +99,22 @@
                 <td>${product.ProductTimestamp}</td>
                 <td>${product.ProductCategory}</td>
                 <td>
-                  <form class="form" name="DirectInventoryDetailForm"
+                  <form:form class="form" name="DirectInventoryDetailForm"
 					action=<jstl:url value="/controller.AdminInventoryDetailController" />
 					method="post">
-				  <input type="submit"
+				  <form:input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="修改">
-				  </form>
+				    name="adminInventoryDetailButton" value="修改" />
+				  </form:form>
                 </td>
                 	<td>
-                  <form class="form" name="DirectInventoryDetailForm"
+                  <form:form class="form" name="DirectInventoryDetailForm"
 					action=<jstl:url value="/controller.AdminInventoryDetailController" />
 					method="post">
-				  <input type="submit"
+				  <form:input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="修改">
-				  </form>
+				    name="adminInventoryDetailButton" value="修改" />
+				  </form:form>
                 </td>
                 	<td>
                   <a href="#" class="btn btn-danger">
