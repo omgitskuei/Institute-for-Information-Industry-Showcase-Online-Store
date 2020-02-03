@@ -39,27 +39,29 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 		return false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public WalletBean selectWallet(WalletBean selectThisWallet) {
 		// Get current Session
 		System.out.println("BEGIN: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
-		
+
 		// Check if selectThisWallet is null
 		if (selectThisWallet != null) {
 			// Try to find selectThisWallet
 			System.out.println("Looking for this Wallet:");
-			
+
 			Session session = sessionFactory.getCurrentSession();
-			
+
 			String hqlString = "from WalletBean where userID=:thisUserID";
 			Query q = session.createQuery(hqlString);
 			q.setParameter("thisUserID", selectThisWallet.getUserID());
-			
+
 			WalletBean existingWallet = (WalletBean) q.uniqueResult();
-			
+
 			if (existingWallet != null) {
 				// If found, return the result WalletBean existingWallet
-				System.out.println("Wallet Selected: ID"+existingWallet.getUserID()+" Amount"+existingWallet.getWalletAmount());
+				System.out.println("Wallet Selected: ID" + existingWallet.getUserID() + " Amount"
+						+ existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 				return existingWallet;
 			}
@@ -69,6 +71,34 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 		System.out.println("ERROR: Select WalletBean FAILED; WalletBean selectThisWallet == null.");
 		System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
 		return null;
+	}
+
+	public WalletBean selectWallet(int userID) {
+		// Get current Session
+		System.out.println("BEGIN: WalletBeanDAO.selectWallet(int userID)");
+
+		// Try to find selectThisWallet
+		System.out.println("Looking for Wallet with userID: "+userID);
+
+		Session session = sessionFactory.getCurrentSession();
+
+		String hqlString = "from WalletBean where userID=:thisUserID";
+		Query q = session.createQuery(hqlString);
+		q.setParameter("thisUserID", userID);
+
+		WalletBean existingWallet = (WalletBean) q.uniqueResult();
+
+		if (existingWallet != null) {
+			// If found, return the result WalletBean existingWallet
+			System.out.println(
+					"Wallet FOUND: userID" + existingWallet.getUserID() + " Amount" + existingWallet.getWalletAmount());
+			System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
+			return existingWallet;
+		} else {
+			System.out.println("ERROR: Select WalletBean FAILED; WalletBean existingWallet == null.");
+			System.out.println("FINISH: WalletBeanDAO.selectWallet(int userID)");
+			return null;
+		}
 	}
 
 	@Override
@@ -84,8 +114,8 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, update Wallets and return True
 				float oldWalletAmount = existingWallet.getWalletAmount();
 				existingWallet.setWalletAmount(newwalletAmount);
-				System.out.println("Wallet Amount updated: ID"+existingWallet.getUserID());
-				System.out.println(" Old Amount"+oldWalletAmount+" New Amount"+existingWallet.getWalletAmount());
+				System.out.println("Wallet Amount updated: ID" + existingWallet.getUserID());
+				System.out.println(" Old Amount" + oldWalletAmount + " New Amount" + existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");
 				return true;
 			}
@@ -110,7 +140,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, delete, return True
 				float deletedWalletAmount = existingWallet.getWalletAmount();
 				session.delete(existingWallet);
-				System.out.println("Wallet Deleted: Previously had amount "+deletedWalletAmount+" in wallet");
+				System.out.println("Wallet Deleted: Previously had amount " + deletedWalletAmount + " in wallet");
 				System.out.println("FINISH: WalletBeanDAO.deletetWallet(WalletBean deleteThisWallet)");
 				return true;
 			}
