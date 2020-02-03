@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SettingBean {
 	// Variable
-	private int settingID ;
-	private int userID  ;
+	private int settingID ;		// Not NULL
+	private int userID  ;		// Not NULL
 	private String settingSecurityQ;  
 	private String settingSecurityA;  	
 	private String settingDisplayName; 	
-	private boolean settingAllowMetadata=true;
+	private boolean settingAllowMetadata=true;		// Not NULL
 
 	// Constructor
 	public SettingBean() {

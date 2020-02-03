@@ -22,14 +22,14 @@ import model.user.UserBean;
 public class ProfileBean {
 
 	// Variables, matches table columns
-	private int userID;
+	private int userID;		// Not NULL
 	private String profileFullName;
-	private Date profileJoinDate;
+	private Date profileJoinDate;		// Not NULL
 	private Date profileBirthdate;
 	private String profileSex;
-	private String profilePhone;
-	private String profileAddress;
-	private int profileVIP=0;
+	private String profilePhone;		// Not NULL
+	private String profileAddress;		// Not NULL
+	private int profileVIP=0;		// Not NULL
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 

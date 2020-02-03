@@ -12,51 +12,60 @@ public class UserBeanService {
 
 	// Variables: Local Fields
 	private UserBeanDAO uDAO;
-	
+
 	// Constructors
 	@Autowired
 	public UserBeanService(UserBeanDAO uDAO) {
 		this.uDAO = uDAO;
 	}
-	
+
 	// Test Validity* of newUser before doing UserBeanDAO.insertUser(UserBean)
 	// Validity means checking all user inputs (specifically userEmail, userPwd)
-	public boolean insert(UserBean newUser) {
-		System.out.println("BEGIN: UserBeanService.insert(UserBean insertThisUser)");
-		// Get values from newUser for validation
-		String email = newUser.getUserEmail();
-		String pwd = newUser.getUserPwd();
+	
+	public boolean insertUser(String email, String pwd) {
 		boolean success = false;
-		// Validate values
 		if (validatePwd(email) && validateEmail(pwd)) {
+			UserBean newUser = new UserBean();
+			newUser.setUserEmail(email);
+			newUser.setUserPwd(pwd);
+			newUser.setAdmin(0);
+
 			System.out.println("Email & Pwd valid");
-			success = uDAO.insertUser(newUser); //Returns true
-		} else {
-			System.out.println("Email && Pwd invalid");
+			success = uDAO.insertUser(newUser); // Returns true
 		}
-		
-		System.out.println("FINISH: UserBeanService.insert(UserBean insertThisUser)");
 		return success;
 	}
-	
+
+	public boolean insertAdmin(String email, String pwd) {
+		boolean success = false;
+		if (validatePwd(email) && validateEmail(pwd)) {
+			UserBean newAdmin = new UserBean();
+			newAdmin.setUserEmail(email);
+			newAdmin.setUserPwd(pwd);
+			newAdmin.setAdmin(1);
+
+			System.out.println("Email & Pwd valid");
+			success = uDAO.insertUser(newAdmin); // Returns true
+		}
+		return success;
+	}
+
 	public UserBean select(UserBean selectThisUser) {
 		System.out.println("BEGIN: UserBeanService.select(UserBean insertThisUser)");
 		// Get values for validation
 		String email = selectThisUser.getUserEmail();
 		String pwd = selectThisUser.getUserPwd();
 		// Validate values, if not valid email & password, don't bother selecting
-		if (validateEmail(email)) {
-			if (validatePwd(pwd) ) {
-				System.out.println("Email && Pwd valid");
-				return uDAO.selectUser(selectThisUser);
-			}
+		if (validateEmail(email) && validatePwd(pwd)) {
+			System.out.println("Email && Pwd VALID");
+			return uDAO.selectUser(selectThisUser);
 		} else {
 			System.out.println("Email && Pwd invalid");
 		}
 		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
 		return selectThisUser;
 	}
-	
+
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
 		System.out.println("BEGIN: UserBeanService.updateEmail(UserBean insertThisUser)");
 		// Validate values, if not valid, don't bother with update
@@ -69,7 +78,7 @@ public class UserBeanService {
 		System.out.println("FINISH: UserBeanService.updateEmail(UserBean insertThisUser)");
 		return false;
 	}
-	
+
 	public boolean updatePwd(UserBean updateThisUser, String newPwd) {
 		System.out.println("BEGIN: UserBeanService.updatePwd(UserBean insertThisUser)");
 		// Validate values, if not valid, don't bother with update
@@ -82,23 +91,23 @@ public class UserBeanService {
 		System.out.println("FINISH: UserBeanService.updatePwd(UserBean insertThisUser)");
 		return false;
 	}
-	
+
 	public boolean delete(UserBean deleteThisUser) {
 		System.out.println("BEGIN: UserBeanService.delete(UserBean insertThisUser)");
 		// Check if the deleted user exists before trying to delete it
-		if (uDAO.selectUser(deleteThisUser)!=null) {
+		if (uDAO.selectUser(deleteThisUser) != null) {
 			return uDAO.deleteUser(deleteThisUser);
 		}
 		System.out.println("FINISH: UserBeanService.delete(UserBean insertThisUser)");
 		return false;
 	}
-	
+
 	private boolean validateEmail(String email) {
 		System.out.println("BEGIN: validateEmail");
 		// Partition email string based on email syntax; localpart@domain
 		String localpart = email.substring(0, email.indexOf("@"));
 		String domain = email.substring(email.indexOf("@") + 1, email.length());
-		
+
 		// Localpart and Domain must not exceed 64 characters
 		if (localpart.length() <= 64 && domain.length() <= 63) {
 			// Create empty ArrayList for storing where "." appear in email String
@@ -123,32 +132,32 @@ public class UserBeanService {
 					dotIndexes.add(index);
 				}
 			}
-			System.out.println("how many @s in email = "+countAt);
-			System.out.println("how many spaces in email = "+noSpaces);
-			System.out.println("index of dots in email = "+dotIndexes);
+			System.out.println("how many @s in email = " + countAt);
+			System.out.println("how many spaces in email = " + noSpaces);
+			System.out.println("index of dots in email = " + dotIndexes);
 			// A valid email must have "@" and can only have one "@"
 			if (countAt == 1) {
 				// A valid email must have no spaces
 				if (noSpaces) {
 					// A valid email cannot begin or end on "."
-					if (!(dotIndexes.contains(0) || dotIndexes.contains(email.length()-1))) {
+					if (!(dotIndexes.contains(0) || dotIndexes.contains(email.length() - 1))) {
 						// Domain must comply with LDH rule (letters, digits, hyphen)
 						// AKA, Domain must NOT contain Special Characters, not including "."
 						CheckSubstring util = new CheckSubstring();
-						if ( util.countSpecialCharacters(domain)==0 ) {
+						if (util.countSpecialCharacters(domain) == 0) {
 							// Domain must contain one "."
 							if (domain.contains(".")) {
 								boolean noConsecutiveDotsFlag = true;
 								// If there's more than 1 dot, Domain cannot have any consecutive dots
-								if (dotIndexes.size()>1) {
+								if (dotIndexes.size() > 1) {
 									System.out.println("More than 1 dot in email");
-									for (int index=0;index<dotIndexes.size()-1;index++) {
-										if ((dotIndexes.get(index+1)-dotIndexes.get(index))==1) {
+									for (int index = 0; index < dotIndexes.size() - 1; index++) {
+										if ((dotIndexes.get(index + 1) - dotIndexes.get(index)) == 1) {
 											noConsecutiveDotsFlag = false;
 										}
 									}
 								}
-								if(noConsecutiveDotsFlag) {
+								if (noConsecutiveDotsFlag) {
 									System.out.println("Yay, good email");
 									return true;
 								}
@@ -172,16 +181,16 @@ public class UserBeanService {
 		}
 		return false;
 	}
-	
+
 	public boolean validatePwd(String pwd) {
 		System.out.println("Begin: validatePwd(String)");
 		try {
 			// A valid password must have >=8 characters
-			if (pwd.length()>=8) {
+			if (pwd.length() >= 8) {
 				// Partition pwd into substrings of each character
 				ArrayList<String> pwdEachChar = new ArrayList<String>();
 				for (int index = 0; index < pwd.length(); index++) {
-					pwdEachChar.add(pwd.substring(index, index+1));
+					pwdEachChar.add(pwd.substring(index, index + 1));
 				}
 				// A valid password must NOT contain spaces
 				if (!(pwdEachChar.contains(" "))) {
@@ -189,16 +198,18 @@ public class UserBeanService {
 					// A valid password must contain >=1 Capitalized letters
 					// A valid password must contain >=1 Lower-case letters
 					CheckSubstring util = new CheckSubstring();
-					if (util.countCapLetters(pwd)>=1 && util.countLowLetters(pwd)>=1 && util.countSpecialCharacters(pwd)>=1) {
+					if (util.countCapLetters(pwd) >= 1 && util.countLowLetters(pwd) >= 1
+							&& util.countSpecialCharacters(pwd) >= 1) {
 						// A valid password must contain >=1 numbers
-						if (util.countNums(pwd)>=1) {
+						if (util.countNums(pwd) >= 1) {
 							System.out.println("Valid Input: Pwd");
 							return true;
 						} else {
 							System.out.println("Invalid Input: Pwd must contain at least one number");
 						}
 					} else {
-						System.out.println("Invalid Input: Pwd must contain at least one Special character, Capital letter, and Lower-case letter");
+						System.out.println(
+								"Invalid Input: Pwd must contain at least one Special character, Capital letter, and Lower-case letter");
 					}
 				} else {
 					System.out.println("Invalid Input: Pwd must not contain spaces");

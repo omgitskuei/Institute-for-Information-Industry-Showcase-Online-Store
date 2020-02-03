@@ -21,10 +21,10 @@ import model.wallet.WalletBean;
 public class UserBean {
 
 	// Variables, matches table columns
-	private int userID;
-	private String userEmail;
-	private String userPwd;
-	private int admin;
+	private int userID;		// Not NULL
+	private String userEmail;		// Not NULL
+	private String userPwd;		// Not NULL
+	private int admin;		// Not NULL
 //	OneToOne關係目前用不到先關閉
 //	private WalletBean walletBean;
 //	private ProfileBean profileBean;

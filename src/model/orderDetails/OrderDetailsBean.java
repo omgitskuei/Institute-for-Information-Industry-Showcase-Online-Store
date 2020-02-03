@@ -21,10 +21,10 @@ import model.order.OrderBean;
 public class OrderDetailsBean {
 	
 	// variables, match the column
-	private int orderDetailID;
-	private int productID;
-	private int productCount;
-	private int orderID;
+	private int orderDetailID;		// Not NULL
+	private int productID;		// Not NULL
+	private int productCount;		// Not NULL
+	private int orderID;		// Not NULL
 	//ManyToOne
 	private OrderBean OrdersTable;
 	
