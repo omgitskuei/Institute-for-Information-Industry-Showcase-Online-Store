@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -75,23 +75,41 @@
 						<table class="table table-striped">
 							<thead class="thead-dark">
 								<tr>
-									<th>#</th>
-									<th>電子郵件</th>
-									<th>身份</th>
+									<th>使用者ID</th>
+									<th>使用者名稱</th>
+									<th>加入日期</th>
+									<th>生日</th>
+									<th>性別</th>
+									<th>電話</th>
+									<th>住址</th>
+									<th>VIP</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="user" items="${list}">
 								<tr>
-									<td>1</td>
-									<td>luchienlin@gmail.com</td>
-									<td>Admin</td>
+									<td>${user.userID}</td>
+									<td>${user.profileFullName}</td>
+									<td>${user.profileJoinDate}</td>
+									<td>${user.profileBirthdate}</td>
+									<td>${user.profileSex}</td>
+									<td>${user.profilePhone}</td>
+									<td>${user.profileAddress}</td>
+									<td>${user.profileVIP}</td>
 									<td>
-									<a href="details.html" class="btn btn-secondary">
-									<i class="fas fa-angle-double-right"></i> 詳細資訊
-									</a>
-									</td>
+                  					<a href="#" class="btn btn-secondary">
+                    						<i class="fas fa-angle-double-right"></i> 修改
+                  					</a>
+                						</td>
+                	 					<td>
+                  					<a href="#" class="btn btn-danger">
+                    						<i class="fas fa-angle-double-right"></i> 刪除
+                  					</a>
+                						</td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 

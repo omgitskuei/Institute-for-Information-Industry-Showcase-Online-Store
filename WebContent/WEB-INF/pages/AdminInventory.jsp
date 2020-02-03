@@ -8,7 +8,7 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -74,88 +74,54 @@
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-                <th>#</th>
+                <th>商品ID</th>
                 <th>商品名稱</th>
-                <th>商品類別</th>
-                <th>商品數量（斤）</th>
                 <th>商品單價</th>
-                <th>商品快照</th>
+                <th>商品數量</th>
                 <th>商品描述</th>
-                <th></th>
+                <th>商品快照</th>
+                <th>上架時間</th>
+                <th>商品類型</th>
+                	<th></th>
+                	<th></th>
               </tr>
             </thead>
             <tbody>
+            	<c:forEach var="product" items="${list}">
               <tr>
-                <td>1</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>100</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
+                <td>${product.ID}</td>
+                <td>${product.Name}</td>
+                <td>${product.Price}</td>
+                <td>${product.Stock}</td>
+                <td>${product.ProductDescrition}</td>
+                <td>${product.ProductImg}</td>
+                <td>${product.ProductTimestamp}</td>
+                <td>${product.ProductCategory}</td>
                 <td>
                   <form class="form" name="DirectInventoryDetailForm"
 					action=<jstl:url value="/controller.AdminInventoryDetailController" />
 					method="post">
 				  <input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
+				    name="adminInventoryDetailButton" value="修改">
 				  </form>
                 </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>高麗菜</td>
-                <td>蔬菜</td>
-                <td>300</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
+                	<td>
                   <form class="form" name="DirectInventoryDetailForm"
 					action=<jstl:url value="/controller.AdminInventoryDetailController" />
 					method="post">
 				  <input type="submit"
 				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
+				    name="adminInventoryDetailButton" value="修改">
 				  </form>
                 </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>花椰菜</td>
-                <td>蔬菜</td>
-                <td>400</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                  <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>蘋果</td>
-                <td>水果</td>
-                <td>1</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                  <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>
+                	<td>
+                  <a href="#" class="btn btn-danger">
+                    <i class="fas fa-angle-double-right"></i> 刪除
+                  </a>
                 </td>
               </tr>
+              </c:forEach>
             </tbody>
           </table>
 

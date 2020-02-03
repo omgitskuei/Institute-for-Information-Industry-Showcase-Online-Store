@@ -8,7 +8,7 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
-
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
 
@@ -75,78 +75,35 @@
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-                <th>#</th>
                 <th>訂單編號</th>
-                <th>商品名稱</th>
-                <th>商品類別</th>
-                <th>買家帳號</th>
-                <th>寄送方式</th>
-                <th>付款方式</th>
-                <th>備註</th>
+                <th>總價</th>
+                <th>寄送地址</th>
+                <th>寄送電話</th>
+                <th>訂購時間</th>
                 <th></th>
+                	<th></th>
               </tr>
             </thead>
             <tbody>
+              <c:forEach var="orderInfo" items="${orderList}">
               <tr>
-                <td>1</td>
-                <td>EEIT1111090128</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>10</td>
-                <td>全家</td>
-                <td>信用卡</td>
-                <td>EMPTY</td>
+                <td>${orderInfo.orderID}</td>
+				<td>${orderInfo.total}</td>
+				<td>${orderInfo.mailingAddress}</td>
+				<td>${orderInfo.mailingPhone}</td>
+				<td>${orderInfo.orderTime}</td>
                 <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
+                  <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-angle-double-right"></i> 修改
+                  </a>
+                </td>
+                	 <td>
+                  <a href="#" class="btn btn-danger">
+                    <i class="fas fa-angle-double-right"></i> 刪除
                   </a>
                 </td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>EEIT1111090128</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>10</td>
-                <td>全家</td>
-                <td>信用卡</td>
-                <td>EMPTY</td>
-                <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>EEIT1111090128</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>10</td>
-                <td>全家</td>
-                <td>信用卡</td>
-                <td>EMPTY</td>
-                <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>EEIT1111090128</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>10</td>
-                <td>全家</td>
-                <td>信用卡</td>
-                <td>EMPTY</td>
-                <td>
-                  <a href="details.html" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a>
-                </td>
-              </tr>
+             </c:forEach>
             </tbody>
           </table>
 
