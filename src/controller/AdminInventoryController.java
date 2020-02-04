@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.order.OrderBean;
 import model.product.ProductBean;
 import model.product.ProductBeanDAO;
 
@@ -25,7 +24,7 @@ public class AdminInventoryController {
 	}
 	
 	@RequestMapping(value = "/inventories", method = RequestMethod.GET)
-	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
+	public String showForm(Model model) {
 		System.out.println("Directing to AdminInventory");
 		List<ProductBean> list=dao.selectAll();
 		model.addAttribute("InventoryList", list);
