@@ -37,9 +37,8 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 			System.out.println("insertThisProfile != null");
 
 			// IF empty or too short, Auto-generate profilePhone value, because it is a NOT-NULL field
-			if (insertThisProfile.getProfilePhone().length() > 5) {
-				insertThisProfile.setProfilePhone("0000-000-000");
-			}
+			insertThisProfile.setProfilePhone("0000-000-000");
+			
 			// Auto-generate profileJoinDate
 			LocalDate now = LocalDate.now();
 			Date convertedDate = Date.from(now.atStartOfDay(ZoneId.systemDefault()).toInstant());
