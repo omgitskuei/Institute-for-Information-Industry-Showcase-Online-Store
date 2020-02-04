@@ -24,7 +24,7 @@ public class AdminOrderController {
 	}
 
 	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.AdminOrderController", method = RequestMethod.POST)
+	@RequestMapping(path = "/controller.AdminOrderController", method = RequestMethod.GET)
 	public String processAction(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
 		System.out.println("Directing to AdminOrder");
 //		nextPage.addAttribute("userEmail", uEmail);

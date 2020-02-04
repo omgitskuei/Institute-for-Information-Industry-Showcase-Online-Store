@@ -24,18 +24,18 @@ public class OrderDetailsBean {
 	private int orderDetailID;		// Not NULL
 	private int productID;		// Not NULL
 	private int productCount;		// Not NULL
-	private int orderID;		// Not NULL
+	//private int orderID;		// Not NULL
 	//ManyToOne
-	private OrderBean OrdersTable;
+	private OrderBean orderBean;
 	
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
 	}
 
-	public OrderDetailsBean(int productID, int productCount, int orderID) {
+	public OrderDetailsBean(int productID, int productCount) {
 		this.productID = productID;
 		this.productCount = productCount;
-		this.orderID = orderID;
+		//this.orderID = orderID;
 	}
 
 	// GET/SET methods
@@ -68,23 +68,23 @@ public class OrderDetailsBean {
 		this.productCount = productCount;
 	}
 
-	@Column(name="OrderID")
-	public int getOrderID() {
-		return orderID;
-	}
-
-	public void setOrderID(int orderID) {
-		this.orderID = orderID;
-	}
+//	@Column(name="OrderID")
+//	public int getOrderID() {
+//		return orderID;
+//	}
+//
+//	public void setOrderID(int orderID) {
+//		this.orderID = orderID;
+//	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDERID")
-	public OrderBean getOrdersTable() {
-		return OrdersTable;
+	@JoinColumn(name = "OrderID")
+	public OrderBean getOrderBean() {
+		return orderBean;
 	}
 
-	public void setOrdersTable(OrderBean ordersTable) {
-		OrdersTable = ordersTable;
+	public void setOrderBean(OrderBean thisBean) {
+		this.orderBean = thisBean;
 	}
 	
 }

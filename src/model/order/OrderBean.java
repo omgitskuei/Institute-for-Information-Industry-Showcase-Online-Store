@@ -30,7 +30,7 @@ public class OrderBean {
 	private String mailingPhone;		// Not NULL
 	private Date orderTime;		// Not NULL
 	//OneToMany
-	// private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
+	private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
                 
 	// Constructors
 	public OrderBean() {
@@ -46,7 +46,7 @@ public class OrderBean {
 
 	// Getter/Setters
 	@Id
-	@Column(name = "ORDERID")
+	@Column(name = "OrderID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getOrderID() {
 		return orderID;
@@ -56,7 +56,7 @@ public class OrderBean {
 		this.orderID = newOrderID;
 	}
 
-	@Column(name = "USERID")
+	@Column(name = "UserID")
 	public int getUserID() {
 		return userID;
 	}
@@ -65,7 +65,7 @@ public class OrderBean {
 		this.userID = newUserID;
 	}
 
-	@Column(name = "TOTAL")
+	@Column(name = "Total")
 	public int getTotal() {
 		return total;
 	}
@@ -74,7 +74,7 @@ public class OrderBean {
 		this.total = newTotal;
 	}
 
-	@Column(name = "MAILINGADDRESS")
+	@Column(name = "MailingAddress")
 	public String getMailingAddress() {
 		return mailingAddress;
 	}
@@ -83,7 +83,7 @@ public class OrderBean {
 		this.mailingAddress = newMailingAddress;
 	}
 
-	@Column(name = "MAILINGPHONE")
+	@Column(name = "MailingPhone")
 	public String getMailingPhone() {
 		return mailingPhone;
 	}
@@ -92,7 +92,7 @@ public class OrderBean {
 		this.mailingPhone = newMailingPhone;
 	}
 
-	@Column(name = "ORDERTIME")
+	@Column(name = "OrderTime")
 	public Date getOrderTime() {
 		return orderTime;
 	}
@@ -100,14 +100,15 @@ public class OrderBean {
 	public void setOrderTime(Date newOrderTime) {
 		this.orderTime = newOrderTime;
 	}
-	//OneToMany
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "OrdersTable", cascade = CascadeType.ALL)
-//	public Set<OrderDetailsBean> getOrderDetailsBeans() {
-//		return orderDetailsBeans;
-//	}
 
-//	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
-//		this.orderDetailsBeans = orderDetailsBeans;
-//	}
+	// One-To-Many
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderBean", cascade = CascadeType.ALL)
+	public Set<OrderDetailsBean> getOrderDetailsBeans() {
+		return orderDetailsBeans;
+	}
+
+	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
+		this.orderDetailsBeans = orderDetailsBeans;
+	}
 		
 }
