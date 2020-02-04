@@ -88,7 +88,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="user" items="${list}">
+							<c:forEach var="user" items="${profileList}">
 								<tr>
 									<td>${user.userID}</td>
 									<td>${user.profileFullName}</td>

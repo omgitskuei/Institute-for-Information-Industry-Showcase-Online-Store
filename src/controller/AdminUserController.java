@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.order.OrderBean;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 
@@ -23,14 +24,14 @@ public class AdminUserController {
 	public AdminUserController() {
 	}
 
-	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.AdminUserController", method = RequestMethod.POST)
-	public String processAction(@SessionAttribute("userEmail") String uEmail, Model m) {
-		List<ProfileBean> list=dao.selectAll();    
-        m.addAttribute("list",list);  
-		System.out.println("Directing to AdminOrder");
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
+		System.out.println("Directing to AdminUser");
+//		nextPage.addAttribute("userEmail", uEmail);
+		List<ProfileBean> profileList=dao.selectAll();
+		model.addAttribute("profileList", profileList);
 		return "AdminUser2";
 	}
-
 
 }

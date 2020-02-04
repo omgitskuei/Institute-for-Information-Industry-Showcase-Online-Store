@@ -35,12 +35,7 @@
 <body>
    <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
       <div class="container">
-        <form class="form"  name="DirectInventoryForm" action=<jstl:url value="/controller.AdminRedirectController" />
-        method="post" >
-        	<input type="submit" style="background-color: transparent;" class="nav-brand btn btn-lg mt-1 text-white" title="Admin Index Button" name="adminIndexButton" value="管理者">
-        	</button>
-        </form>
-        
+		<a href=<jstl:url value="/redirect"/> class="navbar-brand">管理者</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,10 +49,7 @@
             <a href=<jstl:url value="/orders"/> class="nav-link">訂單管理</a>
         	</li>
             <li class="nav-item px-2">
-              <form class="form nav-link" name="DirectUserForm" action=<jstl:url value="/controller.AdminUserController" />
-        method="post" >
-        	<input type="submit" style="background-color: transparent;" class="btn btn-sm mt-1 text-white" title="Admin User Button" name="adminUserButton" value="使用者管理">
-            	</form>
+ 				<a href=<jstl:url value="/users"/> class="nav-link">使用者管理</a>
             </li>
           </ul>
   
@@ -67,11 +59,10 @@
                 <i class="fas fa-user"></i> Welcome ${userEmail}
               </span>
             </li>
-            <li class="nav-item">
-			<form class="form nav-link" name="Logout" action=<jstl:url value="/controller.AdminLogoutController" />
-        method="post" >
-        	<input type="submit" style="background-color: transparent;" class="btn btn-sm mt-1 text-white" title="Admin Logout Button" name="Logout" value="登出">
-            	</form>
+             <li class="nav-item mr-3 mt-2">
+              <a href=<jstl:url value="/logout"/> class="nav-link">
+                <i class="fas fa-user-times"></i> 登出
+              </a>
             </li>
           </ul>
         </div>
