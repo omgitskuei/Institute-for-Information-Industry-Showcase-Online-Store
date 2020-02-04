@@ -6,10 +6,10 @@ public interface OrderDetailsBeanDAOInterface {
 	public boolean insertOrderDetails(OrderDetailsBean insertThisOrderDetails);
 	// R.ead
 	public OrderDetailsBean selectOrderDetails(int orderID);
+	public OrderDetailsBean selectOrderDetails(OrderDetailsBean thisBean);
 	// U.pdate
 	public boolean updateProductID(OrderDetailsBean updateThisOrderDetail, int newProductID);
 	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount);
-	public boolean updateOrderID(OrderDetailsBean updateThisOrderDetail, int newOrderID);
 	// D.elete
 	public boolean deleteOrderDetails(OrderDetailsBean deteleThisOrderDetails);
 }
