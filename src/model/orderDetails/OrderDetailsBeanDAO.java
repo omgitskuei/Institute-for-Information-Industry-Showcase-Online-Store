@@ -37,61 +37,59 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 			System.out.println("OrderDetailID: " + insertThisOrderDetails.getOrderDetailID());
 			System.out.println("ProductID: " + insertThisOrderDetails.getProductID());
 			System.out.println("ProductCount: " + insertThisOrderDetails.getProductCount());
-			System.out.println("OrderID: " + insertThisOrderDetails.getOrderID());
+			System.out.println("Linked OrderBean's OrderID:" + insertThisOrderDetails.getOrderBean().getOrderID());
 
-			System.out.println("FINISH: OrderDetailsBean.insertOrderDetails(OrderDetailsBean)");
+			System.out.println("FINISH: OrderDetailsBeanDAO.insertOrderDetails(OrderDetailsBean)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
+		} else {
+			System.out.println("ERROR: Insert OrderDetailsBean FAILED; passed OrderdDetailsBean is null.");
+			System.out.println("FINISH: OrderDetailsBeanDAO.insertOrderDetails(OrderDetailsBean)");
+			// Return False, for FAILED INSERT
+			return false;
 		}
-		System.out.println(
-				"ERROR: OrderBeanDetails.insertOrderDetails(OrderDetailsBean) FAILED; insertThisOrderDetails == null.");
-		System.out.println("FINISH: OrderDetailsBeanDAO.insertOrderDetails(OrderDetailsBean)");
-		// Return False, for FAILED INSERT
-		return false;
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public OrderDetailsBean selectOrderDetails(int orderID) {
 		// Create new Session
-		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean)");
+		System.out.println("BEGIN: OrderDetailsBeanDAO.selectOrderDetails(OrderBean)");
 
 		System.out.println("Looking for OrderDetail with Order ID:" + orderID);
 
 		Session session = sessionFactory.getCurrentSession();
-		String hqlString = "FROM OrderDetailBean WHERE OrderID=thisOrderID";
+		String hqlString = "FROM OrderDetailsBean WHERE OrderID=thisOrderID";
 		Query q = session.createQuery(hqlString);
 		q.setParameter("thisOrderID", orderID);
 		OrderDetailsBean existingOrderDetail = (OrderDetailsBean) q.uniqueResult();
 
 		if (existingOrderDetail != null) {
-			System.out.println("OrderDetail found: ");
-			System.out.println("OrderDetail ID: " + existingOrderDetail.getOrderDetailID());
-			System.out.println("Product ID: " + existingOrderDetail.getProductID());
-			System.out.println("Product Count: " + existingOrderDetail.getProductCount());
-			System.out.println("Order ID: " + existingOrderDetail.getOrderID());
-
-			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			System.out.println("OrderDetailsBean Selected: ");
+			System.out.println("OrderDetailID: " + existingOrderDetail.getOrderDetailID());
+			System.out.println("ProductID: " + existingOrderDetail.getProductID());
+			System.out.println("ProductCount: " + existingOrderDetail.getProductCount());
+			System.out.println("Linked OrderBean's OrderID:" + existingOrderDetail.getOrderBean().getOrderID());
+			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderBean)");
 			return existingOrderDetail;
 		} else {
-			System.out.println("ERROR: OrderDetail NOT FOUND");
-			System.out.println("OrderDetailsBean not found, query returned NULL");
-			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			System.out.println("ERROR: OrderDetails NOT FOUND, query returned NULL");
+			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderBean)");
 			return null;
 		}
-
 	}
 
+	@SuppressWarnings("rawtypes")
 	public OrderDetailsBean selectOrderDetails(OrderDetailsBean bean) {
 		// Create new Session
-		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean)");
+		System.out.println("BEGIN: OrderDetailsBeanDAO.selectOrderDetails(OrderDetailsBean)");
 
-		System.out.println("Looking for OrderDetail with Order ID:" + bean.getOrderID());
+		System.out.println("Looking for OrderDetail with Order ID:" + bean.getOrderBean().getOrderID());
 
 		Session session = sessionFactory.getCurrentSession();
 		String hqlString = "FROM OrderDetailBean WHERE OrderID=thisOrderID";
 		Query q = session.createQuery(hqlString);
-		q.setParameter("thisOrderID", bean.getOrderID());
+		q.setParameter("thisOrderID", bean.getOrderBean().getOrderID());
 		OrderDetailsBean existingOrderDetail = (OrderDetailsBean) q.uniqueResult();
 
 		if (existingOrderDetail != null) {
@@ -99,19 +97,17 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 			System.out.println("OrderDetail ID: " + existingOrderDetail.getOrderDetailID());
 			System.out.println("Product ID: " + existingOrderDetail.getProductID());
 			System.out.println("Product Count: " + existingOrderDetail.getProductCount());
-			System.out.println("Order ID: " + existingOrderDetail.getOrderID());
-
-			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			System.out.println("Order ID: " + existingOrderDetail.getOrderBean().getOrderID());
+			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderDetailsBean)");
 			return existingOrderDetail;
 		} else {
-			System.out.println("ERROR: OrderDetail NOT FOUND");
-			System.out.println("OrderDetailsBean not found, query returned NULL");
-			System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean)");
+			System.out.println("ERROR: OrderDetail NOT FOUND, query returned NULL");
+			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderDetailsBean)");
 			return null;
 		}
 
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<OrderDetailsBean> selectAll() {
 		System.out.println("BEGIN: OrderDetailsBeanDAO.selectAll()");
@@ -125,20 +121,19 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 		System.out.println("Found Order Details results:");
 		for (int index = 0; index < results.size(); index++) {
 			System.out.println("#" + index);
-			System.out.println(results.get(index).getOrderDetailID());
-			System.out.println(results.get(index).getProductID());
-			System.out.println(results.get(index).getProductCount());
-			System.out.println(results.get(index).getOrderID());
+			System.out.println("OrderDetail ID: " + results.get(index).getOrderDetailID());
+			System.out.println("Product ID:     " + results.get(index).getProductID());
+			System.out.println("Product Count:  " + results.get(index).getProductCount());
+			System.out.println("Order ID:       " + results.get(index).getOrderBean().getOrderID());
 		}
-		System.out.println("FINISH: OrderBeanDAO.selectAll()");
+		System.out.println("FINISH: OrderDetailsBeanDAO.selectAll()");
 		return results;
 	}
 
 	@Override
 	public boolean updateProductID(OrderDetailsBean updateThisOrderDetail, int newProductID) {
 		// Get current Session
-		System.out.println(
-				"Begin: OrderDetailsBeanDAO.updateProductID(OrderDetailsBean updateThisOrderDetails, int newProductID)");
+		System.out.println("BEGIN: OrderDetailsBeanDAO.updateProductID(OrderDetailsBean, int)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if updateThisOrderDetails is null
 		if (updateThisOrderDetail != null) {
@@ -147,26 +142,28 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 					updateThisOrderDetail.getOrderDetailID());
 			if (existingOrderDetails != null) {
 				// If found, update ProductID and return
-				int oldProductID = existingOrderDetails.getOrderDetailID();
+				int oldID = existingOrderDetails.getOrderDetailID();
 				existingOrderDetails.setProductID(newProductID);
-				System.out.println(
-						"Product ID updated from " + oldProductID + " to " + existingOrderDetails.getProductID());
-				System.out.println(
-						"Finish: OrderDetailsBeanDAO.updateProductID(OrderDetailsBean updateThidOrderDetails, int newProductID)");
+				System.out.println("Product ID UPDATED from " + oldID + " to " + existingOrderDetails.getProductID());
+				System.out.println("FINISH: OrderDetailsBeanDAO.updateProductID(OrderDetailsBean, int)");
 				return true;
+			} else {
+				System.out.println("ERROR: Bean NOT FOUND");
+				System.out.println("FINISH: OrderDetalsBeanDAO.updateProductID(OrderDetailsBean, int)");
+				return false;
 			}
+		} else {
+			// Return False,passed bean empty
+			System.out.println("ERROR: Passed OrderDetailsBean is NULL");
+			System.out.println("FINISH: OrderDetailsBeanDAO.updateProductID(OrderDetailsIDBean, int)");
+			return false;
 		}
-		// Return False
-		System.out.println(
-				"Finish: OrderDetailsBeanDAO.updateProductID(OrderDetailsIDBean updateThisOrderDetails, int newProductID)");
-		return false;
 	}
 
 	@Override
 	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount) {
 		// Get current Session
-		System.out.println(
-				"Begin: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean updateThisOrderDetails, int newProductCount)");
+		System.out.println("BEGIN: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean, int newProductCount)");
 		Session session = sessionFactory.getCurrentSession();
 		// Check if updateThisOrderDetails is null
 		if (updateThisOrderDetail != null) {
@@ -175,56 +172,24 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 					updateThisOrderDetail.getOrderDetailID());
 			if (existingOrderDetails != null) {
 				// If found, update ProductCount and return
-				int oldProductCount = existingOrderDetails.getProductCount();
+				int oldCount = existingOrderDetails.getProductCount();
 				existingOrderDetails.setProductCount(newProductCount);
-				System.out.println("Product Count updated from " + oldProductCount + " to "
-						+ existingOrderDetails.getProductCount());
 				System.out.println(
-						"Finish: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount)");
-			}
-		}
-		System.out.println(
-				"Finsih: ProductBean.updateProductStock(OrderDetailBean updateThisOrderDetail, int newProductCount)");
-		return false;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean updateOrderID(OrderDetailsBean updateThisOrderDetail, int newOrderID) {
-		System.out.println("BEGIN: OrderDetailsBeanDAO.updateOrderID(OrderDetailsBean, int)");
-		// Check if updateThisProduct is null
-		if (updateThisOrderDetail != null) {
-			// Try to find updateThisProduct
-			Session session = sessionFactory.getCurrentSession();
-			String hqlString = "from OrderDetailBean where orderID=:thisOrderID and productID=:thisProductID";
-			Query q = session.createQuery(hqlString);
-			q.setParameter("thisOrderID", updateThisOrderDetail.getOrderID());
-			q.setParameter("thisProductID", updateThisOrderDetail.getProductID());
-			OrderDetailsBean results = (OrderDetailsBean) q.uniqueResult();
-			if (results != null) {
-				// If found, update OrderID and return True
-				System.out.println("OrderDetail found: ");
-				System.out.println("OrderDetail ID: " + results.getOrderDetailID());
-				System.out.println("Product ID: " + results.getProductID());
-				System.out.println("Product Count: " + results.getProductCount());
-				System.out.println("Order ID: " + results.getOrderID());
-				System.out.println("");
-				int oldOrderID = results.getOrderID();
-				results.setOrderID(newOrderID);
-				System.out.println("Order Details updated! New Order Details:");
-				System.out.println("OrderDetail ID: " + results.getOrderDetailID());
-				System.out.println("Product ID: " + results.getProductID());
-				System.out.println("Product Count: " + results.getProductCount());
-				System.out.println("Order ID: " + oldOrderID + " to " + results.getOrderID());
-				System.out.println("FINISH: OrderDetailsBeanDAO.updateOrderID(OrderDetailsBean, int)");
+						"Product Count UPDATED from " + oldCount + " to " + existingOrderDetails.getProductCount());
+				System.out.println("FINISH: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean, int)");
 				return true;
 			} else {
-				System.out.println("OrderDetail NOT FOUND!");
+				System.out.println("ERROR: Bean NOT FOUND");
+				System.out.println("FINISH: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean, int)");
+				return false;
 			}
+		} else {
+			System.out.println("ERROR: Passed bean is NULL.");
+			System.out.println("FINISH: OrderDetailsBeanDAO.updateProductCount(OrderDetailsBean, int)");
+			return false;
 		}
-		System.out.println("FINISH: OrderDetailsBeanDAO.updateOrderID(OrderDetailsBean, int)");
-		return false;
 	}
+
 
 	@Override
 	public boolean deleteOrderDetails(OrderDetailsBean deteleThisOrderDetails) {
@@ -242,7 +207,7 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 					int deletedOrderDetailID = resultBean.getOrderDetailID();
 					int deletedProductID = resultBean.getProductID();
 					int deletedProductCount = resultBean.getProductCount();
-					int deletedOrderID = resultBean.getOrderID();
+					int deletedOrderID = resultBean.getOrderBean().getOrderID();
 					session.delete(resultBean);
 					System.out.println("OrderDetails Successfully DELETED:");
 					System.out.println("OrderDetail ID: " + deletedOrderDetailID);
@@ -251,16 +216,19 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 					System.out.println("OrderDetail Order ID " + deletedOrderID);
 					return true;
 				} else {
-					System.out.println("OrderDetails NOT FOUND");
+					System.out.println("ERROR: OrderDetails NOT FOUND");
+					System.out.println("FINISH: OrderDetailsBeanDAO.deleteOrderDetails(OrderDetailsBean)");
 				}
 			} else {
-				System.out.println("ERROR: DeleteOrderDetails was passed null OrderDetailsBean");
+				System.out.println("ERROR: Passed OrderDetailsBean is NULL");
+				System.out.println("FINISH: OrderDetailsBeanDAO.deleteOrderDetails(OrderDetailsBean)");
 				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("ERROR: Exception! See Console for details.");
+		System.out.println("FINISH: OrderDetailsBeanDAO.deleteOrderDetails(OrderDetailsBean)");
 		return false;
 	}
 
