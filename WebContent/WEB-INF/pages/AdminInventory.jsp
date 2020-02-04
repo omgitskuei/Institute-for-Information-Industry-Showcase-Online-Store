@@ -88,33 +88,20 @@
               </tr>
             </thead>
             <tbody>
-            	<c:forEach var="product" items="${list}">
+            	<c:forEach var="product" items="${InventoryList}">
               <tr>
-                <td>${product.ID}</td>
-                <td>${product.Name}</td>
-                <td>${product.Price}</td>
-                <td>${product.Stock}</td>
-                <td>${product.ProductDescrition}</td>
+                <td>${product.ProductID}</td>
+                <td>${product.ProductName}</td>
+                <td>${product.ProductPrice}</td>
+                <td>${product.ProductStock}</td>
+                <td>${product.ProductDescription}</td>
                 <td>${product.ProductImg}</td>
                 <td>${product.ProductTimestamp}</td>
                 <td>${product.ProductCategory}</td>
-                <td>
-                  <form:form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <form:input type="submit"
-				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" path="*" value="修改" />
-				  </form:form>
-                </td>
                 	<td>
-                  <form:form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <form:input type="submit"
-				  class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" path="*" value="修改" />
-				  </form:form>
+                  <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-angle-double-right"></i> 修改
+                  </a>
                 </td>
                 	<td>
                   <a href="#" class="btn btn-danger">

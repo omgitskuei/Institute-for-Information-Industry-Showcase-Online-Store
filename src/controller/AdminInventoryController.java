@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.order.OrderBean;
 import model.product.ProductBean;
 import model.product.ProductBeanDAO;
 
@@ -22,17 +23,25 @@ public class AdminInventoryController {
 	
 	public AdminInventoryController() {
 	}
-
-	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.AdminInventoryController", method = RequestMethod.POST)
-	public String processAction(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
-		
-		List<ProductBean> list= dao.selectAll();
-		nextPage.addAttribute("list",list);
+	
+	@RequestMapping(value = "/inventories", method = RequestMethod.GET)
+	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
 		System.out.println("Directing to AdminInventory");
-//		nextPage.addAttribute("userEmail", uEmail);
+		List<ProductBean> list=dao.selectAll();
+		model.addAttribute("InventoryList", list);
 		return "AdminInventory";
 	}
+
+//	// URL address for this controller, method POST/GET, what data fields
+//	@RequestMapping(path = "/controller.AdminInventoryController", method = RequestMethod.POST)
+//	public String processAction(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
+//		
+//		List<ProductBean> list= dao.selectAll();
+//		nextPage.addAttribute("list",list);
+//		System.out.println("Directing to AdminInventory");
+////		nextPage.addAttribute("userEmail", uEmail);
+//		return "AdminInventory";
+//	}
 
 
 

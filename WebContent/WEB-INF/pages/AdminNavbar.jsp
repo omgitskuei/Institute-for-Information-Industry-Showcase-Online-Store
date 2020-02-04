@@ -40,21 +40,19 @@
         	<input type="submit" style="background-color: transparent;" class="nav-brand btn btn-lg mt-1 text-white" title="Admin Index Button" name="adminIndexButton" value="管理者">
         	</button>
         </form>
+        
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav">
             <li class="nav-item px-2">
-             <form class="form nav-link"  name="DirectInventoryForm" action=<jstl:url value="/controller.AdminInventoryController" />
-        method="post" >
-        	<input type="submit" style="background-color: transparent;" class="btn btn-sm mt-1 text-white" title="Admin Inventory Button" name="adminInventoryButton" value="庫存管理">
-        	</form>
+             <a href=<jstl:url value="/inventories"/> class="nav-link">庫存管理</a>
             </li>
-            <form class="form nav-link" name="DirectOrderForm" action=<jstl:url value="/controller.AdminOrderController" />
-        method="post" >
-        	<input type="submit" class="btn btn-sm mt-1 text-white" style="background-color: transparent;" title="Admin Order Button" name="adminOrderButton" value="訂單管理">
-        	</form>
+            <li class="nav-item px-2">
+            <a href=<jstl:url value="/orders"/> class="nav-link">訂單管理</a>
+        	</li>
             <li class="nav-item px-2">
               <form class="form nav-link" name="DirectUserForm" action=<jstl:url value="/controller.AdminUserController" />
         method="post" >
