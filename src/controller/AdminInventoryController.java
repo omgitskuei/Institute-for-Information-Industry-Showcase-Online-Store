@@ -24,7 +24,7 @@ public class AdminInventoryController {
 	}
 	
 	@RequestMapping(value = "/inventories", method = RequestMethod.GET)
-	public String showForm(Model model) {
+	public String showForm(@SessionAttribute("userEmail"), Model model) {
 		System.out.println("Directing to AdminInventory");
 		List<ProductBean> list=dao.selectAll();
 		model.addAttribute("InventoryList", list);
