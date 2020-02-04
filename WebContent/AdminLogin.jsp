@@ -98,22 +98,25 @@
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
+          
             <form>
               <div class="form-group">
                 <label for="email">電子信箱</label>
-                <input type="email" placeholder="電子信箱" class="form-control">
+                <input type="email" placeholder="電子信箱" class="form-control" name="newEmail">
               </div>
               <div class="form-group">
                 <label for="password">密碼</label>
-                <input type="password" placeholder="密碼" class="form-control">
+                <input type="password" placeholder="密碼" class="form-control" name="newPwd">
               </div>
             </form>
+            
             <form>
             <div class="form-group">
                 <label for="password2">確認密碼</label>
-                <input type="password" placeholder="確認密碼" class="form-control">
+                <input type="password" placeholder="確認密碼" class="form-control" name="reEnterPwd">
               </div>
             </form>
+            
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" data-dismiss="modal">送出</button>
