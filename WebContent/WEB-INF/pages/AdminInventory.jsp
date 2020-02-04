@@ -8,7 +8,6 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
@@ -88,16 +87,16 @@
               </tr>
             </thead>
             <tbody>
-            	<c:forEach var="product" items="${InventoryList}">
+            	<jstl:forEach var="product" items="${InventoryList}" >
               <tr>
-                <td>${product.ProductID}</td>
-                <td>${product.ProductName}</td>
-                <td>${product.ProductPrice}</td>
-                <td>${product.ProductStock}</td>
-                <td>${product.ProductDescription}</td>
-                <td>${product.ProductImg}</td>
-                <td>${product.ProductTimestamp}</td>
-                <td>${product.ProductCategory}</td>
+                <td>${product.productID}</td>
+                <td>${product.productName}</td>
+                <td>${product.productPrice}</td>
+                <td>${product.productStock}</td>
+                <td>${product.productDescription}</td>
+                <td>${product.productImg}</td>
+                <td>${product.productTimestamp}</td>
+                <td>${product.productCategory}</td>
                 	<td>
                   <a href="#" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
@@ -109,7 +108,7 @@
                   </a>
                 </td>
               </tr>
-              </c:forEach>
+              </jstl:forEach>
             </tbody>
           </table>
 
