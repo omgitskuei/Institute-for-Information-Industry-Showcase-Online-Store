@@ -18,7 +18,7 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 
 	// Constructors
 	@Autowired
-	public OrderDetailsBeanDAO(@Qualifier("sessionFactroy") SessionFactory sessionFactory) {
+	public OrderDetailsBeanDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
