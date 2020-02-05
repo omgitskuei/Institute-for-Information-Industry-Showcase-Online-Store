@@ -31,7 +31,7 @@ public class AdminUserController {
 //		nextPage.addAttribute("userEmail", uEmail);
 		List<ProfileBean> profileList=dao.selectAll();
 		model.addAttribute("profileList", profileList);
-		return "AdminUser2";
+		return "AdminViewAllUser";
 	}
 
 }
