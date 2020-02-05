@@ -1,12 +1,11 @@
 package model.profile;
 
-import java.util.Date;
 import java.util.List;
 
-public interface ProfileBeanDAOInterface {
+public interface ProfileBeanServiceInterface {
 	
 	public List <ProfileBean> getProfiles();
-	
+
 	public void saveProfile(ProfileBean theProfile);
 	
 	public ProfileBean getProfile(int userId);
