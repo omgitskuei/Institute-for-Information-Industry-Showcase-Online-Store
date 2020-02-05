@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<jsp:useBean id="command" class="model.profile.ProfileBean" scope="request"></jsp:useBean>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,7 @@
 
 	<h1>管理者編輯使用資訊</h1>
 
-	<form:form method="POST" action="/saveProfile">
+	<form:form method="POST" action="saveProfile" modelAttribute="profile">
 		<table>
 			<tr>
 				<td></td>
@@ -53,7 +56,7 @@
 
 			<tr>
 				<td></td>
-				<td><input type="submit" value="Edit Save" /></td>
+				<td><form:button width="20px" type="submit" value="Edit Save"></form:button></td>
 			</tr>
 		</table>
 	</form:form>
