@@ -210,7 +210,7 @@
             <h4 class="display-4">
               <i class="fas fa-pencil-alt"></i> 6
             </h4>
-            <a href="inventories.html" class="btn btn-outline-light btn-sm">檢視</a>
+            <a href=<jstl:url value="/inventories"/> class="btn btn-outline-light btn-sm">檢視</a>
           </div>
         </div>
 
@@ -220,7 +220,7 @@
             <h4 class="display-4">
               <i class="fas fa-folder"></i> 4
             </h4>
-            <a href="orders.html" class="btn btn-outline-light btn-sm">檢視</a>
+            <a href=<jstl:url value="/orders"/> class="btn btn-outline-light btn-sm">檢視</a>
           </div>
         </div>
 
@@ -230,7 +230,7 @@
             <h4 class="display-4">
               <i class="fas fa-users"></i> 4
             </h4>
-            <a href="<jstl:url value = "/controller.ProfileController"/>" class="btn btn-outline-light btn-sm" > Show Profile </a>
+            <a href=<jstl:url value="/users"/> class="btn btn-outline-light btn-sm" >檢視</a>
           </div>
         </div>
       </div>
@@ -420,7 +420,7 @@
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 
-    CKEDITOR.replace('editor1');
+   /*  CKEDITOR.replace('editor1'); */
   </script>
 </body>
 
