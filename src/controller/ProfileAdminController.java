@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
+import model.user.UserBean;
+import model.user.UserBeanService;
 
 @Controller
 @SessionAttributes
@@ -33,9 +36,14 @@ public class ProfileAdminController {
 	}
 
 	@PostMapping("/saveProfile")
-	public String saveProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile) {
+	public String saveProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
 		profileService.saveProfile(theProfile);
-		return "redirect:/AdminProfile/list";
+		
+		if (bindingResult.hasErrors()) {
+			return "AdminProfileUpdateForm";
+		} else {
+			return "redirect:/AdminProfile/list";
+		}
 	}
 
 	@GetMapping("/updateForm")

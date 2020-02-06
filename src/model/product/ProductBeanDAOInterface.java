@@ -6,7 +6,7 @@ public interface ProductBeanDAOInterface {
 	
 	public List <ProductBean> selectAll();
 	
-	public void saveProduct(ProductBean theProduct);
+	public void insertProduct(ProductBean theProduct);
 	
 	public ProductBean getProduct(int productID);
 	

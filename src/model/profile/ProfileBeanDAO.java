@@ -1,9 +1,6 @@
 package model.profile;
 
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -44,6 +40,13 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	@Override
 	public ProfileBean getProfile(int userID) {
 		Session currentSession = sessionFactory.getCurrentSession();
+		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
+		return theProfile;
+	}
+	
+	public ProfileBean getProfile(ProfileBean thisP) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		int userID = thisP.getUserID();
 		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		return theProfile;
 	}

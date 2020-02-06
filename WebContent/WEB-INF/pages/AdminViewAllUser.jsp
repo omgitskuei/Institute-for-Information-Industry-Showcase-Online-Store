@@ -110,10 +110,10 @@
 										<td><a href="${updateLink}" class="btn btn-secondary">
 												<i class="fas fa-angle-double-right"></i> 修改
 										</a></td>
-										<td><a href="${deleteLink}" class="btn btn-danger"
-											onclick="if (!(confirm('確定要刪除這個使用者嗎?'))) return false">
+										<!-- <td><a href="${deleteLink}" class="btn btn-danger"
+											onclick="if (!(confirm('確定要刪除這個使用者嗎?'))) return false" undo="true">
 												<i class="fas fa-angle-double-right"></i> 刪除
-										</a></td>
+										</a></td> -->
 									</tr>
 								</c:forEach>
 							</tbody>
