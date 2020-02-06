@@ -25,35 +25,38 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>Name :</td>
+				<td>姓名 :</td>
 				<td><form:input path="profileFullName" /></td>
-				<td><form:errors path="profileJoinDate" /></td>
+				
 			</tr>
 			<tr>
-				<td>Join Date :</td>
+				<td>加入日期 :</td>
 				<td><form:input path="profileJoinDate" /></td>
 				<td><form:errors path="profileJoinDate" /></td>
 			</tr>
 			<tr>
-				<td>Birthday :</td>
+				<td>生日 :</td>
 				<td><form:input path="profileBirthdate" /></td>
-				
+				<td><form:errors path="profileBirthdate" /></td>
 			</tr>
 			<tr>
-				<td>Gender :</td>
+				<td>性別 :</td>
 				<td><form:input path="profileSex" /></td>
 			</tr>
 			<tr>
-				<td>Phone :</td>
+				<td>電話 :</td>
 				<td><form:input path="profilePhone" /></td>
+				<td><form:errors path="profilePhone" /></td>
 			</tr>
 			<tr>
-				<td>Address :</td>
+				<td>地址 :</td>
 				<td><form:input path="profileAddress" /></td>
+				<td><form:errors path="profileAddress" /></td>
 			</tr>
 			<tr>
 				<td>VIP Level :</td>
 				<td><form:input path="profileVIP" /></td>
+				<td><form:errors path="profileVIP" /></td>
 			</tr>
 
 			<tr>
