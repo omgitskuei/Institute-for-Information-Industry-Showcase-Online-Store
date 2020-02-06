@@ -16,7 +16,7 @@ public class CookieController {
 	@RequestMapping("/cookie")
 	public String createCookie(@RequestParam(required=false, defaultValue="0")int state, User user, HttpServletResponse response, 
 			HttpServletRequest request, ModelMap map) {
-		if(user.getUsername().equals("aaa") && user.getPassword().contentEquals("aaa")) {
+		if(user.getUsername()!=null && user.getPassword()!=null) {
 			// 如果選擇記住密碼，則創建cookie，並將帳號密碼給cookie
 			if(state==1) {
 				// 創建cookie
@@ -26,6 +26,7 @@ public class CookieController {
 				// 設置Cookie有效範圍,/為全部的路徑
 				ck.setPath("/");
 				response.addCookie(ck);
+				System.out.println("有抓到cookie");
 			}else {
 			// 如果沒有選擇記住密碼，則將以記住密碼的Cookie失效，有效時間設為0
 				Cookie[] cookies = request.getCookies();

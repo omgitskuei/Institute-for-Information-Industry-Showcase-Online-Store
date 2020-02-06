@@ -153,7 +153,7 @@
     			var userPwd = $.cookie(userEmail);
     			if(userPwd!=null){
     				$("#userPwd").val(userPwd);
-    				$("#rememberMe").attr(checked, true);
+    				$("#rememberMe").attr("checked", true);
     			}
     			
     		}
