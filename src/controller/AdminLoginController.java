@@ -48,17 +48,21 @@ public class AdminLoginController {
 		// Check for empty input
 		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
 			
-			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
-			if (remMe == true) {
-				System.out.println("MAKING COOKIE");
-				writeLoginCookie(uEmail, nextPage, response);
-			}
 			
 			// Turn user input into a persistence bean
 			UserBean bean = new UserBean();
+			
 			bean.setUserEmail(uEmail);
 			bean.setUserPwd(uPwd);
 			bean.setAdmin(1);
+			
+			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
+			if (remMe == true) {
+				System.out.println("MAKING COOKIE");
+				writeLoginCookie(bean, nextPage, response);
+			}
+			
+			
 			// Use bean to use UserBeanService service
 			UserBean results = service.select(bean);
 			System.out.println("Service.select(bean) RESULTS: ");
@@ -109,10 +113,16 @@ public class AdminLoginController {
 
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(
-			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") String email,
+			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") UserBean user,
 			Model nextPage, HttpServletResponse response) {
 		// ^ name is synonymous to 'value'
-		response.addCookie(new Cookie("adminLoginCookie", email));
+		// response.addCookie(new Cookie("adminLoginCookie", email));
+		Cookie ck = new Cookie("Kueifong", user.getUserPwd());
+		// ck.setMaxAge(60*60*24);
+		// ck.setPath("/");
+		response.addCookie(ck);
+		System.out.println("有抓Cookie");
+		
 		return "writeLoginCookie";
 	}
 
