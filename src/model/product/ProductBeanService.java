@@ -18,7 +18,7 @@ public class ProductBeanService implements ProductBeanServiceInterface {
 
 	@Override
 	public void saveProduct(ProductBean theProduct) {
-		productDAO.saveProduct(theProduct);
+		productDAO.insertProduct(theProduct);
 	}
 
 	@Override
