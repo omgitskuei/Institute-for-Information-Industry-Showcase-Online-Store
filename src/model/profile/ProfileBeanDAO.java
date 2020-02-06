@@ -38,7 +38,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	@Override
 	public void saveProfile(ProfileBean theProfile) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		currentSession.saveOrUpdate(theProfile);
+		currentSession.update(theProfile);
 	}
 
 	@Override
