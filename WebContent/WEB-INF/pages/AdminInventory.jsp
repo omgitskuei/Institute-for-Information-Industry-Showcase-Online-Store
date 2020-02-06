@@ -61,7 +61,8 @@
     </div>
   </div>
 </section>
-
+<!-- <!-- BACK TO LAST PAGE 
+<a href="javascript:history.go(-1)">返回上一頁</a> -->
 <!-- INVENTORY -->
 <section id="inventory">
   <div class="container">
@@ -137,6 +138,9 @@
     </div>
   </div>
 </section>
+
+
+
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/pages/AdminFooter2.jsp" %>
