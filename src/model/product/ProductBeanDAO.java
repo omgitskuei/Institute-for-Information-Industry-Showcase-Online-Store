@@ -59,18 +59,18 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		if (selectThisProduct != null) {
 			// Try to find selectThisProduct
 			System.out.println("Looking for this Product: ");
-			System.out.println("Product ID:" + selectThisProduct.getProductID());
+//			System.out.println("Product ID:" + selectThisProduct.getProductID());
 			System.out.println("Product Name:" + selectThisProduct.getProductName());
-			System.out.println("Product Price:" + selectThisProduct.getProductPrice());
-			System.out.println("Product Stock:" + selectThisProduct.getProductStock());
-			System.out.println("Product Description:" + selectThisProduct.getProductDescription());
-			System.out.println("Product Img:" + selectThisProduct.getProductImg());
-			System.out.println("Product ProductTimestamp:" + selectThisProduct.getProductTimestamp());
+//			System.out.println("Product Price:" + selectThisProduct.getProductPrice());
+//			System.out.println("Product Stock:" + selectThisProduct.getProductStock());
+//			System.out.println("Product Description:" + selectThisProduct.getProductDescription());
+//			System.out.println("Product Img:" + selectThisProduct.getProductImg());
+//			System.out.println("Product ProductTimestamp:" + selectThisProduct.getProductTimestamp());
 			System.out.println("Product Category:" + selectThisProduct.getProductCategory());
 			
 			Session session = sessionFactory.getCurrentSession();
 			// HQL
-			String hqlString = "from ProductBean where ProductID=:thisProductID and ProductName=:thisProductName and ProductPrice=:thisProductPrice and ProductStock=:thisProductStock and ProductDescription=:thisProductDescription and ProductImg=:thisProductImg and ProductTimestamp=:thisProductTimestamp and ProductCategory=:thisProductCategory";
+			String hqlString = "from ProductBean where ProductName=:thisProductName and ProductCategory=:thisProductCategory";
 			Query q = session.createQuery(hqlString);
 			q.setParameter("thisProductID", selectThisProduct.getProductID());
 			q.setParameter("thisProductName", selectThisProduct.getProductName());
@@ -85,11 +85,13 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			
 			if (existingProduct != null) {
 				// If found, return the result ProductBean existingProduct
+				System.out.println("Product FOUND: ProductID: "+existingProduct.getProductID());
 				System.out.println("Finish: ProductBeanDAO.selectProduct(ProductBean selectThisProduct)");
 				return existingProduct;
 			}
 		}
 		// existingProduct returned null meaning selectThisProduct was not found
+		System.out.println("Product NOT FOUND");
 		System.out.println("Finish: ProductBeanDAO.selectProductr(ProductBean selectThisProduct)");
 		return null;
 	}
