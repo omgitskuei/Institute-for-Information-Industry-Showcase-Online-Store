@@ -111,7 +111,7 @@
 												<i class="fas fa-angle-double-right"></i> 修改
 										</a></td>
 										<td><a href="${deleteLink}" class="btn btn-danger"
-											onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">
+											onclick="if (!(confirm('確定要刪除這個使用者嗎?'))) return false">
 												<i class="fas fa-angle-double-right"></i> 刪除
 										</a></td>
 									</tr>

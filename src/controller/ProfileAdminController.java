@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class ProfileAdminController {
 	}
 
 	@PostMapping("/saveProfile")
-	public String saveProfile(@ModelAttribute("profile") ProfileBean theProfile) {
+	public String saveProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile) {
 		profileService.saveProfile(theProfile);
 		return "redirect:/AdminProfile/list";
 	}
