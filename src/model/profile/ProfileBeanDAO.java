@@ -47,6 +47,13 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		return theProfile;
 	}
+	
+	public ProfileBean getProfile(ProfileBean thisP) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		int userID = thisP.getUserID();
+		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
+		return theProfile;
+	}
 
 	@Override
 	public void deleteProfile(int userID) {
