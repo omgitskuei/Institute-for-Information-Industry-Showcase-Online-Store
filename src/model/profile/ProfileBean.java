@@ -4,17 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
-import model.user.UserBean;
 
 @Entity
 @Table(name = "ProfilesTable")
@@ -24,7 +21,13 @@ public class ProfileBean {
 	// Variables, matches table columns
 	private int userID;		// Not NULL
 	private String profileFullName;
-	private Date profileJoinDate;		// Not NULL
+	
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a date.")
+	private Date profileJoinDate;		// Not Null
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a date.")
 	private Date profileBirthdate;
 	private String profileSex;
 	private String profilePhone;		// Not NULL

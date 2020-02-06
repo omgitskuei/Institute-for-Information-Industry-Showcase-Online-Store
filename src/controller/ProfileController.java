@@ -12,22 +12,15 @@ import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 
 @Controller
-@SessionAttributes()
+@RequestMapping("/AdminProfile")
 public class ProfileController {
 	
 	@Autowired
 	ProfileBeanDAO dao;
-
-//    使用者不用這個，可以等 Admin 那邊增加後刪除。
-//    @RequestMapping("/controller.AddUserProfile")    
-//    public String addUser(Model m){    
-//        m.addAttribute("command", new ProfileBean());  
-//        return "ProfileAdding";   
-//    } 
 	
-	@RequestMapping(path = "/controller.ProfileController")
+	@RequestMapping(path = "/showProfile")
 	public String showProfile(Model m) {
-        List<ProfileBean> list=dao.selectAll();    
+        List<ProfileBean> list=dao.getProfiles();    
         m.addAttribute("list",list);  
 		return "UserProfile";
 	}

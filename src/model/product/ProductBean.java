@@ -1,5 +1,6 @@
 package model.product;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -115,6 +116,14 @@ public class ProductBean {
 
 	public void setProductCategory(String productCategory) {
 		this.ProductCategory = productCategory;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductBean [ProductID=" + ProductID + ", ProductName=" + ProductName + ", ProductPrice=" + ProductPrice
+				+ ", ProductStock=" + ProductStock + ", ProductDescription=" + ProductDescription + ", ProductImg="
+				+ Arrays.toString(ProductImg) + ", ProductTimestamp=" + ProductTimestamp + ", ProductCategory="
+				+ ProductCategory + "]";
 	}
 
 }
