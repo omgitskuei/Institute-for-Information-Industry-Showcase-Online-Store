@@ -1,6 +1,5 @@
 package model.profile;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ProfileBeanDAOInterface {
@@ -9,7 +8,7 @@ public interface ProfileBeanDAOInterface {
 	
 	public void saveProfile(ProfileBean theProfile);
 	
-	public ProfileBean getProfile(int userId);
+	public ProfileBean getProfile(int userID);
 	
-	public void deleteProfile(int userId);
+	public void deleteProfile(int userID);
 }

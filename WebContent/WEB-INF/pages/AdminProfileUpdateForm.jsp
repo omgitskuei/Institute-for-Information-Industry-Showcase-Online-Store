@@ -12,6 +12,8 @@
 <title>管理者編輯使用資訊</title>
 </head>
 <body>
+<!-- NAVBAR -->
+	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
 	<h1>管理者編輯使用資訊</h1>
 
@@ -20,18 +22,22 @@
 			<tr>
 				<td></td>
 				<td><form:hidden path="userID" /></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>Name :</td>
 				<td><form:input path="profileFullName" /></td>
+				<td><form:errors path="profileJoinDate" /></td>
 			</tr>
 			<tr>
 				<td>Join Date :</td>
 				<td><form:input path="profileJoinDate" /></td>
+				<td><form:errors path="profileJoinDate" /></td>
 			</tr>
 			<tr>
 				<td>Birthday :</td>
 				<td><form:input path="profileBirthdate" /></td>
+				
 			</tr>
 			<tr>
 				<td>Gender :</td>
@@ -46,21 +52,15 @@
 				<td><form:input path="profileAddress" /></td>
 			</tr>
 			<tr>
-				<td>Phone :</td>
-				<td><form:input path="profilePhone" /></td>
-			</tr>
-			<tr>
 				<td>VIP Level :</td>
 				<td><form:input path="profileVIP" /></td>
 			</tr>
 
 			<tr>
-				<td></td>
-				<td><form:button width="20px" type="submit" value="Edit Save"></form:button></td>
+				<td>確認</td>
+				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
 			</tr>
 		</table>
 	</form:form>
 
 
-</body>
-</html>
