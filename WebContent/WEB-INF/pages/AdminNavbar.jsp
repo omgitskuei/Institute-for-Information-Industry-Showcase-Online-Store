@@ -49,7 +49,7 @@
             <a href=<jstl:url value="/orders"/> class="nav-link">訂單管理</a>
         	</li>
             <li class="nav-item px-2">
- 				<a href=<jstl:url value="/users"/> class="nav-link">使用者管理</a>
+ 				<a href=<jstl:url value="/AdminProfile/list"/> class="nav-link">使用者管理</a>
             </li>
           </ul>
   

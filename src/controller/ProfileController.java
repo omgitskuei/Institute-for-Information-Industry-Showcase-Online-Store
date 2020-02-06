@@ -20,7 +20,7 @@ public class ProfileController {
 	
 	@RequestMapping(path = "/showProfile")
 	public String showProfile(Model m) {
-        List<ProfileBean> list=dao.selectAll();    
+        List<ProfileBean> list=dao.getProfiles();    
         m.addAttribute("list",list);  
 		return "UserProfile";
 	}

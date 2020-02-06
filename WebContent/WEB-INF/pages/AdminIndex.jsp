@@ -230,7 +230,7 @@
             <h4 class="display-4">
               <i class="fas fa-users"></i> 4
             </h4>
-            <a href=<jstl:url value="/users"/> class="btn btn-outline-light btn-sm" >檢視</a>
+            <a href="<jstl:url value="/AdminProfile/list" />" class="btn btn-outline-light btn-sm" > Show Profile </a>
           </div>
         </div>
       </div>
