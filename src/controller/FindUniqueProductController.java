@@ -1,23 +1,75 @@
 package controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.product.ProductBean;
+import model.product.ProductBeanDAO;
+
 @Controller
-@SessionAttributes()
+@SessionAttributes(names = { "searchSpecificValue" ,"searchCategoryValue"})
 public class FindUniqueProductController {
-	public FindUniqueProductController() {
-		
+	// Local fields
+	ProductBeanDAO pDAO;
+
+	// Constructors
+	@Autowired
+	public FindUniqueProductController(ProductBeanDAO pDAO) {
+		this.pDAO = pDAO;
 	}
-	
-	@RequestMapping(path="/controller.FindUniqueProductController", method=RequestMethod.GET)
-	public String processAction(@SessionAttribute("productCategory")String ProductCategory, Model nextPage) {
-		nextPage.getAttribute("ProductName", productName);
+
+	// Methods
+	@RequestMapping(path = "/controller.FindProductByName", method = RequestMethod.GET)
+	public String processAction(@RequestParam(name = "searchSpecificValue") String input, Model nextPage) {
+		// New object declarations
+		ProductBeanDAO thisDAO = new ProductBeanDAO();
+		ProductBean thisBean = new ProductBean();
+		// Convert user input from last page into object
+		// Give object to DAO, DAO give me result
+		thisBean = thisDAO.getProduct(input);
+		// result returned, get values from object
+		// img
+		byte[] productImage=thisBean.getProductImg();
+		nextPage.addAttribute("resultImg", productImage);
+		// name
+		nextPage.addAttribute("resultName", thisBean.getProductName());
+		// price
+		nextPage.addAttribute("resultPrice", thisBean.getProductPrice());
+		// description
+		nextPage.addAttribute("resultDescription", thisBean.getProductDescription());
+
 		System.out.println("Directing to Product");
 		return "UniqueProduct";
+	}
+
+	@RequestMapping(path = "/controller.FindProductByCategory", method = RequestMethod.GET)
+	public String processAction(@RequestParam(name = "searchCategoryValue") Model nextPage, String input) {
+		// New object declarations
+		ProductBeanDAO thisDAO = new ProductBeanDAO();
+		ProductBean thisBean = new ProductBean();
+		// Convert user input from last page into object
+		// Give object to DAO, DAO give me result
+		thisBean.setProductCategory(input);
+		List<ProductBean> categoryList = thisDAO.selectAllByCategory(thisBean);
+		// result returned, get values from object
+		// img
+		nextPage.addAttribute("resultImg", thisBean.getProductImg());
+		// name
+		nextPage.addAttribute("resultName", thisBean.getProductName());
+		// price
+		nextPage.addAttribute("resultPrice", thisBean.getProductPrice());
+		// 在下一頁顯示所找到的該類別
+		nextPage.addAttribute(categoryList);
+
+		System.out.println("Directing to Product");
+		return "ProductCategory";
 	}
 }
