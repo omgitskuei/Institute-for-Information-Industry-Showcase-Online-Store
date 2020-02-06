@@ -8,6 +8,7 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
@@ -89,6 +90,15 @@
             </thead>
             <tbody>
             	<jstl:forEach var="product" items="${InventoryList}" >
+             <!-- construct an "update" link with customer id -->
+					<c:url var="updateLink" value="/AdminProduct/updateForm">
+						<c:param name="productID" value="${product.productID}" />
+					</c:url>
+
+					<!-- construct an "delete" link with customer id -->
+					<c:url var="deleteLink" value="/AdminProduct/delete">
+						<c:param name="productID" value="${product.productID}" />
+					</c:url>
               <tr>
                 <td>${product.productID}</td>
                 <td>${product.productName}</td>
@@ -99,12 +109,12 @@
                 <td>${product.productTimestamp}</td>
                 <td>${product.productCategory}</td>
                 	<td>
-                  <a href="#" class="btn btn-secondary">
+                  <a href="${updateLink}" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
                 	<td>
-                  <a href="#" class="btn btn-danger">
+                  <a href="${deleteLink}" class="btn btn-danger">
                     <i class="fas fa-angle-double-right"></i> 刪除
                   </a>
                 </td>
