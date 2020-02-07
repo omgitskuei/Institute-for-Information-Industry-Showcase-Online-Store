@@ -3,10 +3,6 @@ package model.profile;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -23,12 +19,9 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	@Override
 	public List<ProfileBean> getProfiles() {
 		Session session = sessionFactory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<ProfileBean> cq = cb.createQuery(ProfileBean.class);
-		Root<ProfileBean> root = cq.from(ProfileBean.class);
-		cq.select(root);
-		Query query = session.createQuery(cq);
-		return query.getResultList();
+		Query query = session.createQuery("From ProfileBean");
+		List<ProfileBean> results = (List<ProfileBean>) query.list();
+		return results;
 	}
 
 	@Override
@@ -54,8 +47,8 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	@Override
 	public void deleteProfile(int userID) {
 		Session session = sessionFactory.getCurrentSession();
-		ProfileBean book = session.byId(ProfileBean.class).load(userID);
-		session.delete(book);
+		ProfileBean theProfile = session.byId(ProfileBean.class).load(userID);
+		session.delete(theProfile);
 
 	}
 
