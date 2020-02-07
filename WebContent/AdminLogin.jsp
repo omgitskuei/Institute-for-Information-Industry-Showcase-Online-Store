@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -24,6 +24,8 @@
     
 </head>
 <body>
+
+
  	<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
       <div class="container">
         <span class="navbar-brand">管理者</span>
@@ -82,6 +84,7 @@
                 <input type="submit" value="登入" class="btn btn-primary btn-block">
                 	<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
             </form>
+            	${ts}<br>
             </div>
         </div>
       </div>
@@ -145,7 +148,7 @@
     $('#year').text(new Date().getFullYear());
     
     // Function of Cookie to Remember Email 
-    // 如果判斷cookieu有值把密碼給他
+    // 如果判斷cookie有值把密碼給他
     $(function(){
     	$("#userEmail").keyup(function(){
     		var userEmail = $("#userEmail").val();
@@ -153,10 +156,10 @@
     			var userPwd = $.cookie(userEmail);
     			if(userPwd!=null){
     				$("#userPwd").val(userPwd);
-    				$("#rememberMe").attr(checked, true);
+    				$("#rememberMe").attr("checked", true);
     			}
     			
-    		})
+    		}
     	})
     })
 

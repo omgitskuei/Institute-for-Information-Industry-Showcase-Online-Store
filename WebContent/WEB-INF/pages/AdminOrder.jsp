@@ -8,7 +8,8 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 
@@ -85,7 +86,16 @@
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="orderInfo" items="${orderList}">
+              <jstl:forEach var="orderInfo" items="${orderList}">
+              <!-- construct an "update" link with customer id -->
+			<c:url var="updateLink" value="/AdminOrder/updateForm">
+						<c:param name="orderID" value="${orderInfo.orderID}" />
+					</c:url>
+
+					<!-- construct an "delete" link with customer id -->
+					<c:url var="deleteLink" value="/AdminOrder/delete">
+						<c:param name="orderID" value="${orderInfo.orderID}" />
+					</c:url>
               <tr>
                 <td>${orderInfo.orderID}</td>
 				<td>${orderInfo.total}</td>
@@ -93,17 +103,17 @@
 				<td>${orderInfo.mailingPhone}</td>
 				<td>${orderInfo.orderTime}</td>
                 <td>
-                  <a href="#" class="btn btn-secondary">
+                  <a href="${updateLink}" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
                 	 <td>
-                  <a href="#" class="btn btn-danger">
+                  <a href="${deleteLink}" class="btn btn-danger">
                     <i class="fas fa-angle-double-right"></i> 刪除
                   </a>
                 </td>
               </tr>
-             </c:forEach>
+             </jstl:forEach>
             </tbody>
           </table>
 

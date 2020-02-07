@@ -101,7 +101,7 @@
             <form>
               <div class="form-group">
                 <label for="email">電子信箱</label>
-                <input type="email" placeholder="電子信箱" class="form-control">
+                <input type="email" placeholder="電子信箱" class="form-control" id="userEmail">
               </div>
               <div class="form-group">
                 <label for="password">密碼</label>
@@ -140,6 +140,21 @@
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
     
+    
+    $(function(){
+    	$("#userEmail").keyup(function(){
+    		var userEmail = $("#userEmail").val();
+    		if(userEmail != ""){
+    			var userPwd = $.cookie(userEmail);
+    			if(userPwd!=null){
+    				$("#userPwd").val(userPwd);
+    				$("#rememberMe").attr(checked, true);
+    			}
+    			
+    		}
+    	})
+    })
+
     
 
   </script>

@@ -30,12 +30,25 @@ public class AdminLoginController {
 		this.service = service;
 		this.response = response;
 	}
+//	
+//	@RequestMapping("/hello.html")
+//	public String hello(@CookieValue(value = "foo", defaultValue = "hello") String fooCookie) {
+//		
+//		response.addCookie(new Cookie("foo", "bar"));
+//		
+//		Cookie foo = new Cookie
+//		
+//		
+//		return fooCookie;
+//		
+//	}
 	
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.POST)
 	public String processAction(@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
+			@CookieValue(value = "Email", required = false) String cEmail,
 			Model nextPage) {
 
 		System.out.println("BEGIN /controller.AdminLoginController");
@@ -47,18 +60,28 @@ public class AdminLoginController {
 		
 		// Check for empty input
 		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
-			
-			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
-			if (remMe == true) {
-				System.out.println("MAKING COOKIE");
-				writeLoginCookie(uEmail, nextPage, response);
-			}
+			UserBean bean = new UserBean();
+			readLoginCookie(cEmail);
+			if(cEmail != null) {
+				bean.setUserEmail(cEmail);
+				bean.setUserPwd(uPwd);
+				bean.setAdmin(1);
+				System.out.println("有抓到Cookie");
+				System.out.println(cEmail);
+			}else {
 			
 			// Turn user input into a persistence bean
-			UserBean bean = new UserBean();
 			bean.setUserEmail(uEmail);
 			bean.setUserPwd(uPwd);
 			bean.setAdmin(1);
+			}
+			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
+			if (remMe == true) {
+				System.out.println("MAKING COOKIE");
+				writeLoginCookie(bean, nextPage, response);	
+			}
+			
+			
 			// Use bean to use UserBeanService service
 			UserBean results = service.select(bean);
 			System.out.println("Service.select(bean) RESULTS: ");
@@ -109,10 +132,16 @@ public class AdminLoginController {
 
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(
-			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") String email,
+			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") UserBean user,
 			Model nextPage, HttpServletResponse response) {
 		// ^ name is synonymous to 'value'
-		response.addCookie(new Cookie("adminLoginCookie", email));
+		// response.addCookie(new Cookie("adminLoginCookie", email));
+		Cookie ck = new Cookie("Email", user.getUserEmail());
+		// ck.setMaxAge(60*60*24);
+		// ck.setPath("/");
+		response.addCookie(ck);
+		System.out.println("有抓Cookie");
+		
 		return "writeLoginCookie";
 	}
 

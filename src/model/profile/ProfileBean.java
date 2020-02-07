@@ -4,17 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
-import model.user.UserBean;
 
 @Entity
 @Table(name = "ProfilesTable")
@@ -23,13 +21,27 @@ public class ProfileBean {
 
 	// Variables, matches table columns
 	private int userID;		// Not NULL
+	
 	private String profileFullName;
-	private Date profileJoinDate;		// Not NULL
+	
+	@NotNull(message = "請輸入日期 yyyy-MM-dd ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date profileJoinDate;		// Not Null
+    
+    @NotNull(message = "請輸入日期 yyyy-MM-dd.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date profileBirthdate;
-	private String profileSex;
-	private String profilePhone;		// Not NULL
-	private String profileAddress;		// Not NULL
-	private int profileVIP=0;		// Not NULL
+	
+    private String profileSex;
+	
+    @NotNull(message = "請輸入電話.")
+    private String profilePhone;		// Not NULL
+	
+    @NotNull(message = "請輸入地址.")
+    private String profileAddress;		// Not NULL
+	
+    @NotNull(message = "請輸入 VIP: 0 或 1")
+    private int profileVIP=0;		// Not NULL
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 
@@ -125,5 +137,13 @@ public class ProfileBean {
 //	public void setUserBean(UserBean userBean) {
 //		this.userBean = userBean;
 //	}
+
+	@Override
+	public String toString() {
+		return "ProfileBean [userID=" + userID + ", profileFullName=" + profileFullName + ", profileJoinDate="
+				+ profileJoinDate + ", profileBirthdate=" + profileBirthdate + ", profileSex=" + profileSex
+				+ ", profilePhone=" + profilePhone + ", profileAddress=" + profileAddress + ", profileVIP=" + profileVIP
+				+ "]";
+	}
 
 }

@@ -23,8 +23,8 @@
 
 <!-- Dictate which Stylesheets to use for this webpage -->
 <style>
-		<%@include file="/WEB-INF/css/normalize.css"%>
-        <%@include file="/WEB-INF/css/style.css"%>
+<%@ include file="/WEB-INF/css/normalize.css" %>
+<%@ include file="/WEB-INF/css/style.css" %>
 </style>
 
 
@@ -88,28 +88,34 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="user" items="${profileList}">
-								<tr>
-									<td>${user.userID}</td>
-									<td>${user.profileFullName}</td>
-									<td>${user.profileJoinDate}</td>
-									<td>${user.profileBirthdate}</td>
-									<td>${user.profileSex}</td>
-									<td>${user.profilePhone}</td>
-									<td>${user.profileAddress}</td>
-									<td>${user.profileVIP}</td>
-									<td>
-                  					<a href="#" class="btn btn-secondary">
-                    						<i class="fas fa-angle-double-right"></i> 修改
-                  					</a>
-                						</td>
-                	 					<td>
-                  					<a href="#" class="btn btn-danger">
-                    						<i class="fas fa-angle-double-right"></i> 刪除
-                  					</a>
-                						</td>
-								</tr>
-							</c:forEach>
+								<c:forEach var="user" items="${profiles}">
+									<!-- construct an "update" link with customer id -->
+									<c:url var="updateLink" value="/AdminProfile/updateForm">
+										<c:param name="userID" value="${user.userID}" />
+									</c:url>
+
+									<!-- construct an "delete" link with customer id -->
+									<c:url var="deleteLink" value="/AdminProfile/delete">
+										<c:param name="userID" value="${user.userID}" />
+									</c:url>
+									<tr>
+										<td>${user.userID}</td>
+										<td>${user.profileFullName}</td>
+										<td>${user.profileJoinDate}</td>
+										<td>${user.profileBirthdate}</td>
+										<td>${user.profileSex}</td>
+										<td>${user.profilePhone}</td>
+										<td>${user.profileAddress}</td>
+										<td>${user.profileVIP}</td>
+										<td><a href="${updateLink}" class="btn btn-secondary">
+												<i class="fas fa-angle-double-right"></i> 修改
+										</a></td>
+										<!-- <td><a href="${deleteLink}" class="btn btn-danger"
+											onclick="if (!(confirm('確定要刪除這個使用者嗎?'))) return false" undo="true">
+												<i class="fas fa-angle-double-right"></i> 刪除
+										</a></td> -->
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 

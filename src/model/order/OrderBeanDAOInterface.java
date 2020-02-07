@@ -1,5 +1,7 @@
 package model.order;
 
+import model.product.ProductBean;
+
 public interface OrderBeanDAOInterface {
 	//Create
 	public boolean insertOrder(OrderBean insertThisOrder);
@@ -11,4 +13,5 @@ public interface OrderBeanDAOInterface {
 	public boolean updateMailingPhone(OrderBean updateThisOrder, String newMailingPhone);
 	//Delete
 	public boolean deleteOrder(OrderBean deleteThisOrder);
+	public OrderBean getOrder(int orderID);
 }
