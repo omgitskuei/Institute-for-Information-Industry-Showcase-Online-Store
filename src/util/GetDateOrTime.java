@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class GetDateOrTime {
 	
@@ -18,7 +20,13 @@ public class GetDateOrTime {
 		System.out.println("GetDateOrTime generated: "+dateFormat.format(newDate)); //prints out current Date
 		return newDate;
 	}
-	
+	public LocalDateTime generateLocalDatetime() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
+		String nowTime = localDateTime.format(formatter);
+		System.out.println(nowTime);
+		return localDateTime;
+	}
 	// Generate current local date
 	public LocalDate generateLocalDate() {
 		// Generate current local date based on system clock
