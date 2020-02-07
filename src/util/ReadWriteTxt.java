@@ -2,6 +2,8 @@ package util;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileReader;
@@ -35,15 +37,29 @@ public class ReadWriteTxt {
 		this.appendToFile = appendToFile; // true for append, false for override
 	}
 
-	
-	
-	
 	// -- Executable
 	public static void main(String args[]) {
 
 		ReadWriteTxt data = new ReadWriteTxt("D:\\log.txt");
-		//data.appendToFile = false;
+		// data.appendToFile = false;
+		
+		// Timestamp
+		LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
+		String nowTime = localDateTime.format(formatter);
+		System.out.println("LocalDateTime: " + nowTime);
+		
+		// print result
+		// data.writeFile(nowTime+" | Admin "+adminUserID+" INSERT new user
+		// [UserID:"+userID+",ProfileID:"+profileID+",SettingID:"+settingID+",WalletID:"+walletID+"]");
+		// data.writeFile(nowTime+" | Admin "+adminUserID+" UPDATE userEmail from "+oldEmail+" to "+newEmail);
+		// data.writeFile(nowTime+" | Admin "+adminUserID+" UPDATE userPwd from "+oldPwd+" to "+newPwd);
+		// data.writeFile(nowTime+" | Admin "+adminUserID+" DELETE new user
+		// [UserID:"+userID+",ProfileID:"+profileID+",SettingID:"+settingID+",WalletID:"+walletID+"]");
 
+		//
+		
+		// 
 		try {
 			// Write log
 			data.writeFile("This is wOAH");
@@ -51,40 +67,37 @@ public class ReadWriteTxt {
 			// Read log
 			ArrayList<String> s = data.readFile(data.filePath);
 			System.out.println(s);
-			
+
 		} catch (IOException e) {
 			System.out.println("ERROR: IOException thrown.");
 		}
 	}
 
-	
-	
-	
 	// Methods
 	// -- writeFile appends
 	public void writeFile(String newText) throws IOException {
-		System.out.println("BEGIN: Writing File ["+filePath+"]");
+		System.out.println("BEGIN: Writing File [" + filePath + "]");
 		// Double-check if field variables passed
 		// System.out.println("Append: " + appendToFile);
-		
+
 		// New FileWriter - Bytes, New PrintWriter - Text
 		openWriters();
 		// Format, and print text
 		textWriter.printf("%s" + "%n", newText); // "%n" means a newline, "%s" means a string of any length
-		System.out.println("Wrote: "+newText);
+		System.out.println("Wrote: " + newText);
 		// Close writers
 		closeWriters();
 		System.out.println("FINISH: Writing File");
 	}
 
 	public ArrayList<String> readFile(String filePath) throws IOException {
-		System.out.println("BEGIN: Reading File ["+ filePath+"]");
+		System.out.println("BEGIN: Reading File [" + filePath + "]");
 		// Object declaration
 		openReaders();
 		String aLine = "";
 		// Data structure declaration
 		ArrayList<String> fileContent = new ArrayList<String>();
-		
+
 		// Until there are no more lines, ...
 		while (aLine != null) {
 			// ... Read a line from the file, ...
@@ -94,8 +107,8 @@ public class ReadWriteTxt {
 		}
 		// Because it's a whileLoop, the end of fileContent will be a NULL
 		// ... So, the last index value needs to be removed
-		fileContent.remove(fileContent.size()-1);
-		
+		fileContent.remove(fileContent.size() - 1);
+
 		// Close readers
 		closeReaders();
 		System.out.println("FINISH: Reading File");
@@ -103,7 +116,7 @@ public class ReadWriteTxt {
 		return fileContent;
 	}
 
-	public boolean openWriters() {
+	private boolean openWriters() {
 		try {
 			bytesWriter = new FileWriter(filePath, appendToFile);
 			textWriter = new PrintWriter(bytesWriter);
@@ -114,8 +127,8 @@ public class ReadWriteTxt {
 			return false;
 		}
 	}
-	
-	public boolean openReaders() {
+
+	private boolean openReaders() {
 		try {
 			bytesReader = new FileReader(filePath);
 			textReader = new BufferedReader(bytesReader);
@@ -126,8 +139,8 @@ public class ReadWriteTxt {
 			return false;
 		}
 	}
-	
-	public boolean closeWriters() {
+
+	private boolean closeWriters() {
 		try {
 			textWriter.close();
 			bytesWriter.close();
@@ -138,8 +151,8 @@ public class ReadWriteTxt {
 			return false;
 		}
 	}
-	
-	public boolean closeReaders() {
+
+	private boolean closeReaders() {
 		try {
 			textReader.close();
 			bytesReader.close();
