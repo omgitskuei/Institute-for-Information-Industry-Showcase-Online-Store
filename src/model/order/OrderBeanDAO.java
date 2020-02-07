@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.product.ProductBean;
+
 @Repository
 public class OrderBeanDAO implements OrderBeanDAOInterface {
 
@@ -192,6 +194,19 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		}
 		System.out.println("FINISH: OrderBeanDAO.deleteOrder(OrderBean deleteThisOrder)");
 		return false;
+	}
+	@Override
+	public OrderBean getOrder(int orderID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
+	}
+	
+	public OrderBean getOrder(OrderBean beanWithID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		int orderID = beanWithID.getOrderID();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
 	}
 
 }

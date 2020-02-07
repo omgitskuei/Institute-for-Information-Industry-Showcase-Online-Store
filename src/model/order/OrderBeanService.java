@@ -1,8 +1,11 @@
 package model.order;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import model.product.ProductBean;
 import util.CheckSubstring;
 
 @Service
@@ -14,6 +17,19 @@ public class OrderBeanService {
 	@Autowired
 	public OrderBeanService(OrderBeanDAO oDAO) {
 		this.oDAO = oDAO;
+	}
+	
+	
+	public List<OrderBean> selectAll() {
+		return oDAO.selectAll();
+	}
+
+	public void saveOrder(OrderBean insertThisOrder) {
+		oDAO.insertOrder(insertThisOrder);
+	}
+	
+	public OrderBean getOrder(int orderID) {
+		return oDAO.getOrder(orderID);
 	}
 
 	// Test validity of OrderBean user input
@@ -88,4 +104,5 @@ public class OrderBeanService {
 		}
 		return valid;
 	}
+
 }
