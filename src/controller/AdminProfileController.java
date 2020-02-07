@@ -23,7 +23,7 @@ import model.user.UserBeanService;
 @Controller
 @SessionAttributes
 @RequestMapping("/AdminProfile")
-public class ProfileAdminController {
+public class AdminProfileController {
 
 	@Autowired
 	private ProfileBeanService profileService;
@@ -52,11 +52,13 @@ public class ProfileAdminController {
 		m.addAttribute("profile", theProfile);
 		return "AdminProfileUpdateForm";
 	}
+	
+	
 
-	@GetMapping("/delete")
-	public String deleteProfile(@RequestParam("userID") int userID) {
-		profileService.deleteProfile(userID);
-		return "redirect:/AdminProfile/list";
-	}
+//	@GetMapping("/delete")
+//	public String deleteProfile(@RequestParam("userID") int userID) {
+//		profileService.deleteProfile(userID);
+//		return "redirect:/AdminProfile/list";
+//	}
 
 }
