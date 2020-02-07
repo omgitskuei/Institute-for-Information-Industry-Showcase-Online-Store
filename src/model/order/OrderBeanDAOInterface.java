@@ -1,7 +1,5 @@
 package model.order;
 
-import model.product.ProductBean;
-
 public interface OrderBeanDAOInterface {
 	//Create
 	public boolean insertOrder(OrderBean insertThisOrder);
