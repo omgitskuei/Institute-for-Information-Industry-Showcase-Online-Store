@@ -65,28 +65,33 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				q.setParameter("thisPwd", selectThisUser.getUserPwd());
 				UserBean existingUser = (UserBean) q.uniqueResult();
 				
-				System.out.println("Query RESULTS:");
-				System.out.println("UserID:"+existingUser.getUserID());
-				System.out.println("UserEmail:"+existingUser.getUserEmail());
-				System.out.println("UserPwd:"+existingUser.getUserPwd());
-				System.out.println("UserAdmin:"+existingUser.getAdmin());
-				
 				//UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserEmail());
 				if (existingUser != null) {
+					System.out.println("Query RESULTS:");
+					System.out.println("UserID:"+existingUser.getUserID());
+					System.out.println("UserEmail:"+existingUser.getUserEmail());
+					System.out.println("UserPwd:"+existingUser.getUserPwd());
+					System.out.println("UserAdmin:"+existingUser.getAdmin());
 					// If found, return the result UserBean existingUser
 					System.out.println("User Found - Returning User "+ existingUser.getUserID());
-					System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
+					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
 					return existingUser;
+				} else {
+					System.out.println("User NOT Found - Returning NULL");
+					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
+					return null;
 				}
+			} else {
+				System.out.println("Passed User is NULL - Returning NULL");
+				System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
+				return null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("EXCEPTION");
+			System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
+			return null;
 		}
-		
-		// existingUser returned null meaning selectThisUser was not found
-		System.out.println("updateThisUser OR existingUser was NULL");
-		System.out.println("Finish: UserBeanDAO.selecUser(UserBean selectThisUser)");
-		return null;
 	}
 	
 	@SuppressWarnings("rawtypes")
