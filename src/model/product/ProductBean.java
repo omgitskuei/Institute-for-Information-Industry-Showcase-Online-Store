@@ -24,7 +24,7 @@ public class ProductBean {
 	private byte[] ProductImg;		// Not NULL
 	private Date ProductTimestamp;		// Not NULL
 	private String ProductCategory;		// Not NULL
-	
+	private String filename;
 	// Constructors
 	public ProductBean() {
 	}
@@ -116,5 +116,15 @@ public class ProductBean {
 	public void setProductCategory(String productCategory) {
 		this.ProductCategory = productCategory;
 	}
+	
+	@Column(name = "FILENAME")
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 
 }
