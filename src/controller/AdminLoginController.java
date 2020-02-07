@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,8 @@ public class AdminLoginController {
 	public String processAction(@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
-			@CookieValue(value = "Email", required = false) String cEmail,
+			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String cEmail,
+			@CookieValue(value = "Password", required = false, defaultValue = "Testing123!" ) String cPwd,
 			Model nextPage) {
 
 		System.out.println("BEGIN /controller.AdminLoginController");
@@ -61,13 +63,14 @@ public class AdminLoginController {
 		// Check for empty input
 		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
 			UserBean bean = new UserBean();
-			readLoginCookie(cEmail);
-			if(cEmail != null) {
-				bean.setUserEmail(cEmail);
+			//readLoginCookie(cEmail);
+			if(cEmail != null && cPwd != null) {
+				bean.setUserEmail(uEmail);
 				bean.setUserPwd(uPwd);
 				bean.setAdmin(1);
 				System.out.println("有抓到Cookie");
 				System.out.println(cEmail);
+				System.out.println(cPwd);
 			}else {
 			
 			// Turn user input into a persistence bean
@@ -78,7 +81,7 @@ public class AdminLoginController {
 			// Write a Cookie storing email so user don't need to enter email next time    *CURRENTLY INCOMPLETE*
 			if (remMe == true) {
 				System.out.println("MAKING COOKIE");
-				writeLoginCookie(bean, nextPage, response);	
+				writeLoginCookie(bean, bean, nextPage, response);	
 			}
 			
 			
@@ -132,14 +135,17 @@ public class AdminLoginController {
 
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(
-			@CookieValue(name = "adminLoginCookie", required = false, defaultValue = "user@domain.com") UserBean user,
+			@CookieValue(name = "Email", required = false, defaultValue = "user@domain.com") UserBean user1,
+			@CookieValue(name = "Password", required = false, defaultValue = "Testing123!") UserBean user2,
 			Model nextPage, HttpServletResponse response) {
 		// ^ name is synonymous to 'value'
 		// response.addCookie(new Cookie("adminLoginCookie", email));
-		Cookie ck = new Cookie("Email", user.getUserEmail());
+		Cookie ck = new Cookie("Email", user1.getUserEmail());
+		Cookie pw = new Cookie("Password", user2.getUserPwd());
 		// ck.setMaxAge(60*60*24);
 		// ck.setPath("/");
 		response.addCookie(ck);
+		response.addCookie(pw);
 		System.out.println("有抓Cookie");
 		
 		return "writeLoginCookie";
@@ -147,7 +153,8 @@ public class AdminLoginController {
 
 	@RequestMapping("/readAdminLoginCookie")
 	public String readLoginCookie(
-			@CookieValue(value = "adminLoginCookie", required = false, defaultValue = "user@domain.com") String loginCookie) {
+			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String loginEmail,
+			@CookieValue(name = "Password", required = false, defaultValue = "Testing123!") String loginPwd) {
 
 		return "readCookie";
 	}

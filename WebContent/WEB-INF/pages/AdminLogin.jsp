@@ -64,12 +64,12 @@
            <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
-                  <input type="email" class="form-control" name="userEmail">
+                  <input type="email" class="form-control" name="userEmail" value="${cookie.Email.getValue()}">
                   <span id="emailErrorSpan">${errors.emailError}</span>
                 </div>
                 <div class="form-group">
                   <label for="password">密碼</label>
-                  <input type="password" class="form-control" name="userPwd">
+                  <input type="password" class="form-control" name="userPwd" value="${cookie.Password.getValue()}">
                   <span id="pwdErrorSpan">${errors.pwdError}</span>
                 </div>
                 <div class="form-group ml-4">
