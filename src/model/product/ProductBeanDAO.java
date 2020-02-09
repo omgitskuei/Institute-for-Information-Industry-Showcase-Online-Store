@@ -41,7 +41,8 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				String oldProductName = existingProduct.getProductName();
 				existingProduct.setProductName(newProductName);
 				System.out.println(
-						"Finish: ProductBeanDAO.updateProductName(ProductBean updateThisProductr, String newProductName)");
+						"Product Name updated from " + oldProductName + " to " + existingProduct.getProductName());
+				System.out.println("Finish: ProductBeanDAO.updateProductName(ProductBean, String)");
 				return true;
 			}
 		}
@@ -66,7 +67,8 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				float oldProductPrice = existingProduct.getProductPrice();
 				existingProduct.setProductPrice(newProductPrice);
 				System.out.println(
-						"Finish: ProductBeanDAO.updateProductPrice(ProductBean updateThisProductr, int newProductPrice)");
+						"Product Price updated from " + oldProductPrice + " to " + existingProduct.getProductPrice());
+				System.out.println("Finish: ProductBeanDAO.updateProductPrice(ProductBean, int)");
 				return true;
 			}
 		}
@@ -91,7 +93,8 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				int oldProductStock = existingProduct.getProductStock();
 				existingProduct.setProductStock(newProductStock);
 				System.out.println(
-						"Finish: ProductBeanDAO.updateProductStock(ProductBean updateThisProduct, int newProductStock)");
+						"Product Stock updated from " + oldProductStock + " to " + existingProduct.getProductStock());
+				System.out.println("Finish: ProductBeanDAO.updateProductStock(ProductBean, int)");
 				return true;
 			}
 		}
@@ -113,10 +116,13 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, update ProductDescription and return True
-				String oldProductName = existingProduct.getProductDescription();
+				String oldProductDescription = existingProduct.getProductDescription();
 				existingProduct.setProductDescription(newProductDescription);
-				System.out.println(
-						"Finish: ProductBeanDAO.updateProductDescription(ProductBean updateThisProductr, String newProductDescription)");
+				System.out.println("Product Description updated from:");
+				System.out.println(oldProductDescription);
+				System.out.println("to");
+				System.out.println(existingProduct.getProductDescription());
+				System.out.println("Finish: ProductBeanDAO.updateProductDescription(ProductBean, String)");
 				return true;
 			}
 		}
@@ -140,8 +146,8 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				// If found, update ProductImg and return True
 				byte[] oldProductImg = existingProduct.getProductImg();
 				existingProduct.setProductImg(newProductImg);
-				System.out.println(
-						"Finish: ProductBeanDAO.updateProductImg(ProductBean updateThisProductr, byte[] newProductImg)");
+				System.out.println("Product img updated!");
+				System.out.println("Finish: ProductBeanDAO.updateProductImg(ProductBean, byte[])");
 				return true;
 			}
 		}
@@ -165,8 +171,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				// If found, update ProductTimestamp and return True
 				Date oldProductTimestamp = existingProduct.getProductTimestamp();
 				existingProduct.setProductTimestamp(newProductTimestamp);
-				System.out.println(
-						"Finish: ProductBeanDAO.updateProductTimestamp(ProductBean updateThisProductr, DATE newProductTimestamp)");
+				System.out.println("Finish: ProductBeanDAO.updateProductTimestamp(ProductBean, DATE)");
 				return true;
 			}
 		}
@@ -188,10 +193,10 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, update ProductCategory and return True
-				String oldProductName = existingProduct.getProductCategory();
+				String oldCategory = existingProduct.getProductCategory();
 				existingProduct.setProductCategory(newProductCategory);
-				System.out.println(
-						"Finish: ProductBeanDAO.updateProductCategory(ProductBean updateThisProductr, String newProductCategory)");
+				System.out.println("Product category updated from "+oldCategory+" to "+existingProduct.getProductCategory());
+				System.out.println("Finish: ProductBeanDAO.updateProductCategory(ProductBean, String)");
 				return true;
 			}
 		}
@@ -201,23 +206,21 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 				"Finish: ProductBeanDAO.updateProductCategory(ProductBean updateThisProduct, String newProductCategory)");
 		return false;
 	}
-	
-	
-	
+
 	@Override
 	public ProductBean getProduct(int productID) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		ProductBean theProduct = currentSession.get(ProductBean.class, productID);
 		return theProduct;
 	}
-	
+
 	public ProductBean getProduct(ProductBean beanWithID) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		int productID = beanWithID.getProductID();
 		ProductBean theProduct = currentSession.get(ProductBean.class, productID);
 		return theProduct;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public ProductBean getProduct(String productName) {
 		Session session = sessionFactory.getCurrentSession();
@@ -230,7 +233,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		}
 		return existingProduct;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<ProductBean> selectAll() {
@@ -242,13 +245,15 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		Query query = session.createQuery(cq);
 		return query.getResultList();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<ProductBean> selectAllByCategory(ProductBean beanWithCategory) {
 		System.out.println("Begin: ProductBeanDAO.selectAllByCategory()");
 		Session session = sessionFactory.getCurrentSession();
 		// Get all rows from ProductTable
-		Query query = session.createQuery("From ProductBean where ProductCategory=:thisProductCategory"); // This 'From' references ProductBean.java
+		Query query = session.createQuery("From ProductBean where ProductCategory=:thisProductCategory"); // This 'From'
+																											// references
+																											// ProductBean.java
 		query.setParameter("thisProductCategory", beanWithCategory.getProductCategory());
 		// Store query results into List results
 		List<ProductBean> results = (List<ProductBean>) query.list();
