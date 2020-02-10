@@ -55,13 +55,6 @@ public class AdminProfileController {
 		return "AdminProfileUpdateForm";
 	}
 	
-	
-	@RequestMapping(path = "/showProfile")
-	public String showProfile(Model m) {
-        List<ProfileBean> list=dao.getProfiles();    
-        m.addAttribute("list",list);  
-		return "UserProfile";
-	}
 
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {
