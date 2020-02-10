@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav">
             <li class="nav-item px-2">
-             <a href=<jstl:url value="/inventories"/> class="nav-link">庫存管理</a>
+             <a href=<jstl:url value="/AdminProduct/inventories"/> class="nav-link">庫存管理</a>
             </li>
             <li class="nav-item px-2">
             <a href=<jstl:url value="/orders"/> class="nav-link">訂單管理</a>
