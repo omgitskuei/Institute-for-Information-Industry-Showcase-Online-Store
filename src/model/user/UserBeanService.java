@@ -2,6 +2,8 @@ package model.user;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +52,7 @@ public class UserBeanService {
 		return success;
 	}
 
-	public UserBean select(UserBean selectThisUser) {
+	public UserBean checkLogin(UserBean selectThisUser) {
 		System.out.println("BEGIN: UserBeanService.select(UserBean insertThisUser)");
 		// Get values for validation
 		String email = selectThisUser.getUserEmail();
@@ -60,12 +62,30 @@ public class UserBeanService {
 			System.out.println("Email && Pwd VALID");
 			return uDAO.selectUser(selectThisUser);
 		} else {
-			System.out.println("Email && Pwd invalid");
+			System.out.println("Email && Pwd INVALID");
 		}
 		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
 		return selectThisUser;
 	}
 
+	public int selectUserIDByEmail(String email) {
+		System.out.println("BEGIN: UserBeanService.selectUserIDByEmail(String)");
+		System.out.println("Looking for user with this email:"+email);
+
+		int userID = uDAO.selectUserIDByEmail(email);
+		
+		if (userID != 0) {
+			System.out.println("Result: "+userID);
+			System.out.println("FINISH: UserBeanService.selectUserIDByEmail(String)");
+			return userID;
+		} else {
+			System.out.println("User with this email ["+email+"] NOT FOUND.");
+			System.out.println("Result: userID==0");
+			System.out.println("FINISH: UserBeanService.selectUserIDByEmail(String)");
+			return 0;
+		}
+	}
+	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
 		System.out.println("BEGIN: UserBeanService.updateEmail(UserBean insertThisUser)");
 		// Validate values, if not valid, don't bother with update
@@ -73,7 +93,7 @@ public class UserBeanService {
 			System.out.println("New Email valid");
 			return uDAO.updateEmail(updateThisUser, newEmail);
 		} else {
-			System.out.println("New Email valid");
+			System.out.println("New Email INVALID");
 		}
 		System.out.println("FINISH: UserBeanService.updateEmail(UserBean insertThisUser)");
 		return false;
@@ -86,7 +106,7 @@ public class UserBeanService {
 			System.out.println("New Password valid");
 			return uDAO.updatePwd(updateThisUser, newPwd);
 		} else {
-			System.out.println("New Password valid");
+			System.out.println("New Password INVALID");
 		}
 		System.out.println("FINISH: UserBeanService.updatePwd(UserBean insertThisUser)");
 		return false;

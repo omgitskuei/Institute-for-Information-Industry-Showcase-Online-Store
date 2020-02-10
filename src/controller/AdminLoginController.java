@@ -86,7 +86,7 @@ public class AdminLoginController {
 			
 			
 			// Use bean to use UserBeanService service
-			UserBean results = service.select(bean);
+			UserBean results = service.checkLogin(bean);
 			System.out.println("Service.select(bean) RESULTS: ");
 			if (results == null || results.getUserID()==0) {
 				// Match not found

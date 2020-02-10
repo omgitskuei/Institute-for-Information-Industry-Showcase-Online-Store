@@ -55,6 +55,6 @@
 	<context:component-scan base-package="model.wallet" />
 	<!-- redirects user to form.jsp when they land on other pages right away, eg. typing "localhost:8080//SpringMvcWebProject/" -->
 	<!-- CHANGE TO CONTROLLER ADDRESS!! TO STRAT INSIDE WEB-INF/ "Login.Controller" -->
-	<mvc:view-controller path="/" view-name="redirect:index.jsp"/>
+	<mvc:view-controller path="/" view-name="controller.HomepageController"/>
 
 </beans>

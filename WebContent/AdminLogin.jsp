@@ -102,7 +102,7 @@
           </div>
           <div class="modal-body">
           
-            <form>
+            <form action="<jstl:url value="/controller.AdminSignInController" />">
               <div class="form-group">
                 <label for="email">電子信箱</label>
                 <input type="email" placeholder="電子信箱" class="form-control" name="newEmail">
@@ -111,19 +111,17 @@
                 <label for="password">密碼</label>
                 <input type="password" placeholder="密碼" class="form-control" name="newPwd">
               </div>
-            </form>
-            
-            <form>
-            <div class="form-group">
-                <label for="password2">確認密碼</label>
-                <input type="password" placeholder="確認密碼" class="form-control" name="reEnterPwd">
+            	<div class="form-group">
+           	     <label for="password2">確認密碼</label>
+            	 <input type="password" placeholder="確認密碼" class="form-control" name="reEnterPwd">
               </div>
+              <div class="modal-footer">
+           		 <button class="btn btn-primary" data-dismiss="modal">送出</button>
+     	     </div>
             </form>
             
           </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal">送出</button>
-          </div>
+          
         </div>
       </div>
     </div>

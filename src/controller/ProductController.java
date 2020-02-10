@@ -79,7 +79,7 @@ public class ProductController {
 			is1.close();
 
 			ProductBean.setProductImg(data);
-			prservice.insert(ProductBean);			
+			prservice.saveProduct(ProductBean);			
 		} catch (Exception e) {
             e.printStackTrace();
 		}

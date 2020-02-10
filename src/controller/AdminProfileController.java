@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.profile.ProfileBean;
+import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
@@ -28,6 +29,9 @@ public class AdminProfileController {
 	@Autowired
 	private ProfileBeanService profileService;
 
+	@Autowired
+	ProfileBeanDAO dao;
+	
 	@GetMapping("/list")
 	public String listProfiles(Model m) {
 		List<ProfileBean> theProfiles = profileService.getProfiles();
@@ -54,6 +58,12 @@ public class AdminProfileController {
 	}
 	
 	
+	@RequestMapping(path = "/showProfile")
+	public String showProfile(Model m) {
+        List<ProfileBean> list=dao.getProfiles();    
+        m.addAttribute("list",list);  
+		return "UserProfile";
+	}
 
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {

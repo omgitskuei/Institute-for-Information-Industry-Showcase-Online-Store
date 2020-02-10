@@ -380,22 +380,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form name="newUserForm" action="<jstl:url value="/controller.AdminNewUserController" />" method="post">
           <div class="form-group">
             <label for="email">電子信箱</label>
-            <input type="email" class="form-control">
+            <input type="email" class="form-control" name="newEmail">
           </div>
           <div class="form-group">
             <label for="password">密碼</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" name="newPwd">
           </div>
           <div class="form-group">
             <label for="password2">確認密碼</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" name="repeatPwd">
           </div>
           <div class="form-group">
             <label for="orderPayMethod">身份</label>
-            <select class="form-control">
+            <select class="form-control" name="userType">
               <option value="">一般使用者</option>
               <option value="">管理者</option>
             </select>

@@ -8,35 +8,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.profile.ProfileBeanService;
-import model.setting.SettingBean;
-import model.setting.SettingBeanService;
-import model.user.UserBean;
+import model.order.OrderBean;
+import model.order.OrderBeanService;
 import model.user.UserBeanService;
+import model.wallet.WalletBean;
 import model.wallet.WalletBeanService;
 
 @Controller
 @SessionAttributes(names= {"userEmail"})
 public class CheckoutController {
 	private UserBeanService uService;
-	private SettingBeanService sService;
+	private OrderBeanService oService;
 	private WalletBeanService wService;
-	private ProfileBeanService pService;
 	
 	@Autowired
-	public CheckoutController(UserBeanService uService, SettingBeanService sService, WalletBeanService wService, ProfileBeanService pService) {
+	public CheckoutController(UserBeanService uService, OrderBeanService oService, WalletBeanService wService) {
 		this.uService = uService;
-		this.sService = sService;
+		this.oService = oService;
 		this.wService = wService;
-		this.pService = pService;
 	}
 	
 	@RequestMapping(value="/selectSetting",method = RequestMethod.POST)    
-	public String processActionPost(@SessionAttribute({"userEmail", "userPwd"}) String email, Model nextPage) {
-		UserBean newThisUser = new UserBean();
-		SettingBean newSetting = new SettingBean();
+	public String processActionPost(@SessionAttribute("userEmail") String email, Model nextPage) {
+		int userID= uService.selectUserIDByEmail(email);
 		
-		uService.select(newThisUser);
+		WalletBean thisWallet = new WalletBean();
+		
+		thisWallet.setUserID(userID);
+		wService.select(thisWallet);
+		
+		OrderBean insertThisBean = new OrderBean();
+		
+		insertThisBean.setUserID(userID);
+		oService.insert(insertThisBean);
 		//nextPage.addAllAttributes(ArrayList<String> s);
 		return "redirect:/checkout";
 	}
