@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.product.ProductBean;
 import model.product.ProductBeanDAO;
+import model.product.ProductBeanService;
 
 @Controller
+@RequestMapping(value = "/AdminProduct", method = RequestMethod.GET)
 @SessionAttributes(names = {"userEmail"})
 public class AdminInventoryController {
 
 	@Autowired
-	ProductBeanDAO dao;
+	ProductBeanService productService;
 	
 	public AdminInventoryController() {
 	}
@@ -26,7 +28,7 @@ public class AdminInventoryController {
 	@RequestMapping(value = "/inventories", method = RequestMethod.GET)
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
 		System.out.println("Directing to AdminInventory");
-		List<ProductBean> Inventorylist=dao.selectAll();
+		List<ProductBean> Inventorylist=productService.selectAll();
 		model.addAttribute("InventoryList", Inventorylist);
 		return "AdminInventory";
 	}
