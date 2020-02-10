@@ -21,7 +21,7 @@
   	crossorigin="anonymous">
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
   	crossorigin="anonymous">
-    <title>Admin's Order | 管理者訂單頁</title>
+    <title>Order Details List | 管理者訂單明細頁</title>
     <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 
     <!-- Dictate which Stylesheets to use for this webpage -->
@@ -42,7 +42,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h1><i class="fas fa-pencil-alt"> 訂單管理</i></h1>
+        <h1><i class="fas fa-pencil-alt"> 訂單管理明細</i></h1>
       </div>
     </div>
   </div>
@@ -71,45 +71,43 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>最新訂單</h4>
+            <h4>訂單明細</h4>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-                <th>訂單編號</th>
+                <th>產品名稱</th>
+                <th>單價</th>
+                <th>數量</th>
                 <th>總價</th>
-                <th>寄送地址</th>
-                <th>寄送電話</th>
-                <th>訂購時間</th>
                 <th></th>
-                	<th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <jstl:forEach var="orderInfo" items="${orderList}">
+              <jstl:forEach var="orderDetailsList" items="${detailsList}">
               <!-- construct an "update" link with customer id -->
 			<c:url var="updateLink" value="/AdminOrder/updateForm">
-						<c:param name="orderID" value="${orderInfo.orderID}" />
+						<c:param name="orderID" value="${orderDetailsList.orderDetailID}" />
 					</c:url>
 
 					<!-- construct an "delete" link with customer id -->
 					<c:url var="deleteLink" value="/AdminOrder/delete">
-						<c:param name="orderID" value="${orderInfo.orderID}" />
+						<c:param name="orderID" value="${orderDetailsList.orderDetailID}" />
 					</c:url>
               <tr>
-                <td><a  href='<c:url value='orderDetails.do?orderID=${orderInfo.orderID}' />'>
-                ${orderInfo.orderID}</a></td>
-				<td>${orderInfo.total}</td>
-				<td>${orderInfo.mailingAddress}</td>
-				<td>${orderInfo.mailingPhone}</td>
-				<td>${orderInfo.orderTime}</td>
-                <td>
-                  <a href="${updateLink}" class="btn btn-secondary">
+				<td>${orderDetailsList.productName}</td>	
+				<td>${orderDetailsList.productPrice}</td>	
+				<td>${orderDetailsList.productCount}</td>
+				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>
+				
+				<td>
+                  <a href="#" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
                 	 <td>
-                  <a href="${deleteLink}" class="btn btn-danger">
+                  <a href="#" class="btn btn-danger">
                     <i class="fas fa-angle-double-right"></i> 刪除
                   </a>
                 </td>

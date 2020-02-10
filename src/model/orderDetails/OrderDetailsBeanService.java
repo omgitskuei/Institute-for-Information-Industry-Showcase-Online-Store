@@ -1,9 +1,12 @@
 package model.orderDetails;
 
+import javax.servlet.annotation.WebServlet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@WebServlet("/orderDetails/orderDetails.do")
 public class OrderDetailsBeanService {
 	// Variables: Local Fields
 	private OrderDetailsBeanDAO odDAO;

@@ -19,28 +19,31 @@ import model.order.OrderBean;
 @Table(name = "OrderDetailsTable")
 @Component
 public class OrderDetailsBean {
-	
+
 	// variables, match the column
-	private int orderDetailID;		// Not NULL
-	private int productID;		// Not NULL
-	private int productCount;		// Not NULL
-	//private int orderID;		// Not NULL
-	//ManyToOne
-	private OrderBean orderBean;
-	
+	private int orderDetailID; // Not NULL
+	private OrderBean orderBean; // ManyToOne
+	private int productID; // Not NULL
+	private String ProductName;
+	private int productCount; // Not NULL
+	private float ProductPrice;
+
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
 	}
 
-	public OrderDetailsBean(int productID, int productCount) {
+	public OrderDetailsBean(OrderBean orderBean, int productID, String ProductName, int productCount,
+			float ProductPrice) {
+		this.orderBean = orderBean;
 		this.productID = productID;
+		this.ProductName = ProductName;
 		this.productCount = productCount;
-		//this.orderID = orderID;
+		this.ProductPrice = ProductPrice;
 	}
 
 	// GET/SET methods
 	@Id
-	@Column(name="OrderDetailID")
+	@Column(name = "OrderDetailID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getOrderDetailID() {
 		return orderDetailID;
@@ -49,33 +52,6 @@ public class OrderDetailsBean {
 	public void setOrderDetailID(int orderDetailID) {
 		this.orderDetailID = orderDetailID;
 	}
-
-	@Column(name="ProductID")
-	public int getProductID() {
-		return productID;
-	}
-
-	public void setProductID(int productID) {
-		this.productID = productID;
-	}
-	
-	@Column(name="ProductCount")
-	public int getProductCount() {
-		return productCount;
-	}
-
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
-	}
-
-//	@Column(name="OrderID")
-//	public int getOrderID() {
-//		return orderID;
-//	}
-//
-//	public void setOrderID(int orderID) {
-//		this.orderID = orderID;
-//	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OrderID")
@@ -86,5 +62,41 @@ public class OrderDetailsBean {
 	public void setOrderBean(OrderBean thisBean) {
 		this.orderBean = thisBean;
 	}
-	
+
+	@Column(name = "ProductID")
+	public int getProductID() {
+		return productID;
+	}
+
+	public void setProductID(int productID) {
+		this.productID = productID;
+	}
+
+	@Column(name = "ProductName")
+	public String getProductName() {
+		return ProductName;
+	}
+
+	public void setProductName(String productName) {
+		this.ProductName = productName;
+	}
+
+	@Column(name = "ProductCount")
+	public int getProductCount() {
+		return productCount;
+	}
+
+	public void setProductCount(int productCount) {
+		this.productCount = productCount;
+	}
+
+	@Column(name = "ProductPrice")
+	public float getProductPrice() {
+		return ProductPrice;
+	}
+
+	public void setProductPrice(float productPrice) {
+		this.ProductPrice = productPrice;
+	}
+
 }

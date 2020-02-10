@@ -73,9 +73,11 @@ GO
 -- (3.g.)
 CREATE table OrderDetailsTable(
 OrderDetailID int Identity(1,1) Primary Key Not NULL,
-ProductID int Foreign Key REFERENCES ProductsTable(ProductID) Not NULL,
-ProductCount int Not NULL,
 OrderID int Foreign Key REFERENCES OrdersTable(OrderID) Not NULL,
+ProductID int Foreign Key REFERENCES ProductsTable(ProductID) Not NULL,
+ProductName NVarchar(50)  Not NULL,
+ProductCount int Not NULL,
+ProductPrice decimal(18, 2) Not NULL
 )
 GO
 
