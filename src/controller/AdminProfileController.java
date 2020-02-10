@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
-import model.user.UserBean;
-import model.user.UserBeanService;
 
 @Controller
 @SessionAttributes
@@ -57,13 +55,6 @@ public class AdminProfileController {
 		return "AdminProfileUpdateForm";
 	}
 	
-	
-	@RequestMapping(path = "/showProfile")
-	public String showProfile(Model m) {
-        List<ProfileBean> list=dao.getProfiles();    
-        m.addAttribute("list",list);  
-		return "UserProfile";
-	}
 
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {
