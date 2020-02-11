@@ -116,7 +116,7 @@
             	 <input type="password" placeholder="確認密碼" class="form-control" name="reEnterPwd">
               </div>
               <div class="modal-footer">
-           		 <button class="btn btn-primary" data-dismiss="modal">送出</button>
+           		 <button type="submit" class="btn btn-primary" data-dismiss="modal">送出</button>
      	     </div>
             </form>
             
