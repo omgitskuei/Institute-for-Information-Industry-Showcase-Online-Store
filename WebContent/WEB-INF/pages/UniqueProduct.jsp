@@ -40,9 +40,9 @@
 										<td>${product.ProductName}</td>
 										<td>${product.ProductPrice}</td>
 										<td>${product.ProductDescription}</td>
-										<%-- <td><a href="${}" class="">
-												<i class=""></i> 修改
-										</a></td> --%>
+ 										<td><a href="${}" class="">
+ 												<i class=""></i> 修改 
+										</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
