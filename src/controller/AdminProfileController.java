@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
+import model.user.UserBean;
+import model.user.UserBeanService;
 
 @Controller
 @SessionAttributes
@@ -26,6 +28,9 @@ public class AdminProfileController {
 
 	@Autowired
 	private ProfileBeanService profileService;
+	
+	@Autowired
+	private UserBeanService userService;
 
 	@Autowired
 	ProfileBeanDAO dao;
@@ -51,7 +56,10 @@ public class AdminProfileController {
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("userID") int userID, Model m) {
 		ProfileBean theProfile = profileService.getProfile(userID);
+		UserBean theUser = userService.selectUser(userID);
+		
 		m.addAttribute("profile", theProfile);
+		m.addAttribute("user", theUser);
 		return "AdminProfileUpdateForm";
 	}
 	

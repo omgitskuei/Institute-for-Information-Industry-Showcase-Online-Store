@@ -4,15 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import model.user.UserBean;
 
 @Entity
 @Table(name = "ProfilesTable")
@@ -42,6 +46,8 @@ public class ProfileBean {
 	
     @NotNull(message = "請輸入 VIP: 0 或 1")
     private int profileVIP=0;		// Not NULL
+
+	private UserBean userBean;
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 
@@ -127,16 +133,16 @@ public class ProfileBean {
 	public void setProfileVIP(int profileVIP) {
 		this.profileVIP = profileVIP;
 	}
-//	OneToOne關係目前用不到先關閉
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn
-//	public UserBean getUserBean() {
-//		return userBean;
-//	}
-//
-//	public void setUserBean(UserBean userBean) {
-//		this.userBean = userBean;
-//	}
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
 
 	@Override
 	public String toString() {
