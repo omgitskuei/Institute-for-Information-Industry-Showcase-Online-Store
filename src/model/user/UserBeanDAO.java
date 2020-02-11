@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.profile.ProfileBean;
+
 @Repository
 public class UserBeanDAO implements UserBeanDAOInterface {
 
 	// Variables: Local Fields
 	private SessionFactory sessionFactory;
+	private Session session;
 
 	@Autowired
 	public UserBeanDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
@@ -92,6 +95,13 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 			System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
 			return null;
 		}
+	}
+	
+	@Override
+	public UserBean selectUser(int userID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		UserBean theUser = currentSession.get(UserBean.class, userID);
+		return theUser;
 	}
 	
 	@SuppressWarnings("rawtypes")
