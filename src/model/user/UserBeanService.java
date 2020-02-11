@@ -86,6 +86,10 @@ public class UserBeanService {
 		}
 	}
 	
+	public UserBean selectUser(int userID) {
+		return uDAO.selectUser(userID);
+	}
+	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
 		System.out.println("BEGIN: UserBeanService.updateEmail(UserBean insertThisUser)");
 		// Validate values, if not valid, don't bother with update
