@@ -84,7 +84,6 @@
 									<th>住址</th>
 									<th>VIP</th>
 									<th></th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
