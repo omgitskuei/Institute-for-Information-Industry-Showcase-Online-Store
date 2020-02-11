@@ -1,0 +1,3 @@
+2020-02-10, 23:45:08, User Log-In [Type:Admin, ID:1]
+2020-02-10, 23:45:39, New Sign-Up [Type:Admin, ID:1]
+2020-02-10, 23:45:39, User Log-In [Type:Admin, ID:1]

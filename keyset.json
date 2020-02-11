@@ -1,13 +1,13 @@
 {
-    "primaryKeyId": 430875664,
+    "primaryKeyId": 1281643347,
     "key": [{
         "keyData": {
             "typeUrl": "type.googleapis.com/google.crypto.tink.AesGcmKey",
             "keyMaterialType": "SYMMETRIC",
-            "value": "GiBAL2W/4mmRirdlnS6oFouWXveIvULGf4Brzl8TX5PXxA=="
+            "value": "GiA3hr3jNc9ocen7/Rdsfu3Suc7q2PdyXKS3sdw6xBUikg=="
         },
         "outputPrefixType": "TINK",
-        "keyId": 430875664,
+        "keyId": 1281643347,
         "status": "ENABLED"
     }]
 }

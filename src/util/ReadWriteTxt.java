@@ -30,7 +30,7 @@ public class ReadWriteTxt {
 		this.filePath = filePath;
 	}
 
-	// -- Pass true to add more lines to file
+	// -- Pass true to add more lines to end of file
 	public ReadWriteTxt(String filePath, boolean appendToFile) {
 		System.out.println("BEGIN: util.ReadWriteTxt(String, boolean)");
 		this.filePath = filePath;
@@ -39,44 +39,73 @@ public class ReadWriteTxt {
 
 	// -- Executable
 	public static void main(String args[]) {
+		// Print project root
+		System.out.println("Present Project Directory : " + System.getProperty("user.dir"));
 
-		ReadWriteTxt data = new ReadWriteTxt("D:\\log.txt");
-		// data.appendToFile = false;
-		
-		// Timestamp
-		LocalDateTime localDateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
-		String nowTime = localDateTime.format(formatter);
-		System.out.println("LocalDateTime: " + nowTime);
-		
-		// print result
-		// data.writeFile(nowTime+" | Admin "+adminUserID+" INSERT new user
-		// [UserID:"+userID+",ProfileID:"+profileID+",SettingID:"+settingID+",WalletID:"+walletID+"]");
-		// data.writeFile(nowTime+" | Admin "+adminUserID+" UPDATE userEmail from "+oldEmail+" to "+newEmail);
-		// data.writeFile(nowTime+" | Admin "+adminUserID+" UPDATE userPwd from "+oldPwd+" to "+newPwd);
-		// data.writeFile(nowTime+" | Admin "+adminUserID+" DELETE new user
-		// [UserID:"+userID+",ProfileID:"+profileID+",SettingID:"+settingID+",WalletID:"+walletID+"]");
+		// Use project root to find AdminLog.txt log file
+		// Sets filePath to [project root]\AdminLog.txt
+		ReadWriteTxt data = new ReadWriteTxt(System.getProperty("user.dir") + "\\AdminLog.txt");
+
+		// Un-comment to overwrite entire log file
+		// WARNING, OVERWRITTEN DATA CAN'T BE RECOVERED
+		//data.appendToFile = false;
 
 		//
-		
-		// 
 		try {
 			// Write log
-			data.writeFile("This is wOAH");
-			data.writeFile("This is amazing");
+			data.writeFile(data.autofill("adminSignUp", 1));
+			data.writeFile(data.autofill("adminLogin", 1));
 			// Read log
-			ArrayList<String> s = data.readFile(data.filePath);
-			System.out.println(s);
+			ArrayList<String> fileContent = data.readFile(data.filePath);
+			// Show in console log contents
+			// WARNING, CAN BE VERY LONG
+			for (int index=0;index<fileContent.size();index++) {
+				System.out.println(fileContent.get(index));
+			}
 
+			// End class
+			System.out.println("FINISH: util.ReadWriteTxt(String)");
 		} catch (IOException e) {
 			System.out.println("ERROR: IOException thrown.");
 		}
 	}
 
 	// Methods
-	// -- writeFile appends
+	public String autofill(String abbr, int id) {
+		// Generate Timestamp
+		LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
+		String logLine;
+
+		// Sign-up, Login, Logout
+		if (abbr.equals("adminSignUp")) {
+			logLine = localDateTime.format(formatter) + ", " + "New Sign-Up [Type:Admin, ID:" + id + "]";
+			return logLine;
+		} else if (abbr.equals("adminLogin")) {
+			logLine = localDateTime.format(formatter) + ", " + "User Log-In [Type:Admin, ID:" + id + "]";
+			return logLine;
+
+		} else if (abbr.equals("adminLogout")) {
+			return " User Log-Out [Type:Admin, ID:" + id + ", Email:" + ", Pwd:" + "]";
+
+			// Update User email, password
+		} else if (abbr.equals("userChangeEmail")) {
+			return " User Email Changed []";
+		} else if (abbr.equals("")) {
+			return " ";
+
+			// Place order, update order
+		} else if (abbr.equals("")) {
+			return " ";
+		} else if (abbr.equals("")) {
+			return " ";
+		} else {
+			return " > > > ABBREVIATION INVALID < < <";
+		}
+	}
+
 	public void writeFile(String newText) throws IOException {
-		System.out.println("BEGIN: Writing File [" + filePath + "]");
+		System.out.println("  BEGIN: Writing File [" + filePath + "]");
 		// Double-check if field variables passed
 		// System.out.println("Append: " + appendToFile);
 
@@ -84,14 +113,14 @@ public class ReadWriteTxt {
 		openWriters();
 		// Format, and print text
 		textWriter.printf("%s" + "%n", newText); // "%n" means a newline, "%s" means a string of any length
-		System.out.println("Wrote: " + newText);
+		System.out.println("      Wrote: " + newText);
 		// Close writers
 		closeWriters();
-		System.out.println("FINISH: Writing File");
+		System.out.println("  FINISH: Writing File");
 	}
 
 	public ArrayList<String> readFile(String filePath) throws IOException {
-		System.out.println("BEGIN: Reading File [" + filePath + "]");
+		System.out.println("  BEGIN: Reading File [" + filePath + "]");
 		// Object declaration
 		openReaders();
 		String aLine = "";
@@ -111,7 +140,7 @@ public class ReadWriteTxt {
 
 		// Close readers
 		closeReaders();
-		System.out.println("FINISH: Reading File");
+		System.out.println("  FINISH: Reading File");
 		// Return result
 		return fileContent;
 	}
@@ -120,10 +149,10 @@ public class ReadWriteTxt {
 		try {
 			bytesWriter = new FileWriter(filePath, appendToFile);
 			textWriter = new PrintWriter(bytesWriter);
-			System.out.println("Opening Writers SUCCEEDED");
+			System.out.println("    Opening Writers SUCCEEDED");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Opening Writers FAILED");
+			System.out.println("    Opening Writers FAILED");
 			return false;
 		}
 	}
@@ -132,10 +161,10 @@ public class ReadWriteTxt {
 		try {
 			bytesReader = new FileReader(filePath);
 			textReader = new BufferedReader(bytesReader);
-			System.out.println("Opening Readers SUCCEEDED");
+			System.out.println("    Opening Readers SUCCEEDED");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Opening Writers FAILED");
+			System.out.println("    Opening Writers FAILED");
 			return false;
 		}
 	}
@@ -144,10 +173,10 @@ public class ReadWriteTxt {
 		try {
 			textWriter.close();
 			bytesWriter.close();
-			System.out.println("Closing Writers SUCCEEDED");
+			System.out.println("    Closing Writers SUCCEEDED");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Closing Writers FAILED");
+			System.out.println("    Closing Writers FAILED");
 			return false;
 		}
 	}
@@ -156,10 +185,10 @@ public class ReadWriteTxt {
 		try {
 			textReader.close();
 			bytesReader.close();
-			System.out.println("Closing Readers SUCCEEDED");
+			System.out.println("    Closing Readers SUCCEEDED");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Closing Readers FAILED");
+			System.out.println("    Closing Readers FAILED");
 			return false;
 		}
 	}

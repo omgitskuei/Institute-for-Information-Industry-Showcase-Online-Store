@@ -10,7 +10,7 @@
 <title>Homepage</title>
 </head>
 <body>
-	This is the homepage Products User Login Search bar
+	This is the WebContent/index.jsp!!
 	<form class="form" name="loginForm" action=<jstl:url value="controller.searchBar" /> method="post"></form>
 
 		<input type="search" title="Products search bar" name="SearchBar"></input>
@@ -19,7 +19,8 @@
         
         </form>
 	
-	<a href="viewemp">View Employees</a>  
+	<a href="WebContent/AdminLogin.jsp">Admin Login</a>  
+	
 	
 	<a href="<jstl:url value = "/controller.ProfileController"/>" > Show Profile </a>
 	<a href="<jstl:url value = "/controller.AdminOrdersController"/>" > Admin order </a>
