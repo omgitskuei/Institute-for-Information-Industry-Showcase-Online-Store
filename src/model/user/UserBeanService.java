@@ -87,7 +87,7 @@ public class UserBeanService {
 	}
 	
 	public UserBean selectUser(int userID) {
-		return uDAO.selectUser(userID);
+		return uDAO.selectUserByID(userID);
 	}
 	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {
