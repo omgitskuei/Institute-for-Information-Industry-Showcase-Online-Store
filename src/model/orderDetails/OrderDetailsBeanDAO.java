@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.order.OrderBean;
+
 @Repository
 public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 
@@ -51,9 +53,8 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 		}
 	}
 
-	@Override
 	@SuppressWarnings("rawtypes")
-	public OrderDetailsBean selectOrderDetails(int orderID) {
+	public OrderDetailsBean selectOrderDetails(OrderBean orderID) {
 		// Create new Session
 		System.out.println("BEGIN: OrderDetailsBeanDAO.selectOrderDetails(OrderBean)");
 
@@ -108,26 +109,45 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 		}
 
 	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<OrderDetailsBean> selectAll() {
-		System.out.println("BEGIN: OrderDetailsBeanDAO.selectAll()");
+//	select全部資料
+//	@SuppressWarnings({ "rawtypes", "unchecked" })
+//	public List<OrderDetailsBean> selectAll() {
+//		System.out.println("BEGIN: OrderDetailsBeanDAO.selectAll()");
+//		Session session = sessionFactory.getCurrentSession();
+//
+//		Query query = session.createQuery("From OrderDetailsBean");
+//
+//		List<OrderDetailsBean> results = (List<OrderDetailsBean>) query.list();
+//
+//		System.out.println("selectAll:" + results.get(0).getClass());
+//		System.out.println("Found Order Details results:");
+//		for (int index = 0; index < results.size(); index++) {
+//			System.out.println("#" + index);
+//			System.out.println("OrderDetail ID: " + results.get(index).getOrderDetailID());
+//			System.out.println("Product ID:     " + results.get(index).getProductID());
+//			System.out.println("Product Count:  " + results.get(index).getProductCount());
+//			System.out.println("Order ID:       " + results.get(index).getOrderBean().getOrderID());
+//		}
+//		System.out.println("FINISH: OrderDetailsBeanDAO.selectAll()");
+//		return results;
+//	}
+	
+//	//寫死orderID=2
+//	@SuppressWarnings({ "rawtypes", "unchecked" })
+//	public List<OrderDetailsBean> selectAll2() {
+//		Session session = sessionFactory.getCurrentSession();
+//		Query query = session.createQuery("From OrderDetailsBean where orderID=2");
+//		List<OrderDetailsBean> results = (List<OrderDetailsBean>) query.list();
+//		return results;
+//	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<OrderDetailsBean> selectAllByOrderID(int orderID) {
 		Session session = sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery("From OrderDetailsBean");
-
+		Query query = session.createQuery("From OrderDetailsBean where OrderID=:thisOrderID"); // This 'From'
+																											
+		query.setParameter("thisOrderID", orderID);
 		List<OrderDetailsBean> results = (List<OrderDetailsBean>) query.list();
-
-		System.out.println("selectAll:" + results.get(0).getClass());
-		System.out.println("Found Order Details results:");
-		for (int index = 0; index < results.size(); index++) {
-			System.out.println("#" + index);
-			System.out.println("OrderDetail ID: " + results.get(index).getOrderDetailID());
-			System.out.println("Product ID:     " + results.get(index).getProductID());
-			System.out.println("Product Count:  " + results.get(index).getProductCount());
-			System.out.println("Order ID:       " + results.get(index).getOrderBean().getOrderID());
-		}
-		System.out.println("FINISH: OrderDetailsBeanDAO.selectAll()");
 		return results;
 	}
 
@@ -231,6 +251,12 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 		System.out.println("ERROR: Exception! See Console for details.");
 		System.out.println("FINISH: OrderDetailsBeanDAO.deleteOrderDetails(OrderDetailsBean)");
 		return false;
+	}
+
+	@Override
+	public OrderDetailsBean selectOrderDetails(int orderID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
