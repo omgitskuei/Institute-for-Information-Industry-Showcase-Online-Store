@@ -48,24 +48,24 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public UserBean selectUser(UserBean selectThisUser) {
+	public UserBean selectUser(UserBean beanWithEmailAndPwd) {
 		// Get current Session
 		System.out.println("Begin: UserBeanDAO.selectUser(UserBean selectThisUser)");
 		// Check if selecThisUser is null
 		try {
-			if (selectThisUser != null) {
+			if (beanWithEmailAndPwd != null) {
 				// Try to find selectThisUser
 				System.out.println("QUERY:");
-				System.out.println("UserID:"+selectThisUser.getUserID());
-				System.out.println("UserEmail:"+selectThisUser.getUserEmail());
-				System.out.println("UserPwd:"+selectThisUser.getUserPwd());
-				System.out.println("UserAdmin:"+selectThisUser.getAdmin());
+				System.out.println("UserID:"+beanWithEmailAndPwd.getUserID());
+				System.out.println("UserEmail:"+beanWithEmailAndPwd.getUserEmail());
+				System.out.println("UserPwd:"+beanWithEmailAndPwd.getUserPwd());
+				System.out.println("UserAdmin:"+beanWithEmailAndPwd.getAdmin());
 				
 				Session session = sessionFactory.getCurrentSession();
 				String hqlString = "from UserBean where userEmail=:thisEmail and userPwd=:thisPwd";
 				Query q = session.createQuery(hqlString);
-				q.setParameter("thisEmail", selectThisUser.getUserEmail());
-				q.setParameter("thisPwd", selectThisUser.getUserPwd());
+				q.setParameter("thisEmail", beanWithEmailAndPwd.getUserEmail());
+				q.setParameter("thisPwd", beanWithEmailAndPwd.getUserPwd());
 				UserBean existingUser = (UserBean) q.uniqueResult();
 				
 				//UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserEmail());
@@ -98,7 +98,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 	}
 	
 	@Override
-	public UserBean selectUser(int userID) {
+	public UserBean selectUserByID(int userID) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		UserBean theUser = currentSession.get(UserBean.class, userID);
 		return theUser;

@@ -6,7 +6,7 @@ public interface UserBeanDAOInterface {
 	public boolean insertUser(UserBean insertThisUser);
 	// R.ead
 	public UserBean selectUser(UserBean selectThisUser);
-	public UserBean selectUser(int userID);
+	public UserBean selectUserByID(int userID);
 	// U.pdate
 	public boolean updateEmail(UserBean updateThisUser, String newEmail);
 	public boolean updatePwd(UserBean updateThisUser, String newPwd);
