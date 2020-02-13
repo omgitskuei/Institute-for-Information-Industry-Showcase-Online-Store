@@ -11,20 +11,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.profile.ProfileBean;
+import model.profile.ProfileBeanService;
+import model.setting.SettingBean;
+import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
+import model.wallet.WalletBean;
+import model.wallet.WalletBeanService;
 import util.EmailUsers;
+import util.GetDateOrTime;
 
 @Controller
 @SessionAttributes(names = { "nEmail", "nPwd", "rPwd" })
 public class AdminSignUpController {
 
-	private UserBeanService service;
+	private UserBeanService uService;
+	private SettingBeanService sService;
+	private WalletBeanService wService;
+	private ProfileBeanService pService;
 	private HttpServletResponse response;
 
 	@Autowired
-	public AdminSignUpController(UserBeanService service, HttpServletResponse response) {
-		this.service = service;
+	public AdminSignUpController(UserBeanService uService, SettingBeanService sService, WalletBeanService wService, ProfileBeanService pService, HttpServletResponse response) {
+		this.uService = uService;
+		this.sService = sService;
+		this.wService = wService;
+		this.pService = pService;
 		this.response = response;
 	}
 
@@ -77,16 +90,26 @@ public class AdminSignUpController {
 			// Use Service to select bean, if null, means user doesn't current exist
 			try {
 				// If user doesn't exist, create new user
-				// service checkLogin includes validating userEmail and userPwd
-				if (service.checkLogin(bean) == null) {
+				// uService checkLogin includes validating userEmail and userPwd
+				if (uService.checkLogin(bean) == null) {
 					// Match not found
 					System.out.println("User not found, creating new user");
-					service.insertAdmin(nEmail, nPwd);
-
+					
+					// Create user, profile, setting, wallet beans and inserting beans
+					uService.insertAdmin(nEmail, nPwd);
+					int newAdminID = uService.selectUserIDByEmail(nEmail);
+					System.out.println("Creating new setting for user id"+newAdminID);
+					sService.insert(new SettingBean(newAdminID, true));
+					System.out.println("Creating new wallet for user id"+newAdminID);
+					wService.insert(new WalletBean(newAdminID, 0));
+					System.out.println("Creating new profile for user id"+newAdminID);
+					pService.saveProfile(new ProfileBean(newAdminID, new GetDateOrTime().generateDate(), "0000-000-000", "Taiwan", 1));
+					
+					// Send email
 					System.out.println("Sending welcome email");
-					EmailUsers emailUtil = new EmailUsers();
-					emailUtil.sendWelcomeEmail(nEmail, nEmail);
-
+					new EmailUsers().sendWelcomeEmail(nEmail, nEmail); // sendWelcomeEmail()'s userName can be Email, Display Name, or Full Name
+					
+					// Send info to model nextPage
 					System.out.println("model nextPage addAttribute");
 					nextPage.addAttribute("userEmail", nEmail);
 					nextPage.addAttribute("loggedInUserEmail", nEmail);
