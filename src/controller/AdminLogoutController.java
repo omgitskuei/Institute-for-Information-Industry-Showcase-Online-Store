@@ -22,10 +22,11 @@ public class AdminLogoutController {
 	}
 
 	// Write Logout 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String processActionLogout() {
-		System.out.println("Directing to Login Page");
-		return "AdminLogin";
+	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	public String processActionLogout(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
+		System.out.println("Directing to 首頁");
+		nextPage.addAttribute("userEmail", uEmail);
+		return "AdminIndex";
 	}
 	
 //	// Write RedirectHomePage
@@ -43,16 +44,16 @@ public class AdminLogoutController {
 //	}
 	
 	// Closes session when user logs out
-	 @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	    public ModelAndView loadApp(HttpServletRequest request) {
 	        HttpSession session= request.getSession(false);
 	        SecurityContextHolder.clearContext();
 	        if(session != null) {
 	            session.invalidate();
-	            System.out.println("Session Cleaned");
+	            System.out.println("Session無效");
 	        }
 
-	        return new ModelAndView("/AdminIndex");
+	        return new ModelAndView("/AdminLogin");
 	    }
 
 
