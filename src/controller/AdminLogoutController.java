@@ -42,6 +42,7 @@ public class AdminLogoutController {
 //		return "AdminIndex";
 //	}
 	
+	// Closes session when user logs out
 	 @RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	    public ModelAndView loadApp(HttpServletRequest request) {
 	        HttpSession session= request.getSession(false);
