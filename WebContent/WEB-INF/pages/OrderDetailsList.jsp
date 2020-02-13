@@ -10,6 +10,7 @@
 %>
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -71,71 +72,78 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>訂單明細</h4>
+            <h4 >訂單明細</h4>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
+                <th>產品編號</th>
                 <th>產品名稱</th>
                 <th>單價</th>
                 <th>數量</th>
                 <th>總價</th>
                 <th></th>
-                <th></th>
+<!--                 <th></th> -->
               </tr>
             </thead>
+            
             <tbody>
+            
               <jstl:forEach var="orderDetailsList" items="${detailsList}">
+<!--  暫時放顯示更改 -->
+              訂單編號:${orderDetailsList.orderID}
               <!-- construct an "update" link with customer id -->
 			<c:url var="updateLink" value="/AdminOrder/updateForm">
 						<c:param name="orderID" value="${orderDetailsList.orderDetailID}" />
 					</c:url>
 
 					<!-- construct an "delete" link with customer id -->
-					<c:url var="deleteLink" value="/AdminOrder/delete">
-						<c:param name="orderID" value="${orderDetailsList.orderDetailID}" />
-					</c:url>
+<%-- 					<c:url var="deleteLink" value="/AdminOrder/delete"> --%>
+<%-- 						<c:param name="orderID" value="${orderDetailsList.orderDetailID}" /> --%>
+<%-- 					</c:url> --%>
               <tr>
+                <td>${orderDetailsList.productID}</td>	
 				<td>${orderDetailsList.productName}</td>	
 				<td>${orderDetailsList.productPrice}</td>	
 				<td>${orderDetailsList.productCount}</td>
 				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>
 				
 				<td>
-                  <a href="#" class="btn btn-secondary">
+                  <a href="updateLink" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
-                </td>
-                	 <td>
-                  <a href="#" class="btn btn-danger">
-                    <i class="fas fa-angle-double-right"></i> 刪除
-                  </a>
-                </td>
+<!--                 </td> -->
+<!--                 	 <td> -->
+<!--                   <a href="#" class="btn btn-danger"> -->
+<!--                     <i class="fas fa-angle-double-right"></i> 刪除 -->
+<!--                   </a> -->
+<!--                 </td> -->
               </tr>
+              
              </jstl:forEach>
-            </tbody>
+
           </table>
 
           <!-- PAGINATION -->
-          <nav class="ml-4">
-              <ul class="pagination">
-                  <li class="page-item disabled">
-                      <a href="#" class="page-link">上一頁</a>
-                  </li>
-                  <li class="page-item active">
-                      <a href="#" class="page-link">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">2</a>
-                </li>
-                    <li class="page-item">
-                    <a href="#" class="page-link">3</a>
-                 </li>
-                <li class="page-item">
-                    <a href="#" class="page-link">下一頁</a>
-                </li>
-              </ul>
-          </nav>
+<!--           <nav class="ml-4"> -->
+<!--               <ul class="pagination"> -->
+<!--                   <li class="page-item disabled"> -->
+<!--                       <a href="#" class="page-link">上一頁</a> -->
+<!--                   </li> -->
+<!--                   <li class="page-item active"> -->
+<!--                       <a href="#" class="page-link">1</a> -->
+<!--                   </li> -->
+<!--                   <li class="page-item"> -->
+<!--                     <a href="#" class="page-link">2</a> -->
+<!--                 </li> -->
+<!--                     <li class="page-item"> -->
+<!--                     <a href="#" class="page-link">3</a> -->
+<!--                  </li> -->
+<!--                 <li class="page-item"> -->
+<!--                     <a href="#" class="page-link">下一頁</a> -->
+<!--                 </li> -->
+<!--               </ul> -->
+<!--           </nav> -->
         </div>
       </div>
     </div>
