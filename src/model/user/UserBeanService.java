@@ -26,7 +26,7 @@ public class UserBeanService {
 	
 	public boolean insertUser(String email, String pwd) {
 		boolean success = false;
-		if (validatePwd(email) && validateEmail(pwd)) {
+		if (validateEmail(email) && validatePwd(pwd)) {
 			UserBean newUser = new UserBean();
 			newUser.setUserEmail(email);
 			newUser.setUserPwd(pwd);
@@ -40,7 +40,7 @@ public class UserBeanService {
 
 	public boolean insertAdmin(String email, String pwd) {
 		boolean success = false;
-		if (validatePwd(email) && validateEmail(pwd)) {
+		if (validateEmail(email) && validatePwd(pwd)) {
 			UserBean newAdmin = new UserBean();
 			newAdmin.setUserEmail(email);
 			newAdmin.setUserPwd(pwd);

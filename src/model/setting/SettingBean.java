@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SettingBean {
 	// Variable
-	private int settingID ;		// Not NULL
-	private int userID  ;		// Not NULL
+	private int settingID;		// Not NULL
+	private int userID;		// Not NULL
 	private String settingSecurityQ;  
 	private String settingSecurityA;  	
 	private String settingDisplayName; 	
@@ -25,14 +25,23 @@ public class SettingBean {
 	// Constructor
 	public SettingBean() {
 	}
-
-	public SettingBean(String newsettingSecurityQ,String newsettingSecurityA, 
-			String newsettingDisplayName, boolean newsettingsAllowMetadata ) {
+	
+	public SettingBean(int userID, boolean settingAllowMetadata) {
+		this.userID=userID;
+		this.settingAllowMetadata = settingAllowMetadata;
+	}
+	
+	public SettingBean(
+			int userID,
+			String newsettingSecurityQ,
+			String newsettingSecurityA, 
+			String newsettingDisplayName,
+			boolean newsettingsAllowMetadata ) {
+		this.userID=userID;
 		this.settingSecurityQ=newsettingSecurityQ;
 		this.settingSecurityA=newsettingSecurityA;
 		this.settingDisplayName = newsettingDisplayName;
 		this.settingAllowMetadata = newsettingsAllowMetadata;
-		
 	}
 	
 	
@@ -51,10 +60,10 @@ public class SettingBean {
 	public int getUserID() {
 		return userID;
 	}
-
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+	
 	@Column(name="settingSecurityQ")
 	public String getSettingSecurityQ() {
 		return settingSecurityQ;
