@@ -15,6 +15,7 @@ import model.order.OrderBean;
 import model.order.OrderBeanDAO;
 import model.orderDetails.OrderDetailsBean;
 import model.orderDetails.OrderDetailsBeanDAO;
+import model.user.UserBeanDAO;
 
 @Controller
 @SessionAttributes(names = {"userEmail"})
@@ -25,6 +26,10 @@ public class OrderDetailsListController {
 	
 	@Autowired
 	OrderBeanDAO dao2;
+	
+	@Autowired
+	UserBeanDAO uDAO;
+	
 	public OrderDetailsListController() {
 	}
 	
@@ -32,7 +37,8 @@ public class OrderDetailsListController {
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model, @RequestParam("orderID")int OrderID ) {
 		
 		//Order
-		List<OrderBean> detailsList2=dao2.selectorderID(OrderID);
+		int userID = uDAO.selectUserIDByEmail(uEmail);
+		List<OrderBean> detailsList2=dao2.selectOrdersByUserID(userID);
 		model.addAttribute("detailsList2", detailsList2);
 		//OrderDetails
 		List<OrderDetailsBean> detailsList=dao.selectAllByOrderID(OrderID);
