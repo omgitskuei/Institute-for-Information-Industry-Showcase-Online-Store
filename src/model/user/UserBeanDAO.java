@@ -192,7 +192,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				// If found, update Pwd and return True
 				String oldPwd = existingUser.getUserPwd();
 				existingUser.setUserPwd(newPwd);
-				session.save(existingUser);
+				session.update(existingUser);
 				System.out.println("User password UPDATED " +oldPwd+ " to " + existingUser.getUserPwd());
 				System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
 				return true;
