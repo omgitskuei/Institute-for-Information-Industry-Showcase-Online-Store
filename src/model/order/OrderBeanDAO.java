@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import model.orderDetails.OrderDetailsBean;
-
 @Repository
 public class OrderBeanDAO implements OrderBeanDAOInterface {
 
@@ -109,6 +107,14 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("From OrderBean where UserID=:thisUserID");
 		query.setParameter("thisUserID", userID);
+		List<OrderBean> results = (List<OrderBean>) query.list();
+		return results;
+	}
+	
+	public List<OrderBean> selectByOrderID(int orderID) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("From OrderBean where OrderID=:thisOrderID");
+		query.setParameter("thisOrderID", orderID);
 		List<OrderBean> results = (List<OrderBean>) query.list();
 		return results;
 	}

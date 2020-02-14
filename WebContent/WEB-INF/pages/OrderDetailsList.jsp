@@ -80,7 +80,7 @@
             </thead>
                         
             <tbody>
-              <jstl:forEach var="orderInfo" items="${detailsList2}">
+              <jstl:forEach var="orderInfo" items="${orderToDetailsList}">
               <tr>
                 <td>${orderInfo.orderID}</td>
 				<td>${orderInfo.total}</td>
