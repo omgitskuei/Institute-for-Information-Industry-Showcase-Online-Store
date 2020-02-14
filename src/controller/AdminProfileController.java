@@ -75,8 +75,7 @@ public class AdminProfileController {
 	@PostMapping("/savePassword")
 	public String savePassword(@ModelAttribute UserBean updateThisUser, 
 							   @RequestParam(value = "newPwd", required = true) String newPwd, 
-							   @RequestParam(value = "userID",required = true) int userID, 
-							   Model m) {
+							   @RequestParam(value = "userID",required = true) int userID) {
 		userService.updatePwd(updateThisUser, newPwd);
 		System.out.println("updateThisUser is " + updateThisUser);
 		System.out.println("newPwd is " + newPwd);
