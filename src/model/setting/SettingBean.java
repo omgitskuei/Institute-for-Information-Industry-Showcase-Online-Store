@@ -17,20 +17,22 @@ public class SettingBean {
 	// Variable
 	private int settingID;		// Not NULL
 	private int userID;		// Not NULL
-	private String settingSecurityQ;  
-	private String settingSecurityA;  	
-	private String settingDisplayName; 	
+	private String settingSecurityQ = "";  
+	private String settingSecurityA = "";  	
+	private String settingDisplayName = ""; 	
 	private boolean settingAllowMetadata=true;		// Not NULL
 
 	// Constructor
 	public SettingBean() {
 	}
 	
+	// -- Constructor with only not-nulls
 	public SettingBean(int userID, boolean settingAllowMetadata) {
 		this.userID=userID;
 		this.settingAllowMetadata = settingAllowMetadata;
 	}
 	
+	// -- Constructor with all variables
 	public SettingBean(
 			int userID,
 			String newsettingSecurityQ,

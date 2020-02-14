@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.crypto.tink.Aead;
+
 import model.user.UserBean;
 import model.user.UserBeanService;
+import util.EncodeHexString;
+import util.EncryptString;
 
 @Controller
 @SessionAttributes(names = { "userEmail", "userPwd", "rememberMe" })
@@ -61,7 +65,7 @@ public class AdminLoginController {
 		System.out.println("");
 		
 		// Check for empty input
-		if ( (uEmail.length() >= 5 && uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
+		if ( (uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
 			UserBean bean = new UserBean();
 			//readLoginCookie(cEmail);
 			if(cEmail != null && cPwd != null) {
@@ -140,8 +144,23 @@ public class AdminLoginController {
 			Model nextPage, HttpServletResponse response) {
 		// ^ name is synonymous to 'value'
 		// response.addCookie(new Cookie("adminLoginCookie", email));
-		Cookie ck = new Cookie("Email", user1.getUserEmail());
-		Cookie pw = new Cookie("Password", user2.getUserPwd());
+		
+		// Encrypt email before writing to cookie
+		String email = user1.getUserEmail();
+		EncryptString util1 = new EncryptString();
+		Aead aead = util1.newCleartextAEADKeyset();
+		byte[] cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
+		EncodeHexString hexConvert = new EncodeHexString();
+		email = hexConvert.byteArrayToHexString(cipher);
+		
+		Cookie ck = new Cookie("Email", email);
+		
+		// Encrypt pwd before writing cookie
+		String pwd = user1.getUserEmail();
+		cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
+		email = hexConvert.byteArrayToHexString(cipher);
+		
+		Cookie pw = new Cookie("Password", pwd);
 		// ck.setMaxAge(60*60*24);
 		// ck.setPath("/");
 		response.addCookie(ck);
@@ -151,13 +170,13 @@ public class AdminLoginController {
 		return "writeLoginCookie";
 	}
 
-	@RequestMapping("/readAdminLoginCookie")
-	public String readLoginCookie(
-			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String loginEmail,
-			@CookieValue(name = "Password", required = false, defaultValue = "Testing123!") String loginPwd) {
-
-		return "readCookie";
-	}
+//	@RequestMapping("/readAdminLoginCookie")
+//	public String readLoginCookie(
+//			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String loginEmail,
+//			@CookieValue(name = "Password", required = false, defaultValue = "Testing123!") String loginPwd) {
+//
+//		return "readCookie";
+//	}
 	
 
 

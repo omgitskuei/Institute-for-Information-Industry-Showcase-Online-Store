@@ -39,6 +39,7 @@ public class UserBeanService {
 	}
 
 	public boolean insertAdmin(String email, String pwd) {
+		System.out.println("");
 		boolean success = false;
 		if (validateEmail(email) && validatePwd(pwd)) {
 			UserBean newAdmin = new UserBean();
@@ -53,7 +54,7 @@ public class UserBeanService {
 	}
 
 	public UserBean checkLogin(UserBean selectThisUser) {
-		System.out.println("BEGIN: UserBeanService.select(UserBean insertThisUser)");
+		System.out.println("BEGIN: UserBeanService.checkLogin(UserBean)");
 		// Get values for validation
 		String email = selectThisUser.getUserEmail();
 		String pwd = selectThisUser.getUserPwd();
@@ -64,7 +65,7 @@ public class UserBeanService {
 		} else {
 			System.out.println("Email && Pwd INVALID");
 		}
-		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
+		System.out.println("FINISH: UserBeanService.checkLogin(UserBean)");
 		return selectThisUser;
 	}
 
