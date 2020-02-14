@@ -22,11 +22,11 @@ public class AdminLogoutController {
 	}
 
 	// Write Logout 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String processActionLogout() {
-		System.out.println("Directing to Login Page");
-		return "AdminLogin";
-	}
+//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+//	public String processActionLogout() {
+//		System.out.println("Directing to Login Page");
+//		return "AdminLogin";
+//	}
 	
 //	// Write RedirectHomePage
 //	@RequestMapping(path = "/controller.AdminRedirectController", method = RequestMethod.GET)
@@ -36,13 +36,13 @@ public class AdminLogoutController {
 //		return "AdminIndex";
 //	}
 	
-//	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
-//	public ModelAndView(@SessionAttribute("userEmail") String uEmail, Model model) {
-//		System.out.println("Directing to AdminIndex");
-//		return "AdminIndex";
-//	}
+	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	public String rediectAction(@SessionAttribute("userEmail") String uEmail, Model model) {
+		System.out.println("Directing to AdminIndex");
+		return "AdminIndex";
+	}
 	
-	 @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	    public ModelAndView loadApp(HttpServletRequest request) {
 	        HttpSession session= request.getSession(false);
 	        SecurityContextHolder.clearContext();
@@ -51,7 +51,7 @@ public class AdminLogoutController {
 	            System.out.println("Session Cleaned");
 	        }
 
-	        return new ModelAndView("/AdminIndex");
+	        return new ModelAndView("/AdminLogin");
 	    }
 
 

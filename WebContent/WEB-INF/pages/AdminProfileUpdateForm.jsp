@@ -17,20 +17,21 @@
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
 	<h1>管理者編輯使用資訊</h1>
-	<form:form method="POST" action="saveProfile" modelAttribute="user"> 
-	<table>
-			<tr>
-				<td></td>
-				<td><form:hidden path="userID" /></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><form:input path="userEmail" /></td>
-
-			</tr>
-	</table>
-	</form:form>
+	<div>
+	<c:url var="updateLink" value="/AdminProfile/updateForm">
+		<c:param name="userID" value="${user.userID}" />
+	</c:url>
+	<c:url var="updatePasswordLink" value="/AdminProfile/updatePasswordForm">
+		<c:param name="userID" value="${user.userID}" />
+	</c:url>
+	<a href="${updateLink}">更新使用者基本資料</a>
+	<a href="${updatePasswordLink}">更改密碼</a>
+	
+	
+	<a>使用者基本資料</a>
+	<a>使用者基本資料</a>
+	<a>使用者基本資料</a>
+	</div>
 
 	<form:form method="POST" action="saveProfile" modelAttribute="profile">
 		<table>
@@ -87,6 +88,7 @@
 			</tr>
 		</table>
 	</form:form>
+	
 
 
 

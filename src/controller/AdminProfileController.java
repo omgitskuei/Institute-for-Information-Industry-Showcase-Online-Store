@@ -63,6 +63,22 @@ public class AdminProfileController {
 		return "AdminProfileUpdateForm";
 	}
 	
+	@GetMapping("/updatePasswordForm")
+	public String showFormForPassword(@RequestParam("userID") int userID, Model m) {
+		UserBean theUser = userService.selectUser(userID);
+		
+		m.addAttribute("user", theUser);
+		
+		return "AdminUpdatePasswordForm";
+	}
+	
+	@PostMapping("/savePassword")
+	public String savePassword(@ModelAttribute("user") @Valid UserBean updateThisUser, String newPwd, BindingResult bindingResult,@RequestParam("userID") int userID) {
+		UserBean bean = new UserBean();
+		bean.setUserID(userID);
+		userService.updatePwd(bean, newPwd);
+		return "AdminUpdatePasswordForm";
+	}
 
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {
