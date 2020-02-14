@@ -27,18 +27,20 @@ public class OrderDetailsBean {
 	private String ProductName;
 	private int productCount; // Not NULL
 	private float ProductPrice;
+	private int OrderID;
 
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
 	}
 
-	public OrderDetailsBean(OrderBean orderBean, int productID, String ProductName, int productCount,
+	public OrderDetailsBean(int OrderID,OrderBean orderBean, int productID, String ProductName, int productCount,
 			float ProductPrice) {
 		this.orderBean = orderBean;
 		this.productID = productID;
 		this.ProductName = ProductName;
 		this.productCount = productCount;
 		this.ProductPrice = ProductPrice;
+		this.OrderID = OrderID;
 	}
 
 	// GET/SET methods
@@ -61,6 +63,14 @@ public class OrderDetailsBean {
 
 	public void setOrderBean(OrderBean thisBean) {
 		this.orderBean = thisBean;
+	}
+//	@Column(name = "OrderID")
+	public int getOrderID() {
+		return OrderID;
+	}
+
+	public void setOrderID(int orderID) {
+		OrderID = orderID;
 	}
 
 	@Column(name = "ProductID")

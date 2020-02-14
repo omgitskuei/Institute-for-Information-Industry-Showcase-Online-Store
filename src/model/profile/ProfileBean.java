@@ -55,8 +55,31 @@ public class ProfileBean {
 	public ProfileBean() {
 	}
 
-	public ProfileBean(String profileFullName, Date profileBirthdate, String profileSexString,
-			String profilePhoneString, String profileAddress) {
+	public ProfileBean(int userID, Date joinDate, String phone, String address, int vip) {
+		this.userID = userID;
+		this.profileJoinDate = joinDate;
+		this.profilePhone = phone;
+		this.profileAddress = address;
+		this.profileVIP = vip;
+	}
+	
+	public ProfileBean(
+			int userID,
+			String profileFullName, 
+			Date profileJoinDate,
+			Date profileBirthdate, 
+			String profileSexString,
+			String profilePhoneString, 
+			String profileAddress,
+			int profileVIP) {
+		this.userID = userID;
+		this.profileFullName = profileFullName;
+		this.profileJoinDate = profileJoinDate;
+		this.profileBirthdate = profileBirthdate;
+		this.profileSex = profileSexString;
+		this.profilePhone = profilePhoneString;
+		this.profileAddress = profileAddress;
+		this.profileVIP = profileVIP;
 	}
 
 	// Getter / Setters

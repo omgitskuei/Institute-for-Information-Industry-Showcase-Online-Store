@@ -47,14 +47,14 @@
 			</tr>
 			<tr>
 				<td>加入日期 :</td>
-				<td><form:input id="joinDateInput" onchange="joinDateCheck()"
+				<td><form:input id="joinDateInput" onkeyup="joinDateCheck()"
 						path="profileJoinDate" /></td>
 				<td><form:errors path="profileJoinDate" /></td>
 				<td><span id="joinDateErrMsg"></span></td>
 			</tr>
 			<tr>
 				<td>生日 :</td>
-				<td><form:input id="birthdayInput" onchange="birthdayCheck()"
+				<td><form:input id="birthdayInput" onkeyup="birthdayCheck()"
 						path="profileBirthdate" /></td>
 				<td><form:errors path="profileBirthdate" /></td>
 				<td><span id="birthdayErrMsg"></span></td>
@@ -71,7 +71,7 @@
 			</tr>
 			<tr>
 				<td>地址 :</td>
-				<td><form:input onblur="addressCheck()" path="profileAddress" /></td>
+				<td><form:input onkeyup="addressCheck()" path="profileAddress" /></td>
 				<td><form:errors path="profileAddress" /></td>
 			</tr>
 			<tr>

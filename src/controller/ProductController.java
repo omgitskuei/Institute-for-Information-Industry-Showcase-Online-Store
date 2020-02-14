@@ -71,16 +71,17 @@ public class ProductController {
 	private void savePicture(String fileName, String savePath) {
 		try {
 			ProductBean ProductBean = new ProductBean();
-			ProductBean.setFilename(fileName);
 
 			FileInputStream is1 = new FileInputStream(savePath);
 			byte[] data = new byte[is1.available()];
 			is1.read(data);
 			is1.close();
-
+			
 			ProductBean.setProductImg(data);
-			prservice.saveProduct(ProductBean);			
+			prservice.saveProduct(ProductBean);		
+			System.out.println("File ["+fileName+"] at root ["+savePath+"] has successfully SAVED");
 		} catch (Exception e) {
+			System.out.println("ERROR: File failed to save!");
             e.printStackTrace();
 		}
 	}

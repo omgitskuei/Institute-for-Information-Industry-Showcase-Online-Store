@@ -26,7 +26,7 @@ public class UserBeanService {
 	
 	public boolean insertUser(String email, String pwd) {
 		boolean success = false;
-		if (validatePwd(email) && validateEmail(pwd)) {
+		if (validateEmail(email) && validatePwd(pwd)) {
 			UserBean newUser = new UserBean();
 			newUser.setUserEmail(email);
 			newUser.setUserPwd(pwd);
@@ -39,8 +39,9 @@ public class UserBeanService {
 	}
 
 	public boolean insertAdmin(String email, String pwd) {
+		System.out.println("");
 		boolean success = false;
-		if (validatePwd(email) && validateEmail(pwd)) {
+		if (validateEmail(email) && validatePwd(pwd)) {
 			UserBean newAdmin = new UserBean();
 			newAdmin.setUserEmail(email);
 			newAdmin.setUserPwd(pwd);
@@ -53,7 +54,7 @@ public class UserBeanService {
 	}
 
 	public UserBean checkLogin(UserBean selectThisUser) {
-		System.out.println("BEGIN: UserBeanService.select(UserBean insertThisUser)");
+		System.out.println("BEGIN: UserBeanService.checkLogin(UserBean)");
 		// Get values for validation
 		String email = selectThisUser.getUserEmail();
 		String pwd = selectThisUser.getUserPwd();
@@ -64,7 +65,7 @@ public class UserBeanService {
 		} else {
 			System.out.println("Email && Pwd INVALID");
 		}
-		System.out.println("FINISH: UserBeanService.select(UserBean insertThisUser)");
+		System.out.println("FINISH: UserBeanService.checkLogin(UserBean)");
 		return selectThisUser;
 	}
 
@@ -87,7 +88,7 @@ public class UserBeanService {
 	}
 	
 	public UserBean selectUser(int userID) {
-		return uDAO.selectUser(userID);
+		return uDAO.selectUserByID(userID);
 	}
 	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {

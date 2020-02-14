@@ -93,6 +93,7 @@
 </section>
 
 <!-- SIGN UP MODAL -->
+<section>
 <div class="modal" id="signUpModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -101,22 +102,21 @@
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-          
-            <form action="<jstl:url value="/controller.AdminSignInController" />">
+            <form class="form" name="signupForm" action="<jstl:url value="/controller.AdminSignUpController" />" method="post" id="signupForm">
               <div class="form-group">
                 <label for="email">電子信箱</label>
-                <input type="email" placeholder="電子信箱" class="form-control" name="newEmail">
+                <input type="email" placeholder="電子信箱" class="form-control" name="nEmail">
               </div>
               <div class="form-group">
                 <label for="password">密碼</label>
-                <input type="password" placeholder="密碼" class="form-control" name="newPwd">
+                <input type="password" placeholder="密碼" class="form-control" name="nPwd">
               </div>
             	<div class="form-group">
            	     <label for="password2">確認密碼</label>
-            	 <input type="password" placeholder="確認密碼" class="form-control" name="reEnterPwd">
+            	 <input type="password" placeholder="確認密碼" class="form-control" name="rPwd">
               </div>
               <div class="modal-footer">
-           		 <button type="submit" class="btn btn-primary" data-dismiss="modal">送出</button>
+           		 <button type="submit" class="btn btn-primary" value="送出">送出</button>
      	     </div>
             </form>
             
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-  </div>
+</section>
 
 
 <!-- FOOTER -->

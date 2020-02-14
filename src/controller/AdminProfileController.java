@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -54,12 +55,12 @@ public class AdminProfileController {
 	}
 
 	@GetMapping("/updateForm")
-	public String showFormForUpdate(@RequestParam("userID") int userID, Model m) {
+	public String showFormForUpdate(@RequestParam("userID") int userID, Map<String, Object> map, Model m) {
 		ProfileBean theProfile = profileService.getProfile(userID);
 		UserBean theUser = userService.selectUser(userID);
 		
-		m.addAttribute("profile", theProfile);
-		m.addAttribute("user", theUser);
+		map.put("profile", theProfile);
+		map.put("user", theUser);
 		return "AdminProfileUpdateForm";
 	}
 	

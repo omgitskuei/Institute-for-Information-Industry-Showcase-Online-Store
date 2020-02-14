@@ -20,6 +20,10 @@ public class ProductBeanService implements ProductBeanServiceInterface {
 	public void saveProduct(ProductBean theProduct) {
 		productDAO.insertProduct(theProduct);
 	}
+	
+	public boolean updateProductName(ProductBean thisProduct, String newProductName) {
+		return productDAO.updateProductName(thisProduct, newProductName);
+	}
 
 	@Override
 	public ProductBean getProduct(int productID) {

@@ -58,70 +58,27 @@
       <div class="col-md-6 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h4>使用者登入</h4>
+                <h4>使用者注冊</h4>
             </div>
             <div class="card-body">
-           <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
+           <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminSignUpConfirmController" />" method="post" id="myForm">
             <div class="form-group">
-                  <label for="email">電子郵件</label>
-                  <input type="email" class="form-control" name="userEmail" value="${cookie.Email.getValue()}">
-                  <span id="emailErrorSpan">${errors.emailError}</span>
+            <span id="nEmail">${nEmail}</span><br>
+            <span id="nPwd">${nPwd}</span>
+            <div>Please enter your administrator code below.</div>
+                  <label for="confirmCode">Administrator Code</label>
+                  <input type="text" class="form-control" name="nEmail" value="${nEmail}">
+                  <input type="text" class="form-control" name="nPwd" value="${nPwd}">
+                  <input type="text" class="form-control" name="confirmCode" value="">
+                  <span id="codeErrorSpan">${errors.codeError}</span>
                 </div>
-                <div class="form-group">
-                  <label for="password">密碼</label>
-                  <input type="password" class="form-control" name="userPwd" value="${cookie.Password.getValue()}">
-                  <span id="pwdErrorSpan">${errors.pwdError}</span>
-                </div>
-                <div class="form-group ml-4">
-                  <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="rememberMe"/>
-            	  <label class="form-check-label" for="FormCheck">
-             		記住帳號密碼  <br>
-             		${errors.notFoundError}
-            	  </label>
-                </div>
-                <input type="submit" value="登入" class="btn btn-primary btn-block">
-                	<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block">
             </form>
             </div>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- SIGN UP MODAL -->
-<section>
-<div class="modal" id="signUpModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">註冊</h5>
-            <button class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <form class="form" name="signupForm" action="<jstl:url value="/controller.AdminSignUpController" />" method="post" id="signupForm">
-              <div class="form-group">
-                <label for="email">電子信箱</label>
-                <input type="email" placeholder="電子信箱" class="form-control" name="nEmail">
-              </div>
-              <div class="form-group">
-                <label for="password">密碼</label>
-                <input type="password" placeholder="密碼" class="form-control" name="nPwd">
-              </div>
-            	<div class="form-group">
-           	     <label for="password2">確認密碼</label>
-            	 <input type="password" placeholder="確認密碼" class="form-control" name="rPwd">
-              </div>
-              <div class="modal-footer">
-           		 <button type="submit" class="btn btn-primary" value="送出">送出</button>
-     	     </div>
-            </form>
-            
-          </div>
-          
-        </div>
-      </div>
-    </div>
 </section>
 
 <!-- FOOTER -->

@@ -29,8 +29,12 @@ public class WalletBean {
 	// Constructors
 	public WalletBean() {
 	}
-
-	public WalletBean(float walletAmount) {
+	
+	public WalletBean(int userID) {
+		this.userID = userID;
+	}
+	
+	public WalletBean(int userID, float walletAmount) {
 		this.walletAmount = walletAmount;
 	}
 

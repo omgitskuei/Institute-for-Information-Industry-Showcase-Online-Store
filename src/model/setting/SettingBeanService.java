@@ -103,7 +103,7 @@ public class SettingBeanService {
 			// Count how many special characters, and DisplayName must be longer than 6 char
 			CheckSubstring util = new CheckSubstring();
 			int countSpec = util.countSpecialCharacters(thisName);
-			if(countSpec==0 && thisName.length()>6) {
+			if(countSpec==0) {
 				valid = true;
 			}
 		} catch (Exception e) {
