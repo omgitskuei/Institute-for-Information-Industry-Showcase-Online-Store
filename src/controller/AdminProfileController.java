@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -55,15 +54,33 @@ public class AdminProfileController {
 	}
 
 	@GetMapping("/updateForm")
-	public String showFormForUpdate(@RequestParam("userID") int userID, Map<String, Object> map, Model m) {
+	public String showFormForUpdate(@RequestParam("userID") int userID, Model m) {
 		ProfileBean theProfile = profileService.getProfile(userID);
 		UserBean theUser = userService.selectUser(userID);
 		
-		map.put("profile", theProfile);
-		map.put("user", theUser);
+		m.addAttribute("profile", theProfile);
+		m.addAttribute("user", theUser);
 		return "AdminProfileUpdateForm";
 	}
 	
+	@GetMapping("/updatePasswordForm")
+	public String showFormForPassword(@RequestParam("userID") int userID, Model m) {
+		UserBean theUser = userService.selectUser(userID);
+		
+		m.addAttribute("user", theUser);
+		
+		return "AdminUpdatePasswordForm";
+	}
+	
+	@PostMapping("/savePassword")
+	public String savePassword(@ModelAttribute("user") @Valid UserBean updateThisUser, String newPwd, BindingResult bindingResult,@RequestParam("userID") int userID) {
+		UserBean bean = new UserBean();
+		bean.setUserID(userID);
+		userService.updatePwd(updateThisUser, newPwd);
+		System.out.println(updateThisUser);
+		System.out.println(newPwd);
+		return "redirect:/AdminProfile/list";
+	}
 
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {
