@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" 	 uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -100,8 +102,8 @@
 									<tr>
 										<td>${user.userID}</td>
 										<td>${user.profileFullName}</td>
-										<td>${user.profileJoinDate}</td>
-										<td>${user.profileBirthdate}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.profileJoinDate}" /></td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.profileBirthdate}" /></td>
 										<td>${user.profileSex}</td>
 										<td>${user.profilePhone}</td>
 										<td>${user.profileAddress}</td>
