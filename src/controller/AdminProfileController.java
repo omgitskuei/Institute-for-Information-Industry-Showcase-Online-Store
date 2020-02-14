@@ -73,12 +73,13 @@ public class AdminProfileController {
 	}
 	
 	@PostMapping("/savePassword")
-	public String savePassword(@ModelAttribute("user") @Valid UserBean updateThisUser, String newPwd, BindingResult bindingResult,@RequestParam("userID") int userID) {
-		UserBean bean = new UserBean();
-		bean.setUserID(userID);
+	public String savePassword(@ModelAttribute UserBean updateThisUser, 
+							   @RequestParam(value = "newPwd", required = true) String newPwd, 
+							   @RequestParam(value = "userID",required = true) int userID, 
+							   Model m) {
 		userService.updatePwd(updateThisUser, newPwd);
-		System.out.println(updateThisUser);
-		System.out.println(newPwd);
+		System.out.println("updateThisUser is " + updateThisUser);
+		System.out.println("newPwd is " + newPwd);
 		return "redirect:/AdminProfile/list";
 	}
 

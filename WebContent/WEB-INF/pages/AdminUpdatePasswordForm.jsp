@@ -20,34 +20,35 @@
 			value="/AdminProfile/updatePasswordForm">
 			<c:param name="userID" value="${user.userID}" />
 		</c:url>
-		<a href="${updateLink}">更新使用者基本資料</a> <a href="${updatePasswordLink}">更改密碼</a>
+		<a href="${updateLink}">更新使用者基本資料</a> 
+		<a href="${updatePasswordLink}">更改密碼</a>
 
 
 		<a>使用者基本資料</a> <a>使用者基本資料</a> <a>使用者基本資料</a>
 	</div>
 
-<form:form method="POST" action="savePassword" modelAttribute="user">
+<form method="POST" action="<c:url value="/AdminProfile/savePassword" />" >
 		<table>
 			<tr>
 				<td></td>
-				<td><form:hidden path="userID" /></td>
+				<td><input type="hidden" name="userID" value="${user.userID}" /></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td><form:hidden path="userEmail" /></td>
+				<td>帳號: </td>
+				<td>${user.userEmail}</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>密碼:</td>
-				<td><form:input path="userPwd" /></td>
+				<td>密碼: </td>
+				<td><input  name="newPwd" value="${user.userPwd}"/></td>
 			</tr>
 			<tr>
 				<td>確認</td>
-				<td><form:button cssClass="btn btn-info" type="submit"
-						>儲存</form:button></td>
+				<td><button class="btn btn-info" type="submit"
+						>儲存</button></td>
 			</tr>
 		</table>
-		</form:form>
+		</form>
 </body>
 </html>
