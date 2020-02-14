@@ -152,15 +152,20 @@ public class AdminLoginController {
 		byte[] cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
 		EncodeHexString hexConvert = new EncodeHexString();
 		email = hexConvert.byteArrayToHexString(cipher);
-		
+		// Write encrypted email cookie
 		Cookie ck = new Cookie("Email", email);
+		System.out.println("email: "+user1.getUserEmail());
+		System.out.println("cookie email(encrypted): "+email);
 		
 		// Encrypt pwd before writing cookie
-		String pwd = user1.getUserEmail();
+		String pwd = user2.getUserPwd();
 		cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
 		email = hexConvert.byteArrayToHexString(cipher);
-		
+		// Write encrypted pwd cookie
 		Cookie pw = new Cookie("Password", pwd);
+		System.out.println("pwd: "+user2.getUserPwd());
+		System.out.println("cookie pwd(encrpyted): "+pwd);
+		
 		// ck.setMaxAge(60*60*24);
 		// ck.setPath("/");
 		response.addCookie(ck);
