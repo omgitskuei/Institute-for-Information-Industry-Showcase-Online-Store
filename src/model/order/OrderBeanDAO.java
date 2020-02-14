@@ -105,10 +105,10 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		return results;
 	}
 	
-	public List<OrderBean> selectorderID(int newUserID) {
+	public List<OrderBean> selectOrdersByUserID(int userID) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("From OrderBean where OrderID=:thisOrderID");
-		query.setParameter("thisOrderID", newUserID);
+		Query query = session.createQuery("From OrderBean where UserID=:thisUserID");
+		query.setParameter("thisUserID", userID);
 		List<OrderBean> results = (List<OrderBean>) query.list();
 		return results;
 	}
