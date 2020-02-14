@@ -167,6 +167,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				// If found, update Email and return True
 				String oldEmail = existingUser.getUserEmail();
 				existingUser.setUserEmail(newEmail);
+				session.save(existingUser);
 				System.out.println("User email " + oldEmail + " updated to " + existingUser.getUserEmail());
 				System.out.println("Finish: UserBeanDAO.updateEmail(UserBean updateThisUser, String newEmail)");
 				return true;
@@ -191,6 +192,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				// If found, update Pwd and return True
 				String oldPwd = existingUser.getUserPwd();
 				existingUser.setUserPwd(newPwd);
+				session.save(existingUser);
 				System.out.println("User password UPDATED " +oldPwd+ " to " + existingUser.getUserPwd());
 				System.out.println("Finish: UserBeanDAO.updatePwd(UserBean updateThisUser, String newPwd)");
 				return true;
