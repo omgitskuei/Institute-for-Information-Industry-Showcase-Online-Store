@@ -17,13 +17,18 @@ public class AdminDetailController {
 		
 	}
 	
-	// URL address for the controller, method POST/GET, what data
+
+	// 1)導到詳細修改庫存資料，但目前被拿掉，無用處跟其他人確認後可刪
+	// 2)寫完了
+	// 3)Thomas
 	@RequestMapping(path = "/controller.AdminInventoryDetailController", method = RequestMethod.POST)
 	public String proccessActionInventoryDetail(@SessionAttribute("userEmail") String uEmail) {
 		System.out.println("Directing to InventoryDetail");
 		return "AdminInventoryDetail";
 	}
-	
+	// 1)導到詳細修改訂單資料，但目前被拿掉，無用處跟其他人確認後可刪
+	// 2)寫完了
+	// 3)Thomas
 	@RequestMapping(path = "/controller.AdminOrderDetailController", method = RequestMethod.POST)
 	public String proccessActionOrderDetail(@SessionAttribute("userEmail") String uEmail) {
 		System.out.println("Directing to OrderDetail");

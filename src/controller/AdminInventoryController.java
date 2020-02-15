@@ -25,6 +25,9 @@ public class AdminInventoryController {
 	public AdminInventoryController() {
 	}
 	
+	// 1)導到AdminInventory頁面，並傳庫存資料產生表格
+	// 2)已完成
+	// 3)Thomas
 	@RequestMapping(value = "/inventories", method = RequestMethod.GET)
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
 		System.out.println("Directing to AdminInventory");

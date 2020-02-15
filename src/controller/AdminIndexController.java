@@ -15,7 +15,9 @@ public class AdminIndexController {
 	public AdminIndexController() {
 	}
 
-	// URL address for this controller, method POST/GET, what data fields
+	// 1)這個應該沒用了，再請確認一下
+	// 2)已完成
+	// 3)Thomas
 	@RequestMapping(path = "/controller.AdminIndexController", method = RequestMethod.POST)
 	public String processAction( Model nextPage) {
 		System.out.println("Directing to Adminindex");

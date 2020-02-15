@@ -35,19 +35,10 @@ public class AdminLoginController {
 		this.service = service;
 		this.response = response;
 	}
-//	
-//	@RequestMapping("/hello.html")
-//	public String hello(@CookieValue(value = "foo", defaultValue = "hello") String fooCookie) {
-//		
-//		response.addCookie(new Cookie("foo", "bar"));
-//		
-//		Cookie foo = new Cookie
-//		
-//		
-//		return fooCookie;
-//		
-//	}
-	
+
+	// 1)登入功能，並製造Cookie
+	// 2)還沒處理回來解碼Cookie的到Input資料欄位裡面
+	// 3)Chris, Thomas
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.POST)
 	public String processAction(@RequestParam(name = "userEmail") String uEmail,
@@ -137,6 +128,9 @@ public class AdminLoginController {
 		}
 	}
 
+	// 1)製造Cookie
+	// 2)I don't know the status of this method now...:(
+	// 3)Chris
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(
 			@CookieValue(name = "Email", required = false, defaultValue = "user@domain.com") UserBean user1,
