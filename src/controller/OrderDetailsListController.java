@@ -17,6 +17,9 @@ import model.orderDetails.OrderDetailsBean;
 import model.orderDetails.OrderDetailsBeanDAO;
 import model.user.UserBeanDAO;
 
+//1)控制訂單管理明細顯示
+//2)寫完了
+//3)忠城寫的
 @Controller
 @SessionAttributes(names = {"userEmail"})
 public class OrderDetailsListController {
@@ -40,10 +43,10 @@ public class OrderDetailsListController {
 		int userID = uDAO.selectUserIDByEmail(uEmail);
 		List<OrderBean> detailsList2=oDAO.selectOrdersByUserID(userID);
 		model.addAttribute("detailsList2", detailsList2);
-		//Order
+		//顯示Order部分
 		List<OrderBean> orderToDetailsList=oDAO.selectByOrderID(OrderID);
 		model.addAttribute("orderToDetailsList", orderToDetailsList);
-		//OrderDetails
+		//顯示OrderDetails部分
 		List<OrderDetailsBean> detailsList=odDAO.selectAllByOrderID(OrderID);
 		model.addAttribute("detailsList", detailsList);
 

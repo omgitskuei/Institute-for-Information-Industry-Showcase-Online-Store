@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
 
+//1)控制Product表單更新
+//2)還未寫完了 儲存送出型別錯誤
+//3)忠城寫的
 @Controller
 @SessionAttributes
 @RequestMapping("/AdminProduct")
