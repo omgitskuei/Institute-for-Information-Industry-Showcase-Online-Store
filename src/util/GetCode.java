@@ -33,68 +33,59 @@ public class GetCode {
 		this.includeSpecialCharacters = includeSpecialCharacters;
 	}
 	
-	// methods
-	private void appendNums() {
-		genBank.add("0");
-		genBank.add("1");
-		genBank.add("2");
-		genBank.add("3");
-		genBank.add("4");
-		genBank.add("5");
-		genBank.add("6");
-		genBank.add("7");
-		genBank.add("8");
-		genBank.add("9");
-	}
-	private void appendLetters() {
-		genBank.add("a");
-		genBank.add("b");
-		genBank.add("c");
-		genBank.add("d");
-		genBank.add("e");
-		genBank.add("f");
-		genBank.add("g");
-		genBank.add("h");
-		genBank.add("i");
-		genBank.add("j");
-		genBank.add("k");
-		genBank.add("l");
-		genBank.add("m");
-		genBank.add("n");
-		genBank.add("o");
-		genBank.add("p");
-		genBank.add("q");
-		genBank.add("r");
-		genBank.add("s");
-		genBank.add("t");
-		genBank.add("u");
-		genBank.add("v");
-		genBank.add("x");
-		genBank.add("y");
-		genBank.add("z");
-	}
-	private void appendSpecChars() {
-		genBank.add("!");
-		genBank.add("@");
-		genBank.add("#");
-		genBank.add("$");
-		genBank.add("%");
-		genBank.add("^");
-		genBank.add("&");
-		genBank.add("*");
-		genBank.add("(");
-		genBank.add(")");
-		genBank.add("?");
-	}
-	public void generateCode() {
+	// methods	
+	public String generateCode() {
 		if (this.includeNums==true) {
-			appendNums();
+			genBank.add("0");
+			genBank.add("1");
+			genBank.add("2");
+			genBank.add("3");
+			genBank.add("4");
+			genBank.add("5");
+			genBank.add("6");
+			genBank.add("7");
+			genBank.add("8");
+			genBank.add("9");
 		}
 		if (this.includeLetters==true) {
-			appendLetters();
+			genBank.add("a");
+			genBank.add("b");
+			genBank.add("c");
+			genBank.add("d");
+			genBank.add("e");
+			genBank.add("f");
+			genBank.add("g");
+			genBank.add("h");
+			genBank.add("i");
+			genBank.add("j");
+			genBank.add("k");
+			genBank.add("l");
+			genBank.add("m");
+			genBank.add("n");
+			genBank.add("o");
+			genBank.add("p");
+			genBank.add("q");
+			genBank.add("r");
+			genBank.add("s");
+			genBank.add("t");
+			genBank.add("u");
+			genBank.add("v");
+			genBank.add("x");
+			genBank.add("y");
+			genBank.add("z");
 		}
 		if (this.includeSpecialCharacters==true) {
-			appendSpecChars();
+			genBank.add("!");
+			genBank.add("@");
+			genBank.add("#");
+			genBank.add("$");
+			genBank.add("%");
+			genBank.add("^");
+			genBank.add("&");
+			genBank.add("*");
+			genBank.add("(");
+			genBank.add(")");
+			genBank.add("?");
 		}
 		// Show bank
 		System.out.println("Code Generator Bank: "+genBank);
@@ -110,10 +101,7 @@ public class GetCode {
 			// Show code so far
 			//System.out.println(this.code);
 		}
-		System.out.println("");
 		System.out.println("Generated code: "+this.code);
-	}
-	public String returnCode() {
 		return code;
 	}
 
@@ -123,43 +111,7 @@ public class GetCode {
 //		String input = console.getConsoleInputBR("Input length:");
 //		int length = Integer.parseInt(input);
 		
-		GetCode gen = new GetCode(5, true, true, false);
-		gen.generateCode();
-		String result = gen.returnCode();
-		
-		System.out.println("result: "+result);
-	}
-
-	// Getter / Setter
-	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
-	}
-
-	public boolean isIncludeNums() {
-		return includeNums;
-	}
-
-	public void setIncludeNums(boolean includeNums) {
-		this.includeNums = includeNums;
-	}
-
-	public boolean isIncludeLetters() {
-		return includeLetters;
-	}
-
-	public void setIncludeLetters(boolean includeLetters) {
-		this.includeLetters = includeLetters;
-	}
-
-	public boolean isIncludeSpecialCharacters() {
-		return includeSpecialCharacters;
-	}
-
-	public void setIncludeSpecialCharacters(boolean includeSpecialCharacters) {
-		this.includeSpecialCharacters = includeSpecialCharacters;
+		GetCode gen = new GetCode(10, true, false, false);
+		String result = gen.generateCode();
 	}
 }
