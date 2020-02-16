@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.product.ProductBean;
 import model.product.ProductBeanDAO;
-
+//1)利用商品種類名稱或是商品名稱進行搜尋
+//2)已完成
+//3)Chris, Alex
 @Controller
 @SessionAttributes(names = { "searchSpecificValue" ,"searchCategoryValue"})
 public class FindUniqueProductController {

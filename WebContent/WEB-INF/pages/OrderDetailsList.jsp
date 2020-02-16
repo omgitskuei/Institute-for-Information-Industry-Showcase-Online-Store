@@ -80,13 +80,13 @@
             </thead>
                         
             <tbody>
-              <jstl:forEach var="orderInfo" items="${detailsList2}">
+              <jstl:forEach var="orderInfo" items="${orderToDetailsList}">
               <tr>
                 <td>${orderInfo.orderID}</td>
 				<td>${orderInfo.total}</td>
 				<td>${orderInfo.mailingAddress}</td>
 				<td>${orderInfo.mailingPhone}</td>
-				<td>${orderInfo.orderTime}</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
               </tr>
              </jstl:forEach>
             </tbody>

@@ -24,6 +24,9 @@ public class AdminOrderController {
 	public AdminOrderController() {
 	}
 
+	// 1)導到訂單並產生資料
+	// 2)已完成
+	// 3)Thomas
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
 		System.out.println("Directing to AdminOrder");

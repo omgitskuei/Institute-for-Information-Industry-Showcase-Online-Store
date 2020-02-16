@@ -22,10 +22,10 @@ import model.user.UserBeanDAO;
 public class OrderDetailsListController {
 
 	@Autowired
-	OrderDetailsBeanDAO dao;
+	OrderDetailsBeanDAO odDAO;
 	
 	@Autowired
-	OrderBeanDAO dao2;
+	OrderBeanDAO oDAO;
 	
 	@Autowired
 	UserBeanDAO uDAO;
@@ -36,12 +36,15 @@ public class OrderDetailsListController {
 	@RequestMapping(value = "/orderDetails", method = RequestMethod.GET)
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model, @RequestParam("orderID")int OrderID ) {
 		
-		//Order
+		//user
 		int userID = uDAO.selectUserIDByEmail(uEmail);
-		List<OrderBean> detailsList2=dao2.selectOrdersByUserID(userID);
+		List<OrderBean> detailsList2=oDAO.selectOrdersByUserID(userID);
 		model.addAttribute("detailsList2", detailsList2);
+		//Order
+		List<OrderBean> orderToDetailsList=oDAO.selectByOrderID(OrderID);
+		model.addAttribute("orderToDetailsList", orderToDetailsList);
 		//OrderDetails
-		List<OrderDetailsBean> detailsList=dao.selectAllByOrderID(OrderID);
+		List<OrderDetailsBean> detailsList=odDAO.selectAllByOrderID(OrderID);
 		model.addAttribute("detailsList", detailsList);
 
 		return "OrderDetailsList";

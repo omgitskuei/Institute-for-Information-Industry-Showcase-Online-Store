@@ -1,15 +1,10 @@
-<%@ page
-	language="java"
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<%@ taglib
-	prefix="jstl"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" 	 uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -106,7 +101,7 @@
                 <td>${product.productStock}</td>
                 <td>${product.productDescription}</td>
                 <td>${product.productImg}</td>
-                <td>${product.productTimestamp}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.productTimestamp}" /></td>
                 <td>${product.productCategory}</td>
                 	<td>
                   <a href="${updateLink}" class="btn btn-secondary">

@@ -20,8 +20,10 @@ public class AdminLogoutController {
 	@Autowired
 	public AdminLogoutController() {
 	}
-
-	// Write Logout 
+	
+	// 1)回首頁
+	// 2)已完成
+	// 3)Thomas
 	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	public String processActionLogout(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
 		System.out.println("Directing to 首頁");
@@ -29,20 +31,10 @@ public class AdminLogoutController {
 		return "AdminIndex";
 	}
 	
-//	// Write RedirectHomePage
-//	@RequestMapping(path = "/controller.AdminRedirectController", method = RequestMethod.GET)
-//	public String processAction(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
-//		System.out.println("Directing to AdminIndex");
-////		nextPage.addAttribute("userEmail", uEmail);
-//		return "AdminIndex";
-//	}
 	
-//	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
-//	public ModelAndView(@SessionAttribute("userEmail") String uEmail, Model model) {
-//		System.out.println("Directing to AdminIndex");
-//		return "AdminIndex";
-//	}
-	
+	// 1)停用Session，並登出
+	// 2)已完成
+	// 3)Thomas
 	// Closes session when user logs out
 	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	    public ModelAndView loadApp(HttpServletRequest request) {
@@ -50,7 +42,7 @@ public class AdminLogoutController {
 	        SecurityContextHolder.clearContext();
 	        if(session != null) {
 	            session.invalidate();
-	            System.out.println("Session無效");
+	            System.out.println("Invalid Session!!!");
 	        }
 
 	        return new ModelAndView("/AdminLogin");

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -22,6 +21,7 @@ import model.profile.ProfileBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
 
+// Admin 的 Profile 控制器
 @Controller
 @SessionAttributes
 @RequestMapping("/AdminProfile")
@@ -36,13 +36,15 @@ public class AdminProfileController {
 	@Autowired
 	ProfileBeanDAO dao;
 	
+	// 列出所有使用者頁面
 	@GetMapping("/list")
 	public String listProfiles(Model m) {
 		List<ProfileBean> theProfiles = profileService.getProfiles();
 		m.addAttribute("profiles", theProfiles);
 		return "AdminViewAllUser";
 	}
-
+	
+	// 儲存修改後的基本資料
 	@PostMapping("/saveProfile")
 	public String saveProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
 		profileService.saveProfile(theProfile);
@@ -53,18 +55,40 @@ public class AdminProfileController {
 			return "redirect:/AdminProfile/list";
 		}
 	}
-
+	
+	// 秀出修改單一該使用者基本資料的頁面 (根據 userID 指定使用者)
 	@GetMapping("/updateForm")
-	public String showFormForUpdate(@RequestParam("userID") int userID, Map<String, Object> map, Model m) {
+	public String showFormForUpdate(@RequestParam("userID") int userID, Model m) {
 		ProfileBean theProfile = profileService.getProfile(userID);
 		UserBean theUser = userService.selectUser(userID);
 		
-		map.put("profile", theProfile);
-		map.put("user", theUser);
+		m.addAttribute("profile", theProfile);
+		m.addAttribute("user", theUser);
 		return "AdminProfileUpdateForm";
 	}
 	
+	// 指定使用者修改密碼頁面
+	@GetMapping("/updatePasswordForm")
+	public String showFormForPassword(@RequestParam("userID") int userID, Model m) {
+		UserBean theUser = userService.selectUser(userID);
+		
+		m.addAttribute("user", theUser);
+		
+		return "AdminUpdatePasswordForm";
+	}
+	
+	// 儲存修改後的密碼
+	@PostMapping("/savePassword")
+	public String savePassword(@ModelAttribute UserBean updateThisUser, 
+							   @RequestParam(value = "newPwd", required = true) String newPwd, 
+							   @RequestParam(value = "userID",required = true) int userID) {
+		userService.updatePwd(updateThisUser, newPwd);
+		System.out.println("updateThisUser is " + updateThisUser);
+		System.out.println("newPwd is " + newPwd);
+		return "redirect:/AdminProfile/list";
+	}
 
+	// 先不用刪除使用者
 //	@GetMapping("/delete")
 //	public String deleteProfile(@RequestParam("userID") int userID) {
 //		profileService.deleteProfile(userID);
