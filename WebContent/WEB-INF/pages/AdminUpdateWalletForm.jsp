@@ -30,8 +30,9 @@
 <h1>管理員修改電子錢包</h1>
 <p>目前: ${wallet.walletAmount}</p>
 
-<form>
-修改成: <input name="wallet.walletAmount" />
+<form method="POST" action="<c:url value="/AdminProfile/saveWallet" />" >
+<input hidden="true" name="userID" value="${user.userID}" />
+修改成: <input name="newwalletAmount" value="${wallet.walletAmount}" />
 <button type="submit">送出</button>
 </form>
 

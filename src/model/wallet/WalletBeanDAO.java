@@ -103,6 +103,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, update Wallets and return True
 				float oldWalletAmount = existingWallet.getWalletAmount();
 				existingWallet.setWalletAmount(newwalletAmount);
+				session.update(existingWallet);
 				System.out.println("Wallet Amount updated: ID" + existingWallet.getUserID());
 				System.out.println(" Old Amount" + oldWalletAmount + " New Amount" + existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");

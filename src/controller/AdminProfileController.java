@@ -103,6 +103,14 @@ public class AdminProfileController {
 		return "AdminUpdateWalletForm";
 	}
 	
+	@PostMapping("/saveWallet")
+	public String saveWallet(@ModelAttribute WalletBean updateThisWallet, 
+							   @RequestParam(value = "newwalletAmount", required = true) float newwalletAmount, 
+							   @RequestParam(value = "userID",required = true) int userID) {
+		walletService.updateAmount(updateThisWallet, newwalletAmount);
+		return "redirect:/AdminProfile/list";
+	}
+	
 	
 
 	// 先不用刪除使用者
