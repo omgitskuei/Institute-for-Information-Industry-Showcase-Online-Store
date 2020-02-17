@@ -28,16 +28,19 @@ public class WalletBeanService {
 	public WalletBean select(WalletBean thisBean) {
 		return wDAO.selectWallet(thisBean);
 	}
+	public WalletBean selectUser(int userID) {
+		return wDAO.selectWallet(userID);
+	}
 	
 	// Test validity* of Wallet amount changes
 	// Validity means checking user input for proper $ money values
-	public boolean updateAmount(WalletBean updateThisWallet) {
+	public boolean updateAmount(WalletBean updateThisWallet, float newwalletAmount) {
 		System.out.println("BEGIN: WalletBeanService.insert(WalletBean thisWallet)");
 		// Local variables
 		boolean success = false;
 		// Validate Money before updating amount
-		if ( validateMoney(updateThisWallet.getWalletAmount()) ) {
-			wDAO.updateWalletAmount(updateThisWallet, updateThisWallet.getWalletAmount());
+		if ( validateMoney( newwalletAmount) ) {
+			wDAO.updateWalletAmount(updateThisWallet,  newwalletAmount);
 		}
 		System.out.println("FINISH: WalletBeanService.insert(WalletBean thisWallet)");
 		return success;
@@ -73,4 +76,6 @@ public class WalletBeanService {
 		System.out.println("FINISH: WalletBeanService.validateMoney(float)");
 		return success;
 	}
+
+
 }
