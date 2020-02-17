@@ -44,17 +44,15 @@ public class EmailUsers {
 			email.setFrom(this.fromEmail);
 			email.addTo(toEmail);
 			// Email body
-			email.setSubject("FarmVille Account Support: Your password changed");
+			email.setSubject("FarmVille Account Support: Resetting your password");
 			email.setMsg("Hi " + userName + "," + " \r\n"
 					+ " \r\n" 
-					+ "Please enter this code to reset your password." + "\r\n"
-					+ " \r\n"
-					+ code + "\r\n" 
+					+ "Your code for resetting your password: " + code + "\r\n" 
 					+ " \r\n" 
-					+ "Just a reminder:" + "\r\n"
-					+ "Please enter in this reset code " + "\r\n" 
+					+ "If you did not forget your password and request a reset, \r\n contact support at farmvilletaiwan@gmail.com immediately." + "\r\n"
 					+ " \r\n"
-					+ "Thanks," + "\r\n" + "The FarmVille Support Team");
+					+ "Thanks," + "\r\n" 
+					+ "The FarmVille Support Team");
 			// Send
 			email.send();
 			System.out.println("Email to [" + toEmail + "] from [" + this.fromEmail + "] sent!");
@@ -63,6 +61,45 @@ public class EmailUsers {
 			System.out.println("ERROR: TestUtil Email Exception");
 		}
 		System.out.println("FINISH: util.EmailUsers.sendForgotPwdEmail(String, String)");
+	}
+
+	public void sendVerifyEmail(String userEmail, String userName, String code) {
+		// String userName can be a user's Display name, Email, or Full name
+		System.out.println("BEGIN: util.EmailUsers.sendVerifyEmail(String, String, String)");
+		// Local Variables
+		String toEmail = userEmail;
+		try {
+			// Instantiate SimpleEmail object
+			Email email = new SimpleEmail();
+			// Email sending settings
+			email.setHostName(this.fromEmailHostName);
+			email.setSmtpPort(this.fromEmailPort);
+			// Email sender's credentials
+			email.setAuthenticator(new DefaultAuthenticator(this.fromEmail, this.fromEmailPwd));
+			email.setSSLOnConnect(true);
+			// Email TO / FROM
+			email.setFrom(this.fromEmail);
+			email.addTo(toEmail);
+			// Email body
+			email.setSubject("FarmVille Account Support: Email Verification");
+			email.setMsg("Hi " + userName + "," + " \r\n"
+					+ " \r\n"
+					+ "Thank you for signing up for a Farmville account. \r\n" 
+					+ "To complete and confirm your registration, you’ll need to verify your email address. \r\n"
+					+ "To do so, please enter the security code below on the confirmation page:"+ "\r\n" 
+					+ "\r\n" 
+					+ code + "\r\n" 
+					+ " \r\n" 
+					+ "Thanks," + "\r\n" 
+					+ "The FarmVille Support Team");
+			// Send
+			email.send();
+			System.out.println("Email to [" + toEmail + "] from [" + this.fromEmail + "] sent!");
+		} catch (EmailException e) {
+			e.printStackTrace();
+			System.out.println("ERROR: TestUtil Email Exception");
+		}
+		System.out.println("FINISH: util.EmailUsers.sendVerifyEmail(String, String)");
 	}
 
 	public void sendChangePwdEmail(String userEmail, String userName) {
