@@ -32,11 +32,12 @@ public class WalletBean {
 	public WalletBean() {
 	}
 	
-	public WalletBean(int walletID) {
-		this.walletID = walletID;
+	public WalletBean(int userID) {
+		this.userID = userID;
+		this.walletAmount = 0;
 	}
 	
-	public WalletBean(int walletID, int userID, float walletAmount) {
+	public WalletBean(int userID, float walletAmount) {
 		this.userID = userID;
 		this.walletAmount = walletAmount;
 	}
@@ -54,6 +55,7 @@ public class WalletBean {
 		this.walletID = walletID;
 	}
 
+	@Column(name = "userID")
 	public int getUserID() {
 		return userID;
 	}

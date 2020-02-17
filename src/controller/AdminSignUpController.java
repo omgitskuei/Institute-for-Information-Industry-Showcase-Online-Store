@@ -137,6 +137,7 @@ public class AdminSignUpController {
 					// -- Wallet
 					System.out.println("Creating new wallet for user id: "+newAdminID);
 					wService.insert(new WalletBean(newAdminID, 0));
+					// -- Profile
 					System.out.println("Creating new profile for user id: "+newAdminID);
 					pService.saveProfile(new ProfileBean(newAdminID, new GetDateOrTime().generateDate(), "0000-000-000", "Taiwan", 1));
 					
