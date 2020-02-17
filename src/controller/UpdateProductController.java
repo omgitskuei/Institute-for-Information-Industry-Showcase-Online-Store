@@ -32,7 +32,7 @@ public class UpdateProductController {
 	public String listProducts(Model m) {
 		List<ProductBean> theProduct = productService.selectAll();
 		m.addAttribute("product", theProduct);
-		return "AdminViewAllUser";
+		return "AdminInventory";
 	}
 
 	@PostMapping("/saveProduct")
