@@ -73,7 +73,7 @@ public class AdminSignUpController {
 
 				System.out.println("AUTHENTICATED: Directing to AdminLoginConfirm");
 				// Make code
-				GetCode genCode = new GetCode(10, true, false, false);
+				GetCode genCode = new GetCode(8, true, false, false);
 				verificationCode = genCode.generateCode();
 				// Make code available on next page
 				nextPage.addAttribute("verificationCode", verificationCode);
