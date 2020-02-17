@@ -24,13 +24,13 @@
 	<c:url var="updatePasswordLink" value="/AdminProfile/updatePasswordForm">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
+	<c:url var="updateWalletLink" value="/AdminProfile/updateWalletForm">
+		<c:param name="userID" value="${user.userID}" />
+	</c:url>
 	<a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${updateWalletLink}">更改電子錢包</a>
 	
-	
-	<a>使用者基本資料</a>
-	<a>使用者基本資料</a>
-	<a>使用者基本資料</a>
 	</div>
 
 	<form:form method="POST" action="saveProfile" modelAttribute="profile">

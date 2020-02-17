@@ -28,6 +28,9 @@ public class WalletBeanService {
 	public WalletBean select(WalletBean thisBean) {
 		return wDAO.selectWallet(thisBean);
 	}
+	public WalletBean selectUser(int userID) {
+		return wDAO.selectWallet(userID);
+	}
 	
 	// Test validity* of Wallet amount changes
 	// Validity means checking user input for proper $ money values
@@ -73,4 +76,6 @@ public class WalletBeanService {
 		System.out.println("FINISH: WalletBeanService.validateMoney(float)");
 		return success;
 	}
+
+
 }

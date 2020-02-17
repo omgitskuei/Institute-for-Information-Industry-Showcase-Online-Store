@@ -20,6 +20,8 @@ import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
+import model.wallet.WalletBean;
+import model.wallet.WalletBeanService;
 
 // Admin 的 Profile 控制器
 @Controller
@@ -35,6 +37,9 @@ public class AdminProfileController {
 
 	@Autowired
 	ProfileBeanDAO dao;
+	
+	@Autowired
+	private WalletBeanService walletService;
 	
 	// 列出所有使用者頁面
 	@GetMapping("/list")
@@ -83,10 +88,22 @@ public class AdminProfileController {
 							   @RequestParam(value = "newPwd", required = true) String newPwd, 
 							   @RequestParam(value = "userID",required = true) int userID) {
 		userService.updatePwd(updateThisUser, newPwd);
-		System.out.println("updateThisUser is " + updateThisUser);
-		System.out.println("newPwd is " + newPwd);
 		return "redirect:/AdminProfile/list";
 	}
+	
+	// 秀出修改電子錢包表格
+	@GetMapping("/updateWalletForm")
+	public String showFormForWallet(@RequestParam("userID") int userID, Model m) {
+		WalletBean theUserWallet = walletService.selectUser(userID);
+		UserBean theUser = userService.selectUser(userID);
+		
+		m.addAttribute("user", theUser);
+		m.addAttribute("wallet", theUserWallet);
+		
+		return "AdminUpdateWalletForm";
+	}
+	
+	
 
 	// 先不用刪除使用者
 //	@GetMapping("/delete")
@@ -94,5 +111,6 @@ public class AdminProfileController {
 //		profileService.deleteProfile(userID);
 //		return "redirect:/AdminProfile/list";
 //	}
+	
 
 }
