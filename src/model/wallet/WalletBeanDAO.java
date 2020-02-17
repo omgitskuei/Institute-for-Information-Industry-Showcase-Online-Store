@@ -28,7 +28,9 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 			// Insert the passed WalletBean
 			session.save(insertThisWallet);
 			System.out.println("WalletBean Inserted:");
-			System.out.println("walletAmount: " + insertThisWallet.getWalletAmount());
+			System.out.println("	walletID: "+ insertThisWallet.getWalletID());
+			System.out.println("	wserID: "+ insertThisWallet.getUserID());
+			System.out.println("	walletAmount: " + insertThisWallet.getWalletAmount());
 			System.out.println("FINISH: WalletBeanDAO.insertWallet(WalletBean insertThisWallet)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;

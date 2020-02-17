@@ -31,7 +31,7 @@ GO
 -- (3.c.)OneToOne
 CREATE table WalletsTable(
 walletID int Identity(1,1) primary key not null,
-userID int Foreign Key REFERENCES UsersTable(userID) Not NULL,
+userID int Not NULL,
 walletAmount decimal(18, 2) DEFAULT '0.0' Not NULL,	-- Defaults to $0.0 in Wallet
 )
 GO

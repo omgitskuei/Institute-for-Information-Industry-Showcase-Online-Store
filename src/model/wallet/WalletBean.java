@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -19,12 +20,10 @@ import model.user.UserBean;
 @Table(name = "WalletsTable")
 @Component
 public class WalletBean {
-
-	// Variables, matches table columns
+	// Variables
+	private int walletID;	// Not NULL
 	private int userID;		// Not NULL
-	private float walletAmount;		// Not NULL
-//	OneToOne關係目前用不到先關閉
-//	private UserBean userBean;
+	private float walletAmount=0;		// Not NULL
 
 	// Constructors
 	public WalletBean() {
@@ -32,17 +31,28 @@ public class WalletBean {
 	
 	public WalletBean(int userID) {
 		this.userID = userID;
+		this.walletAmount = 0;
 	}
 	
 	public WalletBean(int userID, float walletAmount) {
+		this.userID = userID;
 		this.walletAmount = walletAmount;
 	}
 
 	// Get/Set Methods
 	//@GenericGenerator(name = "generator", parameters = @Parameter(name = "property", value = "UserBean "), strategy = "foreign")
 	@Id
+	@Column(name = "walletID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getWalletID() {
+		return walletID;
+	}
+
+	public void setWalletID(int walletID) {
+		this.walletID = walletID;
+	}
+
 	@Column(name = "userID")
-	//@GeneratedValue(generator = "generator")
 	public int getUserID() {
 		return userID;
 	}
