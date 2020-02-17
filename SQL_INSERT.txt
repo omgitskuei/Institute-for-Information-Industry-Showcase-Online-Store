@@ -25,16 +25,20 @@ VALUES (1,'What is my dog''s name?','nodog','omgitsk',0),
 	   (3,'my word','pineapples','MuchWowDoge',1)
 go
 
-INSERT INTO ProductsTable(ProductName,ProductPrice,ProductStock,ProductDescription,ProductImg,ProductTimestamp,ProductCategory)
-VALUES ('牛蕃茄',25,8,'新鮮牛蕃茄',0000000000000,'2020-01-01','蕃茄'),
-	   ('朝天椒',67,30,'超辣朝天椒',0110101010101,'2020-01-15','辣椒'),
-	   ('玉米筍',80,20,'甘甜玉米筍',001111111111,'2020-01-28','玉米')
+INSERT INTO ProductsTable(ProductName,ProductPrice,ProductStock,ProductDescription,ProductTimestamp,ProductCategory,ProductImg)
+SELECT '牛蕃茄',25,8,'新鮮牛蕃茄',(SELECT GETDATE() AS CurrentDateTime),'蕃茄',BulkColumn from Openrowset( Bulk 'C:\Users\User\Pictures\Saved Pictures\001.jpg', Single_Blob)as EmployeePicture
+
+INSERT INTO ProductsTable(ProductName,ProductPrice,ProductStock,ProductDescription,ProductTimestamp,ProductCategory,ProductImg)
+SELECT '朝天椒',67,30,'超辣朝天椒',(SELECT GETDATE() AS CurrentDateTime),'辣椒',BulkColumn from Openrowset( Bulk 'C:\Users\User\Pictures\Saved Pictures\002.jpg', Single_Blob)as EmployeePicture
+
+INSERT INTO ProductsTable(ProductName,ProductPrice,ProductStock,ProductDescription,ProductTimestamp,ProductCategory,ProductImg)
+SELECT '玉米筍',80,20,'甘甜玉米筍',(SELECT GETDATE() AS CurrentDateTime),'玉米',BulkColumn from Openrowset( Bulk 'C:\Users\User\Pictures\Saved Pictures\003.jpg', Single_Blob)as EmployeePicture
 go
 
 INSERT INTO OrdersTable(UserID,Total,MailingAddress,MailingPhone,OrderTime)
-VALUES (2,50,'Taichung','0983-221-131','2020-01-2'),
-	   (2,172,'Tainan','0910-123-456','2020-01-15'),
-	   (3,331,'Kaohsiung','0977-234-450','2020-01-29')
+VALUES (2,92,'Taichung','0983-221-131','2020-01-2'),
+	   (2,571,'Tainan','0910-123-456','2020-01-15'),
+	   (3,1470,'Kaohsiung','0977-234-450','2020-01-29')
 go
 
 INSERT INTO OrderDetailsTable(OrderID,ProductID,ProductName,ProductCount,ProductPrice)
