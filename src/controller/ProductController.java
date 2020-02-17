@@ -30,10 +30,12 @@ import model.product.ProductBean;
 import model.product.ProductBeanService;
 
 
-
+//1)寫入、讀取 產品資料
+//2)未完成
+//3)Aming
 
 @Controller
-@SessionAttributes(names = {"name", "price","stock","description","timestamp","category", "errors"})
+@SessionAttributes(names = {"name", "price","stock","description","image","timestamp","category", "errors"})
 public class ProductController {
 	
 	@Autowired
