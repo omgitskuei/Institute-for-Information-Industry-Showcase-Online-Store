@@ -53,7 +53,7 @@ ProductID int Identity(1,1) Primary Key Not NULL,
 ProductName NVarchar(50)  Not NULL,
 ProductPrice decimal(18, 2) Not NULL,
 ProductStock int Not NULL,
-ProductDescription NVarchar(50),
+ProductDescription NVarchar(MAX),
 ProductImg varbinary(MAX) Not NULL,
 ProductTimestamp Date Not NULL,
 ProductCategory NVarchar(50) Not NULL
