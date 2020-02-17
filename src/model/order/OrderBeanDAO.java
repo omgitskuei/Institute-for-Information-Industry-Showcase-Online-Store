@@ -32,7 +32,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		if (insertThisOrder != null) {
 			System.out.println("insertThisOrder!=null");
 
-			session.save(insertThisOrder);
+			session.saveOrUpdate(insertThisOrder);
 			System.out.println("OrderBean inserted:");
 			System.out.println("orderTotal:" + insertThisOrder.getTotal());
 			System.out.println("orderMailingAddress:" + insertThisOrder.getMailingAddress());

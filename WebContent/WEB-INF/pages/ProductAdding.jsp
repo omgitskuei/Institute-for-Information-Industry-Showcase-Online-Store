@@ -53,7 +53,7 @@
 			</tr>
 
 			<tr>
-				<td>確認</td>
+				<td></td>
 				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
 			</tr>
 		</table>
