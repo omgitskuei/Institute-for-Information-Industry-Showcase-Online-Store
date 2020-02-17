@@ -211,7 +211,7 @@
             <h4 class="display-4">
               <i class="fas fa-pencil-alt"></i> 6
             </h4>
-            <a href=<jstl:url value="/inventories"/> class="btn btn-outline-light btn-sm">檢視</a>
+            <a href=<jstl:url value="/AdminProduct/inventories"/> class="btn btn-outline-light btn-sm">檢視</a>
           </div>
         </div>
 

@@ -38,7 +38,7 @@ public class UpdateProductController {
 	@PostMapping("/saveProduct")
 	public String saveProduct(@ModelAttribute("product") @Valid ProductBean theProduct) {
 		productService.saveProduct(theProduct);
-		return "redirect:/AdminProduct/list";
+		return "redirect:/AdminProduct/inventories";
 	}
 
 	@GetMapping("/updateForm")
