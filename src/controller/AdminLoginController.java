@@ -129,7 +129,7 @@ public class AdminLoginController {
 	}
 
 	// 1)製造Cookie
-	// 2)I don't know the status of this method now...:(
+	// 2)寫完了，唯一問題為這麽確保加密用的AssociatedData，但又不寫死（暫時是"OMGiloveyou"）
 	// 3)Chris
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(

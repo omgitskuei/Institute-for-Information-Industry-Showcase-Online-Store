@@ -39,10 +39,10 @@ public class WalletBean {
 	}
 
 	// Get/Set Methods
-	@GenericGenerator(name = "generator", parameters = @Parameter(name = "property", value = "UserBean "), strategy = "foreign")
+	//@GenericGenerator(name = "generator", parameters = @Parameter(name = "property", value = "UserBean "), strategy = "foreign")
 	@Id
 	@Column(name = "userID")
-	@GeneratedValue(generator = "generator")
+	//@GeneratedValue(generator = "generator")
 	public int getUserID() {
 		return userID;
 	}
