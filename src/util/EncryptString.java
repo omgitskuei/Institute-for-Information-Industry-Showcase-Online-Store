@@ -94,11 +94,22 @@ public class EncryptString {
 		String plainText = util.input;
 
 		EncryptString util1 = new EncryptString();
-		Aead aead = util1.newCleartextAEADKeyset();
+		// Refreshes the encryption keys in keyset.json.
+		// WARNING: information encrypted with OLD key cannot be decrypted with new key
+		//util1.newCleartextAEADKeyset();
+		
+		EncodeHexString s = new EncodeHexString();
+		
+		
 		
 		// encrypt
 		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
+		String hexstring = s.byteArrayToHexString(cipher);
+		
+		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key and fail decrypt
+		
 		// decrypt
-		String decrypted = util1.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+		byte[] bytearray = s.HexStringToByteArray(hexstring);
+		String decrypted = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
 	}
 }

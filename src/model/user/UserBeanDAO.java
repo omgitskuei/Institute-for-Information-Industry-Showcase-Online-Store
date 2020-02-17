@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import model.profile.ProfileBean;
+import util.EncodeHexString;
+import util.EncryptString;
 
 @Repository
 public class UserBeanDAO implements UserBeanDAOInterface {
@@ -31,11 +33,22 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		// Test if passed UserBean is not empty
 		if (insertThisUser != null) {
 			System.out.println("insertThisUser != null");
+			// encrypt
+//			EncryptString util1 = new EncryptString();
+//			EncodeHexString hexConvert = new EncodeHexString();
+//			byte[] cipher = util1.encryptGoogleTinkAEAD(insertThisUser.getUserEmail(), "OMGiloveyou");
+//			insertThisUser.setUserEmail(hexConvert.byteArrayToHexString(cipher));
+//			
+//			cipher = util1.encryptGoogleTinkAEAD(insertThisUser.getUserPwd(), "OMGiloveyou");
+//			insertThisUser.setUserPwd((hexConvert.byteArrayToHexString(cipher)));
+			
 			// Insert the passed UserBean
 			session.save(insertThisUser);
 			System.out.println("UserBean Inserted:");
-			System.out.println("userEmail: " + insertThisUser.getUserEmail());
-			System.out.println("userPwd: " + insertThisUser.getUserPwd());
+			System.out.println("	userID"+insertThisUser.getUserID());
+			System.out.println("	userEmail: " + insertThisUser.getUserEmail());
+			System.out.println("	userPwd: " + insertThisUser.getUserPwd());
+			System.out.println("	userAdmin: " + insertThisUser.getAdmin());
 			System.out.println("FINISH: UserBeanDAO.insertUser(UserBean insertThisUser)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
@@ -55,7 +68,7 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		try {
 			if (beanWithEmailAndPwd != null) {
 				// Try to find selectThisUser
-				System.out.println("QUERY:");
+				System.out.println("About to QUERY:");
 				System.out.println("UserID:"+beanWithEmailAndPwd.getUserID());
 				System.out.println("UserEmail:"+beanWithEmailAndPwd.getUserEmail());
 				System.out.println("UserPwd:"+beanWithEmailAndPwd.getUserPwd());
@@ -66,11 +79,19 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 				Query q = session.createQuery(hqlString);
 				q.setParameter("thisEmail", beanWithEmailAndPwd.getUserEmail());
 				q.setParameter("thisPwd", beanWithEmailAndPwd.getUserPwd());
+				
+				// decrypt
+//				EncryptString util1 = new EncryptString();
+//				EncodeHexString hexConvert = new EncodeHexString();
+//				byte[] wow = hexConvert.HexStringToByteArray(this.userEmail);
+//				userEmail = util1.decryptGoogleTinkAEAD(wow, "OMGiloveyou");
+				
+				
 				UserBean existingUser = (UserBean) q.uniqueResult();
 				
 				//UserBean existingUser = session.get(UserBean.class, selectThisUser.getUserEmail());
 				if (existingUser != null) {
-					System.out.println("Query RESULTS:");
+					System.out.println("Select User Query RESULTS:");
 					System.out.println("UserID:"+existingUser.getUserID());
 					System.out.println("UserEmail:"+existingUser.getUserEmail());
 					System.out.println("UserPwd:"+existingUser.getUserPwd());

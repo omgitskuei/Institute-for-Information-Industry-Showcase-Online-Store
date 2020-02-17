@@ -25,29 +25,21 @@ public class ProfileBean {
 
 	// Variables, matches table columns
 	private int userID;		// Not NULL
-	
 	private String profileFullName;
-	
-	@NotNull(message = "請輸入日期 yyyy-MM-dd ")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@NotNull(message = "請輸入日期 yyyy-MM-dd ")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date profileJoinDate;		// Not Null
-    
-    @NotNull(message = "請輸入日期 yyyy-MM-dd.")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @NotNull(message = "請輸入日期 yyyy-MM-dd.")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date profileBirthdate;
-	
     private String profileSex;
-	
-    @NotNull(message = "請輸入電話.")
+//    @NotNull(message = "請輸入電話.")
     private String profilePhone;		// Not NULL
-	
-    @NotNull(message = "請輸入地址.")
+//    @NotNull(message = "請輸入地址.")
     private String profileAddress;		// Not NULL
-	
-    @NotNull(message = "請輸入 VIP: 0 或 1")
+//    @NotNull(message = "請輸入 VIP: 0 或 1")
     private int profileVIP=0;		// Not NULL
-
-	private UserBean userBean;
+//	private UserBean userBean;
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
 
@@ -85,7 +77,7 @@ public class ProfileBean {
 	// Getter / Setters
 	@Id
 	@Column(name = "userID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)        // auto-generated BUT ALSO FK? IMPOSSIBLE
 	public int getUserID() {
 		return userID;
 	}
@@ -157,15 +149,15 @@ public class ProfileBean {
 		this.profileVIP = profileVIP;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	public UserBean getUserBean() {
+//		return userBean;
+//	}
+//
+//	public void setUserBean(UserBean userBean) {
+//		this.userBean = userBean;
+//	}
 
 	@Override
 	public String toString() {

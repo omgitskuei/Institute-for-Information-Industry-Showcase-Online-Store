@@ -9,6 +9,11 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.google.crypto.tink.Aead;
+
+import util.EncodeHexString;
+import util.EncryptString;
+
 @Entity
 @Table(name = "UsersTable")
 @Component

@@ -25,10 +25,10 @@ public class SettingBeanService {
 		
 		String displayName = insertThisBean.getSettingDisplayName();
 		// Validate input values
-		if (validateDisplayName(displayName)) {
+		//if (validateDisplayName(displayName)) {	// there are Major problems with validateDisplayName(String)
 			success = true;
 			sDAO.insertSetting(insertThisBean);
-		}
+		//}
 		System.out.println("FINISH: SettingBeanService.insert(SettingBean)");
 		return success;
 	}
@@ -40,15 +40,14 @@ public class SettingBeanService {
 		// Local variables
 		boolean success = false;
 		String newDisplayName = updateThisBean.getSettingDisplayName();
-		// Validate input values
-		if (validateDisplayName(newDisplayName)) {
-			System.out.println("Valid Display Name");
-			// See if bean exist before updating
-			SettingBean result = sDAO.selectSetting(updateThisBean);
-			if (result != null) {
-				sDAO.updateSettingDisplayName(result, newDisplayName);
-				success = true;
-			}
+		// find bean to update
+		SettingBean result = sDAO.selectSetting(updateThisBean);
+		if (result != null) {
+			sDAO.updateSettingDisplayName(result, newDisplayName);
+			System.out.println("	SettingBeanService.updateDisplayName SUCCESSFUL updated Display Name");
+			success = true;
+		} else {
+			System.out.println("	ERROR: updateDisplayName(settingBean) CANT FIND SETTING BEAN");
 		}
 		System.out.println("FINISH: SettingBeanService.updateDisplayName(SettingBean)");
 		return success;
@@ -70,29 +69,37 @@ public class SettingBeanService {
 	}
 	
 	public boolean updateSecuityA(SettingBean updateThisBean) {
-		System.out.println("BEGIN: SettingBeanService.updateSecuityA(SettingBean)");
+		System.out.println("	BEGIN: SettingBeanService.updateSecuityA(SettingBean)");
 		// Local variables
 		boolean success = false;
 		
 		String newSecurityA = updateThisBean.getSettingSecurityA();
 		SettingBean result = sDAO.selectSetting(updateThisBean);
 		if (result != null) {
+			System.out.println("		found bean to update");
 			sDAO.updateSettingSecurityA(result, newSecurityA);
+			System.out.println("		updated bean's SecuityA to"+newSecurityA);
 			success = true;
+		} else {
+			System.out.println("		bean not found");
 		}
-		System.out.println("FINISH: SettingBeanService.updateSecuityA(SettingBean)");
+		System.out.println("	FINISH: SettingBeanService.updateSecuityA(SettingBean)");
 		return success;
 	}
 	
 	public boolean updateAllowMeta(SettingBean thisBean) {
-		System.out.println("BEGIN: SettingBeanService.updateAllowMeta(SettingBean)");
+		System.out.println("	BEGIN: SettingBeanService.updateAllowMeta(SettingBean)");
 		boolean success = false;
 		// see if thisBean exists in DB
 		SettingBean result = sDAO.selectSetting(thisBean);
 		if (result != null) {
+			System.out.println("		found bean to update");
 			sDAO.updateSettingAllowMetadata(result, thisBean.getSettingAllowMetadata());
+			System.out.println("		updated bean's allowMeta to"+thisBean.getSettingAllowMetadata());
+		} else {
+			System.out.println("bean not found");
 		}
-		System.out.println("FINISH: SettingBeanService.updateAllowMeta(SettingBean)");
+		System.out.println("	FINISH: SettingBeanService.updateAllowMeta(SettingBean)");
 		return success;
 	}
 

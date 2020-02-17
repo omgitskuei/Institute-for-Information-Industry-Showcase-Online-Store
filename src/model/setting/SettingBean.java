@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "SettingBean")
+@Table(name = "SettingsTable")            // THIS IS TABLE NAME
 @Component
 public class SettingBean {
 	// Variable

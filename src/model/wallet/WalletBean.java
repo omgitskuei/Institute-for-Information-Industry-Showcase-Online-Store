@@ -24,7 +24,7 @@ public class WalletBean {
 	private int walletID;	// Not NULL
 	private int userID;		// Not NULL
 	private float walletAmount=0;		// Not NULL
-	private UserBean userBean;
+//	private UserBean userBean;
 
 	// Constructors
 	public WalletBean() {
@@ -71,14 +71,14 @@ public class WalletBean {
 		this.walletAmount = walletAmount;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public UserBean getUserBean() {
-		return getUserBean();
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	public UserBean getUserBean() {
+//		return getUserBean();
+//	}
+//
+//	public void setUserBean(UserBean userBean) {
+//		this.userBean = userBean;
+//	}
 
 }
