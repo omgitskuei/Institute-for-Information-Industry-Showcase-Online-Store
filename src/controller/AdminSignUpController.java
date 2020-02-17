@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionAttributeStore;
+
+import com.google.crypto.tink.Aead;
 
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
@@ -20,6 +23,9 @@ import model.user.UserBeanService;
 import model.wallet.WalletBean;
 import model.wallet.WalletBeanService;
 import util.EmailUsers;
+import util.EncodeHexString;
+import util.EncryptString;
+import util.GetCode;
 import util.GetDateOrTime;
 
 @Controller
@@ -31,7 +37,8 @@ public class AdminSignUpController {
 	private WalletBeanService wService;
 	private ProfileBeanService pService;
 	private HttpServletResponse response;
-
+	private String verificationCode = "";
+	
 	@Autowired
 	public AdminSignUpController(UserBeanService uService, SettingBeanService sService, WalletBeanService wService, ProfileBeanService pService, HttpServletResponse response) {
 		this.uService = uService;
@@ -61,6 +68,15 @@ public class AdminSignUpController {
 				nextPage.addAttribute("nPwd", nPwd);
 
 				System.out.println("AUTHENTICATED: Directing to AdminLoginConfirm");
+				// Make code
+				GetCode genCode = new GetCode(10, true, false, false);
+				verificationCode = genCode.generateCode();
+				// Make code available on next page
+				nextPage.addAttribute("verificationCode", verificationCode);
+				// Send 
+				EmailUsers emailSender = new EmailUsers();
+				emailSender.sendVerifyEmail(nEmail, nEmail, verificationCode);
+				// 
 				return "AdminLoginConfirm";
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -80,8 +96,9 @@ public class AdminSignUpController {
 		System.out.println("BEGIN /controller.AdminSignUpConfirmController");
 		System.out.println("User input: ");
 		System.out.println("confirmCode = " + confirmCode);
-		System.out.println("");
-		if (confirmCode.equals("344pp1")) {
+		System.out.println("verificationCode = "+verificationCode);
+		if (confirmCode.equals(verificationCode)) {
+			System.out.println("the 2 codes match!");
 			// Create new bean with passed values, in order to use Service
 			UserBean bean = new UserBean();
 			bean.setUserEmail(nEmail);
@@ -95,26 +112,46 @@ public class AdminSignUpController {
 					// Match not found
 					System.out.println("User not found, creating new user");
 					
+//					EncryptString util1 = new EncryptString();
+//					Aead aead = util1.newCleartextAEADKeyset();
+					// encrypt
+//					byte[] cipherPwd = util1.encryptGoogleTinkAEAD(nPwd, "OMGiloveyou");
+//					EncodeHexString hexConvert = new EncodeHexString();
+//					nPwd = hexConvert.byteArrayToHexString(cipherPwd);
+					
 					// Create user, profile, setting, wallet beans and inserting beans
+					// -- User
 					uService.insertAdmin(nEmail, nPwd);
+					// -- Setting
 					int newAdminID = uService.selectUserIDByEmail(nEmail);
-					System.out.println("Creating new setting for user id"+newAdminID);
-					sService.insert(new SettingBean(newAdminID, true));
-					System.out.println("Creating new wallet for user id"+newAdminID);
+					System.out.println("Creating new setting for user id: "+newAdminID);
+					SettingBean bean1 = new SettingBean();
+					bean1.setUserID(newAdminID);
+					bean1.setSettingDisplayName(nEmail);
+					bean1.setSettingAllowMetadata(true);
+					bean1.setSettingDisplayName(nEmail);
+					bean1.setSettingSecurityQ("");
+					bean1.setSettingSecurityA("");
+					System.out.println("NEW USER ID = "+ uService.selectUser(newAdminID).getUserID());
+					sService.insert(bean1);
+					// -- Wallet
+					System.out.println("Creating new wallet for user id: "+newAdminID);
 					wService.insert(new WalletBean(newAdminID, 0));
-					System.out.println("Creating new profile for user id"+newAdminID);
+					System.out.println("Creating new profile for user id: "+newAdminID);
 					pService.saveProfile(new ProfileBean(newAdminID, new GetDateOrTime().generateDate(), "0000-000-000", "Taiwan", 1));
 					
-					// Send email
-					System.out.println("Sending welcome email");
-					new EmailUsers().sendWelcomeEmail(nEmail, nEmail); // sendWelcomeEmail()'s userName can be Email, Display Name, or Full Name
 					
 					// Send info to model nextPage
 					System.out.println("model nextPage addAttribute");
 					nextPage.addAttribute("userEmail", nEmail);
 					nextPage.addAttribute("loggedInUserEmail", nEmail);
 					nextPage.addAttribute("loggedInUserPwd", nPwd);
-
+					
+					// Send email
+					System.out.println("Sending welcome email");
+					new EmailUsers().sendWelcomeEmail(nEmail, nEmail); // sendWelcomeEmail()'s userName can be Email, Display Name, or Full Name
+					
+					
 					return "AdminIndex";
 				} else {
 					System.out.println("User already exists in the database, do not create new User");
