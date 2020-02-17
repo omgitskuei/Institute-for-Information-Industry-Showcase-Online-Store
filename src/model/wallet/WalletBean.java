@@ -21,28 +21,39 @@ import model.user.UserBean;
 public class WalletBean {
 
 	// Variables, matches table columns
+	private int walletID;
 	private int userID;		// Not NULL
 	private float walletAmount;		// Not NULL
 //	OneToOne關係目前用不到先關閉
 //	private UserBean userBean;
-
+	
+	
 	// Constructors
 	public WalletBean() {
 	}
 	
-	public WalletBean(int userID) {
-		this.userID = userID;
+	public WalletBean(int walletID) {
+		this.walletID = walletID;
 	}
 	
-	public WalletBean(int userID, float walletAmount) {
+	public WalletBean(int walletID, int userID, float walletAmount) {
+		this.userID = userID;
 		this.walletAmount = walletAmount;
 	}
 
 	// Get/Set Methods
 	//@GenericGenerator(name = "generator", parameters = @Parameter(name = "property", value = "UserBean "), strategy = "foreign")
 	@Id
-	@Column(name = "userID")
+	@Column(name = "walletID")
 	//@GeneratedValue(generator = "generator")
+	public int getWalletID() {
+		return walletID;
+	}
+
+	public void setWalletID(int walletID) {
+		this.walletID = walletID;
+	}
+
 	public int getUserID() {
 		return userID;
 	}
