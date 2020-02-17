@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import model.orderDetails.OrderDetailsBean;
@@ -93,6 +94,7 @@ public class OrderBean {
 	}
 
 	@Column(name = "OrderTime")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date getOrderTime() {
 		return orderTime;
 	}
