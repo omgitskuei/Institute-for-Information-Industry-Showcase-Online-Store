@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.crypto.tink.Aead;
 
 import model.profile.ProfileBeanService;
 import model.setting.SettingBeanService;
