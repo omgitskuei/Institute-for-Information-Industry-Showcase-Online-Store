@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.profile.ProfileBean;
+
 @Repository
 public class WalletBeanDAO implements WalletBeanDAOInterface {
 
@@ -84,23 +86,8 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 
 		Session session = sessionFactory.getCurrentSession();
 
-		String hqlString = "from WalletBean where userID=:thisUserID";
-		Query q = session.createQuery(hqlString);
-		q.setParameter("thisUserID", userID);
-
-		WalletBean existingWallet = (WalletBean) q.uniqueResult();
-
-		if (existingWallet != null) {
-			// If found, return the result WalletBean existingWallet
-			System.out.println(
-					"Wallet FOUND: userID" + existingWallet.getUserID() + " Amount" + existingWallet.getWalletAmount());
-			System.out.println("FINISH: WalletBeanDAO.selectWallet(WalletBean selectThisWallet)");
-			return existingWallet;
-		} else {
-			System.out.println("ERROR: Select WalletBean FAILED; WalletBean existingWallet == null.");
-			System.out.println("FINISH: WalletBeanDAO.selectWallet(int userID)");
-			return null;
-		}
+		WalletBean theWallet = session.get(WalletBean.class, userID);
+		return theWallet;
 	}
 
 	@Override
@@ -116,6 +103,7 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 				// If found, update Wallets and return True
 				float oldWalletAmount = existingWallet.getWalletAmount();
 				existingWallet.setWalletAmount(newwalletAmount);
+				session.update(existingWallet);
 				System.out.println("Wallet Amount updated: ID" + existingWallet.getUserID());
 				System.out.println(" Old Amount" + oldWalletAmount + " New Amount" + existingWallet.getWalletAmount());
 				System.out.println("FINISH: WalletBeanDAO.updateWallet(WalletBean updateThisWallet)");

@@ -17,19 +17,30 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	private SessionFactory sessionFactory;
 
 	@Override
+	public void saveProfile(ProfileBean theProfile) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.save(theProfile);
+		System.out.println("ProfileBean Inserted:");
+		System.out.println("	address"+theProfile.getProfileAddress());
+		System.out.println("	bday"+theProfile.getProfileBirthdate());
+		System.out.println("	fullname"+theProfile.getProfileFullName());
+		System.out.println("	joinDate"+theProfile.getProfileJoinDate());
+		System.out.println("	phone"+theProfile.getProfilePhone());
+		System.out.println("	sex"+theProfile.getProfileSex());
+		System.out.println("	vip"+theProfile.getProfileVIP());
+		//System.out.println("	userBean"+theProfile.getUserBean());
+		System.out.println("	userID"+theProfile.getUserID());
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
 	public List<ProfileBean> getProfiles() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("From ProfileBean");
 		List<ProfileBean> results = (List<ProfileBean>) query.list();
 		return results;
 	}
-
-	@Override
-	public void saveProfile(ProfileBean theProfile) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		currentSession.update(theProfile);
-	}
-
+	
 	@Override
 	public ProfileBean getProfile(int userID) {
 		Session currentSession = sessionFactory.getCurrentSession();

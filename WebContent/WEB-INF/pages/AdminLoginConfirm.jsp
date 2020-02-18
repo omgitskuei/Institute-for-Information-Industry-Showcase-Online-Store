@@ -61,14 +61,12 @@
                 <h4>使用者注冊</h4>
             </div>
             <div class="card-body">
-           <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminSignUpConfirmController" />" method="post" id="myForm">
+           <form class="form" name="loginForm" action="<jstl:url value="/adminSignUpStep2" />" method="post" id="myForm">
             <div class="form-group">
-            <span id="nEmail">${nEmail}</span><br>
-            <span id="nPwd">${nPwd}</span>
-            <div>Please enter your administrator code below.</div>
-                  <label for="confirmCode">Administrator Code</label>
-                  <input type="text" class="form-control" name="nEmail" value="${nEmail}">
-                  <input type="text" class="form-control" name="nPwd" value="${nPwd}">
+            <span id="nEmail">${nEmail}</span> | <span id="nPwd">${nPwd}</span>
+            <br>
+                  <label for="confirmCode"><b>Administrator Code</b></label>
+                  <div>Please enter your administrator code below.</div>
                   <input type="text" class="form-control" name="confirmCode" value="">
                   <span id="codeErrorSpan">${errors.codeError}</span>
                 </div>

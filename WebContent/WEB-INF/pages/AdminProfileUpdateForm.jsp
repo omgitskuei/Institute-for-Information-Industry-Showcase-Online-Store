@@ -11,11 +11,17 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者編輯使用資訊</title>
+<style>
+.errMsgJS {
+  color: red;
+}
+</style>
 </head>
 <body>
 	<!-- NAVBAR -->
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
-
+	
+	<div class="container">
 	<h1>管理者編輯使用資訊</h1>
 	<div>
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
@@ -24,71 +30,69 @@
 	<c:url var="updatePasswordLink" value="/AdminProfile/updatePasswordForm">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
+	<c:url var="updateWalletLink" value="/AdminProfile/updateWalletForm">
+		<c:param name="userID" value="${user.userID}" />
+	</c:url>
 	<a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${updateWalletLink}">更改電子錢包</a>
 	
-	
-	<a>使用者基本資料</a>
-	<a>使用者基本資料</a>
-	<a>使用者基本資料</a>
 	</div>
 
 	<form:form method="POST" action="saveProfile" modelAttribute="profile">
-		<table>
-			<tr>
-				<td></td>
-				<td><form:hidden path="userID" /></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>姓名 :</td>
-				<td><form:input path="profileFullName" /></td>
-
-			</tr>
-			<tr>
-				<td>加入日期 :</td>
-				<td><form:input id="joinDateInput" onchange="joinDateCheck()"
-						path="profileJoinDate" /></td>
-				<td><form:errors path="profileJoinDate" /></td>
-				<td><span id="joinDateErrMsg"></span></td>
-			</tr>
-			<tr>
-				<td>生日 :</td>
-				<td><form:input id="birthdayInput" onchange="birthdayCheck()"
-						path="profileBirthdate" /></td>
-				<td><form:errors path="profileBirthdate" /></td>
-				<td><span id="birthdayErrMsg"></span></td>
-			</tr>
-			<tr>
-				<td>性別 :</td>
-				<td><form:input path="profileSex" /></td>
-			</tr>
-			<tr>
-				<td>電話 :</td>
-				<td><form:input id="phoneInput" path="profilePhone" /></td>
-				<td><form:errors path="profilePhone" /></td>
-				<td><span id="phoneErrMsg"></span></td>
-			</tr>
-			<tr>
-				<td>地址 :</td>
-				<td><form:input onblur="addressCheck()" path="profileAddress" /></td>
-				<td><form:errors path="profileAddress" /></td>
-			</tr>
-			<tr>
-				<td>VIP Level :</td>
-				<td><form:input onblur="VIPCheck()" path="profileVIP" /></td>
-				<td><form:errors path="profileVIP" /></td>
-			</tr>
+		<div class="form-group">
+		<form:hidden path="userID" />
+		</div>
 		
-
-			<tr>
-				<td>確認</td>
-				<td><form:button cssClass="btn btn-info" type="submit"
-						value="儲存">儲存</form:button></td>
-			</tr>
-		</table>
+		<div class="form-group">
+		<label>姓名</label>
+		<form:input cssClass="form-control" path="profileFullName" />
+		</div>
+		
+		<div class="form-group">
+		<label>加入日期</label>
+		<form:input id="joinDateInput" onkeyup="joinDateCheck()" cssClass="form-control" path="profileJoinDate" />
+		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
+		<form:errors class="errMsgJS" path="profileJoinDate" />
+		</div>
+		
+		<div class="form-group">
+		<label>生日</label>
+		<form:input id="birthdayInput" onkeyup="birthdayCheck()" cssClass="form-control" path="profileBirthdate" />
+		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
+		<form:errors class="errMsgJS" path="profileBirthdate" />
+		</div>
+		
+		<div class="form-group">
+		<label>生日</label>
+		<form:input cssClass="form-control" path="profileSex" />
+		</div>
+		
+		<div class="form-group">
+		<label>電話</label>
+		<form:input cssClass="form-control" path="profilePhone" />
+		<form:errors class="errMsgJS" path="profilePhone" />
+		<small><span class="errMsgJS" id="phoneErrMsg"></span></small>
+		</div>
+		
+		<div class="form-group">
+		<label>地址</label>
+		<form:input cssClass="form-control" path="profileAddress" />
+		<form:errors class="errMsgJS" path="profileAddress" />
+		<small><span class="errMsgJS" id="addressErrMsg"></span></small>
+		</div>
+		
+		<div class="form-group">
+		<label>VIP Level :</label>
+		<form:input cssClass="form-control" path="profileVIP" />
+		<form:errors class="errMsgJS" path="profileVIP" />
+		</div>
+		
+		<form:button class="btn btn-info" type="submit"
+						value="儲存">儲存</form:button>
+			
 	</form:form>
-	
+	</div>
 
 
 

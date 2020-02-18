@@ -24,6 +24,7 @@ public class WalletBean {
 	private int walletID;	// Not NULL
 	private int userID;		// Not NULL
 	private float walletAmount=0;		// Not NULL
+//	private UserBean userBean;
 
 	// Constructors
 	public WalletBean() {
@@ -69,11 +70,11 @@ public class WalletBean {
 	public void setWalletAmount(float walletAmount) {
 		this.walletAmount = walletAmount;
 	}
-//	OneToOne關係目前用不到先關閉
+	
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@PrimaryKeyJoinColumn
 //	public UserBean getUserBean() {
-//		return userBean;
+//		return getUserBean();
 //	}
 //
 //	public void setUserBean(UserBean userBean) {

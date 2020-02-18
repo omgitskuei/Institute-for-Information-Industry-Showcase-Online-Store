@@ -29,8 +29,9 @@ public class FindUniqueProductController {
 	}
 
 	// Methods
-	@RequestMapping(path = "/controller.FindProductByName", method = RequestMethod.GET)
+	@RequestMapping(path = "/controller.FindProductByName", method = RequestMethod.POST)
 	public String processAction(@RequestParam(name = "searchSpecificValue") String input, Model nextPage) {
+		System.out.println("BEGIN: /controller.FindProductByName");
 		// New object declarations
 		ProductBeanDAO thisDAO = new ProductBeanDAO();
 		ProductBean thisBean = new ProductBean();
@@ -39,17 +40,21 @@ public class FindUniqueProductController {
 		thisBean = thisDAO.getProduct(input);
 		// result returned, get values from object
 		// img
+		System.out.println("thisBean"+thisBean);
+		System.out.println("input"+input);
+		
 		byte[] productImage=thisBean.getProductImg();
 		nextPage.addAttribute("resultImg", productImage);
 		// name
 		nextPage.addAttribute("resultName", thisBean.getProductName());
+		System.out.println("productName: "+thisBean.getProductName());
 		// price
 		nextPage.addAttribute("resultPrice", thisBean.getProductPrice());
 		// description
 		nextPage.addAttribute("resultDescription", thisBean.getProductDescription());
 
 		System.out.println("Directing to Product");
-		return "UniqueProduct";
+		return "AdminInventory";
 	}
 
 	@RequestMapping(path = "/controller.FindProductByCategory", method = RequestMethod.GET)

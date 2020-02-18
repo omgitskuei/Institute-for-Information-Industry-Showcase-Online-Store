@@ -1,6 +1,7 @@
 package util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.LocalDate;
@@ -11,14 +12,17 @@ import java.time.format.DateTimeFormatter;
 public class GetDateOrTime {
 	
 	// Generate current date 
-	public Date generateDate() {
+	public Date generateDate() throws ParseException {
 		// Generate current date 
 		Date newDate = new Date();
 		// Format the new date
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = formatter.format(newDate);
+		Date result = formatter.parse(date);
 		// Console trail
-		System.out.println("GetDateOrTime generated: "+dateFormat.format(newDate)); //prints out current Date
-		return newDate;
+		System.out.println("GetDateOrTime generated: "+result); //prints out current Date
+				
+		return result;
 	}
 	public LocalDateTime generateLocalDatetime() {
 		LocalDateTime localDateTime = LocalDateTime.now();
