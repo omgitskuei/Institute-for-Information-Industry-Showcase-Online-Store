@@ -77,7 +77,7 @@ public class ProfileBean {
 	// Getter / Setters
 	@Id
 	@Column(name = "userID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)        // auto-generated BUT ALSO FK? IMPOSSIBLE
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)        // auto-generated BUT ALSO FK? IMPOSSIBLE
 	public int getUserID() {
 		return userID;
 	}
