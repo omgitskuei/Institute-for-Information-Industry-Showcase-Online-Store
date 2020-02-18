@@ -19,10 +19,13 @@
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                Welcome FarmVille
+               	<!-- 要任何錯誤訊息或是登入成功的畫面 -->
+               	<!-- PLEASE ENTER ANY MESSAGE IN HERE -->
+               	恭喜註冊成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
+                		<!-- 導到首頁，有異動再改 -->
                     <a href="index.html" id="div2" class="btn btn-dark box-shadow">進入網站</a>
                 </div>
             </div>
