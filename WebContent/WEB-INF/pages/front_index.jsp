@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,7 +31,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item first">
+
               <a href=<jstl:url value="/directaboutus"/> class="nav-link">關於我們</a>
+
             </li>
             <li class="nav-item">
               <a href="services.html" class="nav-link">服務</a>

@@ -13,7 +13,9 @@
     	<%@include file="/WEB-INF/css/frontpage.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
+
     <title>模板</title>
+
 </head>
 <body>
 <div id="main" class="is-loading">

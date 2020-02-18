@@ -61,17 +61,22 @@ nav.pagination {
 }
 
 .carousel-image-1 {
+
     background: url('https://i.imgur.com/mCyWvml.jpg');
     background-size: cover;
 }
 
 .carousel-image-2 {
+
     background: url('https://i.imgur.com/J4DVVpn.jpg');
+
     background-size: cover;
 }
 
 .carousel-image-3 {
+
     background: url('https://i.imgur.com/lXJfUcw.jpg');
+
     background-size: cover;
 }
 
@@ -114,7 +119,9 @@ nav.pagination {
 #video-play {
     position: relative;
     min-height: 200px;
+
     background: url('https://i.imgur.com/uBZDofo.jpg');
+
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: 0 -300px;
@@ -128,7 +135,9 @@ nav.pagination {
 
 #page-header {
     height: 200px;
+
     background: url('https://i.imgur.com/mCyWvml.jpg');
+
     background-position: 0 -360px;
     background-attachment: fixed;
     color: #fff;

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +27,9 @@
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
+
                     <a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">進入網站</a>
+
                 </div>
             </div>
         </div>
