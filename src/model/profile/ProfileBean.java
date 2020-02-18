@@ -24,6 +24,7 @@ import model.user.UserBean;
 public class ProfileBean {
 
 	// Variables, matches table columns
+	private int profileID;
 	private int userID;		// Not NULL
 	private String profileFullName;
 //	@NotNull(message = "請輸入日期 yyyy-MM-dd ")
@@ -47,7 +48,8 @@ public class ProfileBean {
 	public ProfileBean() {
 	}
 
-	public ProfileBean(int userID, Date joinDate, String phone, String address, int vip) {
+	public ProfileBean(int profileID,int userID, Date joinDate, String phone, String address, int vip) {
+		this.profileID = profileID;
 		this.userID = userID;
 		this.profileJoinDate = joinDate;
 		this.profilePhone = phone;
@@ -56,6 +58,7 @@ public class ProfileBean {
 	}
 	
 	public ProfileBean(
+			int profileID,
 			int userID,
 			String profileFullName, 
 			Date profileJoinDate,
@@ -64,6 +67,7 @@ public class ProfileBean {
 			String profilePhoneString, 
 			String profileAddress,
 			int profileVIP) {
+		this.profileID = profileID;
 		this.userID = userID;
 		this.profileFullName = profileFullName;
 		this.profileJoinDate = profileJoinDate;
@@ -73,11 +77,21 @@ public class ProfileBean {
 		this.profileAddress = profileAddress;
 		this.profileVIP = profileVIP;
 	}
-
+	
 	// Getter / Setters
 	@Id
+	@Column(name = "profileID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getProfileID() {
+		return profileID;
+	}
+
+	public void setProfileID(int profileID) {
+		this.profileID = profileID;
+	}
+
+	
 	@Column(name = "userID")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)        // auto-generated BUT ALSO FK? IMPOSSIBLE
 	public int getUserID() {
 		return userID;
 	}

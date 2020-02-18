@@ -31,6 +31,12 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		//System.out.println("	userBean"+theProfile.getUserBean());
 		System.out.println("	userID"+theProfile.getUserID());
 	}
+	
+	@Override
+	public void updateProfile(ProfileBean theProfile) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.update(theProfile);
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

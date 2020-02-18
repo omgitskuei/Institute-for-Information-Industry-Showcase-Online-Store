@@ -21,6 +21,11 @@ public class ProfileBeanService implements ProfileBeanServiceInterface {
 	public void saveProfile(ProfileBean theProfile) {
 		profileDAO.saveProfile(theProfile);
 	}
+	
+	@Override
+	public void updateProfile(ProfileBean theProfile) {
+		profileDAO.updateProfile(theProfile);
+	}
 
 	@Override
 	public ProfileBean getProfile(int userID) {
