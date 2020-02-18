@@ -13,6 +13,10 @@
 <!-- NAVBAR -->
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
+    <div class="container">
+    
+      <h1>管理員修改電子錢包</h1>
+
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
@@ -27,16 +31,22 @@
 	<a href="${updateWalletLink}">更改電子錢包</a>
 	
 	
-<h1>管理員修改電子錢包</h1>
-<p>目前: ${wallet.walletAmount}</p>
+     
+        <p>目前: ${wallet.walletAmount}</p>
 
-<form method="POST" action="<c:url value="/AdminProfile/saveWallet" />" >
-<input hidden="true" name="userID" value="${user.userID}" />
-修改成: <input name="newwalletAmount" value="${wallet.walletAmount}" />
-<button type="submit">送出</button>
-</form>
+		<form method="POST" action="<c:url value="/AdminProfile/saveWallet" />" >
+		<input hidden="true" name="userID" value="${user.userID}" />
+		
+		<div class="form-group">
+		<label>修改金額: </label>
+		<input class="form-control" name="newwalletAmount" value="${wallet.walletAmount}" />
+		</div>
+		
+		<button class="btn btn-info" type="submit"
+						value="儲存">儲存</button>
+		</form>
 
-            
+    </div>  
 
 </body>
 </html>

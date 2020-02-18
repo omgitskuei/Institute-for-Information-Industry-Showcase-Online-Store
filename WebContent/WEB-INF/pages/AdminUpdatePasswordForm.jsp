@@ -12,8 +12,13 @@
 <!-- NAVBAR -->
 <%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
+	<div class="container">
+	
+	<h1>管理者更新密碼</h1>
+	
+	
+	
 	<div>
-
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
@@ -27,31 +32,29 @@
 	<a href="${updatePasswordLink}">更改密碼</a>
 	<a href="${updateWalletLink}">更改電子錢包</a>
 
-	<h1>管理者更新密碼</h1>
+
 	</div>
 
 <form method="POST" action="<c:url value="/AdminProfile/savePassword" />" >
-		<table>
-			<tr>
-				<td></td>
-				<td><input type="hidden" name="userID" value="${user.userID}" /></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>帳號: </td>
-				<td>${user.userEmail}</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>密碼: </td>
-				<td><input  name="newPwd" value="${user.userPwd}"/></td>
-			</tr>
-			<tr>
-				<td>確認</td>
-				<td><button class="btn btn-info" type="submit"
-						>儲存</button></td>
-			</tr>
-		</table>
+		
+		<div class="form-group">
+		<input class="form-control" type="hidden" name="userID" value="${user.userID}" />
+		</div>
+		
+		<div class="form-group">
+		<label>帳號</label>
+		<p>${user.userEmail}</p>
+		</div>
+		
+		<div class="form-group">
+		<label>密碼</label>
+		<input class="form-control" name="newPwd" value="${user.userPwd}" />
+		</div>
+		
+		<button class="btn btn-info" type="submit"
+						>儲存</button>
+		
 		</form>
+		</div>
 </body>
 </html>
