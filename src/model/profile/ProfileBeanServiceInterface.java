@@ -8,7 +8,10 @@ public interface ProfileBeanServiceInterface {
 
 	public void saveProfile(ProfileBean theProfile);
 	
+	public void updateProfile(ProfileBean theProfile);
+	
 	public ProfileBean getProfile(int userId);
 	
 	public void deleteProfile(int userId);
+
 }
