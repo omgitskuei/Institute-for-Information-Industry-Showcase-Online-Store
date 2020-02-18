@@ -49,10 +49,21 @@ public class AdminProfileController {
 		return "AdminViewAllUser";
 	}
 	
-	// 儲存修改後的基本資料
+	// 新增基本資料
 	@PostMapping("/saveProfile")
 	public String saveProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
 		profileService.saveProfile(theProfile);
+		
+		if (bindingResult.hasErrors()) {
+			return "AdminProfileUpdateForm";
+		} else {
+			return "redirect:/AdminProfile/list";
+		}
+	}
+	
+	@PostMapping("/updateProfile")
+	public String updateProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
+		profileService.updateProfile(theProfile);
 		
 		if (bindingResult.hasErrors()) {
 			return "AdminProfileUpdateForm";
