@@ -112,5 +112,6 @@ public class OrderBean {
 	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
 		this.orderDetailsBeans = orderDetailsBeans;
 	}
+
 		
 }

@@ -51,7 +51,7 @@ public class UpdateProductController {
 	@GetMapping("/delete")
 	public String deleteProduct(@RequestParam("productID") int productID) {
 		productService.deleteProduct(productID);
-		return "redirect:/AdminProduct/list";
+		return "redirect:/AdminProduct/inventories";
 	}
 
 }

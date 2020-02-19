@@ -37,22 +37,29 @@ public class UploadFileController {
 	@ResponseBody
 	public ResponseEntity<byte[]> uploadFile(@RequestParam(name = "myFiles") MultipartFile multipartfile)
 			throws Exception {
+		
+		// Set file name to the uploaded image's file name
 		String fileName = multipartfile.getOriginalFilename();
 		System.out.println("fileName=" + fileName);
-
+		
+		// Set file type to JPEG
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
 
-		String savePath = request.getSession().getServletContext().getRealPath("/") + "uploadTempDir\\" + fileName;
+		// Set save file path to project root/resources/images/**
+		String savePath = request.getSession().getServletContext().getRealPath("/") + "images/" + fileName;
 		System.out.println("savePath=" + savePath);
 
+		// New file
 		File saveFile = new File(savePath);
 		multipartfile.transferTo(saveFile);
 
+		// Check validity
 		if (fileName != null && fileName.length() != 0) {
 			savePicture(fileName, savePath);
 		}
 
+		// return the JPEG we just saved
 		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(saveFile), headers, HttpStatus.OK);
 	}
 

@@ -102,9 +102,9 @@ SELECT '芒果',54,4,'芒果富含維生素A、維生素C、膳食纖維、葉�
 go
 
 INSERT INTO OrdersTable(UserID,Total,MailingAddress,MailingPhone,OrderTime)
-VALUES (2,92,'Taichung','0983-221-131','2020-01-2'),
-	   (2,571,'Tainan','0910-123-456','2020-01-15'),
-	   (3,1470,'Kaohsiung','0977-234-450','2020-01-29')
+VALUES (2,156,'基隆市仁愛區仁一路','0983-221-131','2020-01-2'),
+	   (2,111,'桃園市楊梅區大北坑街一段','0910-123-456','2020-01-15'),
+	   (3,321,'苗栗縣頭屋鄉尖豐路','0977-234-450','2020-01-29')
 go
 
 INSERT INTO OrderDetailsTable(OrderID,ProductID,ProductName,ProductCount,ProductPrice)

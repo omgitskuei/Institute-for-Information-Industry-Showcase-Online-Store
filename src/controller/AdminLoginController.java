@@ -40,34 +40,31 @@ public class AdminLoginController {
 	// 2)還沒處理回來解碼Cookie的到Input資料欄位裡面
 	// 3)Chris, Thomas
 	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.AdminLoginController", method = RequestMethod.POST)
+	@RequestMapping(path = "/adminSignIn", method = RequestMethod.POST)
 	public String processAction(@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
-			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String cEmail,
+			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String cookieEmail,
 			@CookieValue(value = "Password", required = false, defaultValue = "Testing123!" ) String cPwd,
 			Model nextPage) {
 
-		System.out.println("BEGIN /controller.AdminLoginController");
-		System.out.println("User input: ");
-		System.out.println("Email = " + uEmail);
-		System.out.println("Password = " + uPwd);
-		System.out.println("Remember Me = " + remMe);
-		System.out.println("");
-		
+		System.out.println("BEGIN /adminSignIn");
+		System.out.println("	User input: ");
+		System.out.println("	Email = " + uEmail);
+		System.out.println("	Password = " + uPwd);
+		System.out.println("	Remember Me = " + remMe);
 		// Check for empty input
 		if ( (uEmail != null) && (uPwd.length() >= 8 && uPwd != null)) {
 			UserBean bean = new UserBean();
-			//readLoginCookie(cEmail);
-			if(cEmail != null && cPwd != null) {
+			
+			if(cookieEmail != null && cPwd != null) {
 				bean.setUserEmail(uEmail);
 				bean.setUserPwd(uPwd);
 				bean.setAdmin(1);
 				System.out.println("有抓到Cookie");
-				System.out.println(cEmail);
+				System.out.println(cookieEmail);
 				System.out.println(cPwd);
 			}else {
-			
 			// Turn user input into a persistence bean
 			bean.setUserEmail(uEmail);
 			bean.setUserPwd(uPwd);
@@ -78,7 +75,6 @@ public class AdminLoginController {
 				System.out.println("MAKING COOKIE");
 				writeLoginCookie(bean, bean, nextPage, response);	
 			}
-			
 			
 			// Use bean to use UserBeanService service
 			UserBean results = service.checkLogin(bean);
@@ -122,7 +118,7 @@ public class AdminLoginController {
 					errors.put("pwdError", "Password is required");
 				}
 			}
-			
+			System.out.println("FINISH /adminSignIn, returning to AdminLogin, input was empty");
 			nextPage.addAttribute("errors", errors);
 			return "AdminLogin";
 		}
@@ -139,10 +135,10 @@ public class AdminLoginController {
 		// ^ name is synonymous to 'value'
 		// response.addCookie(new Cookie("adminLoginCookie", email));
 		
-		// Encrypt email before writing to cookie
+		// Encrypt email before writing to a cookie
 		String email = user1.getUserEmail();
 		EncryptString util1 = new EncryptString();
-		Aead aead = util1.newCleartextAEADKeyset();
+		//Aead aead = util1.newCleartextAEADKeyset();
 		byte[] cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
 		EncodeHexString hexConvert = new EncodeHexString();
 		email = hexConvert.byteArrayToHexString(cipher);
@@ -151,7 +147,7 @@ public class AdminLoginController {
 		System.out.println("email: "+user1.getUserEmail());
 		System.out.println("cookie email(encrypted): "+email);
 		
-		// Encrypt pwd before writing cookie
+		// Encrypt pwd before writing to a cookie
 		String pwd = user2.getUserPwd();
 		cipher = util1.encryptGoogleTinkAEAD(email, "OMGiloveyou");
 		email = hexConvert.byteArrayToHexString(cipher);

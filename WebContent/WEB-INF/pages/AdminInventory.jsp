@@ -50,7 +50,7 @@
         <div class="input-group">
             <input type="text" class="form-control" placeholder="搜尋庫存商品...">
             <div class="input-group-append">
-                <button class="btn btn-primary">搜尋</button>
+                <a href=<jstl:url value="/controller.FindProductByName"/> class="btn btn-primary">搜尋</a>
             </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>${resultName}
 </section>
 
 

@@ -35,10 +35,7 @@
 				<td>Stock :</td>
 				<td><form:input path="productStock" /></td>
 			</tr>
-			<tr>
-				<td>Description :</td>
-				<td><form:input path="productDescription" /></td>
-			</tr>
+			
 			<tr>
 				<td>Img :</td>
 				<td><form:input path="productImg" /></td>
@@ -51,9 +48,15 @@
 				<td>Category :</td>
 				<td><form:input path="productCategory" /></td>
 			</tr>
-
+<tr>
+				<td>Description :</td>
+				<td>
+				<form:textarea type="text" path="productDescription" name="description" cols="22" rows="5" ></form:textarea> </td>
+				
+			</tr>
 			<tr>
 				<td></td>
+				
 				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
 			</tr>
 		</table>
