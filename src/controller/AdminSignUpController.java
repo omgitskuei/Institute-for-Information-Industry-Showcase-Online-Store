@@ -56,43 +56,43 @@ public class AdminSignUpController {
 
 	// Admin attempts to sign up. If credentials Don't match, prepare to create new
 	// admin; must enter secret confirm code.
-//	@RequestMapping(path = "/controller.AdminSignUpController", method = RequestMethod.POST)
-//	public String signInStep1(@RequestParam(name = "nEmail") String nEmail, @RequestParam(name = "nPwd") String nPwd,
-//			@RequestParam(name = "rPwd") String cPwd, Model nextPage) {
-//
-//		System.out.println("BEGIN /controller.AdminSignUpController");
-//		System.out.println("User input: ");
-//		System.out.println("Email = " + nEmail);
-//		System.out.println("Password = " + nPwd);
-//		System.out.println("Confirm Password = " + cPwd);
-//		if (cPwd.equals(nPwd)) {
-//			System.out.println("Confirm Password and New Password match!");
-//			try {
-//				System.out.println("User not found");
-//
-//				nextPage.addAttribute("nEmail", nEmail);
-//				nextPage.addAttribute("nPwd", nPwd);
-//
-//				System.out.println("AUTHENTICATED: Directing to AdminLoginConfirm");
-//				// Make code
-//				GetCode genCode = new GetCode(10, true, false, false);
-//				verificationCode = genCode.generateCode();
-//				// Make code available on next page
-//				nextPage.addAttribute("verificationCode", verificationCode);
-//				// Send 
-//				EmailUsers emailSender = new EmailUsers();
-//				emailSender.sendVerifyEmail(nEmail, nEmail, verificationCode);
-//				// 
-//				return "AdminLoginConfirm";
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				System.out.println("ERROR: AdminSignUpController EXCEPTION");
-//				return "AdminLogin";
-//			}
-//		}
-//		System.out.println("Re-enter Password != New Password, return AdminLogin");
-//		return "AdminLogin";
-//	}
+	@RequestMapping(path = "/adminSignUpStep1", method = RequestMethod.POST)
+	public String signInStep1(@RequestParam(name = "nEmail") String nEmail, @RequestParam(name = "nPwd") String nPwd,
+			@RequestParam(name = "rPwd") String cPwd, Model nextPage) {
+
+		System.out.println("BEGIN /controller.AdminSignUpController");
+		System.out.println("User input: ");
+		System.out.println("Email = " + nEmail);
+		System.out.println("Password = " + nPwd);
+		System.out.println("Confirm Password = " + cPwd);
+		if (cPwd.equals(nPwd)) {
+			System.out.println("Confirm Password and New Password match!");
+			try {
+				System.out.println("User not found");
+
+				nextPage.addAttribute("nEmail", nEmail);
+				nextPage.addAttribute("nPwd", nPwd);
+
+				System.out.println("AUTHENTICATED: Directing to AdminLoginConfirm");
+				// Make code
+				GetCode genCode = new GetCode(10, true, false, false);
+				verificationCode = genCode.generateCode();
+				// Make code available on next page
+				nextPage.addAttribute("verificationCode", verificationCode);
+				// Send 
+				EmailUsers emailSender = new EmailUsers();
+				emailSender.sendVerifyEmail(nEmail, nEmail, verificationCode);
+				// 
+				return "AdminLoginConfirm";
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("ERROR: AdminSignUpController EXCEPTION");
+				return "AdminLogin";
+			}
+		}
+		System.out.println("Re-enter Password != New Password, return AdminLogin");
+		return "AdminLogin";
+	}
 
 	// Admin entered confirm code. If code match, create new admin.
 	@RequestMapping(path = "/adminSignUpStep2", method = RequestMethod.POST)

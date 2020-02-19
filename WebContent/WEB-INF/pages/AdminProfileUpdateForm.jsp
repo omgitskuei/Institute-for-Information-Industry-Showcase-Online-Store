@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:useBean id="command" class="model.profile.ProfileBean"
 	scope="request"></jsp:useBean>
@@ -39,59 +40,52 @@
 	
 	</div>
 
-	<form:form method="POST" action="saveProfile" modelAttribute="profile">
+	<form method="POST" action="<c:url value="/AdminProfile/updateProfile" />" >
 		<div class="form-group">
-		<form:hidden path="userID" />
+		<input hidden="true" value="${user.userID}" />
 		</div>
 		
 		<div class="form-group">
 		<label>姓名</label>
-		<form:input cssClass="form-control" path="profileFullName" />
+		<input class="form-control"  value="${profile.profileFullName}" />
 		</div>
 		
 		<div class="form-group">
 		<label>加入日期</label>
-		<form:input id="joinDateInput" onkeyup="joinDateCheck()" cssClass="form-control" path="profileJoinDate" />
-		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
-		<form:errors class="errMsgJS" path="profileJoinDate" />
+		<input class="form-control" readonly value="${profile.profileJoinDate}" />
 		</div>
 		
 		<div class="form-group">
 		<label>生日</label>
-		<form:input id="birthdayInput" onkeyup="birthdayCheck()" cssClass="form-control" path="profileBirthdate" />
-		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
-		<form:errors class="errMsgJS" path="profileBirthdate" />
+		<input class="form-control" value="${profile.profileBirthdate}"/>
 		</div>
 		
 		<div class="form-group">
-		<label>生日</label>
-		<form:input cssClass="form-control" path="profileSex" />
+		<label>性別</label>
+		<input class="form-control" value="${profile.profileSex}" />
 		</div>
 		
 		<div class="form-group">
 		<label>電話</label>
-		<form:input cssClass="form-control" path="profilePhone" />
-		<form:errors class="errMsgJS" path="profilePhone" />
+		<input class="form-control" value="${profile.profilePhone}" />
 		<small><span class="errMsgJS" id="phoneErrMsg"></span></small>
 		</div>
 		
 		<div class="form-group">
 		<label>地址</label>
-		<form:input cssClass="form-control" path="profileAddress" />
-		<form:errors class="errMsgJS" path="profileAddress" />
+		<input class="form-control" value="${profile.profileAddress}" />
 		<small><span class="errMsgJS" id="addressErrMsg"></span></small>
 		</div>
 		
 		<div class="form-group">
 		<label>VIP Level :</label>
-		<form:input cssClass="form-control" path="profileVIP" />
-		<form:errors class="errMsgJS" path="profileVIP" />
+		<input class="form-control" value="${profile.profileVIP}" />
 		</div>
 		
-		<form:button class="btn btn-info" type="submit"
-						value="儲存">儲存</form:button>
+		<button class="btn btn-info" type="submit"
+						value="儲存">儲存</button>
 			
-	</form:form>
+	</form>
 	</div>
 
 

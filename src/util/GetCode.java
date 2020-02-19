@@ -111,7 +111,7 @@ public class GetCode {
 //		String input = console.getConsoleInputBR("Input length:");
 //		int length = Integer.parseInt(input);
 		
-		GetCode gen = new GetCode(10, true, false, false);
+		GetCode gen = new GetCode(10, true, true, true);
 		String result = gen.generateCode();
 	}
 }

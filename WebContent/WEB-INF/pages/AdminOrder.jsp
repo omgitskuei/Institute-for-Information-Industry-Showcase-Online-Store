@@ -72,42 +72,42 @@
             <thead class="thead-dark">
               <tr>
                 <th>訂單編號</th>
-                <th>總價</th>
+                <th>訂購時間</th>
                 <th>寄送地址</th>
                 <th>寄送電話</th>
-                <th>訂購時間</th>
+                <th>總價</th>
                 <th></th>
                 	<th></th>
               </tr>
             </thead>
             <tbody>
               <jstl:forEach var="orderInfo" items="${orderList}">
-              <!-- construct an "update" link with customer id -->
-			<c:url var="updateLink" value="/AdminOrder/updateForm">
-						<c:param name="orderID" value="${orderInfo.orderID}" />
-					</c:url>
+              	<!-- construct an "update" link with customer id -->
+				<c:url var="updateLink" value="/AdminOrder/updateForm">
+					<c:param name="orderID" value="${orderInfo.orderID}" />
+				</c:url>
 
-					<!-- construct an "delete" link with customer id -->
-					<c:url var="deleteLink" value="/AdminOrder/delete">
-						<c:param name="orderID" value="${orderInfo.orderID}" />
-					</c:url>
+<!-- 				construct an "delete" link with customer id -->
+<%-- 				<c:url var="deleteLink" value="/AdminOrder/delete"> --%>
+<%-- 					<c:param name="orderID" value="${orderInfo.orderID}" /> --%>
+<%-- 				</c:url> --%>
               <tr>
                 <td><a  href='<c:url value='orderDetails.do?orderID=${orderInfo.orderID}' />'>
                 ${orderInfo.orderID}</a></td>
-				<td>${orderInfo.total}</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
 				<td>${orderInfo.mailingAddress}</td>
 				<td>${orderInfo.mailingPhone}</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
+				<td>${orderInfo.total}</td>
                 <td>
                   <a href="${updateLink}" class="btn btn-secondary">
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
-                	 <td>
-                  <a href="${deleteLink}" class="btn btn-danger">
-                    <i class="fas fa-angle-double-right"></i> 刪除
-                  </a>
-                </td>
+<!--                 <td> -->
+<%--                   <a href="${deleteLink}" class="btn btn-danger"> --%>
+<!--                     <i class="fas fa-angle-double-right"></i> 刪除 -->
+<!--                   </a> -->
+<!--                 </td> -->
               </tr>
              </jstl:forEach>
             </tbody>

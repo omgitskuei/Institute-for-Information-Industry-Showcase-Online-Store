@@ -4,19 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
-import model.user.UserBean;
 
 @Entity
 @Table(name = "ProfilesTable")
@@ -90,7 +82,6 @@ public class ProfileBean {
 		this.profileID = profileID;
 	}
 
-	
 	@Column(name = "userID")
 	public int getUserID() {
 		return userID;

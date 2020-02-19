@@ -16,7 +16,7 @@
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
 	<h1>訂單管理_修改</h1>
-//
+
 	<form:form method="POST" action="saveOrder" modelAttribute="order">
 		<table>
 			<tr>
@@ -24,8 +24,11 @@
 				<td><form:hidden path="orderID" /></td>
 			</tr>
 			<tr>
-				
-				<td>訂單編號 :</td>
+				<td>訂購時間 :</td>
+				<td><form:input path="OrderTime" /></td>
+			</tr>
+			<tr>
+				<td>訂購人ID :</td>
 				<td><form:input path="UserID" /></td>
 			</tr>
 			<tr>
@@ -40,12 +43,6 @@
 				<td>寄送電話 :</td>
 				<td><form:input path="MailingPhone" /></td>
 			</tr>
-			<tr>
-				<td>訂購時間 :</td>
-				<td><form:input path="OrderTime" /></td>
-			</tr>
-			
-
 			<tr>
 				<td></td>
 				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>

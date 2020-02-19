@@ -63,7 +63,7 @@
                 <h4>使用者登入</h4>
             </div>
             <div class="card-body">
-           <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
+           <form class="form" name="loginForm" action="<jstl:url value="/adminSignIn" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
                   <input type="email" class="form-control" name="userEmail" id="userEmail" value="${cookie.Email.getValue()}">
@@ -102,7 +102,7 @@
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form class="form" name="signupForm" action="<jstl:url value="/controller.AdminSignUpController" />" method="post" id="signupForm">
+            <form class="form" name="signupForm" action="<jstl:url value="/adminSignUpStep1" />" method="post" id="signupForm">
               <div class="form-group">
                 <label for="email">電子信箱</label>
                 <input type="email" placeholder="電子信箱" class="form-control" name="nEmail">
