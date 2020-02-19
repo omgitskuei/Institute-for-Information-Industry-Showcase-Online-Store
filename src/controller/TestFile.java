@@ -21,7 +21,7 @@ public class TestFile {
 		System.out.println("ByteToFile(bytes)="+bytes);
 	}
 
-	public static void fileToByte(File img) throws Exception {
+	public static byte[] fileToByte(File img) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			BufferedImage bi;
@@ -29,11 +29,12 @@ public class TestFile {
 			ImageIO.write(bi, "jpg", baos);
 			bytes = baos.toByteArray();
 			System.err.println(bytes.length);
+			baos.close();
+			return bytes;
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
 			baos.close();
-		}
+			return null;
 	}
 	
 	static void ByteToFile(byte[] bytes)throws Exception{ 
