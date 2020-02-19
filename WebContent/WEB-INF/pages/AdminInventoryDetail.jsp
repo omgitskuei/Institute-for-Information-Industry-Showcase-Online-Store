@@ -20,10 +20,7 @@
 <title>Admin's Inventory Detail | 管理者修改各庫存頁面</title>
 <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 <!-- Dictate which Stylesheets to use for this webpage -->
-<style>
-<%@ include file="/WEB-INF/css/normalize.css"%>
-<%@ include file="/WEB-INF/css/style.css"%>
-</style>
+
 </head>
 <body>
 <!-- NAVBAR -->
