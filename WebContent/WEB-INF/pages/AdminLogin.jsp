@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -24,6 +24,8 @@
     
 </head>
 <body>
+
+
  	<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
       <div class="container">
         <span class="navbar-brand">管理者</span>
@@ -50,8 +52,8 @@
   </div>
 </section>
 
-	
-		
+	 
+<!-- BODY -->	
 <section id="login">
   <div class="container">
     <div class="row">
@@ -61,19 +63,19 @@
                 <h4>使用者登入</h4>
             </div>
             <div class="card-body">
-           <form class="form" name="loginForm" action="<jstl:url value="/controller.AdminLoginController" />" method="post" id="myForm">
+           <form class="form" name="loginForm" action="<jstl:url value="/adminSignIn" />" method="post" id="myForm">
             <div class="form-group">
                   <label for="email">電子郵件</label>
-                  <input type="email" class="form-control" name="userEmail" value="${cookie.Email.getValue()}">
+                  <input type="email" class="form-control" name="userEmail" id="userEmail" value="${cookie.Email.getValue()}">
                   <span id="emailErrorSpan">${errors.emailError}</span>
                 </div>
                 <div class="form-group">
                   <label for="password">密碼</label>
-                  <input type="password" class="form-control" name="userPwd" value="${cookie.Password.getValue()}">
+                  <input type="password" class="form-control" name="userPwd" id="userPwd" value="${cookie.Password.getValue()}">
                   <span id="pwdErrorSpan">${errors.pwdError}</span>
                 </div>
                 <div class="form-group ml-4">
-                  <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="rememberMe"/>
+                  <input class="form-check-input" type="checkbox" id="inlineFormCheck"  name="rememberMe" id="rememberMe" />
             	  <label class="form-check-label" for="FormCheck">
              		記住帳號密碼  <br>
              		${errors.notFoundError}
@@ -82,6 +84,7 @@
                 <input type="submit" value="登入" class="btn btn-primary btn-block">
                 	<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
             </form>
+            	${ts}<br>
             </div>
         </div>
       </div>
@@ -99,7 +102,7 @@
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form class="form" name="signupForm" action="<jstl:url value="/controller.AdminSignUpController" />" method="post" id="signupForm">
+            <form class="form" name="signupForm" action="<jstl:url value="/adminSignUpStep1" />" method="post" id="signupForm">
               <div class="form-group">
                 <label for="email">電子信箱</label>
                 <input type="email" placeholder="電子信箱" class="form-control" name="nEmail">
@@ -124,6 +127,7 @@
     </div>
 </section>
 
+
 <!-- FOOTER -->
 <%@include file="/WEB-INF/pages/AdminFooter2.jsp"%>
 			
@@ -141,7 +145,8 @@
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
     
-    
+    // Function of Cookie to Remember Email 
+    // 如果判斷cookie有值把密碼給他
     $(function(){
     	$("#userEmail").keyup(function(){
     		var userEmail = $("#userEmail").val();
@@ -149,16 +154,13 @@
     			var userPwd = $.cookie(userEmail);
     			if(userPwd!=null){
     				$("#userPwd").val(userPwd);
-    				$("#rememberMe").attr(checked, true);
+    				$("#rememberMe").attr("checked", true);
     			}
     			
     		}
     	})
     })
 
-    
-
   </script>
-
 
 </html>
