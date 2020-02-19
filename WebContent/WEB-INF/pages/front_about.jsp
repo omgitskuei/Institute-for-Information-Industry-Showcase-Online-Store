@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<html>
+<head>
  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -20,7 +23,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-sm navbar-dark">
       <div class="container">
-        <a href="index.html" class="navbar-brand">FarmVille</a>
+        <a href="index.html" class="navbar-brand" style="font-family: 'Kaushan Script', cursive;">FarmVille</a>
 
         <button
           class="navbar-toggler"
@@ -198,67 +201,14 @@
         <div class="row">
           <div class="col">
             <p>版權所有 &copy;
-
-
-    <!-- PAGE HEADER -->
-    <header id="page-header" >
-      <div class="dark-overlay-title">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 m-auto text-center">
-            <h1>忘記密碼</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    </header>
-
-    <!-- LOGIN SECTION -->
-<section class="py-3">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card p-4">
-          <div class="card-body">
-            <form action="">
-            <h3 class="text-center">輸入驗證碼</h3>
-            <hr>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="admincode">請輸入信箱的驗證碼</label>
-                  <input type="text" class="form-control" placeholder="驗證碼：">
-                  <span style="color: red;" class="ml-auto">驗證碼有效錯誤</span>
-                </div>
-              </div> 
-              <div class="col-md-12">
-                <div class="form-group">
-                  <a href="authmail.html" type="submit" class="btn btn-success btn-block text-white">送出驗證信</a>
-                </div>
-              </div>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- FOOTER -->
-    <footer id="main-footer" class="text-center p-4 bg-dark text-white">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <p>
-              版權所有 &copy;
-
               <span id="year"> FarmVille</span>
             </p>
           </div>
         </div>
       </div>
     </footer>
+
+
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -275,23 +225,12 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha256-NXRS8qVcmZ3dOv3LziwznUHPegFhPZ1F/4inU7uC8h0=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/c3dc04dc4d.js" crossorigin="anonymous"></script>
   </head>
     <script>
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
 
-
-      $('.slider').slick({
-          infinite: true,
-          slideToSHow: 1,
-          slideToScoll: 1
-
-    <script>
-      // Get the current year for copyright
-      $("#year").text(new Date().getFullYear());
     </script>
   </body>
 </html>
