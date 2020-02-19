@@ -60,36 +60,40 @@
 </section>
 
 <!-- ORDERS -->
+<jstl:forEach var="orderInfo" items="${orderToDetailsList}">
 <section id="ordres">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>訂單明細</h4>
+            <h4>訂單編號	${orderInfo.orderID}</h4>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-                <th>訂單編號</th>
-                <th>總價</th>
-                <th>寄送地址</th>
-                <th>寄送電話</th>
+<!--                 <th>訂單編號</th> -->
                 <th>訂購時間</th>
+                <th>收件人</th>
+                <th>寄送地址</th>
+                <th></th>
+                <th>寄送電話</th>
+                <th>總價</th>
+                
               </tr>
             </thead>
-                        
             <tbody>
-              <jstl:forEach var="orderInfo" items="${orderToDetailsList}">
               <tr>
-                <td>${orderInfo.orderID}</td>
-				<td>${orderInfo.total}</td>
-				<td>${orderInfo.mailingAddress}</td>
+<%--                 <td>${orderInfo.orderID}</td> --%>
+                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
+   				<th>${orderInfo.recipient}</th>
+   				<td>${orderInfo.mailingAddress}</td>
+   				<th></th>
 				<td>${orderInfo.mailingPhone}</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
+				<td>${orderInfo.total}</td>
               </tr>
-             </jstl:forEach>
             </tbody>
+</jstl:forEach>
 <!--           </table> -->
 
 <!-- ORDERDETAILS -->
@@ -105,9 +109,10 @@
               <tr>
                 <th>產品編號</th>
                 <th>產品名稱</th>
+                <th></th>
                 <th>單價</th>
                 <th>數量</th>
-                <th>總價</th>
+                <th>小計</th>
               </tr>
             </thead>
             
@@ -116,7 +121,8 @@
               <jstl:forEach var="orderDetailsList" items="${detailsList}">
               <tr>
                 <td>${orderDetailsList.productID}</td>	
-				<td>${orderDetailsList.productName}</td>	
+				<td>${orderDetailsList.productName}</td>
+				<th></th>	
 				<td>${orderDetailsList.productPrice}</td>	
 				<td>${orderDetailsList.productCount}</td>
 				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>

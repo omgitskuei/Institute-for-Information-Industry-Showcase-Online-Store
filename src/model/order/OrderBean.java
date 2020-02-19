@@ -30,6 +30,7 @@ public class OrderBean {
 	private String mailingAddress;		// Not NULL
 	private String mailingPhone;		// Not NULL
 	private Date orderTime;		// Not NULL
+	private String recipient;
 	//OneToMany
 	private Set<OrderDetailsBean> orderDetailsBeans = new HashSet<OrderDetailsBean>();
                 
@@ -37,12 +38,13 @@ public class OrderBean {
 	public OrderBean() {
 	}
 
-	public OrderBean(int newUserID, int newTotal, String newMailingAddress, String newMailingPhone, Date newOrderTime) {
+	public OrderBean(int newUserID, int newTotal, String newMailingAddress, String newMailingPhone, Date newOrderTime,String newRecipient) {
 		this.userID = newUserID;
 		this.total = newTotal;
 		this.mailingAddress = newMailingAddress;
 		this.mailingPhone = newMailingPhone;
 		this.orderTime = newOrderTime;
+		this.recipient = newRecipient;
 	}
 
 	// Getter/Setters
@@ -112,5 +114,16 @@ public class OrderBean {
 	public void setOrderDetailsBeans(Set<OrderDetailsBean> orderDetailsBeans) {
 		this.orderDetailsBeans = orderDetailsBeans;
 	}
+
+	@Column(name = "Recipient")
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+	
+	
 		
 }
