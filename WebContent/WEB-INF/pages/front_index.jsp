@@ -36,16 +36,16 @@
 
             </li>
             <li class="nav-item">
-              <a href="services.html" class="nav-link">服務</a>
+              <a href=<jstl:url value="/directservices"/> class="nav-link">服務</a>
             </li>
             <li class="nav-item">
-              <a href="contact.html" class="nav-link">聯絡我們</a>
+              <a href=<jstl:url value="/directcontact"/> class="nav-link">聯絡我們</a>
             </li>
             <li class="nav-item">
               <a href="shoppingcart.html" class="nav-link">購物車</a>
             </li>
             <li class="nav-item">
-              <a href="login.html" class="nav-link">登入</a>
+              <a href=<jstl:url value="/directlogin"/> class="nav-link">登入</a>
             </li>
           </ul>
         </div>
@@ -69,7 +69,7 @@
                 <p class="lead">
                   讓您吃得安心
                 </p>
-                <a href="signup.html" class="btn btn-success btn-lg btn-color-signup text-white">現在就註冊</a>
+                <a href=<jstl:url value="/directsignup"/> class="btn btn-success btn-lg btn-color-signup text-white">現在就註冊</a>
               </div>
               </div>
             </div>
