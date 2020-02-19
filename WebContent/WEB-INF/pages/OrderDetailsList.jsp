@@ -74,7 +74,6 @@
               <tr>
 <!--                 <th>訂單編號</th> -->
                 <th>訂購時間</th>
-                <th>收件人</th>
                 <th>寄送地址</th>
                 <th></th>
                 <th>寄送電話</th>
@@ -86,7 +85,6 @@
               <tr>
 <%--                 <td>${orderInfo.orderID}</td> --%>
                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
-   				<th>${orderInfo.recipient}</th>
    				<td>${orderInfo.mailingAddress}</td>
    				<th></th>
 				<td>${orderInfo.mailingPhone}</td>

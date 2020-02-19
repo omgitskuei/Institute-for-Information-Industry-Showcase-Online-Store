@@ -24,16 +24,16 @@
 				<td><form:hidden path="orderID" /></td>
 			</tr>
 			<tr>
+				<td>訂購時間 :</td>
+				<td><form:input path="OrderTime" /></td>
+			</tr>
+			<tr>
 				<td>訂購人ID :</td>
 				<td><form:input path="UserID" /></td>
 			</tr>
 			<tr>
 				<td>總價 :</td>
 				<td><form:input path="Total" /></td>
-			</tr>
-			<tr>
-				<td>收件人 :</td>
-				<td><form:input path="Recipient" /></td>
 			</tr>
 			<tr>
 				<td>寄送地址 :</td>
@@ -43,12 +43,6 @@
 				<td>寄送電話 :</td>
 				<td><form:input path="MailingPhone" /></td>
 			</tr>
-			<tr>
-				<td>訂購時間 :</td>
-				<td><form:input path="OrderTime" /></td>
-			</tr>
-			
-
 			<tr>
 				<td></td>
 				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
