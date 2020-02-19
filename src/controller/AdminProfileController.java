@@ -64,7 +64,6 @@ public class AdminProfileController {
 	@PostMapping("/updateProfile")
 	public String updateProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
 		profileService.updateProfile(theProfile);
-		
 		if (bindingResult.hasErrors()) {
 			return "AdminProfileUpdateForm";
 		} else {
@@ -76,10 +75,8 @@ public class AdminProfileController {
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("userID") int userID, Model m) {
 		ProfileBean theProfile = profileService.getProfile(userID);
-		UserBean theUser = userService.selectUser(userID);
 		
 		m.addAttribute("profile", theProfile);
-		m.addAttribute("user", theUser);
 		return "AdminProfileUpdateForm";
 	}
 	
