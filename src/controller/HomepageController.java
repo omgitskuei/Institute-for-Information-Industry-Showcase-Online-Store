@@ -16,7 +16,7 @@ public class HomepageController {
 	}
 
 	// URL address for this controller, method POST/GET, what data fields
-	@RequestMapping(path = "/controller.HomepageController", method = RequestMethod.GET)
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public String processAction( ModelAndView nextPage) {
 		System.out.println("Directing to Adminindex");
 		return "AdminLogin";
