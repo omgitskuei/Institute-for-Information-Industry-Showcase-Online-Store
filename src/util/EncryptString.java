@@ -104,16 +104,13 @@ public class EncryptString {
 		
 		
 		// encrypt
-//		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
-//		String encrypted = s.byteArrayToHexString(cipher);
+		byte[] cipher = util1.encryptGoogleTinkAEAD("Qq1!qwer", "OMGiloveyou");
+		String encrypted = s.byteArrayToHexString(cipher);
 		
 		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key
 		
-		// decrypt
-		byte[] bytearray = s.HexStringToByteArray("010d6e1ac5bcca75d766b25d0e09d54a364512a7fb68d9448311afab6106f6303c8210");
+		// decrypt	
+		byte[] bytearray = s.HexStringToByteArray(encrypted);
 		String decrypted = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
-		
-		byte[] bytearray1 = s.HexStringToByteArray("010d6e1ac5ab5bcfe780028ca86bd16cb01aa9899d90a5e8cdee78fd50cb524ae8b54d");
-		String decrypted1 = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
 	}
 }

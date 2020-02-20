@@ -28,6 +28,8 @@ public class AdminLogoutController {
 	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	public String processActionLogout(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
 		System.out.println("Directing to 首頁");
+		
+		
 		nextPage.addAttribute("userEmail", uEmail);
 		return "AdminIndex";
 	}

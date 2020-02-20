@@ -77,13 +77,6 @@ public class AdminLoginController {
 			bean.setUserPwd(uPwd);
 			bean.setAdmin(1);
 
-			if (remMe == true) {
-				System.out.println("	RememberMe = True: MAKING COOKIE");
-				writeLoginCookie(bean, bean, nextPage, response);
-				System.out.println("	cookieEmail: "+cookieEmail);
-				System.out.println("	cookiePwd: "+cookiePwd);
-			}
-
 			// Use bean to use UserBeanService to see if there's a match
 			UserBean results = service.checkLogin(bean);              // checkLogin READ ONLY, DOESNT DECRYPT Pwd in DB
 			System.out.println("	Service.select(bean) RESULTS: ");
@@ -92,7 +85,7 @@ public class AdminLoginController {
 			System.out.println("		Pwd: "+results.getUserPwd());
 			System.out.println("		Admin: "+results.getAdmin());
 			if (results == null || results.getUserID() == 0) {
-				// Match not found
+// Match not found
 				// If match NOT found, return to previous page AdminLogin
 				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
@@ -101,6 +94,13 @@ public class AdminLoginController {
 				return "AdminLogin";
 			} else {
 				// If match found, return next page
+				if (remMe == true) {
+					System.out.println("	RememberMe = True: MAKING COOKIE");
+					writeLoginCookie(bean, bean, nextPage, response);
+					System.out.println("	cookieEmail: "+cookieEmail);
+					System.out.println("	cookiePwd: "+cookiePwd);
+				}
+				
 				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
