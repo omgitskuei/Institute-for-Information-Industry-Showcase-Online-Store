@@ -26,15 +26,15 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 			System.out.println("insertThisSetting!=null");
 
 			session.save(insertThisSetting);
-			System.out.println("SettingBean inserted:");
-			System.out.println("settingSecurityQ:" + insertThisSetting.getSettingSecurityQ());
-			System.out.println("settingSecurityA:" + insertThisSetting.getSettingSecurityA());
-			System.out.println("settingDisplayName:" + insertThisSetting.getSettingDisplayName());
-			System.out.println("settingAllowMetadata:" + insertThisSetting.getSettingAllowMetadata());
+			System.out.println("	SettingBean inserted:");
+			System.out.println("		settingSecurityQ:" + insertThisSetting.getSettingSecurityQ());
+			System.out.println("		settingSecurityA:" + insertThisSetting.getSettingSecurityA());
+			System.out.println("		settingDisplayName:" + insertThisSetting.getSettingDisplayName());
+			System.out.println("		settingAllowMetadata:" + insertThisSetting.getSettingAllowMetadata());
 
 			return true;
 		}
-		System.out.println("ERROR: insert SettingBean FAILED; SettingBean insertThisSetting==null");
+		System.out.println("	ERROR: insert SettingBean FAILED; SettingBean insertThisSetting==null");
 		System.out.println("FINISH: SettingBeanDAO.insertSetting(SettingBean insertThisSetting)");
 		return false;
 	}

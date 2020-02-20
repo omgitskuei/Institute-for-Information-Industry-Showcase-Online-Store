@@ -85,7 +85,7 @@ public class AdminLoginController {
 			}
 
 			// Use bean to use UserBeanService to see if there's a match
-			UserBean results = service.checkLogin(bean);
+			UserBean results = service.checkLogin(bean);              // checkLogin READ ONLY, DOESNT DECRYPT Pwd in DB
 			System.out.println("	Service.select(bean) RESULTS: ");
 			System.out.println("		userID: "+results.getUserID());
 			System.out.println("		Email: "+results.getUserEmail());
