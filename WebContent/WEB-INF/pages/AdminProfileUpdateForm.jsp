@@ -11,8 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者編輯使用資訊</title>
-<style>
-.errMsgJS {
+<style>.errMsgJS {
   color: red;
 }
 </style>

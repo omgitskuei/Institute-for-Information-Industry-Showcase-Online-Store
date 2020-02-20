@@ -60,7 +60,7 @@ public class UserBeanService {
 		String pwd = selectThisUser.getUserPwd();
 		// Validate values, if not valid email & password, don't bother selecting
 		if (validateEmail(email) && validatePwd(pwd)) {
-			System.out.println("Email && Pwd VALID");
+			System.out.println("	Email && Pwd BOTH VALID");
 			return uDAO.selectUser(selectThisUser);
 		} else {
 			System.out.println("Email && Pwd INVALID");

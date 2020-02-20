@@ -36,6 +36,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	public void updateProfile(ProfileBean theProfile) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.update(theProfile);
+
 		System.out.println("ProfileBean Inserted:");
 		System.out.println("	address"+theProfile.getProfileAddress());
 		System.out.println("	bday"+theProfile.getProfileBirthdate());
@@ -46,6 +47,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		System.out.println("	vip"+theProfile.getProfileVIP());
 		System.out.println("	profileID"+theProfile.getProfileID());
 		System.out.println("	userID"+theProfile.getUserID());
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

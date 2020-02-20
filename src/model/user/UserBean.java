@@ -24,6 +24,8 @@ public class UserBean {
 	private String userEmail;		// Not NULL
 	private String userPwd;		// Not NULL
 	private int admin;		// Not NULL
+	EncryptString tink = new EncryptString();
+	EncodeHexString encoder = new EncodeHexString();
 //	OneToOne關係目前用不到先關閉
 //	private WalletBean walletBean;
 //	private ProfileBean profileBean;
