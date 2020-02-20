@@ -1,5 +1,6 @@
 package model.profile;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -20,11 +23,11 @@ public class ProfileBean {
 	private int userID;		// Not NULL
 	private String profileFullName;
 //	@NotNull(message = "請輸入日期 yyyy-MM-dd ")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date profileJoinDate;		// Not Null
 //    @NotNull(message = "請輸入日期 yyyy-MM-dd.")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date profileBirthdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate profileBirthdate;
     private String profileSex;
 //    @NotNull(message = "請輸入電話.")
     private String profilePhone;		// Not NULL
@@ -54,7 +57,7 @@ public class ProfileBean {
 			int userID,
 			String profileFullName, 
 			Date profileJoinDate,
-			Date profileBirthdate, 
+			LocalDate profileBirthdate, 
 			String profileSexString,
 			String profilePhoneString, 
 			String profileAddress,
@@ -110,11 +113,11 @@ public class ProfileBean {
 	}
 
 	@Column(name = "profileBirthdate")
-	public Date getProfileBirthdate() {
+	public LocalDate getProfileBirthdate() {
 		return profileBirthdate;
 	}
 
-	public void setProfileBirthdate(Date profileBirthdate) {
+	public void setProfileBirthdate(LocalDate profileBirthdate) {
 		this.profileBirthdate = profileBirthdate;
 	}
 
