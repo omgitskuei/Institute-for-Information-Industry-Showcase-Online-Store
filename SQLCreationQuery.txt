@@ -55,7 +55,7 @@ ProductName NVarchar(50)  Not NULL,
 ProductPrice decimal(18, 2) Not NULL,
 ProductStock int Not NULL,
 ProductDescription NVarchar(MAX),
-ProductImg varbinary(MAX) Not NULL,
+ProductImg NVarchar(50) Not NULL,
 ProductTimestamp Date Not NULL,
 ProductCategory NVarchar(50) Not NULL
 )

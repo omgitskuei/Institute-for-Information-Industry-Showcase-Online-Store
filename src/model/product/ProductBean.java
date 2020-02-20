@@ -23,7 +23,7 @@ public class ProductBean {
 	private float ProductPrice;		// Not NULL
 	private int ProductStock;		// Not NULL
 	private String ProductDescription;
-	private byte[] ProductImg;		// Not NULL
+	private String ProductImg;		// Not NULL
 	private Date ProductTimestamp;		// Not NULL
 	private String ProductCategory;		// Not NULL
 	// Constructors
@@ -31,7 +31,7 @@ public class ProductBean {
 	}
 
 	public ProductBean(String ProductName, float ProductPrice, int ProductStock, String ProductDescription,
-			byte[] ProductImg, Date ProductTimestamp, String ProductCategory) {
+			String ProductImg, Date ProductTimestamp, String ProductCategory) {
 
 		this.ProductName = ProductName;
 		this.ProductPrice = ProductPrice;
@@ -92,11 +92,11 @@ public class ProductBean {
 	}
 
 	@Column(name = "ProductImg")
-	public byte[] getProductImg() {
+	public String getProductImg() {
 		return ProductImg;
 	}
 
-	public void setProductImg(byte[] productImg) {
+	public void setProductImg(String productImg) {
 		this.ProductImg = productImg;
 	}
 
@@ -118,14 +118,15 @@ public class ProductBean {
 	public void setProductCategory(String productCategory) {
 		this.ProductCategory = productCategory;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "ProductBean [ProductID=" + ProductID + ", ProductName=" + ProductName + ", ProductPrice=" + ProductPrice
 				+ ", ProductStock=" + ProductStock + ", ProductDescription=" + ProductDescription + ", ProductImg="
-				+ Arrays.toString(ProductImg) + ", ProductTimestamp=" + ProductTimestamp + ", ProductCategory="
-				+ ProductCategory + "]";
+				+ ProductImg + ", ProductTimestamp=" + ProductTimestamp + ", ProductCategory=" + ProductCategory + "]";
 	}
+	
+
+	
 
 }
