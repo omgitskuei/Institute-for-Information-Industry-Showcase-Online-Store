@@ -24,27 +24,28 @@ public class EncryptString {
 	}
 
 	// Methods
-	public Aead newCleartextAEADKeyset() {
-		try {
-			// Initializing Tink/AEAD
-			AeadConfig.register();
-			// Generating new key material/keysets
-			KeyTemplate keyTemplate = AeadKeyTemplates.AES256_GCM;
-			KeysetHandle keysetHandle = KeysetHandle.generateNew(keyTemplate);
-			// Write key material to file/store them
-			String keysetFilename = "keyset.json";
-			CleartextKeysetHandle.write(keysetHandle, JsonKeysetWriter.withFile(new File(keysetFilename)));
-			// Obtaining and using primitive AEAD
-			Aead aead = keysetHandle.getPrimitive(Aead.class);
-			return aead;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("EXCEPTION at util.EncryptString.newCleartextAEADKeyset: Returning NULL");
-			return null;
-		}
-	}
+//	public Aead newCleartextAEADKeyset() {
+//		try {
+//			// Initializing Tink/AEAD
+//			AeadConfig.register();
+//			// Generating new key material/keysets
+//			KeyTemplate keyTemplate = AeadKeyTemplates.AES256_GCM;
+//			KeysetHandle keysetHandle = KeysetHandle.generateNew(keyTemplate);
+//			// Write key material to file/store them
+//			String keysetFilename = "keyset.json";
+//			CleartextKeysetHandle.write(keysetHandle, JsonKeysetWriter.withFile(new File(keysetFilename)));
+//			// Obtaining and using primitive AEAD
+//			Aead aead = keysetHandle.getPrimitive(Aead.class);
+//			return aead;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("EXCEPTION at util.EncryptString.newCleartextAEADKeyset: Returning NULL");
+//			return null;
+//		}
+//	}
 
 	public byte[] encryptGoogleTinkAEAD(String plainText, String ad) {
+		System.out.println("	Encrypting "+plainText+" with AD "+ad+" into AES AEAD");
 		try {
 			// Initialize Tink/AEAD
 			AeadConfig.register();
@@ -56,10 +57,9 @@ public class EncryptString {
 
 			// Encrypt
 			byte[] ciphertext = aead.encrypt(plainText.getBytes(), ad.getBytes());
-			System.out.println("Encode Plaintext (String) into AEAD Cipher (byte[]): " + ciphertext);
+			System.out.println("	Result AEAD Cipher (byte[]): " + ciphertext);
 			return ciphertext;
 		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("util.EncryptString.encryptGoogleTinkAEAD EXCEPTION: Returning NULL");
 			return null;
@@ -67,6 +67,7 @@ public class EncryptString {
 	}
 
 	public String decryptGoogleTinkAEAD(byte[] cipher, String ad) {
+		System.out.println("	Decrypting AEAD (byte[])"+cipher+" with AD "+ad+" into plainText");
 		try {
 			// Initialize Tink/AEAD
 			AeadConfig.register();
@@ -78,7 +79,7 @@ public class EncryptString {
 
 			// Decrypt
 			String decrypted = new String(aead.decrypt(cipher, ad.getBytes()));
-			System.out.println("Decode AEAD Cipher (byte[]) into Plaintext (String): " + decrypted);
+			System.out.println("	Result Plaintext: " + decrypted);
 			return decrypted;
 		} catch (GeneralSecurityException | IOException e) {
 			e.printStackTrace();
@@ -90,8 +91,8 @@ public class EncryptString {
 	// Executable
 	public static void main(String args[]) {
 		// Get Input
-		GetRuntimeInput util = new GetRuntimeInput("Input String:");
-		String plainText = util.input;
+//		GetRuntimeInput util = new GetRuntimeInput("Input String:");
+//		String plainText = util.input;
 
 		EncryptString util1 = new EncryptString();
 		// Refreshes the encryption keys in keyset.json.
@@ -103,13 +104,13 @@ public class EncryptString {
 		
 		
 		// encrypt
-		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
-		String hexstring = s.byteArrayToHexString(cipher);
+		byte[] cipher = util1.encryptGoogleTinkAEAD("Qq1!qwer", "OMGiloveyou");
+		String encrypted = s.byteArrayToHexString(cipher);
 		
-		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key and fail decrypt
+		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key
 		
-		// decrypt
-		byte[] bytearray = s.HexStringToByteArray(hexstring);
+		// decrypt	
+		byte[] bytearray = s.HexStringToByteArray(encrypted);
 		String decrypted = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
 	}
 }

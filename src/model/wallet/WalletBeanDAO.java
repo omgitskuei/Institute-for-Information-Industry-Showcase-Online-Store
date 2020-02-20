@@ -26,18 +26,18 @@ public class WalletBeanDAO implements WalletBeanDAOInterface {
 		Session session = sessionFactory.getCurrentSession();
 		// Test if passed WalletBean is not empty
 		if (insertThisWallet != null) {
-			System.out.println("insertThisWallet != null");
+			System.out.println("	insertThisWallet != null");
 			// Insert the passed WalletBean
 			session.save(insertThisWallet);
-			System.out.println("WalletBean Inserted:");
-			System.out.println("	walletID: "+ insertThisWallet.getWalletID());
-			System.out.println("	wserID: "+ insertThisWallet.getUserID());
-			System.out.println("	walletAmount: " + insertThisWallet.getWalletAmount());
+			System.out.println("	WalletBean Inserted:");
+			System.out.println("		walletID: "+ insertThisWallet.getWalletID());
+			System.out.println("		wserID: "+ insertThisWallet.getUserID());
+			System.out.println("		walletAmount: " + insertThisWallet.getWalletAmount());
 			System.out.println("FINISH: WalletBeanDAO.insertWallet(WalletBean insertThisWallet)");
 			// Return True, for SUCCESSFUL INSERT
 			return true;
 		}
-		System.out.println("ERROR: Insert WalletBean FAILED; WalletBean insertThisWallet == null.");
+		System.out.println("	ERROR: Insert WalletBean FAILED; WalletBean insertThisWallet == null.");
 		System.out.println("FINISH: WalletBeanDAO.insertThisWallet(WalletBean insertThisWallet)");
 		// Return False, for FAILED INSERT
 		return false;

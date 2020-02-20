@@ -23,7 +23,6 @@ public class SettingBeanService {
 		// Local variables
 		boolean success = false;
 		
-		String displayName = insertThisBean.getSettingDisplayName();
 		// Validate input values
 		//if (validateDisplayName(displayName)) {	// there are Major problems with validateDisplayName(String)
 			success = true;
