@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:useBean id="command" class="model.profile.ProfileBean"
 	scope="request"></jsp:useBean>
@@ -40,52 +39,59 @@
 	
 	</div>
 
-	<form method="POST" action="<c:url value="/AdminProfile/updateProfile" />" >
+	<form:form method="POST" action="saveProfile" modelAttribute="profile">
 		<div class="form-group">
-		<input hidden="true" value="${user.userID}" />
+		<form:hidden path="userID" />
 		</div>
 		
 		<div class="form-group">
 		<label>姓名</label>
-		<input class="form-control"  value="${profile.profileFullName}" />
+		<form:input cssClass="form-control" path="profileFullName" />
 		</div>
 		
 		<div class="form-group">
 		<label>加入日期</label>
-		<input class="form-control" readonly value="${profile.profileJoinDate}" />
+		<form:input id="joinDateInput" onkeyup="joinDateCheck()" cssClass="form-control" path="profileJoinDate" />
+		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
+		<form:errors class="errMsgJS" path="profileJoinDate" />
 		</div>
 		
 		<div class="form-group">
 		<label>生日</label>
-		<input class="form-control" value="${profile.profileBirthdate}"/>
+		<form:input id="birthdayInput" onkeyup="birthdayCheck()" cssClass="form-control" path="profileBirthdate" />
+		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
+		<form:errors class="errMsgJS" path="profileBirthdate" />
 		</div>
 		
 		<div class="form-group">
-		<label>性別</label>
-		<input class="form-control" value="${profile.profileSex}" />
+		<label>生日</label>
+		<form:input cssClass="form-control" path="profileSex" />
 		</div>
 		
 		<div class="form-group">
 		<label>電話</label>
-		<input class="form-control" value="${profile.profilePhone}" />
+		<form:input cssClass="form-control" path="profilePhone" />
+		<form:errors class="errMsgJS" path="profilePhone" />
 		<small><span class="errMsgJS" id="phoneErrMsg"></span></small>
 		</div>
 		
 		<div class="form-group">
 		<label>地址</label>
-		<input class="form-control" value="${profile.profileAddress}" />
+		<form:input cssClass="form-control" path="profileAddress" />
+		<form:errors class="errMsgJS" path="profileAddress" />
 		<small><span class="errMsgJS" id="addressErrMsg"></span></small>
 		</div>
 		
 		<div class="form-group">
 		<label>VIP Level :</label>
-		<input class="form-control" value="${profile.profileVIP}" />
+		<form:input cssClass="form-control" path="profileVIP" />
+		<form:errors class="errMsgJS" path="profileVIP" />
 		</div>
 		
-		<button class="btn btn-info" type="submit"
-						value="儲存">儲存</button>
+		<form:button class="btn btn-info" type="submit"
+						value="儲存">儲存</form:button>
 			
-	</form>
+	</form:form>
 	</div>
 
 
@@ -95,7 +101,6 @@
 			var dateValue = document.getElementById('joinDateInput').value;
 			var dateCon = document.getElementById('joinDateErrMsg');
 			var rexdate = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-
 			if (dateValue == '') {
 				dateCon.innerHTML = "日期不可空白";
 			} else if (!rexdate.test(dateValue)) {
@@ -104,12 +109,10 @@
 				dateCon.innerHTML = "";
 			}
 		}
-
 		function birthdayCheck() {
 			var dateValue = document.getElementById('birthdayInput').value;
 			var dateCon = document.getElementById('birthdayErrMsg');
 			var rexdate = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-
 			if (dateValue == '') {
 				dateCon.innerHTML = "日期不可空白";
 			} else if (!rexdate.test(dateValue)) {
@@ -121,4 +124,3 @@
 	</script>
 </body>
 </html>
-
