@@ -44,6 +44,10 @@
 		</div>
 		
 		<div class="form-group">
+		<form:hidden path="profileID" />
+		</div>
+		
+		<div class="form-group">
 		<label>姓名</label>
 		<form:input cssClass="form-control" path="profileFullName" />
 		</div>
@@ -56,14 +60,14 @@
 		</div>
 		
 		<div class="form-group">
-		<label>生日</label>
-		<form:input id="birthdayInput" onkeyup="birthdayCheck()" cssClass="form-control" path="profileBirthdate" />
+		<label for="birthday">生日</label>
+		<form:input type="date" name="birthday" id="birthdayInput" onkeyup="birthdayCheck()" cssClass="form-control" path="profileBirthdate" />
 		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
 		<form:errors class="errMsgJS" path="profileBirthdate" />
 		</div>
 		
 		<div class="form-group">
-		<label>生日</label>
+		<label>性別</label>
 		<form:input cssClass="form-control" path="profileSex" />
 		</div>
 		

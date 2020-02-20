@@ -63,6 +63,7 @@ public class AdminProfileController {
 	
 	@PostMapping("/updateProfile")
 	public String updateProfile(@ModelAttribute("profile") @Valid ProfileBean theProfile, BindingResult bindingResult) {
+		System.out.println(theProfile);
 		profileService.updateProfile(theProfile);
 		if (bindingResult.hasErrors()) {
 			return "AdminProfileUpdateForm";

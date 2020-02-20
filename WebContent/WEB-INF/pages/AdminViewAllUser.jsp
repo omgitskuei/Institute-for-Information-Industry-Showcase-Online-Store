@@ -99,8 +99,8 @@
 									<tr>
 										<td>${user.userID}</td>
 										<td>${user.profileFullName}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.profileJoinDate}" /></td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.profileBirthdate}" /></td>
+										<td>${user.profileJoinDate}</td>
+										<td>${user.profileBirthdate}</td>
 										<td>${user.profileSex}</td>
 										<td>${user.profilePhone}</td>
 										<td>${user.profileAddress}</td>
