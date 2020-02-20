@@ -69,14 +69,20 @@
 <section id="services" class="py-3">
     <div class="container">
         <div class="row mb-4">
+        
+        <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
                 <div class="card box-shadow">
-                    <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/301x200/?fruit" alt="">
+                    <img class="card-img-top img-fluid" src="${product.productImg}" alt="${product.productName}">
                     <div class="card-body">
-                        <h4 class="card-title">商品一</h4>
+                        <h4 class="card-title">${product.productName}</h4>
                         <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                            <small class="text-muted">${product.productTimestamp}</small>
                         </p>
+                        <p class="card-text">
+                          <samll class="text-muted">${product.productDescription}</samll>
+                        </p>
+                        <p id="productPrice" class="card-text">${product.productPrice}</p>
                         <div class="row ml-5">
                         <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
                         <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
@@ -84,6 +90,7 @@
                     </div>
                 </div>
             </div>
+        </jstl:forEach>
             
             <div class="col-md-4">
                 <div class="card box-shadow">

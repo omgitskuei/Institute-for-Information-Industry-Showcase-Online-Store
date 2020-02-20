@@ -21,7 +21,7 @@ import model.product.ProductBeanService;
 //2)寫完了
 //3)忠城寫的
 @Controller
-@SessionAttributes
+@SessionAttributes(names = {"userEmail"})
 @RequestMapping("/AdminProduct")
 public class UpdateProductController {
 

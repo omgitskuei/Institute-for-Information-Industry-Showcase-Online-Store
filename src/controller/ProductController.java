@@ -69,17 +69,19 @@ public class ProductController {
 		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(saveFile), headers, HttpStatus.OK);
 		
 	}
-
+	
+	
+	// TODO 明天來用 2/21 存  String 就好
 	private void savePicture(String fileName, String savePath) {
 		try {
 			ProductBean ProductBean = new ProductBean();
 
 			FileInputStream is1 = new FileInputStream(savePath);
-			byte[] data = new byte[is1.available()];
-			is1.read(data);
+		//	String data = new byte[is1.available()];
+		//	is1.read(data);
 			is1.close();
 			
-			ProductBean.setProductImg(data);
+		//	ProductBean.setProductImg(data);
 			prservice.saveProduct(ProductBean);		
 			System.out.println("File ["+fileName+"] at root ["+savePath+"] has successfully SAVED");
 		} catch (Exception e) {
