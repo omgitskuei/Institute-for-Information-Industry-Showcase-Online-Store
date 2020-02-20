@@ -39,7 +39,7 @@
 	
 	</div>
 
-	<form:form method="POST" action="saveProfile" modelAttribute="profile">
+	<form:form method="POST" action="updateProfile" modelAttribute="profile">
 		<div class="form-group">
 		<form:hidden path="userID" />
 		</div>
