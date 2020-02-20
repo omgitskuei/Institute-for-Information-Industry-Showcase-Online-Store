@@ -54,7 +54,7 @@
 		
 		<div class="form-group">
 		<label>加入日期</label>
-		<form:input id="joinDateInput" onkeyup="joinDateCheck()" cssClass="form-control" path="profileJoinDate" />
+		<form:input  cssClass="form-control" path="profileJoinDate" readonly="true" />
 		<small><span class="errMsgJS" id="joinDateErrMsg"></span></small>
 		<form:errors class="errMsgJS" path="profileJoinDate" />
 		</div>
