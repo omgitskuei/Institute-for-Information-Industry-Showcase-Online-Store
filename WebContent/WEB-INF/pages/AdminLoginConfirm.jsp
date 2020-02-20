@@ -17,6 +17,7 @@
 	<title>Admin Verification | 管理者注冊</title>
 	<!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 	<!-- Dictate which Stylesheets to use for this webpage -->
+
     <style>
     	<%@include file="/WEB-INF/css/normalize.css"%>
         <%@include file="/WEB-INF/css/style.css"%>

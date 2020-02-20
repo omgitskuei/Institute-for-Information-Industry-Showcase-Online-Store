@@ -19,40 +19,7 @@
  </head>
   <body>
     <!-- START -->
-    <nav class="navbar navbar-expand-sm navbar-dark">
-      <div class="container">
-        <a href="index.html" class="navbar-brand" style="font-family: 'Kaushan Script', cursive;">FarmVille</a>
-        <button
-          class="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item first">
-
-              <a href=<jstl:url value="/directaboutus"/> class="nav-link">關於我們</a>
-
-            </li>
-            <li class="nav-item">
-              <a href=<jstl:url value="/directservices"/> class="nav-link">服務</a>
-            </li>
-            <li class="nav-item">
-              <a href=<jstl:url value="/directcontact"/> class="nav-link">聯絡我們</a>
-            </li>
-            <li class="nav-item">
-              <a href="shoppingcart.html" class="nav-link">購物車</a>
-            </li>
-            <li class="nav-item">
-              <a href=<jstl:url value="/directlogin"/> class="nav-link">登入</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+ <%@include file="/WEB-INF/pages/front_navbar.jsp" %>
     <!-- SHOWCASE SLIDER -->
     <section id="showcase">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
