@@ -32,51 +32,41 @@ public class SearchBarController {
 		System.out.println("BEGIN /searchBar");
 		System.out.println("	User input: "+searchBar);
 		
-		// call fuzzyQuery model method (which is WIP) on name
-		
+		// call fuzzyQuery model method on name
 		// call fuzzyQery model method on category
-		
 		// call fuzzyQery model method on description
-		
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+		// 
 		// get rid of the overlaps
-		
-		
 		// if results size() is 0, assume input has typos
-		// - look up dictionary for similar words to input
-		
-		// - rank similar words by index
-		
-		// - add top 3 similar words to empty results
+		// look up dictionary for similar words to input
+		// Reorder the fuzzyResults by relevance; search result
+		// rank similar words by index
+		// add top 3 similar words to empty results
 		
 		
 		// return results
 		
-		
-		
-		// prelim testing:
-		// selectAll products by productName and return products with name==input
-		List<ProductBean> resultsAll = pService.selectAll();
-		for(int index=0; index<resultsAll.size(); index++) {
-			if (resultsAll.get(index).getProductName().equalsIgnoreCase(searchBar)) {
-				System.out.println(resultsAll.get(index).getProductName());
-				nextPage.addAttribute("name", resultsAll.get(index).getProductName());
+		for(int index=0; index<fuzzyResults.size(); index++) {
+			
+				System.out.println(fuzzyResults.get(index).getProductName());
+				nextPage.addAttribute("name", fuzzyResults.get(index).getProductName());
 				
-				System.out.println(resultsAll.get(index).getProductPrice());
-				nextPage.addAttribute("price", resultsAll.get(index).getProductPrice());
+				System.out.println(fuzzyResults.get(index).getProductPrice());
+				nextPage.addAttribute("price", fuzzyResults.get(index).getProductPrice());
 				
-				System.out.println(resultsAll.get(index).getProductStock());
-				nextPage.addAttribute("stock", resultsAll.get(index).getProductStock());
+				System.out.println(fuzzyResults.get(index).getProductStock());
+				nextPage.addAttribute("stock", fuzzyResults.get(index).getProductStock());
 				
-				System.out.println(resultsAll.get(index).getProductDescription());
-				nextPage.addAttribute("description", resultsAll.get(index).getProductDescription());
+				System.out.println(fuzzyResults.get(index).getProductDescription());
+				nextPage.addAttribute("description", fuzzyResults.get(index).getProductDescription());
 				
-				System.out.println(resultsAll.get(index).getProductTimestamp());
-				nextPage.addAttribute("timestamp", resultsAll.get(index).getProductTimestamp());
+				System.out.println(fuzzyResults.get(index).getProductTimestamp());
+				nextPage.addAttribute("timestamp", fuzzyResults.get(index).getProductTimestamp());
 				
-				System.out.println(resultsAll.get(index).getProductCategory());
-				nextPage.addAttribute("category", resultsAll.get(index).getProductCategory());
-				
-			}
+				System.out.println(fuzzyResults.get(index).getProductCategory());
+				nextPage.addAttribute("category", fuzzyResults.get(index).getProductCategory());
+			
 		}
 		return "product";
 	}

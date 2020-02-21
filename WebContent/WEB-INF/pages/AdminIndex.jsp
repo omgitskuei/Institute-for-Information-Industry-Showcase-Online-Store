@@ -69,12 +69,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 ml-auto">
+      <form class="form" name="searchForm" action="<jstl:url value="searchBar" />" method="post">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="搜尋...">
+            <input type="search" class="form-control" placeholder="搜尋..." name="searchBar">
             <div class="input-group-append">
-                <button class="btn btn-primary">搜尋</button>
+                <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
         </div>
+        </form>
       </div>
       <div class="col-md-6 ml-auto">
       	<div class="form-group">
