@@ -24,6 +24,10 @@ public class ProductBeanService implements ProductBeanServiceInterface {
 	public boolean updateProductName(ProductBean thisProduct, String newProductName) {
 		return productDAO.updateProductName(thisProduct, newProductName);
 	}
+	
+	public List<ProductBean> selectFuzzy(String productName, String productCategory, String description) {
+		return productDAO.selectFuzzy(productName, productCategory, description);
+	}
 
 	@Override
 	public ProductBean getProduct(int productID) {
