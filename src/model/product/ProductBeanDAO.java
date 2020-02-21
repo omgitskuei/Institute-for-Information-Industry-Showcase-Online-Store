@@ -265,7 +265,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<ProductBean> selectFuzzy(String productName, String productCategory, String description) {
-		System.out.println("Begin: ProductBeanDAO.selectAllByCategory()");
+		System.out.println("BEGIN: ProductBeanDAO.selectFuzzy(String, String, String)");
 		Session session = sessionFactory.getCurrentSession();
 		
 		String hql = "From ProductBean where ProductName like '%"+productName+"%' or ProductDescription like '%"+description+"%' or ProductCategory like '%"+productCategory+"%'";
@@ -274,7 +274,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		List<ProductBean> results = (List<ProductBean>) query.list();
 		System.out.println("	# of results: " + results.size());
 		// Return List results
-		System.out.println("Finish: ProductBeanDAO.selectAllByCategory()");
+		System.out.println("FINISH: ProductBeanDAO.selectFuzzy(String, String, String)");
 		return results;
 	}
 	
