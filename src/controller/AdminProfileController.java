@@ -25,7 +25,7 @@ import model.wallet.WalletBeanService;
 
 // Admin 的 Profile 控制器
 @Controller
-@SessionAttributes
+@SessionAttributes(names= {"userID"})
 @RequestMapping("/AdminProfile")
 public class AdminProfileController {
 
@@ -85,7 +85,7 @@ public class AdminProfileController {
 	@GetMapping("/updatePasswordForm")
 	public String showFormForPassword(@RequestParam("userID") int userID, Model m) {
 		UserBean theUser = userService.selectUser(userID);
-		
+		System.out.println(theUser.getUserPwd());
 		m.addAttribute("user", theUser);
 		
 		return "AdminUpdatePasswordForm";
