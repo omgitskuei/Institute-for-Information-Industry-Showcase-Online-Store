@@ -79,20 +79,20 @@ public class AdminLoginController {
 
 			// Use bean to use UserBeanService to see if there's a match
 			UserBean results = service.checkLogin(bean);              // checkLogin READ ONLY, DOESNT DECRYPT Pwd in DB
-			System.out.println("	Service.select(bean) RESULTS: ");
-			System.out.println("		userID: "+results.getUserID());
-			System.out.println("		Email: "+results.getUserEmail());
-			System.out.println("		Pwd: "+results.getUserPwd());
-			System.out.println("		Admin: "+results.getAdmin());
+			System.out.println("	UserService.select(bean) RESULTS: ");
 			if (results == null || results.getUserID() == 0) {
-// Match not found
+				// Match not found
 				// If match NOT found, return to previous page AdminLogin
 				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
-				System.out.println("User no match found: Returning to AdminLogin");
+				System.out.println("		NO MATCH FOUND: Returning to AdminLogin");
 				System.out.println("FINISH /adminSignIn");
 				return "AdminLogin";
 			} else {
+				System.out.println("		userID: "+results.getUserID());
+				System.out.println("		Email: "+results.getUserEmail());
+				System.out.println("		Pwd: "+results.getUserPwd());
+				System.out.println("		Admin: "+results.getAdmin());
 				// If match found, return next page
 				if (remMe == true) {
 					System.out.println("	RememberMe = True: MAKING COOKIE");
