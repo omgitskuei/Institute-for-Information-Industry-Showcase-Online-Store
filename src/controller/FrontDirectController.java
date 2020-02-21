@@ -2,6 +2,9 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,8 +27,9 @@ import model.product.ProductBeanService;
 @Controller 
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
-
-	private ProductBeanService productService;
+	
+	@Autowired
+	public ProductBeanService productService;
 
 	// 1)進首頁
 	// 2)完成
@@ -45,20 +49,22 @@ public class FrontDirectController {
 		return "front_about";
 	}
 	
-	// 1)進服務
+	// 1)進服務(商品頁面，User Products Page)
 	// 2)測試
 	// 3)Thomas
 	@RequestMapping(value = "/directservices", method = RequestMethod.GET)
-	public String directToServices(Model mm) {
-		// TODO 前台顯示商品 2/21 做，奇怪抓不到值
-//		List<ProductBean> Inventorylist= productService.selectAll();
-//		System.out.println("導到服務");
-//		System.out.println("Get model content: " + mm );
-//		System.out.println("Get model content: " + Inventorylist );
-//		System.out.println("Directing to user service");
-//		
-//		mm.addAttribute("InventoryList", Inventorylist);
-//		System.out.println("Get Inventiry content: " + Inventorylist );
+	public String directToServices(Model mm, HttpSession session) {
+		
+		System.out.println("導到服務");
+		System.out.println("Directing to user service");
+		System.out.println("塞進去以前的 model : " + mm);
+		
+		List<ProductBean> Inventorylist= productService.selectAll();
+
+		mm.addAttribute("InventoryList", Inventorylist);
+		System.out.println("塞進去以後的 model : " + mm );
+		System.out.println("Get Inventiry content: " + Inventorylist );
+		
 		return "front_services";
 	}
 	
