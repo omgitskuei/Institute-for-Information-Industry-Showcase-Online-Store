@@ -133,7 +133,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		return false;
 	}
 
-	public boolean updateProductImg(ProductBean updateThisProduct, byte[] newProductImg) {
+	public boolean updateProductImg(ProductBean updateThisProduct, String newProductImg) {
 		// Get current Session
 		System.out
 				.println("Begin: ProductBeanDAO.updateProductImg(ProductBean updateThisProduct, byte[] newProductImg)");
@@ -144,7 +144,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, update ProductImg and return True
-				byte[] oldProductImg = existingProduct.getProductImg();
+				String oldProductImg = existingProduct.getProductImg();
 				existingProduct.setProductImg(newProductImg);
 				System.out.println("Product img updated!");
 				System.out.println("Finish: ProductBeanDAO.updateProductImg(ProductBean, byte[])");

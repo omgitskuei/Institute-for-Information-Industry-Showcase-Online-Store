@@ -96,7 +96,7 @@
                 <td>${product.productPrice}</td>
                 <td>${product.productStock}</td>
                 <td>${product.productDescription}</td>
-                <td>${product.productImg}</td>
+                <td><img src="${product.productImg}" alt="${product.productName}" width="200" /></td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.productTimestamp}" /></td>
                 <td>${product.productCategory}</td>
                 	<td>
