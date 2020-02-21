@@ -25,15 +25,15 @@
 			</tr>
 			<tr>
 				<td>訂購時間 :</td>
-				<td><form:input path="OrderTime" /></td>
+				<td><form:input path="OrderTime" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td>訂購人ID :</td>
-				<td><form:input path="UserID" /></td>
+				<td><form:input path="UserID" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td>總價 :</td>
-				<td><form:input path="Total" /></td>
+				<td><form:input path="Total" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td>寄送地址 :</td>

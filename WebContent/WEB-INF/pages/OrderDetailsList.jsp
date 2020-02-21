@@ -107,7 +107,6 @@
               <tr>
                 <th>產品編號</th>
                 <th>產品名稱</th>
-                <th></th>
                 <th>單價</th>
                 <th>數量</th>
                 <th>小計</th>
@@ -120,7 +119,6 @@
               <tr>
                 <td>${orderDetailsList.productID}</td>	
 				<td>${orderDetailsList.productName}</td>
-				<th></th>	
 				<td>${orderDetailsList.productPrice}</td>	
 				<td>${orderDetailsList.productCount}</td>
 				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>

@@ -48,10 +48,10 @@ public class UpdateOrderController {
 		return "OrderAdding";
 	}
 
-//	@GetMapping("/delete")
-//	public String deleteOrder(@RequestParam("orderID") int orderID) {
-//		orderService.deleteOrder(orderID);
-//		return "redirect:/AdminOrder/list";
-//	}
+	@GetMapping("/delete")
+	public String deleteOrder(@RequestParam("orderID") int orderID) {
+		orderService.deleteOrder(orderID);
+		return "redirect:/orders";
+	}
 
 }
