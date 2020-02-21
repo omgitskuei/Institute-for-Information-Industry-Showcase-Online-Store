@@ -11,5 +11,6 @@ public interface OrderBeanDAOInterface {
 	public boolean updateMailingPhone(OrderBean updateThisOrder, String newMailingPhone);
 	//Delete
 	public boolean deleteOrder(OrderBean deleteThisOrder);
+	public void deleteOrder(int orderID);
 	public OrderBean getOrder(int orderID);
 }

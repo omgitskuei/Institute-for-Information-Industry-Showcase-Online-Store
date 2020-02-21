@@ -84,9 +84,9 @@
 				</c:url>
 
 <!-- 				construct an "delete" link with customer id -->
-<%-- 				<c:url var="deleteLink" value="/AdminOrder/delete"> --%>
-<%-- 					<c:param name="orderID" value="${orderInfo.orderID}" /> --%>
-<%-- 				</c:url> --%>
+				<c:url var="deleteLink" value="/AdminOrder/delete">
+					<c:param name="orderID" value="${orderInfo.orderID}" />
+				</c:url>
               <tr>
                 <td><a  href='<c:url value='orderDetails.do?orderID=${orderInfo.orderID}' />'>
                 ${orderInfo.orderID}</a></td>
@@ -99,11 +99,11 @@
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
-<!--                 <td> -->
-<%--                   <a href="${deleteLink}" class="btn btn-danger"> --%>
-<!--                     <i class="fas fa-angle-double-right"></i> 刪除 -->
-<!--                   </a> -->
-<!--                 </td> -->
+                <td>
+                  <a href="${deleteLink}" class="btn btn-danger">
+                    <i class="fas fa-angle-double-right"></i> 刪除
+                  </a>
+                </td>
               </tr>
              </jstl:forEach>
             </tbody>

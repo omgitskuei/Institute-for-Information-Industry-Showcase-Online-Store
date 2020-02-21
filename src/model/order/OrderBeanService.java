@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import util.CheckSubstring;
 
 @Service
-public class OrderBeanService {
+public class OrderBeanService implements OrderBeanServiceInterface{
 	// Variables: Local Fields
 	private OrderBeanDAO oDAO;
 
@@ -29,6 +29,10 @@ public class OrderBeanService {
 	
 	public OrderBean getOrder(int orderID) {
 		return oDAO.getOrder(orderID);
+	}
+	
+	public void deleteOrder(int orderID) {
+		 oDAO.deleteOrder(orderID);
 	}
 
 	// Test validity of OrderBean user input

@@ -222,5 +222,12 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
 		return theOrder;
 	}
+	
+	@Override
+	public void deleteOrder(int orderID) {
+	Session session = sessionFactory.getCurrentSession();
+	OrderBean thisorder = session.byId(OrderBean.class).load(orderID);
+	session.delete(thisorder);
+	}
 
 }
