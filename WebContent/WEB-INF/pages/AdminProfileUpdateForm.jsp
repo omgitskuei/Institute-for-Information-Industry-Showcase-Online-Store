@@ -24,13 +24,13 @@
 	<h1>管理者編輯使用資訊</h1>
 	<div>
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
-		<c:param name="userID" value="${user.userID}" />
+		<c:param name="userID" value="${profile.userID}" />
 	</c:url>
 	<c:url var="updatePasswordLink" value="/AdminProfile/updatePasswordForm">
-		<c:param name="userID" value="${user.userID}" />
+		<c:param name="userID" value="${profile.userID}" />
 	</c:url>
 	<c:url var="updateWalletLink" value="/AdminProfile/updateWalletForm">
-		<c:param name="userID" value="${user.userID}" />
+		<c:param name="userID" value="${profile.userID}" />
 	</c:url>
 	<a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
@@ -68,7 +68,10 @@
 		
 		<div class="form-group">
 		<label>性別</label>
-		<form:input cssClass="form-control" path="profileSex" />
+		<form:select cssClass="form-control" path="profileSex" >
+			<form:option value="f">女性(Female)</form:option>
+			<form:option value="m">男性(Male)</form:option>
+		</form:select>
 		</div>
 		
 		<div class="form-group">
