@@ -68,10 +68,7 @@
     <!-- SERVICES SECTION -->
 <section id="services" class="py-3">
     <div class="container">
-
-        <div class="row mb-4 mb-3">
-
-        
+        <div class="row mt-3">
         <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
                 <div class="card box-shadow">
@@ -83,7 +80,7 @@
                             <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
                         <p class="card-text">
-                          <samll class="text-muted">${product.productDescription}</samll>
+                          <samll class="text-muted card-service-height">${product.productDescription}</samll>
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
@@ -97,6 +94,7 @@
             </div>
         </jstl:forEach>
     <div>
+    </div>
     </div>
     </div>
 </section>
