@@ -68,149 +68,39 @@
     <!-- SERVICES SECTION -->
 <section id="services" class="py-3">
     <div class="container">
-        <div class="row mb-4">
+        <div class="row mb-4 mb-3">
+        
+        <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
                 <div class="card box-shadow">
-                    <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/301x200/?fruit" alt="">
+                    <img class="card-img-top img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
                     <div class="card-body">
-                        <h4 class="card-title">商品一</h4>
+                        <p>商品ID : productID </p>
+                        <h4 class="card-title">${product.productName}</h4>
                         <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                            <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
+                        <p class="card-text">
+                          <samll class="text-muted">${product.productDescription}</samll>
+                        </p>
+                        <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
                         <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                        <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
+                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
                       </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <div class="card box-shadow">
-                    <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/300x200/?fruit" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">商品二</h4>
-                        <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </p>
-                        <div class="row ml-5">
-                          <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                          <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                        </div>  
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card box-shadow">
-                    <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/299x200/?food" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">商品三</h4>
-                        <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </p>
-                        <div class="row ml-5">
-                          <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                          <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-4">
-          <div class="col-md-4">
-              <div class="card box-shadow">
-                  <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/302x200/?fruit" alt="">
-                  <div class="card-body">
-                      <h4 class="card-title">商品四</h4>
-                      <p class="card-text">
-                          <small class="text-muted">Last updated 3 mins ago</small>
-                      </p>
-                      <div class="row ml-5">
-                        <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                        <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                      </div> 
-                  </div>
-              </div>
-          </div>
-          
-          <div class="col-md-4">
-              <div class="card box-shadow">
-                  <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/301x202/?fruit" alt="">
-                  <div class="card-body">
-                      <h4 class="card-title">商品五</h4>
-                      <p class="card-text">
-                          <small class="text-muted">Last updated 3 mins ago</small>
-                      </p>
-                      <div class="row ml-5">
-                        <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                        <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                      </div>  
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="card box-shadow">
-                  <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/300x201/?food" alt="">
-                  <div class="card-body">
-                      <h4 class="card-title">商品六</h4>
-                      <p class="card-text">
-                          <small class="text-muted">Last updated 3 mins ago</small>
-                      </p>
-                      <div class="row ml-5">
-                        <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                        <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                      </div> 
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card box-shadow">
-                <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/303x200/?fruit" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">商品七</h4>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <div class="row ml-5">
-                      <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                      <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                    </div>  
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card box-shadow">
-                <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/303x202/?fruit" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">商品八</h4>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <div class="row ml-5">
-                      <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                      <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card box-shadow">
-                <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/298x200/?food" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">商品九</h4>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <div class="row ml-5">
-                      <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
-                      <a href="#" class="btn btn-danger  mt-2 ml-2">加入購物車</a>   
-                    </div> 
-                </div>
-            </div>
-        </div>
+        </jstl:forEach>
+          <button id="clear-cart">Clear Cart</button>
+    
+
+    <div>
+      <ul id="show-cart">
+        <!-- 會重新建立HTML在這邊 -->
+      </ul>
+      <div>Total Cart:$<span id="total-cart"></span></div>
+    </div>
     </div>
     </div>
 </section>
@@ -390,7 +280,221 @@
     <script>
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
+	
 
+      </script>
+
+       
+
+      
+       <script>
+    // ***************************************************
+    // Shopping Cart functions
+
+    var shoppingCart = (function () {
+        // Private methods and properties
+        var cart = [];
+
+        function Item(name, price, count) {
+            this.name = name
+            this.price = price
+            this.count = count
+        }
+
+        function saveCart() {
+            localStorage.setItem("shoppingCart", JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            cart = JSON.parse(localStorage.getItem("shoppingCart"));
+            if (cart === null) {
+                cart = []
+            }
+        }
+
+        loadCart();
+
+
+
+        // Public methods and properties
+        var obj = {};
+
+        obj.addItemToCart = function (name, price, count) {
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart[i].count += count;
+                    saveCart();
+                    return;
+                }
+            }
+
+            console.log("addItemToCart:", name, price, count);
+
+            var item = new Item(name, price, count);
+            cart.push(item);
+            saveCart();
+        };
+
+        obj.setCountForItem = function (name, count) {
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart[i].count = count;
+                    break;
+                }
+            }
+            saveCart();
+        };
+
+
+        obj.removeItemFromCart = function (name) { // Removes one item
+            for (var i in cart) {
+                if (cart[i].name === name) { // "3" === 3 false
+                    cart[i].count--; // cart[i].count --
+                    if (cart[i].count === 0) {
+                        cart.splice(i, 1);
+                    }
+                    break;
+                }
+            }
+            saveCart();
+        };
+
+
+        obj.removeItemFromCartAll = function (name) { // removes all item name
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart.splice(i, 1);
+                    break;
+                }
+            }
+            saveCart();
+        };
+
+
+        obj.clearCart = function () {
+            cart = [];
+            saveCart();
+        }
+
+
+        obj.countCart = function () { // -> return total count
+            var totalCount = 0;
+            for (var i in cart) {
+                totalCount += cart[i].count;
+            }
+
+            return totalCount;
+        };
+
+        obj.totalCart = function () { // -> return total cost
+            var totalCost = 0;
+            for (var i in cart) {
+                totalCost += cart[i].price * cart[i].count;
+            }
+            return totalCost.toFixed(2);
+        };
+
+        obj.listCart = function () { // -> array of Items
+            var cartCopy = [];
+            console.log("Listing cart");
+            console.log(cart);
+            for (var i in cart) {
+                console.log(i);
+                var item = cart[i];
+                var itemCopy = {};
+                for (var p in item) {
+                    itemCopy[p] = item[p];
+                }
+                itemCopy.total = (item.price * item.count).toFixed(2);
+                cartCopy.push(itemCopy);
+            }
+            return cartCopy;
+        };
+
+        // ----------------------------
+        return obj;
+    })();
+    </script>
+
+       
+       <script>
+        // event就像一個function可以帶值進去
+        $(".add-to-cart").click(function(event){
+          // 不要a連結做預設動作
+          event.preventDefault();
+          // this代表點下去的那個
+          // .attr("可以加一個屬性")
+          var name = $(this).attr("data-name");
+          // Number() convert to the Number
+          var price = Number($(this).attr("data-price"));
+
+          console.log("Click add to cart:"+name+" "+price);
+
+          shoppingCart.addItemToCart(name, price, 1);
+          displayCart();
+        });
+
+       // 寫清除
+        $("#clear-cart").click(function(event){
+          shoppingCart.clearCart();
+          displayCart();
+        });
+
+
+
+        //displayCart();
+        function displayCart() {
+          console.log("*** Display Cart ***");
+          var cartArray = shoppingCart.listCart();
+          console.log("*** Count Cart:" + cartArray.length);
+          var output = "";
+          for(var i in cartArray) {
+            output += "<li>"+cartArray[i].name+" <input class='item-count' type='number' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'>"+" x " + cartArray[i].price + " = " +cartArray[i].total+ 
+            "<button class='plus-item' data-name='"+cartArray[i].name+"'>+</button>"+
+            "<button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button>" + "<button class='delete-item' data-name='"+cartArray[i].name+"'>X</button>"
+            +"</li>";
+          }
+          // html會渲染所有東西
+          $("#show-cart").html(output);
+          $("#count-cart").html(shoppingCart.countCart());
+          $("#total-cart").html(shoppingCart.totalCart());
+        }
+        // 不太確定這邊的on是為什麼
+        $("#show-cart").on("click", ".delete-item", function(event){
+          // this X button我們按的 
+          var name = $(this).attr("data-name");
+          shoppingCart.removeItemFromCartAll(name);
+          displayCart();
+        });
+        // 寫加法的
+        $("#show-cart").on("click", ".plus-item", function(event){
+          var name = $(this).attr("data-name");
+          // 對應下面的addItemToCart function
+          // 不用放任何事情在price，但如果刪掉可能會undefined
+          shoppingCart.addItemToCart(name, 0, 1);
+          displayCart();
+
+        });
+        // 寫減法的
+        $("#show-cart").on("click", ".subtract-item", function(){
+          var name = $(this).attr("data-name");
+          shoppingCart.removeItemFromCart(name);
+          displayCart();
+        });
+        // 寫輸入數字的，注意是change
+        $("#show-cart").on("change", ".item-count", function(event){
+          var name = $(this).attr("data-name");
+          // 要取得數字，取得數值是val
+          // 避免String + Number = String現象發生所以加Number
+          var count = Number($(this).val());
+          shoppingCart.setCountForItem(name, count);
+          displayCart();
+        });
+
+
+       
+
+        displayCart();   
     </script>
   </body>
 </html>
