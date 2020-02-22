@@ -313,7 +313,7 @@
           var output = "";
           for(var i in cartArray) {
             output += "<tr><td>"+cartArray[i].name+"</td><td>"+"<input class='item-count form-control' type='text'data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>"+"</td><td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>"+"<td class='text-right price'>"+cartArray[i].total+ 
-            +"</td>"+"<td><button class='plus-item' data-name='"+cartArray[i].name+"'>+</button></td>"+
+            "</td>"+"<td><button class='plus-item' data-name='"+cartArray[i].name+"'>+</button></td>"+
             "<td><button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
             
           }
