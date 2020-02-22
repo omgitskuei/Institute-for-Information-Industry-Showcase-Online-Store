@@ -45,10 +45,12 @@
     <div class="row">
       <div class="col-md-6 ml-auto">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="搜尋訂單...">
-            <div class="input-group-append">
-                <button class="btn btn-success">搜尋</button>
-            </div>
+         <form action="<c:url value='orderDetails.do?orderID=${orderID}'/>" class="input-group">
+            <input type="text" class="form-control" placeholder="請輸入訂單編號..." name="orderID">
+             <div class="input-group-append">
+              <button class="btn btn-success">搜尋</button>
+             </div>
+         </form>
         </div>
       </div>
     </div>
@@ -84,9 +86,9 @@
 				</c:url>
 
 <!-- 				construct an "delete" link with customer id -->
-<%-- 				<c:url var="deleteLink" value="/AdminOrder/delete"> --%>
-<%-- 					<c:param name="orderID" value="${orderInfo.orderID}" /> --%>
-<%-- 				</c:url> --%>
+				<c:url var="deleteLink" value="/AdminOrder/delete">
+					<c:param name="orderID" value="${orderInfo.orderID}" />
+				</c:url>
               <tr>
                 <td><a  href='<c:url value='orderDetails.do?orderID=${orderInfo.orderID}' />'>
                 ${orderInfo.orderID}</a></td>
@@ -99,11 +101,11 @@
                     <i class="fas fa-angle-double-right"></i> 修改
                   </a>
                 </td>
-<!--                 <td> -->
-<%--                   <a href="${deleteLink}" class="btn btn-danger"> --%>
-<!--                     <i class="fas fa-angle-double-right"></i> 刪除 -->
-<!--                   </a> -->
-<!--                 </td> -->
+                <td>
+                  <a href="${deleteLink}" class="btn btn-danger">
+                    <i class="fas fa-angle-double-right"></i> 刪除
+                  </a>
+                </td>
               </tr>
              </jstl:forEach>
             </tbody>

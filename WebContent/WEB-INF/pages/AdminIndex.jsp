@@ -8,6 +8,10 @@
 	prefix="jstl"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
+<%@ taglib prefix="c"    uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -69,12 +73,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 ml-auto">
+      <form class="form" name="searchForm" action="<jstl:url value="searchBar" />" method="post">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="搜尋...">
+            <input type="search" class="form-control" placeholder="搜尋..." name="searchBar">
             <div class="input-group-append">
-                <button class="btn btn-primary">搜尋</button>
+                <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
         </div>
+        </form>
       </div>
       <div class="col-md-6 ml-auto">
       	<div class="form-group">
@@ -118,81 +124,45 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>香菜</td>
-                <td>蔬菜</td>
-                <td>100</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                  <!-- <a href="/controller.AdminInventoryDetailController" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right"></i> 詳細資訊
-                  </a> -->
-				  <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				   class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>
-			   </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>高麗菜</td>
-                <td>蔬菜</td>
-                <td>300</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                   <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				   class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>花椰菜</td>
-                <td>蔬菜</td>
-                <td>400</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                   <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				   class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>蘋果</td>
-                <td>水果</td>
-                <td>1</td>
-                <td>10</td>
-                <td>EMPTY</td>
-                <td>EMPTY</td>
-                <td>
-                   <form class="form" name="DirectInventoryDetailForm"
-					action=<jstl:url value="/controller.AdminInventoryDetailController" />
-					method="post">
-				  <input type="submit"
-				   class="btn btn-secondary" title="Admin InventoryDetail Button"
-				    name="adminInventoryDetailButton" value="詳細資訊">
-				  </form>
-                </td>
-              </tr>
+            	<c:if test="${not empty InventoryList}">
+            		<c:forEach var="product" items="${InventoryList}" varStatus="status">
+						<!-- construct an "update" link with customer id -->
+						<c:url var="updateLink" value="/AdminProduct/updateForm">
+							<c:param name="productID" value="${product.productID}" />
+						</c:url>
+	
+						<!-- construct an "delete" link with customer id -->
+						<c:url var="deleteLink" value="/AdminProduct/delete">
+							<c:param name="productID" value="${product.productID}" />
+						</c:url>
+						<tr>
+						     
+							<td>${product.productID}</td>
+ 							<td>${product.productName}</td>
+ 							<td>${product.productCategory}</td>
+ 							<td>${product.productStock}</td>
+							<td>${product.productPrice}</td>
+							<td><img src="${product.productImg}" alt="${product.productName}" width="100" /></td>
+							<td>${product.productDescription}</td>
+<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.productTimestamp}" /></td> --%>
+			
+							<td>
+								<a href="${updateLink}" class="btn btn-secondary">
+									<i class="fas fa-angle-double-right"></i> 修改
+								</a>
+								<a href="${deleteLink}" class="btn btn-danger">
+									<i class="fas fa-angle-double-right"></i> 刪除
+								</a>
+							</td>
+<!-- 							<td> -->
+								
+<!-- 							</td> -->
+						</tr>
+						<c:if test="${not status.last}">
+							<hr/>
+						</c:if>
+					</c:forEach>
+				</c:if>
             </tbody>
           </table>
         </div>

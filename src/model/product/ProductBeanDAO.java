@@ -133,7 +133,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		return false;
 	}
 
-	public boolean updateProductImg(ProductBean updateThisProduct, byte[] newProductImg) {
+	public boolean updateProductImg(ProductBean updateThisProduct, String newProductImg) {
 		// Get current Session
 		System.out
 				.println("Begin: ProductBeanDAO.updateProductImg(ProductBean updateThisProduct, byte[] newProductImg)");
@@ -144,7 +144,7 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 			ProductBean existingProduct = session.get(ProductBean.class, updateThisProduct.getProductID());
 			if (existingProduct != null) {
 				// If found, update ProductImg and return True
-				byte[] oldProductImg = existingProduct.getProductImg();
+				String oldProductImg = existingProduct.getProductImg();
 				existingProduct.setProductImg(newProductImg);
 				System.out.println("Product img updated!");
 				System.out.println("Finish: ProductBeanDAO.updateProductImg(ProductBean, byte[])");
@@ -263,6 +263,21 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		return results;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<ProductBean> selectFuzzy(String productName, String productCategory, String description) {
+		System.out.println("BEGIN: ProductBeanDAO.selectFuzzy(String, String, String)");
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "From ProductBean where ProductName like '%"+productName+"%' or ProductDescription like '%"+description+"%' or ProductCategory like '%"+productCategory+"%'";
+		Query query = session.createQuery(hql); 
+		// Store query results into List results
+		List<ProductBean> results = (List<ProductBean>) query.list();
+		System.out.println("	# of results: " + results.size());
+		// Return List results
+		System.out.println("FINISH: ProductBeanDAO.selectFuzzy(String, String, String)");
+		return results;
+	}
+	
 	@Override
 	public void deleteProduct(int productID) {
 		Session session = sessionFactory.getCurrentSession();

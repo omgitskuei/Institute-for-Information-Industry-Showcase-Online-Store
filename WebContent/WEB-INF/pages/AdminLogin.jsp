@@ -79,7 +79,8 @@
             	  </label>
                 </div>
                 <input type="submit" value="登入" class="btn btn-primary btn-block">
-                	<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
+                <input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
+                <input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
             </form>
             	${ts}<br>
             </div>
@@ -159,5 +160,12 @@
     })
 
   </script>
-
+<script>
+	function autofill() {
+		var eml = document.getElementById("userEmail");
+		var pwd = document.getElementById("userPwd");
+		eml.value = "farmvilletaiwan@gmail.com"
+		pwd.value = "Qq22222!";
+	};
+</script>
 </html>

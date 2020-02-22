@@ -6,7 +6,7 @@
 	<table>
 		<tr>
 			<td>Name:</td>
-			<td><input type="text" name="name"></td>
+			<td><input type="search" name="name"></td>
 			<td>${errors.name}</td>
 		</tr>
 		<tr>

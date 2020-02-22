@@ -68,7 +68,9 @@
     <!-- SERVICES SECTION -->
 <section id="services" class="py-3">
     <div class="container">
+
         <div class="row mb-4 mb-3">
+
         
         <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
@@ -86,21 +88,15 @@
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
                         <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
+
                         <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
+
                       </div>
                     </div>
                 </div>
             </div>
         </jstl:forEach>
-          <button id="clear-cart">Clear Cart</button>
-    
-
     <div>
-      <ul id="show-cart">
-        <!-- 會重新建立HTML在這邊 -->
-      </ul>
-      <div>Total Cart:$<span id="total-cart"></span></div>
-    </div>
     </div>
     </div>
 </section>

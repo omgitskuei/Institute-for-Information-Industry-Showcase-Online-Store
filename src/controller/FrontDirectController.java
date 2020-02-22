@@ -1,9 +1,20 @@
 package controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import model.product.ProductBean;
+import model.product.ProductBeanService;
 
 
 // TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html
@@ -17,6 +28,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller 
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
+	
+	@Autowired
+	public ProductBeanService productService;
 
 	// 1)進首頁
 	// 2)完成
@@ -36,12 +50,22 @@ public class FrontDirectController {
 		return "front_about";
 	}
 	
-	// 1)進服務
+	// 1)進服務(商品頁面，User Products Page)
 	// 2)測試
 	// 3)Thomas
 	@RequestMapping(value = "/directservices", method = RequestMethod.GET)
-	public String directToServices() {
+	public String directToServices(Model mm, HttpSession session) {
+		
 		System.out.println("導到服務");
+		System.out.println("Directing to user service");
+		System.out.println("塞進去以前的 model : " + mm);
+		
+		List<ProductBean> Inventorylist= productService.selectAll();
+
+		mm.addAttribute("InventoryList", Inventorylist);
+		System.out.println("塞進去以後的 model : " + mm );
+		System.out.println("Get Inventiry content: " + Inventorylist );
+		
 		return "front_services";
 	}
 	

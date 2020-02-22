@@ -55,34 +55,36 @@ public class AdminSignUpController {
 	}
 
 	// Admin attempts to sign up. If credentials Don't match, prepare to create new
-	// admin; must enter secret confirm code.
+	// admin; must enter email verification code.
 	@RequestMapping(path = "/adminSignUpStep1", method = RequestMethod.POST)
-	public String signInStep1(@RequestParam(name = "nEmail") String nEmail, @RequestParam(name = "nPwd") String nPwd,
-			@RequestParam(name = "rPwd") String cPwd, Model nextPage) {
-
-		System.out.println("BEGIN /controller.AdminSignUpController");
-		System.out.println("User input: ");
-		System.out.println("Email = " + nEmail);
-		System.out.println("Password = " + nPwd);
-		System.out.println("Confirm Password = " + cPwd);
+	public String signUpStep1(
+			@RequestParam(name = "nEmail") String nEmail,
+			@RequestParam(name = "nPwd") String nPwd,
+			@RequestParam(name = "rPwd") String cPwd, 
+			Model nextPage) {
+		System.out.println("BEGIN /adminSignUpStep1");
+		System.out.println("	User input: ");
+		System.out.println("	Email: " + nEmail);
+		System.out.println("	Password: " + nPwd);
+		System.out.println("	Confirm Password: " + cPwd);
 		if (cPwd.equals(nPwd)) {
-			System.out.println("Confirm Password and New Password match!");
+			System.out.println("	Confirm Password and New Password match!");
 			try {
-				System.out.println("User not found");
 
 				nextPage.addAttribute("nEmail", nEmail);
 				nextPage.addAttribute("nPwd", nPwd);
 
-				System.out.println("AUTHENTICATED: Directing to AdminLoginConfirm");
+				System.out.println("	AUTHENTICATED: Directing to AdminLoginConfirm");
 				// Make code
-				GetCode genCode = new GetCode(10, true, false, false);
+				GetCode genCode = new GetCode(10, true, true, true);
 				verificationCode = genCode.generateCode();
 				// Make code available on next page
 				nextPage.addAttribute("verificationCode", verificationCode);
+				
 				// Send 
 				EmailUsers emailSender = new EmailUsers();
 				emailSender.sendVerifyEmail(nEmail, nEmail, verificationCode);
-				// 
+				System.out.println("	Redirecting to AdminLoginConfirm.jsp");
 				return "AdminLoginConfirm";
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -96,8 +98,10 @@ public class AdminSignUpController {
 
 	// Admin entered confirm code. If code match, create new admin.
 	@RequestMapping(path = "/adminSignUpStep2", method = RequestMethod.POST)
-	public String signInStep2(@SessionAttribute(name = "nEmail") String nEmail,
-			@SessionAttribute(name = "nPwd") String nPwd, @RequestParam(name = "confirmCode") String confirmCode,
+	public String signUpStep2(
+			@SessionAttribute(name = "nEmail") String nEmail,
+			@SessionAttribute(name = "nPwd") String nPwd,
+			@RequestParam(name = "confirmCode") String confirmCode,
 			Model nextPage) {
 
 		System.out.println("BEGIN /adminSignUpStep2");
@@ -126,14 +130,17 @@ public class AdminSignUpController {
 				e.printStackTrace();
 			}
 		} else {
+			
 			System.out.println("Confirm code incorrect");
 		}
 		return "AdminLogin";
 	}
 
 	@RequestMapping(path = "/adminSignUpStep3", method = RequestMethod.POST)
-	public String signInStep3(@SessionAttribute(name = "nEmail") String nEmail,
-			@SessionAttribute(name = "nPwd") String nPwd, @RequestParam(name = "confirmCode") String confirmCode,
+	public String signUpStep3(
+			@SessionAttribute(name = "nEmail") String nEmail,
+			@SessionAttribute(name = "nPwd") String nPwd, 
+			@RequestParam(name = "confirmCode") String confirmCode,
 			Model nextPage) {
 		System.out.println("BEGIN: /adminSignUpStep3");
 		// Match not found
@@ -171,7 +178,6 @@ public class AdminSignUpController {
 		bean1.setSettingDisplayName(nEmail);
 		bean1.setSettingSecurityQ("");
 		bean1.setSettingSecurityA("");
-		System.out.println("NEW USER ID = " + uService.selectUser(newAdminID).getUserID());
 		sService.insert(bean1);
 
 		// Send info to model nextPage
@@ -188,5 +194,6 @@ public class AdminSignUpController {
 		return "AdminIndex";
 
 	}
-
+	
+	
 }

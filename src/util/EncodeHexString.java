@@ -43,6 +43,7 @@ public class EncodeHexString {
 
 	// Methods
 	public String byteArrayToHexString(byte[] byteArray) {
+		System.out.println("	Converting "+byteArray+" to HexString");
 		StringBuffer HexStringBuffer = new StringBuffer();
 		for (int i = 0; i < byteArray.length; i++) {
 			char[] hexDigits = new char[2];
@@ -51,29 +52,30 @@ public class EncodeHexString {
 			HexStringBuffer.append(new String(hexDigits));
 		}
 		String result = HexStringBuffer.toString();
-		System.out.println("Result HexString: "+result);
+		System.out.println("	Result HexString: "+result);
 		return result;
 	}
 
-	public byte[] HexStringToByteArray(String HexString) {
-		if (HexString.length() % 2 == 1) {
+	public byte[] HexStringToByteArray(String hexString) {
+		System.out.println("	Converting "+hexString+" to byte[]");
+		if (hexString.length() % 2 == 1) {
 			throw new IllegalArgumentException("Invalid hexadecimal String supplied.");
 		}
-		byte[] bytes = new byte[HexString.length() / 2];
-		for (int i = 0; i < HexString.length(); i += 2) {
-			int firstDigit = Character.digit(HexString.substring(i, i + 2).charAt(0), 16);
+		byte[] bytes = new byte[hexString.length() / 2];
+		for (int i = 0; i < hexString.length(); i += 2) {
+			int firstDigit = Character.digit(hexString.substring(i, i + 2).charAt(0), 16);
 			if (firstDigit == -1) {
 				throw new IllegalArgumentException(
-						"Invalid Hexadecimal Character: " + HexString.substring(i, i + 2).charAt(0));
+						"	Invalid Hexadecimal Character: " + hexString.substring(i, i + 2).charAt(0));
 			}
-			int secondDigit = Character.digit(HexString.substring(i, i + 2).charAt(1), 16);
+			int secondDigit = Character.digit(hexString.substring(i, i + 2).charAt(1), 16);
 			if (secondDigit == -1) {
 				throw new IllegalArgumentException(
-						"Invalid Hexadecimal Character: " + HexString.substring(i, i + 2).charAt(1));
+						"	Invalid Hexadecimal Character: " + hexString.substring(i, i + 2).charAt(1));
 			}
 			bytes[i / 2] = (byte) ((firstDigit << 4) + secondDigit);
 		}
-		System.out.println("Result byte[]: "+bytes);
+		System.out.println("	Result byte[]: "+bytes);
 		return bytes;
 	}
 

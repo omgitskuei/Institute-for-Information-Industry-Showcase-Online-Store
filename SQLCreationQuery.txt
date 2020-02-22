@@ -10,7 +10,7 @@ GO
 CREATE table UsersTable (
 userID int Identity(1,1) Primary Key Not NULL,
 userEmail NVarchar(50) Not NULL, 	-- Required for login
-userPwd NVarchar(50) Not NULL, 	-- Required for login
+userPwd NVarchar(MAX) Not NULL, 	-- Required for login
 admin int DEFAULT '0' Not NULL 
 )
 GO
@@ -55,7 +55,7 @@ ProductName NVarchar(50)  Not NULL,
 ProductPrice decimal(18, 2) Not NULL,
 ProductStock int Not NULL,
 ProductDescription NVarchar(MAX),
-ProductImg varbinary(MAX) Not NULL,
+ProductImg NVarchar(50) Not NULL,
 ProductTimestamp Date Not NULL,
 ProductCategory NVarchar(50) Not NULL
 )
