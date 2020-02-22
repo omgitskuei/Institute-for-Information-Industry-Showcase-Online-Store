@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.order.OrderBean;
+import model.order.OrderBeanDAO;
+import model.orderDetails.OrderDetailsBean;
+import model.orderDetails.OrderDetailsBeanDAO;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
@@ -25,7 +29,7 @@ import model.wallet.WalletBeanService;
 
 // Admin 的 Profile 控制器
 @Controller
-@SessionAttributes(names= {"userID"})
+@SessionAttributes(names= {"userID", "userEmail"})
 @RequestMapping("/AdminProfile")
 public class AdminProfileController {
 
@@ -36,10 +40,16 @@ public class AdminProfileController {
 	private UserBeanService userService;
 
 	@Autowired
-	ProfileBeanDAO dao;
+	private ProfileBeanDAO dao;
 	
 	@Autowired
 	private WalletBeanService walletService;
+	
+	@Autowired
+	private OrderBeanDAO orderDAO;
+	
+	@Autowired
+	private OrderDetailsBeanDAO orderDetailsDAO;
 	
 	// 列出所有使用者頁面
 	@GetMapping("/list")
@@ -118,6 +128,17 @@ public class AdminProfileController {
 							   @RequestParam(value = "userID",required = true) int userID) {
 		walletService.updateAmount(updateThisWallet, newwalletAmount);
 		return "redirect:/AdminProfile/list";
+	}
+	
+	@GetMapping("/showTheUserOrer")
+	public String showTheUserOrder(@RequestParam("userID") int userID, Model m) {
+	    System.out.println("userID is: " + userID);
+		List<OrderBean> theUserOrder = orderDAO.selectOrdersByUserID(userID);
+		UserBean theUser = userService.selectUser(userID);
+		
+		m.addAttribute("user", theUser);
+		m.addAttribute("userOrder", theUserOrder);
+		return "AdminShowTheUserOrder";
 	}
 	
 	
