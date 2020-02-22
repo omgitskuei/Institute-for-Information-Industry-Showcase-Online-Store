@@ -56,6 +56,7 @@
     $("#main").removeClass("is-loading");
 	}, 100);
     $(a).fadeIn();
+  
     
 });
 </script>

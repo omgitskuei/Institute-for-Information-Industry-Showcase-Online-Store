@@ -24,6 +24,7 @@ import model.product.ProductBeanService;
 // 4)進聯絡我們 
 // 5)進登入
 // 6)進註冊 V
+// 7)進購物車
 @Controller 
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
@@ -95,5 +96,14 @@ public class FrontDirectController {
 		return "front_signup";
 	}
 	
+	// 1)進購物車
+	// 2)測試
+	// 3)Thomas
+	@RequestMapping(value = "/directshoppingcart", method = RequestMethod.GET)
+	public String directToShoppingCart() {
+			System.out.println("導到購物車");
+			return "front_shoppingcart";
+		}
+		
 	
 }
