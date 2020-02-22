@@ -23,6 +23,7 @@
     /* border: solid 1px black; */
     font-family: 'Noto Sans TC', sans-serif';
 }
+
 body {
     overflow-x: hidden;
 }
@@ -47,9 +48,6 @@ nav.pagination {
     transition: 0.5s;
 }
 
-.box-shadow:hover{
-    transform: scale(1.1,1.1);
-}
 .
 /* NAVBAR第一個標題左邊 */
 .navbar .nav-item.first{
@@ -80,6 +78,7 @@ nav.pagination {
     background-size: cover;
 }
 
+
 .card-height {
     height: 300px;
 }
@@ -90,6 +89,9 @@ nav.pagination {
     left: 20%;
 }
 
+.card-service-height{
+	height: 650px;
+}
 
 #home-heading {
     position: relative;
