@@ -1,10 +1,13 @@
 package model.profile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import model.user.UserBean;
 
 @Service
 public class ProfileBeanService implements ProfileBeanServiceInterface {
@@ -32,6 +35,13 @@ public class ProfileBeanService implements ProfileBeanServiceInterface {
 		return profileDAO.getProfile(userID);
 	}
 
+	public ArrayList<ProfileBean> selectFuzzy(String searchQuery) {
+		System.out.println("	BEGIN: ProfileBeanService.selectFuzzy");
+		ArrayList<ProfileBean> results = profileDAO.selectFuzzy(searchQuery);
+		System.out.println("	FINISH: ProfileBeanService.selectFuzzy");
+		return results;
+	}
+	
 	@Override
 	public void deleteProfile(int userID) {
 		profileDAO.deleteProfile(userID);

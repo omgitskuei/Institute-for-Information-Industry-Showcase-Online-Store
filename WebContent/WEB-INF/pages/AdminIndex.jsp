@@ -73,14 +73,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 ml-auto">
-      <form class="form" name="searchForm" action="<jstl:url value="searchBar" />" method="post">
+      <form class="form" name="searchForm" action="<jstl:url value="searchBarProducts" />" method="post">
         <div class="input-group">
             <input type="search" class="form-control" placeholder="搜尋..." name="searchBar">
             <div class="input-group-append">
                 <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
         </div>
-        </form>
+      </form>
       </div>
       <div class="col-md-6 ml-auto">
       	<div class="form-group">
@@ -124,28 +124,25 @@
               </tr>
             </thead>
             <tbody>
-            	<c:if test="${not empty InventoryList}">
-            		<c:forEach var="product" items="${InventoryList}" varStatus="status">
+            	<c:if test="${not empty SearchResults}">
+            		<c:forEach var="product" items="${SearchResults}" varStatus="status">
 						<!-- construct an "update" link with customer id -->
 						<c:url var="updateLink" value="/AdminProduct/updateForm">
 							<c:param name="productID" value="${product.productID}" />
 						</c:url>
-	
 						<!-- construct an "delete" link with customer id -->
 						<c:url var="deleteLink" value="/AdminProduct/delete">
 							<c:param name="productID" value="${product.productID}" />
 						</c:url>
 						<tr>
-						     
 							<td>${product.productID}</td>
  							<td>${product.productName}</td>
  							<td>${product.productCategory}</td>
  							<td>${product.productStock}</td>
 							<td>${product.productPrice}</td>
-							<td><img src="${product.productImg}" alt="${product.productName}" width="100" /></td>
+							<td><img src="${product.productImg}" alt="${product.productName}" width="75" /></td>
 							<td>${product.productDescription}</td>
-<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.productTimestamp}" /></td> --%>
-			
+<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.productTimestamp}" /></td> --%>		
 							<td>
 								<a href="${updateLink}" class="btn btn-secondary">
 									<i class="fas fa-angle-double-right"></i> 修改
@@ -154,13 +151,10 @@
 									<i class="fas fa-angle-double-right"></i> 刪除
 								</a>
 							</td>
-<!-- 							<td> -->
-								
-<!-- 							</td> -->
 						</tr>
-						<c:if test="${not status.last}">
-							<hr/>
-						</c:if>
+<%-- 						<c:if test="${not status.last}"> --%>
+<!-- 							<hr/> -->
+<%-- 						</c:if> --%>
 					</c:forEach>
 				</c:if>
             </tbody>

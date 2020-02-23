@@ -1,6 +1,7 @@
 package model.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -89,6 +90,10 @@ public class UserBeanService {
 	
 	public UserBean selectUser(int userID) {
 		return uDAO.selectUserByID(userID);
+	}
+	
+	public List<UserBean> selectFuzzy(String searchQuery) {
+		return uDAO.selectFuzzy(searchQuery);
 	}
 	
 	public boolean updateEmail(UserBean updateThisUser, String newEmail) {

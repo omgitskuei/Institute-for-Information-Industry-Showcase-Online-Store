@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.product.ProductBean;
 import model.profile.ProfileBean;
 import util.EncodeHexString;
 import util.EncryptString;
@@ -228,6 +229,21 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		return results;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<UserBean> selectFuzzy(String searchQuery) {
+		System.out.println("BEGIN: UserBeanDAO.selectFuzzy(String)");
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "From UserBean where userID like '%"+searchQuery+"%' or userEmail like '%"+searchQuery+"%'";
+		Query query = session.createQuery(hql); 
+		// Store query results into List results
+		List<UserBean> results = (List<UserBean>) query.list();
+		System.out.println("	# of results: " + results.size());
+		// Return List results
+		System.out.println("FINISH: UserBeanDAO.selectFuzzy(String)");
+		return results;
+	}
+	
 	@Override
 	public boolean updateEmail(UserBean beanWithID, String newEmail) {
 		// Get current Session

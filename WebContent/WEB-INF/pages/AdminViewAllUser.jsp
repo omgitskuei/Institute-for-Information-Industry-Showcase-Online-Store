@@ -51,12 +51,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 ml-auto">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="搜尋使用者...">
-						<div class="input-group-append">
-							<button class="btn btn-warning text-black">搜尋</button>
+					 <form class="form" name="searchForm" action="<jstl:url value="searchBarProfiles" />" method="post">
+       					<div class="input-group">
+							<input type="search" class="form-control" placeholder="搜尋使用者..." name="searchBar">
+							<div class="input-group-append">
+              		  			<input type="submit" class="btn btn-warning text-black" value="搜尋">
+							</div>
 						</div>
-					</div>
+        			</form>
 				</div>
 			</div>
 		</div>
@@ -74,6 +76,7 @@
 						<table class="table table-striped">
 							<thead class="thead-dark">
 								<tr>
+									<th>ProfileID</th>
 									<th>使用者ID</th>
 									<th>使用者名稱</th>
 									<th>加入日期</th>
@@ -86,7 +89,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="user" items="${profiles}">
+							<c:if test="${not empty SearchResults}">
+								<c:forEach var="user" items="${SearchResults}" varStatus="status">
 									<!-- construct an "update" link with customer id -->
 									<c:url var="updateLink" value="/AdminProfile/updateForm">
 										<c:param name="userID" value="${user.userID}" />
@@ -97,6 +101,7 @@
 										<c:param name="userID" value="${user.userID}" />
 									</c:url>
 									<tr>
+										<td>${user.profileID}</td>
 										<td>${user.userID}</td>
 										<td>${user.profileFullName}</td>
 										<td>${user.profileJoinDate}</td>
@@ -114,6 +119,7 @@
 										</a></td> -->
 									</tr>
 								</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 

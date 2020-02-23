@@ -45,7 +45,7 @@ public class AdminProfileController {
 	@GetMapping("/list")
 	public String listProfiles(Model m) {
 		List<ProfileBean> theProfiles = profileService.getProfiles();
-		m.addAttribute("profiles", theProfiles);
+		m.addAttribute("SearchResults", theProfiles);
 		return "AdminViewAllUser";
 	}
 	

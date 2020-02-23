@@ -1,6 +1,7 @@
 package model.profile;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import model.user.UserBean;
 
 @Repository
 public class ProfileBeanDAO implements ProfileBeanDAOInterface {
@@ -71,6 +74,24 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		int userID = thisP.getUserID();
 		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		return theProfile;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public ArrayList<ProfileBean> selectFuzzy(String searchQuery) {
+		System.out.println("		BEGIN: ProfileBeanDAO.selectFuzzy(String)");
+		Session session = sessionFactory.getCurrentSession();
+		System.out.println(session.isConnected());
+		System.out.println(session.isOpen());
+		System.out.println(session.isJoinedToTransaction());
+		
+		String hql = "From ProfileBean where profileFullName like '%"+searchQuery+"%'";
+		Query query = session.createQuery(hql); 
+		// Store query results into List results
+		ArrayList<ProfileBean> results = (ArrayList<ProfileBean>) query.list();
+		System.out.println("			# of results: " + results.size());
+		// Return List results
+		System.out.println("		FINISH: ProfileBeanDAO.selectFuzzy(String)");
+		return results;
 	}
 
 	@Override
