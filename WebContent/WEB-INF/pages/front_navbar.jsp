@@ -45,7 +45,7 @@
               <a href=<jstl:url value="/directcontact"/> class="nav-link">聯絡我們</a>
             </li>
             <li class="nav-item">
-              <a href="shoppingcart.html" class="nav-link">購物車</a>
+              <a href=<jstl:url value="/directshoppingcart"/> class="nav-link">購物車</a>
             </li>
             <li class="nav-item">
               <a href=<jstl:url value="/directlogin"/> class="nav-link">登入</a>

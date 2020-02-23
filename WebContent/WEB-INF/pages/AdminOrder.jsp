@@ -45,10 +45,12 @@
     <div class="row">
       <div class="col-md-6 ml-auto">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="搜尋訂單...">
-            <div class="input-group-append">
-                <button class="btn btn-success">搜尋</button>
-            </div>
+         <form action="<c:url value='orderDetails.do?orderID=${orderID}'/>" class="input-group">
+            <input type="text" class="form-control" placeholder="請輸入訂單編號..." name="orderID">
+             <div class="input-group-append">
+              <button class="btn btn-success">搜尋</button>
+             </div>
+         </form>
         </div>
       </div>
     </div>
