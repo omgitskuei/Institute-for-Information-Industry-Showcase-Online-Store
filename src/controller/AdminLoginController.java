@@ -41,9 +41,11 @@ public class AdminLoginController {
 	// 3)Chris, Thomas
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/adminSignIn", method = RequestMethod.POST)
-	public String processAction(@RequestParam(name = "userEmail") String uEmail,
+	public String processAction(
+			@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
+			@RequestParam(name = "g-recaptcha-response", required = false) boolean recaptcha,
 			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String cookieEmail,
 			@CookieValue(value = "Password", required = false, defaultValue = "Testing123!") String cookiePwd,
 			Model nextPage) {
@@ -53,6 +55,7 @@ public class AdminLoginController {
 		System.out.println("	Email = " + uEmail);
 		System.out.println("	Password = " + uPwd);
 		System.out.println("	Remember Me = " + remMe);
+		System.out.println("	Recaptcha = " + recaptcha);
 		
 		// Check for empty email and pwd input
 		Map<String, String> errors = new HashMap<String, String>();

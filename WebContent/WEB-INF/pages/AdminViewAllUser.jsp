@@ -97,9 +97,9 @@
 									</c:url>
 
 									<!-- construct an "delete" link with customer id -->
-									<c:url var="deleteLink" value="/AdminProfile/delete">
-										<c:param name="userID" value="${user.userID}" />
-									</c:url>
+<%-- 									<c:url var="deleteLink" value="/AdminProfile/delete"> --%>
+<%-- 										<c:param name="userID" value="${user.userID}" /> --%>
+<%-- 									</c:url> --%>
 									<tr>
 										<td>${user.profileID}</td>
 										<td>${user.userID}</td>
