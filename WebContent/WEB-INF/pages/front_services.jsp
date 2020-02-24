@@ -73,6 +73,9 @@
 
         
         <jstl:forEach var="product" items="${InventoryList}" >
+        <jstl:url var="theProductLink" value="/showSpecificProduct">
+				<jstl:param name="productID" value="${product.productID}" />
+		</jstl:url>
             <div class="col-md-4">
                 <div class="card box-shadow">
                     <img class="card-img-top img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
@@ -87,9 +90,11 @@
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
-                        <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
+                        <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
+
 
                         <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${product.productID}" data-img="${product.productImg}" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
+
 
                       </div>
                     </div>

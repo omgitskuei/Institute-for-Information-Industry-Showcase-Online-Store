@@ -2,15 +2,12 @@ package controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.product.ProductBean;
@@ -54,7 +51,7 @@ public class FrontDirectController {
 	// 2)測試
 	// 3)Thomas
 	@RequestMapping(value = "/directservices", method = RequestMethod.GET)
-	public String directToServices(Model mm, HttpSession session) {
+	public String directToServices(Model mm) {
 		
 		System.out.println("導到服務");
 		System.out.println("Directing to user service");
@@ -67,6 +64,21 @@ public class FrontDirectController {
 		System.out.println("Get Inventiry content: " + Inventorylist );
 		
 		return "front_services";
+	}
+	
+	@RequestMapping(value = "/showSpecificProduct", method = RequestMethod.GET)
+	public String showSpecificProduct(@RequestParam("productID") int productID,Model mm) {
+		
+		System.out.println("導到 show Specific Product");
+		System.out.println("Directing to showSpecificProduct");
+		
+		ProductBean theProduct = productService.getProduct(productID);
+
+		mm.addAttribute("theProduct", theProduct);
+		System.out.println(" theProduct 塞進去以後的 model : " + mm );
+		System.out.println("抓到的商品物件: " + theProduct );
+		
+		return "front_specificProduct";
 	}
 	
 	// 1)進聯絡我們
