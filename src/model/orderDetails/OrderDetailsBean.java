@@ -2,17 +2,12 @@ package model.orderDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-
-import model.order.OrderBean;
 
 // match table
 @Entity
@@ -22,25 +17,24 @@ public class OrderDetailsBean {
 
 	// variables, match the column
 	private int orderDetailID; // Not NULL
-	private OrderBean orderBean; // ManyToOne
 	private int productID; // Not NULL
-	private String ProductName;
+	private String productName;
 	private int productCount; // Not NULL
-	private float ProductPrice;
-	private int OrderID;
+	private float productPrice;
+	private int orderID;
+//	private OrderBean orderBean; // ManyToOne
 
 	// Empty Constructor and Constructor
 	public OrderDetailsBean() {
 	}
 
-	public OrderDetailsBean(int OrderID,OrderBean orderBean, int productID, String ProductName, int productCount,
-			float ProductPrice) {
-		this.orderBean = orderBean;
-		this.productID = productID;
-		this.ProductName = ProductName;
-		this.productCount = productCount;
-		this.ProductPrice = ProductPrice;
-		this.OrderID = OrderID;
+	public OrderDetailsBean(int OrderID, int ProductID, String ProductName, int ProductCount, float ProductPrice) {
+		this.productID = ProductID;
+		this.productName = ProductName;
+		this.productCount = ProductCount;
+		this.productPrice = ProductPrice;
+		this.orderID = OrderID;
+//		this.orderBean = orderBean;//ManyToOne
 	}
 
 	// GET/SET methods
@@ -55,22 +49,13 @@ public class OrderDetailsBean {
 		this.orderDetailID = orderDetailID;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OrderID")
-	public OrderBean getOrderBean() {
-		return orderBean;
-	}
-
-	public void setOrderBean(OrderBean thisBean) {
-		this.orderBean = thisBean;
-	}
-//	@Column(name = "OrderID")
+	@Column(name = "OrderID")
 	public int getOrderID() {
-		return OrderID;
+		return orderID;
 	}
 
 	public void setOrderID(int orderID) {
-		OrderID = orderID;
+		this.orderID = orderID;
 	}
 
 	@Column(name = "ProductID")
@@ -84,11 +69,11 @@ public class OrderDetailsBean {
 
 	@Column(name = "ProductName")
 	public String getProductName() {
-		return ProductName;
+		return productName;
 	}
 
 	public void setProductName(String productName) {
-		this.ProductName = productName;
+		this.productName = productName;
 	}
 
 	@Column(name = "ProductCount")
@@ -102,11 +87,20 @@ public class OrderDetailsBean {
 
 	@Column(name = "ProductPrice")
 	public float getProductPrice() {
-		return ProductPrice;
+		return productPrice;
 	}
 
 	public void setProductPrice(float productPrice) {
-		this.ProductPrice = productPrice;
+		this.productPrice = productPrice;
 	}
-
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "OrderID")
+//	public OrderBean getOrderBean() {
+//		return orderBean;
+//	}
+//
+//	public void setOrderBean(OrderBean thisBean) {
+//		this.orderBean = thisBean;
+//	}
 }

@@ -40,7 +40,7 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 			System.out.println("OrderDetailID: " + insertThisOrderDetails.getOrderDetailID());
 			System.out.println("ProductID: " + insertThisOrderDetails.getProductID());
 			System.out.println("ProductCount: " + insertThisOrderDetails.getProductCount());
-			System.out.println("Linked OrderBean's OrderID:" + insertThisOrderDetails.getOrderBean().getOrderID());
+//			System.out.println("Linked OrderBean's OrderID:" + insertThisOrderDetails.getOrderBean().getOrderID());
 
 			System.out.println("FINISH: OrderDetailsBeanDAO.insertOrderDetails(OrderDetailsBean)");
 			// Return True, for SUCCESSFUL INSERT
@@ -71,7 +71,7 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 			System.out.println("OrderDetailID: " + existingOrderDetail.getOrderDetailID());
 			System.out.println("ProductID: " + existingOrderDetail.getProductID());
 			System.out.println("ProductCount: " + existingOrderDetail.getProductCount());
-			System.out.println("Linked OrderBean's OrderID:" + existingOrderDetail.getOrderBean().getOrderID());
+//			System.out.println("Linked OrderBean's OrderID:" + existingOrderDetail.getOrderBean().getOrderID());
 			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderBean)");
 			return existingOrderDetail;
 		} else {
@@ -86,12 +86,12 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 		// Create new Session
 		System.out.println("BEGIN: OrderDetailsBeanDAO.selectOrderDetails(OrderDetailsBean)");
 
-		System.out.println("Looking for OrderDetail with Order ID:" + bean.getOrderBean().getOrderID());
+//		System.out.println("Looking for OrderDetail with Order ID:" + bean.getOrderBean().getOrderID());
 
 		Session session = sessionFactory.getCurrentSession();
 		String hqlString = "FROM OrderDetailBean WHERE OrderID=thisOrderID";
 		Query q = session.createQuery(hqlString);
-		q.setParameter("thisOrderID", bean.getOrderBean().getOrderID());
+//		q.setParameter("thisOrderID", bean.getOrderBean().getOrderID());
 		OrderDetailsBean existingOrderDetail = (OrderDetailsBean) q.uniqueResult();
 
 		if (existingOrderDetail != null) {
@@ -99,7 +99,7 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 			System.out.println("OrderDetail ID: " + existingOrderDetail.getOrderDetailID());
 			System.out.println("Product ID: " + existingOrderDetail.getProductID());
 			System.out.println("Product Count: " + existingOrderDetail.getProductCount());
-			System.out.println("Order ID: " + existingOrderDetail.getOrderBean().getOrderID());
+//			System.out.println("Order ID: " + existingOrderDetail.getOrderBean().getOrderID());
 			System.out.println("FINISH: OrderDetailsBeanDAO.selectOrderDetails(OrderDetailsBean)");
 			return existingOrderDetail;
 		} else {
@@ -228,13 +228,13 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 					int deletedOrderDetailID = resultBean.getOrderDetailID();
 					int deletedProductID = resultBean.getProductID();
 					int deletedProductCount = resultBean.getProductCount();
-					int deletedOrderID = resultBean.getOrderBean().getOrderID();
+//					int deletedOrderID = resultBean.getOrderBean().getOrderID();
 					session.delete(resultBean);
 					System.out.println("OrderDetails Successfully DELETED:");
 					System.out.println("OrderDetail ID: " + deletedOrderDetailID);
 					System.out.println("OrderDetail Product ID " + deletedProductID);
 					System.out.println("OrderDetail Product count" + deletedProductCount);
-					System.out.println("OrderDetail Order ID " + deletedOrderID);
+//					System.out.println("OrderDetail Order ID " + deletedOrderID);
 					return true;
 				} else {
 					System.out.println("ERROR: OrderDetails NOT FOUND");
@@ -257,6 +257,13 @@ public class OrderDetailsBeanDAO implements OrderDetailsBeanDAOInterface {
 	public OrderDetailsBean selectOrderDetails(int orderID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public OrderDetailsBean getOrderDetails(int orderID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		OrderDetailsBean theOrderDetails = currentSession.get(OrderDetailsBean.class, orderID);
+		return theOrderDetails;
 	}
 
 }

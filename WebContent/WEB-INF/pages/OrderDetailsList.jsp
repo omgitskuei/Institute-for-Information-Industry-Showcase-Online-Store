@@ -63,6 +63,7 @@
 
 <!-- ORDERS -->
 <jstl:forEach var="orderInfo" items="${orderToDetailsList}">
+
 <section id="ordres">
   <div class="container">
     <div class="row">
@@ -70,6 +71,7 @@
         <div class="card">
           <div class="card-header">
             <h4>訂單編號	${orderInfo.orderID}</h4>
+            <a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">

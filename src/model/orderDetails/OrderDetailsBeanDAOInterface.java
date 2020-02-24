@@ -12,4 +12,6 @@ public interface OrderDetailsBeanDAOInterface {
 	public boolean updateProductCount(OrderDetailsBean updateThisOrderDetail, int newProductCount);
 	// D.elete
 	public boolean deleteOrderDetails(OrderDetailsBean deteleThisOrderDetails);
+	
+	public OrderDetailsBean getOrderDetails(int orderID);
 }
