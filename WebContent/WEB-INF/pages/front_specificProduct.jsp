@@ -55,21 +55,20 @@
       <div class="row">
           <div class="col-md-4">
               <div class="sticky-top" style="top: 10px;">
-                  <img src="https://source.unsplash.com/random/400x500/?fruit" class="mb-3 img-fluid" alt="">
-                  <h1>商品標題<small class="text-secondary ml-1">副標題</small></h1>
+                  <img src="${theProduct.productImg}" class="mb-3 img-fluid" alt="">
+                  <h1>${theProduct.productName}</h1>
+                  <p>商品 ID: ${theProduct.productID}</p>
                   <div class="d-flex justify-content-end align-items-end">
-                      <del class="text-muted">售價 $2999</del>
+                      <del class="text-muted">售價 ${theProduct.productPrice+10.00} 新台幣</del>
                       <div class="h3 ml-auto mb-0 text-danger">
                           <small>特價 $NT</small>
-                          <strong> 1999</strong>
+                          <strong> ${theProduct.productPrice}</strong>
                       </div>
                   </div>
                   <hr>
                   <div class="input-group mt-3">
                       <select name="" id="" class="form-control">
                           <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
                       </select>
                       <a href="#" class="btn btn-success text-white ml-1">加入購物車</a>
                   </div>
@@ -77,12 +76,8 @@
 
           </div>
           <div class="col-md-8">
-              <h2>商品特色</h2>
-              <ul>
-                <li class="h3">商品特色一</li>
-                <li class="h3">商品特色二</li>
-                <li class="h3">商品特色三</li>
-              </ul>
+              <h2> ${theProduct.productName} 特色</h2>
+              <p> ${theProduct.productDescription} </p>
 
               <div class="card mt-5">
                   <div class="card-body bg-light">
