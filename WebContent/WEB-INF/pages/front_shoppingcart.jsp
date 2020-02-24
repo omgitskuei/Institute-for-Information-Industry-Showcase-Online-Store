@@ -97,10 +97,13 @@
         </div>
         <div class="col mb-2">
             <div class="row">
-                <div class="col-sm-12  col-md-6">
+                <div class="col-sm-12  col-md-4">
                     <button class="btn btn-lg btn-block btn-light">繼續購物</button>
                 </div>
-                <div class="col-sm-12 col-md-6 text-right">
+                <div class="col-sm-12 col-md-4 text-right">
+                    <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
+                </div>
+                <div class="col-sm-12 col-md-4 text-right">
                     <a href="checkout.html" class="btn btn-lg btn-block btn-success text-white">結帳</a>
                 </div>
             </div>
