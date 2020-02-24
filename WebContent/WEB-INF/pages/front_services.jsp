@@ -246,7 +246,6 @@
   </div>
 </section>
 
-
     <!-- FOOTER -->
     <footer id="main-footer" class="text-center p-4">
       <div class="container">
