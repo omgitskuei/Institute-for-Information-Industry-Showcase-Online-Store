@@ -74,15 +74,15 @@
         
         <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
-                <div class="card box-shadow">
-                    <img class="card-img-top img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
+                <div class="card box-shadow mb-3">
+                    <img class="card-img-top img-height img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
                     <div class="card-body">
                         <p>商品ID : ${product.productID} </p>
                         <h4 class="card-title">${product.productName}</h4>
                         <p class="card-text">
                             <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
-                        <p class="card-text">
+                        <p class="card-text service-discription">
                           <samll class="text-muted">${product.productDescription}</samll>
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
