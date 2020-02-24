@@ -80,6 +80,17 @@ nav.pagination {
     height: 300px;
 }
 
+.img-height {
+	height: 200px;
+}
+
+.service-discription{
+	height: 100px;
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .form-right {
     display: inline-block;
     position: relative;
