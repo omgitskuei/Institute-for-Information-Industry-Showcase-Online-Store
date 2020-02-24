@@ -96,11 +96,14 @@
             </div>
         </div>
         <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-lg btn-block btn-light">繼續購物</button>
+            <div class="row d-flex justify-content-end">
+                <div class="col-sm-2">
+                    <a href=<jstl:url value="/directservices"/> class="btn btn-lg btn-block btn-light">繼續購物</a>
                 </div>
-                <div class="col-sm-12 col-md-6 text-right">
+                <div class="col-sm-2">
+                    <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
+                </div>
+                <div class="col-sm-2">
                     <a href="checkout.html" class="btn btn-lg btn-block btn-success text-white">結帳</a>
                 </div>
             </div>

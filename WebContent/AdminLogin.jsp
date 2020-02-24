@@ -22,6 +22,7 @@
 <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 <!-- Dictate which Stylesheets to use for this webpage -->
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -90,6 +91,12 @@
 								<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
 							</form>
 							${ts}<br>
+								<div>
+								<form action="?" method="POST" >
+     								<div style="resize: horizontal;" class="g-recaptcha" data-sitekey="6LdDltsUAAAAACnxxFD8oacBBWlWdgPE7X-2VyCp" data-theme="light" data-size="normal"></div>
+									<br/>
+								</form>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -134,6 +141,7 @@
 		</div>
 	</section>
 
+	
 
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/pages/AdminFooter2.jsp"%>
