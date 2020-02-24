@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="c" 	 uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -51,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 ml-auto">
-					 <form class="form" name="searchForm" action="<jstl:url value="searchBarProfiles" />" method="post">
+					 <form class="form" name="searchForm" action="<c:url value="searchBarProfiles" />" method="post">
        					<div class="input-group">
 							<input type="search" class="form-control" placeholder="搜尋使用者..." name="searchBar">
 							<div class="input-group-append">
