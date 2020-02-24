@@ -68,25 +68,28 @@
     <!-- SERVICES SECTION -->
 <section id="services" class="py-3">
     <div class="container">
-        <div class="row mt-3">
+
+        <div class="row mb-4 mb-3">
+
+        
         <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
                 <div class="card box-shadow">
                     <img class="card-img-top img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
                     <div class="card-body">
-                        <p>商品ID : productID </p>
+                        <p>商品ID : ${product.productID} </p>
                         <h4 class="card-title">${product.productName}</h4>
                         <p class="card-text">
                             <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
                         <p class="card-text">
-                          <samll class="text-muted card-service-height">${product.productDescription}</samll>
+                          <samll class="text-muted">${product.productDescription}</samll>
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
                         <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
 
-                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
+                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${product.productID}" data-img="${product.productImg}" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
 
                       </div>
                     </div>
@@ -94,7 +97,6 @@
             </div>
         </jstl:forEach>
     <div>
-    </div>
     </div>
     </div>
 </section>
@@ -289,7 +291,9 @@
         // Private methods and properties
         var cart = [];
 
-        function Item(name, price, count) {
+        function Item(id, img, name, price, count) {
+        	this.id = id
+        	this.img = img
             this.name = name
             this.price = price
             this.count = count
@@ -313,7 +317,7 @@
         // Public methods and properties
         var obj = {};
 
-        obj.addItemToCart = function (name, price, count) {
+        obj.addItemToCart = function (id, img, name, price, count) {
             for (var i in cart) {
                 if (cart[i].name === name) {
                     cart[i].count += count;
@@ -324,7 +328,7 @@
 
             console.log("addItemToCart:", name, price, count);
 
-            var item = new Item(name, price, count);
+            var item = new Item(id, img, name, price, count);
             cart.push(item);
             saveCart();
         };
@@ -421,10 +425,13 @@
           var name = $(this).attr("data-name");
           // Number() convert to the Number
           var price = Number($(this).attr("data-price"));
+          
+          var img = $(this).attr("data-img");
+          var id = Number($(this).attr("data-id"));
 
           console.log("Click add to cart:"+name+" "+price);
 
-          shoppingCart.addItemToCart(name, price, 1);
+          shoppingCart.addItemToCart(id, img, name, price, 1);
           displayCart();
         });
 
@@ -443,10 +450,10 @@
           console.log("*** Count Cart:" + cartArray.length);
           var output = "";
           for(var i in cartArray) {
-            output += "<li>"+cartArray[i].name+" <input class='item-count' type='number' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'>"+" x " + cartArray[i].price + " = " +cartArray[i].total+ 
+            output += "<td>"+cartArray[i].name+" <input class='item-count' type='number' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'>"+" x " + cartArray[i].price + " = " +cartArray[i].total+ 
             "<button class='plus-item' data-name='"+cartArray[i].name+"'>+</button>"+
             "<button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button>" + "<button class='delete-item' data-name='"+cartArray[i].name+"'>X</button>"
-            +"</li>";
+            +"</td>";
           }
           // html會渲染所有東西
           $("#show-cart").html(output);
