@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +48,7 @@ public class UpdateOrderController {
 		} else {
 			OrderBean theOrder = new OrderBean();
 			m.addAttribute("order", theOrder);
-			return "OrderAdding";
+			return "OrderAdding2";
 		}
 	}
 
