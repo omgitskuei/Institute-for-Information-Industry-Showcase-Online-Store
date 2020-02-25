@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import model.order.OrderBean;
+
 //@Service
 //@WebServlet("/orderDetails/orderDetails.do")
 @Controller
@@ -29,5 +31,9 @@ public class OrderDetailsBeanService {
 
 	public boolean delete(OrderDetailsBean thisBean) {
 		return odDAO.deleteOrderDetails(thisBean);
+	}
+	
+	public OrderDetailsBean getOrderDetails(int orderID) {
+		return odDAO.getOrderDetails(orderID);
 	}
 }

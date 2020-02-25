@@ -28,12 +28,12 @@ public class UpdateOrderController {
 	@Autowired
 	private OrderBeanService orderService;
 
-	@GetMapping("/list")
-	public String listOrders(Model m) {
-		List<OrderBean> theOrder = orderService.selectAll();
-		m.addAttribute("order", theOrder);
-		return "AdminViewAllUser";
-	}
+//	@GetMapping("/list")
+//	public String listOrders(Model m) {
+//		List<OrderBean> theOrder = orderService.selectAll();
+//		m.addAttribute("order", theOrder);
+//		return "AdminViewAllUser";
+//	}
 
 	@PostMapping("/saveOrder")
 	public String saveOrder(@ModelAttribute("order") @Valid OrderBean theOrder) {
@@ -43,9 +43,15 @@ public class UpdateOrderController {
 
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("orderID") int orderID, Model m) {
-		OrderBean theOrder = orderService.getOrder(orderID);
-		m.addAttribute("order", theOrder);
-		return "OrderAdding";
+		if (orderID != 0) {
+			OrderBean theOrder = orderService.getOrder(orderID);
+			m.addAttribute("order", theOrder);
+			return "OrderAdding";
+		} else {
+			OrderBean theOrder = new OrderBean();
+			m.addAttribute("order", theOrder);
+			return "OrderAdding";
+		}
 	}
 
 	@GetMapping("/delete")
