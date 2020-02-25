@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.product.ProductBean;
-import model.product.ProductBeanDAO;
 import model.product.ProductBeanService;
 import util.GetDateOrTime;
 import util.ImgConversion;
@@ -53,7 +54,8 @@ public class AdminInventoryController {
 	
 	// 管理者增加商品
 	@PostMapping(value="/addProduct")
-	public String addProduct(@RequestParam(name="productName", required = true) String productName,
+	public String addProduct(
+			@RequestParam(name="productName", required = true) String productName,
 			@RequestParam(name="productPrice", required = true) float productPrice,
 			@RequestParam(name="productStock", required = true) int productStock,
 			@RequestParam(name="productDescription", required = false) String productDescription,
@@ -90,9 +92,20 @@ public class AdminInventoryController {
 		}
 		
 		System.out.println("Beging add productImg");
-		ImgConversion imgUtil = new ImgConversion();
-		String newFile = imgUtil.addProductImg(file, request);
-		productBean.setProductImg(newFile);
+		
+//		ImgConversion imgUtil = new ImgConversion();
+//		String newFile = imgUtil.addProductImg(file, request);
+		
+		String fileName = file.getOriginalFilename();
+		System.out.println("fileName=" + fileName);	
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+		String savePath = request.getSession().getServletContext().getRealPath("/") + "images/productsImage/" + fileName;
+		System.out.println("savePath=" + savePath);
+//		
+		
+		productBean.setProductImg(savePath);
+		productService.saveProduct(productBean);
 		System.out.println("Finish adding productImg");
 		
 		return "AdminIndex";
