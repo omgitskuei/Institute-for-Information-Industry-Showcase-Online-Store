@@ -64,22 +64,23 @@
 <!-- ORDERS -->
 <jstl:forEach var="orderInfo" items="${orderToDetailsList}">
 
-<section id="ordres">
+<section id="orderDetails">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             <h4>訂單編號	${orderInfo.orderID}</h4>
-            <a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a>
+            				<td><a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a></td>
+            
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
 <!--                 <th>訂單編號</th> -->
                 <th>訂購時間</th>
+                <th>訂購人ID</th>
                 <th>寄送地址</th>
-                <th></th>
                 <th>寄送電話</th>
                 <th>總價</th>
                 
@@ -89,8 +90,8 @@
               <tr>
 <%--                 <td>${orderInfo.orderID}</td> --%>
                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
+   				<th>${orderInfo.orderID}</th>
    				<td>${orderInfo.mailingAddress}</td>
-   				<th></th>
 				<td>${orderInfo.mailingPhone}</td>
 				<td>${orderInfo.total}</td>
               </tr>
@@ -114,20 +115,24 @@
                 <th>單價</th>
                 <th>數量</th>
                 <th>小計</th>
+                
               </tr>
             </thead>
-            
+
             <tbody>
-            
               <jstl:forEach var="orderDetailsList" items="${detailsList}">
-              <tr>
+               <tr>
                 <td>${orderDetailsList.productID}</td>	
 				<td>${orderDetailsList.productName}</td>
 				<td>${orderDetailsList.productPrice}</td>	
 				<td>${orderDetailsList.productCount}</td>
 				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>
-              </tr>
-             </jstl:forEach>
+				 <c:set var="subtotal" value="${subtotal+orderDetailsList.productPrice*orderDetailsList.productCount}" />
+               </tr>
+              </jstl:forEach>
+                <tr >
+					<td align="right" rowspan="3" colspan="5" ><b>總金額<fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</b></td>
+			    </tr>
           </table>
         </div>
       </div>
