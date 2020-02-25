@@ -89,10 +89,10 @@
 							</thead>
 							<tbody>
 							<c:if test="${not empty SearchResults}">
-								<c:forEach var="user" items="${SearchResults}" varStatus="status">
+								<c:forEach var="profile" items="${SearchResults}" varStatus="status">
 									<!-- construct an "update" link with customer id -->
 									<c:url var="updateLink" value="/AdminProfile/updateForm">
-										<c:param name="userID" value="${user.userID}" />
+										<c:param name="userID" value="${profile.userID}" />
 									</c:url>
 
 									<!-- construct an "delete" link with customer id -->
@@ -100,15 +100,15 @@
 <%-- 										<c:param name="userID" value="${user.userID}" /> --%>
 <%-- 									</c:url> --%>
 									<tr>
-										<td>${user.profileID}</td>
-										<td>${user.userID}</td>
-										<td>${user.profileFullName}</td>
-										<td>${user.profileJoinDate}</td>
-										<td>${user.profileBirthdate}</td>
-										<td>${user.profileSex}</td>
-										<td>${user.profilePhone}</td>
-										<td>${user.profileAddress}</td>
-										<td>${user.profileVIP}</td>
+										<td>${profile.profileID}</td>
+										<td>${profile.userID}</td>
+										<td>${profile.profileFullName}</td>
+										<td>${profile.profileJoinDate}</td>
+										<td>${profile.profileBirthdate}</td>
+										<td>${profile.profileSex}</td>
+										<td>${profile.profilePhone}</td>
+										<td>${profile.profileAddress}</td>
+										<td>${profile.profileVIP}</td>
 										<td><a href="${updateLink}" class="btn btn-secondary">
 												<i class="fas fa-angle-double-right"></i> 修改
 										</a></td>
