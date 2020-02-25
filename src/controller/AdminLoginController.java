@@ -43,12 +43,13 @@ public class AdminLoginController {
 	// 3)Chris, Thomas
 	// URL address for this controller, method POST/GET, what data fields
 	@RequestMapping(path = "/adminSignIn", method = RequestMethod.POST)
-	public String adminSignIn(@RequestParam(name = "userEmail") String uEmail,
+	public String adminSignIn(
+			@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			@RequestParam(name = "g-recaptcha-response", required = false) boolean recaptcha,
-			@CookieValue(value = "Email", required = false, defaultValue = "user@domain.com") String cookieEmail,
-			@CookieValue(value = "Password", required = false, defaultValue = "Testing123!") String cookiePwd,
+			@CookieValue(value = "EmailCookie", required = false) Cookie emailCookie,
+			@CookieValue(value = "PasswordCookie", required = false) Cookie pwdCookie,
 			Model nextPage) {
 
 		System.out.println("BEGIN /adminSignIn");
@@ -57,6 +58,17 @@ public class AdminLoginController {
 		System.out.println("	Password = " + uPwd);
 		System.out.println("	Remember Me = " + remMe);
 		System.out.println("	Recaptcha = " + recaptcha);
+		try {
+			System.out.println("	Cookie email name, value, maxAge: " + emailCookie.getName() + ", "
+					+ emailCookie.getValue() + ", " + emailCookie.getMaxAge());
+			System.out.println("	Cookie pwd name, value, maxAge: " + pwdCookie.getName() + ", "
+					+ pwdCookie.getValue() + ", " + pwdCookie.getMaxAge());
+		} catch (NullPointerException e) {
+			System.out.println("No emailcookie and pwdcookie");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 
 		// Check for empty input
 		if ((uEmail == null) || (uPwd.length() < 8 || uPwd == null)) {
@@ -77,18 +89,30 @@ public class AdminLoginController {
 			nextPage.addAttribute("errors", errors);
 			return "AdminLogin";
 		} else {
-			// User input somewhat valid
 			UserBean bean = new UserBean();
-			bean.setUserEmail(uEmail);
-			bean.setUserPwd(uPwd);
-			bean.setAdmin(1);
+			if (emailCookie != null && pwdCookie != null) {
+				bean.setUserEmail(emailCookie.getValue());
+				byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
+				String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
+				bean.setUserPwd(pwd);
+				bean.setAdmin(1);
+			} else {
+				bean.setUserEmail(uEmail);
+				bean.setUserPwd(uPwd);
+				bean.setAdmin(1);
+			}
 			// Use bean to use UserBeanService uService
 			UserBean results = uService.checkLogin(bean);
 			System.out.println("Service.select(bean) RESULTS: ");
-			if (results == null || results.getUserID() == 0) {
+			if (results == null || results.getUserID() == 0 || results.getAdmin()==0) {
+				if (results == null || results.getUserID() ==0) {
+					System.out.println("USER NOT FOUND: Returning to AdminLogin");
+				} else if (results.getAdmin() == 0) {
+					System.out.println("USER FOUND BUT NOT ADMIN");
+				}
 				// Match not found
 				// If match NOT found, return to previous page AdminLogin
-				System.out.println("USER NOT FOUND: Returning to AdminLogin");
+				
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
@@ -116,7 +140,6 @@ public class AdminLoginController {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 				}
-
 				System.out.println("AUTHENTICATED: Directing to AdminIndex");
 				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
@@ -135,11 +158,11 @@ public class AdminLoginController {
 		// response.addCookie(new Cookie("adminLoginCookie", email));
 
 		System.out.println("	email: " + email);
-		// Encrypt email before writing to a cookie
-		byte[] cipherEmail = util.encryptGoogleTinkAEAD(email, "OMGiloveyou");
-		email = hexConvert.byteArrayToHexString(cipherEmail);
-		System.out.println("			cookie email(encrypted): " + email);
-		// Write encrypted email cookie
+//		// Encrypt email before writing to a cookie
+//		byte[] cipherEmail = util.encryptGoogleTinkAEAD(email, "OMGiloveyou");
+//		email = hexConvert.byteArrayToHexString(cipherEmail);
+//		System.out.println("			cookie email(encrypted): " + email);
+		// Write email cookie
 		Cookie emailCookie = new Cookie("EmailCookie", email);
 
 		System.out.println("	pwd: " + pwd);

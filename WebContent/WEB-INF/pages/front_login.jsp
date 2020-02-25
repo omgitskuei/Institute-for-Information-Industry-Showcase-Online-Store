@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,9 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css"
         integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
     <style>
-        <%@include file="/WEB-INF/css/bootstrap.css"%><%@include file="/WEB-INF/css/style.css"%>
+        <%@include file="/WEB-INF/css/bootstrap.css"%>
+        <%@include file="/WEB-INF/css/style.css"%>
     </style>
-    <title>登入</title>
+    <title>Farmville | 登入頁</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
@@ -44,7 +47,7 @@
                 <div class="col-md-8">
                     <div class="card p-4">
                         <div class="card-body">
-                            <form action="<jstl:url value="................................." />" method="post">
+                            <form action="<jstl:url value="/userSignIn" />" method="post">
                                 <h3 class="text-center">請輸入帳號密碼</h3>
                                 <hr>
                                 <div class="row">
@@ -57,8 +60,8 @@
          										placeholder="電子信箱："
          										name="userEmail"
          										id="userEmail"
-												value="${cookie.Email.getValue()}">
-											<span id="emailErrorSpan">${errors.emailError}</span>
+												value="${cookie.EmailCookie.getValue()}">
+											<span style="color: red;" id="emailErrorSpan">${errors.emailError}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -71,7 +74,7 @@
                                             	name="userPwd"
                                             	id="userPwd"
 												value="${cookie.Password.getValue()}">
-											<span id="pwdErrorSpan">${errors.pwdError}</span>
+											<span style="color: red;" id="pwdErrorSpan">${errors.pwdError}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 pl-4">
@@ -80,33 +83,26 @@
                                             	class="form-check-input" 
 												type="checkbox"
 												id="inlineFormCheck"
-												name="rememberMe"
-												/> 
-											<span id="notFoundErrorSpan">${errors.notFoundError}</span>	
+												name="rememberMe" /> 
 											<label
 												class="form-check-label"
-												for="FormCheck">記住帳號密碼</label>
+												for="FormCheck">記住帳號密碼
+											</label>
+											<span style="color: red;" id="notFoundErrorSpan">${errors.notFoundError}</span>	
 											<br>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-right">
                                         <div class="form-group">
-                                            <a href="<jstl:url value="................................." />">忘記密碼</a>
+                                            <a href="<jstl:url value="/directForgotPassword" />">忘記密碼</a>
                                         </div>
                                     </div>
                                 </div>
-<!-- 								<div class="col-md-12"> -->
-<!--                                     <div class="form-group"> -->
-<!--                                         <a href="forgetpwd.html" type="submit" -->
-<!--                                             class="btn btn-success btn-block text-white">送出</a> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-
 								<!-- SUBMIT LOGIN FORM BUTTON -->
 								<div class="row d-flex justify-content-end">
 									<div class="col-md-2">
 										<div class="form-group">
-												<a href="forgetpwd.html" type="submit" class="btn btn-success btn-block text-white">登入</a>
+												<input type="submit" value="登入" class="btn btn-success text-white btn-block"> 
 										</div>
 									</div>
 								<!-- OEPN SIGN UP MODAL BUTTON -->
@@ -117,7 +113,7 @@
 												value="註冊" 
 												class="btn btn-secondary btn-block text-white" 
 												data-toggle="modal" 
-												data-target="#signUpModal">
+												data-target="#signUpModal"/>
 										</div>
 									</div>
 								</div>
@@ -147,7 +143,7 @@
 					</div>
 					<div class="modal-body">
 						<form class="form" name="signupForm"
-							action="<jstl:url value="/..................." />" method="post"
+							action="<jstl:url value="/userSignUp" />" method="post"
 							id="signupForm">
 							<div class="form-group">
 								<label for="email">電子信箱</label> <input type="email"

@@ -68,27 +68,42 @@
 								action="<jstl:url value="/adminSignIn" />" method="post"
 								id="myForm">
 								<div class="form-group">
-									<label for="email">電子郵件</label> <input type="email"
-										class="form-control" name="userEmail" id="userEmail"
-										value="${cookie.EmailCookie.getValue()}"> <span
-										id="emailErrorSpan">${errors.emailError}</span>
+									<label for="email">電子郵件</label> 
+									<input 
+										type="email"
+										class="form-control" 
+										name="userEmail" 
+										id="userEmail"
+										value="${cookie.EmailCookie.getValue()}">
+									<span id="emailErrorSpan">${errors.emailError}</span>
 								</div>
 								<div class="form-group">
-									<label for="password">密碼</label> <input type="password"
-										class="form-control" name="userPwd" id="userPwd"
-										value="${cookie.PasswordCookie.getValue()}"> <span
-										id="pwdErrorSpan">${errors.pwdError}</span>
-								</div>
-								<div class="form-group ml-4">
-									<input class="form-check-input" type="checkbox"
-										id="inlineFormCheck" name="rememberMe" id="rememberMe" /> <label
-										class="form-check-label" for="FormCheck"> 記住帳號密碼 <br>
-										${errors.notFoundError}
-									</label>
-								</div>
-								<input type="submit" value="登入" class="btn btn-primary btn-block"> 
-								<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
-								<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
+									<label for="password">密碼</label> 
+									<input 
+										type="password"
+										class="form-control" 
+										name="userPwd" 
+										id="userPwd"
+										value="${cookie.PasswordCookie.getValue()}"> 
+								<span id="pwdErrorSpan">${errors.pwdError}</span>
+							</div>
+							<div class="form-group ml-4">
+								<input 
+									class="form-check-input" 
+									type="checkbox"
+									id="inlineFormCheck" 
+									name="rememberMe" 
+									id="rememberMe" /> 
+								<label 
+									class="form-check-label" 
+									for="FormCheck"> 記住帳號密碼
+								</label>
+								<span id="notFoundSpan">${errors.notFoundError}</span>
+								 <br>
+							</div>
+							<input type="submit" value="登入" class="btn btn-primary btn-block"> 
+							<input type="button" value="註冊" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#signUpModal">
+							<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
 							</form>
 							${ts}<br>
 								<div>

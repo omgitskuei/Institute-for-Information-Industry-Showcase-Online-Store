@@ -20,88 +20,77 @@ import util.EncodeHexString;
 import util.EncryptString;
 
 @Controller
-@SessionAttributes(names = {"userEmail"})
+@SessionAttributes(names = { "userEmail" })
 public class AdminLogoutController {
-	
+
 	private HttpServletResponse response;
-	
+
 	@Autowired
 	public AdminLogoutController(HttpServletResponse response) {
 		this.response = response;
 	}
-	
+
 	// 1)回首頁
 	// 2)已完成
 	// 3)Thomas
 	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	public String processActionLogout(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
 		System.out.println("Directing to 首頁");
-		
-		
+
 		nextPage.addAttribute("userEmail", uEmail);
 		return "AdminIndex";
 	}
-	
-	
+
 	// 1)停用Session，並登出
 	// 2)已完成
-	// 3)Thomas
+	// 3)Thomas， Chris added cookies handling
 	// Closes session when user logs out
-	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
-	 public ModelAndView loadApp(
-	    		@CookieValue(value = "EmailCookie", required = false) String cEmail,
-				@CookieValue(value = "PasswordCookie", required = false) String cPwd, 
-				HttpServletRequest request,
-				HttpServletResponse response) {
-		 // read Login Cookies
-		 ModelAndView nextPage = new ModelAndView("/AdminLogin");
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView logout(@CookieValue(value = "EmailCookie", required = false) Cookie emailCookie,
+			@CookieValue(value = "PasswordCookie", required = false) Cookie pwdCookie, HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("BEGIN: /logout");
+		// read Login Cookies
+		ModelAndView nextPage = new ModelAndView("/AdminLogin");
 		// Cookies exist
-		if (cEmail != null && cPwd != null) {
-			System.out.println("有抓到Cookie - Success read cookie");
-			System.out.println("	Cookie email value: " + cEmail);
-			System.out.println("	Cookie pwd value: " + cPwd);
+		if (emailCookie != null && pwdCookie != null) {
+			System.out.println("有抓到Cookie - Successfuly read cookies");
+			System.out.println("	Cookie email name, value, maxAge: " + emailCookie.getName() + ", "
+					+ emailCookie.getValue() + ", " + emailCookie.getMaxAge());
+			System.out.println("	Cookie pwd name, value, maxAge: " + pwdCookie.getName() + ", "
+					+ pwdCookie.getValue() + ", " + pwdCookie.getMaxAge());
 			EncryptString util = new EncryptString();
 			EncodeHexString hexConvert = new EncodeHexString();
-			
-			// decrypt Email Cookie				
-			byte[] emailCipher = hexConvert.HexStringToByteArray(cEmail);
-			String email = util.decryptGoogleTinkAEAD(emailCipher, "OMGiloveyou");
+
+//			// decrypt Email Cookie				
+//			byte[] emailCipher = hexConvert.HexStringToByteArray(emailCookie.getValue());
+//			String email = util.decryptGoogleTinkAEAD(emailCipher, "OMGiloveyou");
 			// decrypt Password Cookie
-			byte[] pwdCipher = hexConvert.HexStringToByteArray(cPwd);
+			byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
 			String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
-			
-			System.out.println("	Cookie email value: " + email);
-			System.out.println("	Cookie pwd value: " + pwd);
-			
-			// delete cookie
-			Cookie cookie = new Cookie("EmailCookie", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-			cookie = new Cookie("PasswordCookie", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-			
-			Cookie EmailCookie = new Cookie("EmailCookie", email);
-			Cookie PasswordCookie = new Cookie("PasswordCookie", pwd);
-			EmailCookie.setMaxAge(60*30);
-			PasswordCookie.setMaxAge(60*30);
-			
-			
-			
-			response.addCookie(EmailCookie);
-			response.addCookie(PasswordCookie);
-			//nextPage.addObject(EmailCookie);
-			//nextPage.addObject(PasswordCookie);
-		} 	else {
+			System.out.println("	Cookie pwd decrypted value (read only): " + pwd);
+
+			// nextPage.addObject(EmailCookie);
+			// nextPage.addObject(PasswordCookie);
+		} else {
 			System.out.println("No cookies at nextPage AdminLogin");
+			// deleting cookies a second time just in case
+			try {
+				emailCookie.setMaxAge(0);
+				pwdCookie.setMaxAge(0);
+				response.addCookie(emailCookie);
+				response.addCookie(pwdCookie);
+			} catch (Exception e) {
+				System.out.println("cant delete a second time");
+			}
 		}
-		HttpSession session= request.getSession(false);
+		HttpSession session = request.getSession(false);
 		SecurityContextHolder.clearContext();
-		if(session != null) {
+		if (session != null) {
 			session.invalidate();
 			System.out.println("Invalid Session!");
 		}
-		
-	    return nextPage;
-	 }
+
+		return nextPage;
+	}
 }

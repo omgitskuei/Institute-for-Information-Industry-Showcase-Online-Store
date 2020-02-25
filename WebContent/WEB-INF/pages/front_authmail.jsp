@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Noto+Sans+TC&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
-    <style>
+   <link rel="stylesheet" href="css/style.css" />
+   <%--  <style>
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
-    </style>
+    </style> --%>
   <title>忘記密碼</title>
   </head>
   <body>
@@ -34,31 +36,35 @@
     </div>
     </header>
 
-    <!-- LOGIN SECTION -->
+    <!-- EMAIL VERIFICATION SECTION -->
 <section class="py-3">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
-            <form action="">
-            <h3 class="text-center">輸入驗證碼</h3>
-            <hr>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="admincode">請輸入信箱的驗證碼</label>
-                  <input type="text" class="form-control" placeholder="驗證碼：">
-                  <span style="color: red;" class="ml-auto">驗證碼有效錯誤</span>
-                </div>
-              </div> 
-              <div class="col-md-12">
-                <div class="form-group">
-                  <a href="authmail.html" type="submit" class="btn btn-success btn-block text-white">送出驗證信</a>
-                </div>
-              </div>
-            </div>
-          </form>
+            <form 
+            	class="form" 
+                name="signupForm"
+				action="<jstl:url value="/userSignUpVerification" />" 
+				method="post">
+            	<h3 class="text-center">輸入驗證碼</h3>
+				<hr>
+            	<div class="row">
+					<div class="col-md-12">
+ 						<div class="form-group">
+							<label for="confirmCode">請輸入信箱的驗證碼</label>
+							<input type="text" class="form-control" placeholder="驗證碼：" name="confirmCode">
+							<span id="codeErrorSpan" style="color: red;" class="ml-auto">${errors.codeError}</span>
+						</div>
+					</div> 
+					<div class="col-md-12">
+						<div class="form-group">
+							<button type="submit" class="btn btn-success btn-block text-white" value="送出">送出驗證碼</button>
+						</div>
+					</div>
+				</div>
+			</form>
           </div>
         </div>
       </div>

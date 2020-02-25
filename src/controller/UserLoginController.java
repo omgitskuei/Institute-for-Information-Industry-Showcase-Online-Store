@@ -43,50 +43,41 @@ public class UserLoginController {
 		// ^ name is synonymous to 'value'
 		// response.addCookie(new Cookie("adminLoginCookie", email));
 
-		System.out.println("email: " + email);
-		// Encrypt email before writing to a cookie
-		byte[] cipherEmail = util.encryptGoogleTinkAEAD(email, "OMGiloveyou");
-		email = hexConvert.byteArrayToHexString(cipherEmail);
-		System.out.println("cookie email(encrypted): " + email);
-		// Write encrypted email cookie
-		Cookie emailCookie = new Cookie("EmailCookie", email);
-
-		System.out.println("pwd: " + pwd);
-		// Encrypt pwd before writing to a cookie
-		byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
-		pwd = hexConvert.byteArrayToHexString(cipherPwd);
-		System.out.println("cookie pwd(encrpyted): " + pwd);
-		// Write encrypted pwd cookie
-		Cookie pwdCookie = new Cookie("PasswordCookie", pwd);
-
-		emailCookie.setMaxAge(60 * 60);
-		pwdCookie.setMaxAge(60 * 60);
-		response.addCookie(emailCookie);
-		response.addCookie(pwdCookie);
-		System.out.println("有抓Cookie");
+		
 
 		return "writeLoginCookie";
 	}
 
 	// Methods > User sign up account
-	@RequestMapping(path = "/signIn", method = RequestMethod.POST)
-	public String signIn(@RequestParam(name = "userEmail") String uEmail, @RequestParam(name = "userPwd") String uPwd,
+	@RequestMapping(path = "/userSignIn", method = RequestMethod.POST)
+	public String userSignIn(@RequestParam(name = "userEmail") String uEmail,
+			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			@RequestParam(name = "g-recaptcha-response", required = false) boolean recaptcha,
-			@CookieValue(value = "EmailCookie", required = false, defaultValue = "user@domain.com") String cEmail,
-			@CookieValue(value = "PasswordCookie", required = false, defaultValue = "Testing123!") String cPwd,
-			Model nextPage) {
+			@CookieValue(value = "UserEmailCookie", required = false) Cookie emailCookie,
+			@CookieValue(value = "UserPasswordCookie", required = false) Cookie pwdCookie, Model nextPage) {
 
-		System.out.println("BEGIN /UserLogin");
-		System.out.println("User input: ");
-		System.out.println("Email = " + uEmail);
-		System.out.println("Password = " + uPwd);
-		System.out.println("Remember Me = " + remMe);
+		System.out.println("BEGIN /adminSignIn");
+		System.out.println("	User input: ");
+		System.out.println("	Email = " + uEmail);
+		System.out.println("	Password = " + uPwd);
+		System.out.println("	Remember Me = " + remMe);
+		System.out.println("	Recaptcha = " + recaptcha);
+		try {
+			System.out.println("	Cookie email name, value, maxAge: " + emailCookie.getName() + ", "
+					+ emailCookie.getValue() + ", " + emailCookie.getMaxAge());
+			System.out.println("	Cookie pwd name, value, maxAge: " + pwdCookie.getName() + ", "
+					+ pwdCookie.getValue() + ", " + pwdCookie.getMaxAge());
+		} catch (NullPointerException e) {
+			System.out.println("		No Useremailcookie and Userpwdcookie");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// Check for empty input
 		if ((uEmail == null) || (uPwd.length() < 8 || uPwd == null)) {
 			// One of the User's input is empty, return to previous page with error messages
-			System.out.println("USER INPUT INVALID: Returning to AdminLogin");
+			System.out.println("	USER INPUT INVALID: Returning to AdminLogin");
 			Map<String, String> errors = new HashMap<String, String>();
 			if (uEmail == null || uEmail.length() == 0) {
 				errors.put("emailError", "Email is required");
@@ -100,53 +91,59 @@ public class UserLoginController {
 			}
 
 			nextPage.addAttribute("errors", errors);
-			return "AdminLogin";
+			return "front_login";
 		} else {
-			// User input somewhat valid
 			UserBean bean = new UserBean();
-			bean.setUserEmail(uEmail);
-			bean.setUserPwd(uPwd);
-			bean.setAdmin(1);
+			if (emailCookie != null && pwdCookie != null) {
+				bean.setUserEmail(emailCookie.getValue());
+				byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
+				String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
+				bean.setUserPwd(pwd);
+				bean.setAdmin(0);
+			} else {
+				bean.setUserEmail(uEmail);
+				bean.setUserPwd(uPwd);
+				bean.setAdmin(0);
+			}
 			// Use bean to use UserBeanService uService
 			UserBean results = uService.checkLogin(bean);
-			System.out.println("Service.select(bean) RESULTS: ");
+			System.out.println("	Service.select(bean) RESULTS: ");
 			if (results == null || results.getUserID() == 0) {
-				// Match not found
-				// If match NOT found, return to previous page AdminLogin
-				System.out.println("USER NOT FOUND: Returning to AdminLogin");
+				if (results == null || results.getUserID() == 0) {
+					System.out.println("USER NOT FOUND: Returning to AdminLogin");
+				} 
+				// Match not found, return to previous page to login again
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("notFoundError", "Incorrect Email or Password");
 				nextPage.addAttribute("errors", errors);
-				return "AdminLogin";
+				return "front_login";
 			} else {
 				// If match found, return
 				// EEIT111FinalProject/WebContent/WEB-INF/pages/AdminDashboard
-				System.out.println("Class = " + results.getClass());
-				System.out.println("User ID = " + results.getUserID());
-				System.out.println("Email = " + results.getUserEmail());
-				System.out.println("Password = " + results.getUserPwd());
-				System.out.println("Admin = " + results.getAdmin());
-				System.out.println("");
-
+				System.out.println("		Class = " + results.getClass());
+				System.out.println("		User ID = " + results.getUserID());
+				System.out.println("		Email = " + results.getUserEmail());
+				System.out.println("		Password = " + results.getUserPwd());
+				System.out.println("		Admin = " + results.getAdmin());
+				// Write a Cookie storing email so user don't need to enter email next time
 				// Write a Cookie storing email so user don't need to enter email next time
 				if (remMe == true) {
-					System.out.println("MAKING COOKIE");
-					writeLoginCookie(uEmail, uPwd, nextPage, response);
+					System.out.println("	MAKING COOKIE");
+					writeLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
 				} else {
-					// delete cookie
-					Cookie EmailCookie = new Cookie("EmailCookie", uEmail);
-					EmailCookie.setMaxAge(0);
-					response.addCookie(EmailCookie);
-					Cookie PasswordCookie = new Cookie("PasswordCookie", uEmail);
-					PasswordCookie.setMaxAge(0);
-					response.addCookie(PasswordCookie);
+					System.out.println("	Remember Me == false, DELETING OLD COOKIES");
+					Cookie cookie = new Cookie("UserEmailCookie", "");
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+					cookie = new Cookie("UserPasswordCookie", "");
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
 				}
-				
-				System.out.println("AUTHENTICATED: Directing to AdminIndex");
+				System.out.println("AUTHENTICATED: Directing to front_intro_loginSuccess");
 				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
-				return "AdminIndex";
+				return "front_intro_loginSuccess";
 			}
 		}
 	}
