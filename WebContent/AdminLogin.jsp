@@ -70,13 +70,13 @@
 								<div class="form-group">
 									<label for="email">電子郵件</label> <input type="email"
 										class="form-control" name="userEmail" id="userEmail"
-										value="${cookie.Email.getValue()}"> <span
+										value="${cookie.EmailCookie.getValue()}"> <span
 										id="emailErrorSpan">${errors.emailError}</span>
 								</div>
 								<div class="form-group">
 									<label for="password">密碼</label> <input type="password"
 										class="form-control" name="userPwd" id="userPwd"
-										value="${cookie.Password.getValue()}"> <span
+										value="${cookie.PasswordCookie.getValue()}"> <span
 										id="pwdErrorSpan">${errors.pwdError}</span>
 								</div>
 								<div class="form-group ml-4">
