@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import model.product.ProductBean;
 import model.profile.ProfileBean;
 import util.EncodeHexString;
 import util.EncryptString;
@@ -101,14 +102,20 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 					System.out.println("	Decrypted password: "+clonedBean.getUserPwd());
 					
 					
-					// ---------------------------> RETURN THE CLONE <--------------------------
+					// ---------------------------> RETURN THE CLONE BEAN <--------------------------
 					System.out.println("User Found - Returning User "+ clonedBean.getUserID());
 					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
 					return clonedBean;
 				} else {
-					System.out.println("		User NOT FOUND - Returning NULL");
+					// ---------------------------> RETURN THE EMPTY BEAN <--------------------------
+					System.out.println("		User NOT FOUND - Returning nullBean(0, domain@example.com, Testing123!, 0)");
 					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
-					return null;
+					UserBean nullBean = new UserBean();
+					nullBean.setUserID(0);
+					nullBean.setUserEmail("domain@example.com");
+					nullBean.setUserPwd("Testing123!");
+					nullBean.setAdmin(0);
+					return nullBean;
 				}
 			} else {
 				System.out.println("Passed User is NULL - Returning NULL");
@@ -228,6 +235,21 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 		return results;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<UserBean> selectFuzzy(String searchQuery) {
+		System.out.println("BEGIN: UserBeanDAO.selectFuzzy(String)");
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "From UserBean where userID like '%"+searchQuery+"%' or userEmail like '%"+searchQuery+"%'";
+		Query query = session.createQuery(hql); 
+		// Store query results into List results
+		List<UserBean> results = (List<UserBean>) query.list();
+		System.out.println("	# of results: " + results.size());
+		// Return List results
+		System.out.println("FINISH: UserBeanDAO.selectFuzzy(String)");
+		return results;
+	}
+	
 	@Override
 	public boolean updateEmail(UserBean beanWithID, String newEmail) {
 		// Get current Session

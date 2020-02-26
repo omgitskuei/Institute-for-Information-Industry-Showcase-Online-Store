@@ -15,37 +15,41 @@
 <!-- NAVBAR -->
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
-	<h1>編輯訂單資料</h1>
-
-	<form:form method="POST" action="saveOrder" modelAttribute="order">
+	<h1>新增明細</h1>
+	
+	<form:form method="POST" action="saveOrderDetails" modelAttribute="orderDetails">
 		<table>
 			<tr>
 				<td></td>
-				<td><form:hidden path="orderID" /></td>
+				<td><form:hidden path="OrderDetailID" /></td>
 			</tr>
 			<tr>
-				<td>訂購時間 :</td>
-				<td><form:input path="OrderTime" readonly="true"/></td>
+				<td>訂單ID :</td>
+				<td><form:input path="OrderID" /></td>
 			</tr>
 			<tr>
-				<td>訂購人ID :</td>
-				<td><form:input path="UserID" readonly="true"/></td>
+				<td>產品ID :</td>
+				<td><form:input path="ProductID" /></td>
 			</tr>
 			<tr>
-				<td>總價 :</td>
-				<td><form:input path="Total" readonly="true"/></td>
+				<td>產品名稱 :</td>
+				<td><form:input path="ProductName" /></td>
 			</tr>
 			<tr>
-				<td>寄送地址 :</td>
-				<td><form:input path="MailingAddress" /></td>
+				<td>數量 :</td>
+				<td><form:input path="ProductCount" /></td>
 			</tr>
 			<tr>
-				<td>寄送電話 :</td>
-				<td><form:input path="MailingPhone" /></td>
+				<td>單價 :</td>
+				<td><form:input path="ProductPrice" /></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">下一步</form:button></td>
+				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
 			</tr>
 		</table>
 	</form:form>
+	
+	
+
+

@@ -62,27 +62,6 @@ public class ImgConversion {
 
 	}
 
-	/**
-	 * @Service 刪除照片
-	 */
-	@Override
-	public boolean deleteMemberPic(Integer memberId, HttpServletRequest request) {
-		
-
-		if (!memberpic.equals("images/memberPic/T1213121.jpg")) {
-			String filePath = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/");
-			String fileName = filePath + memberpic;
-			File file = new File(fileName);
-			if (file.isFile() && file.exists()) {
-				file.delete();// "刪除單個檔案"+name+"成功！"
-				return true;
-			} // "刪除單個檔案"+name+"失敗！"
-			return false;
-		}
-		return true;
-	}
-
-	// Methods
 	// -- Convert JPG to byte[]
 	public byte[] jpgToByte(String filePath) {
 		// Java provides ImageIO class for reading and writing an image.

@@ -80,6 +80,9 @@
         <div class="row mb-4"> 
 		
         <jstl:forEach var="product" items="${InventoryList}" >
+        <jstl:url var="theProductLink" value="/showSpecificProduct">
+				<jstl:param name="productID" value="${product.productID}" />
+		</jstl:url>
             <div class="col-md-4">
                 <div class="card box-shadow mb-3">
                     <img class="card-img-top img-height img-fluid" src="${product.productImg}" alt="${product.productName} 的圖" width="250px">
@@ -96,7 +99,9 @@
                         <div class="row ml-5">
                         <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
 
+
                         <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${product.productID}" data-img="${product.productImg}" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
+
 
                       </div>
                     </div>
@@ -249,7 +254,6 @@
     </div>
   </div>
 </section>
-
 
     <!-- FOOTER -->
     <footer id="main-footer" class="text-center p-4">

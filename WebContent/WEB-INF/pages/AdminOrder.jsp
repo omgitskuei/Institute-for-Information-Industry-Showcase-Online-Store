@@ -64,13 +64,15 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>最新訂單</h4>
+<!--             <h4>最新訂單</h4> -->
+              <a href="AdminOrder/updateForm?orderID=0" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>新增訂單</a>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
                 <th>訂單編號</th>
                 <th>訂購時間</th>
+                <th>訂購人ID</th>
                 <th>寄送地址</th>
                 <th>寄送電話</th>
                 <th>總價</th>
@@ -93,6 +95,7 @@
                 <td><a  href='<c:url value='orderDetails.do?orderID=${orderInfo.orderID}' />'>
                 ${orderInfo.orderID}</a></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderInfo.orderTime}" /></td>
+				<td>${orderInfo.userID}</td>
 				<td>${orderInfo.mailingAddress}</td>
 				<td>${orderInfo.mailingPhone}</td>
 				<td>${orderInfo.total}</td>

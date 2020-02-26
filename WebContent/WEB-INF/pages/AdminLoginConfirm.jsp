@@ -73,13 +73,12 @@
 								name="loginForm"
 								action="<jstl:url value="/adminSignUpStep2" />"
 								method="post"
-								id="myForm"
-							>
+								id="myForm">
 								<div class="form-group">
 
 
 									<label for="confirmCode"><b>Administrator Verification</b></label>
-									<div>請輸入</div>
+									<div>請輸入驗證碼</div>
 									<div>Please enter your verification code below.</div>
 									<div>Contact HR if you have any questions, or did not receive your code.</div>
 									<br>
@@ -87,8 +86,8 @@
 										type="text"
 										class="form-control"
 										name="confirmCode"
-										value=""
-									> <span id="codeErrorSpan">${errors.codeError}</span>
+										placeholder="驗證碼："> 
+									<span id="codeErrorSpan">${errors.codeError}</span>
 								</div>
 								<input
 									type="submit"

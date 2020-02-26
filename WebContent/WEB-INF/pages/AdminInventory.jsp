@@ -62,6 +62,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
+          <a class="btn btn-primary" href="<c:url value="addingProductForm" />">新增商品</a>
             <h4>最新庫存商品</h4>
           </div>
           <table class="table table-striped">

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="c" 	 uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -51,12 +50,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 ml-auto">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="搜尋使用者...">
-						<div class="input-group-append">
-							<button class="btn btn-warning text-black">搜尋</button>
+					 <form class="form" name="searchForm" action="<c:url value="searchBarProfiles" />" method="post">
+       					<div class="input-group">
+							<input type="search" class="form-control" placeholder="搜尋使用者..." name="searchBar">
+							<div class="input-group-append">
+              		  			<input type="submit" class="btn btn-warning text-black" value="搜尋">
+							</div>
 						</div>
-					</div>
+        			</form>
 				</div>
 			</div>
 		</div>
@@ -74,6 +75,7 @@
 						<table class="table table-striped">
 							<thead class="thead-dark">
 								<tr>
+									<th>ProfileID</th>
 									<th>使用者ID</th>
 									<th>使用者名稱</th>
 									<th>加入日期</th>
@@ -86,25 +88,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="user" items="${profiles}">
+							<c:if test="${not empty SearchResults}">
+								<c:forEach var="profile" items="${SearchResults}" varStatus="status">
 									<!-- construct an "update" link with customer id -->
 									<c:url var="updateLink" value="/AdminProfile/updateForm">
-										<c:param name="userID" value="${user.userID}" />
+										<c:param name="userID" value="${profile.userID}" />
 									</c:url>
 
 									<!-- construct an "delete" link with customer id -->
-									<c:url var="deleteLink" value="/AdminProfile/delete">
-										<c:param name="userID" value="${user.userID}" />
-									</c:url>
+<%-- 									<c:url var="deleteLink" value="/AdminProfile/delete"> --%>
+<%-- 										<c:param name="userID" value="${user.userID}" /> --%>
+<%-- 									</c:url> --%>
 									<tr>
-										<td>${user.userID}</td>
-										<td>${user.profileFullName}</td>
-										<td>${user.profileJoinDate}</td>
-										<td>${user.profileBirthdate}</td>
-										<td>${user.profileSex}</td>
-										<td>${user.profilePhone}</td>
-										<td>${user.profileAddress}</td>
-										<td>${user.profileVIP}</td>
+										<td>${profile.profileID}</td>
+										<td>${profile.userID}</td>
+										<td>${profile.profileFullName}</td>
+										<td>${profile.profileJoinDate}</td>
+										<td>${profile.profileBirthdate}</td>
+										<td>${profile.profileSex}</td>
+										<td>${profile.profilePhone}</td>
+										<td>${profile.profileAddress}</td>
+										<td>${profile.profileVIP}</td>
 										<td><a href="${updateLink}" class="btn btn-secondary">
 												<i class="fas fa-angle-double-right"></i> 修改
 										</a></td>
@@ -114,6 +118,7 @@
 										</a></td> -->
 									</tr>
 								</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 

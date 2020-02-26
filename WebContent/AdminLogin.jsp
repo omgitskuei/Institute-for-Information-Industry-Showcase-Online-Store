@@ -22,6 +22,7 @@
 <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 <!-- Dictate which Stylesheets to use for this webpage -->
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -69,13 +70,13 @@
 								<div class="form-group">
 									<label for="email">電子郵件</label> <input type="email"
 										class="form-control" name="userEmail" id="userEmail"
-										value="${cookie.Email.getValue()}"> <span
+										value="${cookie.EmailCookie.getValue()}"> <span
 										id="emailErrorSpan">${errors.emailError}</span>
 								</div>
 								<div class="form-group">
 									<label for="password">密碼</label> <input type="password"
 										class="form-control" name="userPwd" id="userPwd"
-										value="${cookie.Password.getValue()}"> <span
+										value="${cookie.PasswordCookie.getValue()}"> <span
 										id="pwdErrorSpan">${errors.pwdError}</span>
 								</div>
 								<div class="form-group ml-4">
@@ -90,6 +91,12 @@
 								<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
 							</form>
 							${ts}<br>
+								<div>
+								<form action="?" method="POST" >
+     								<div style="resize: horizontal;" class="g-recaptcha" data-sitekey="6LdDltsUAAAAACnxxFD8oacBBWlWdgPE7X-2VyCp" data-theme="light" data-size="normal"></div>
+									<br/>
+								</form>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -134,6 +141,7 @@
 		</div>
 	</section>
 
+	
 
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/pages/AdminFooter2.jsp"%>

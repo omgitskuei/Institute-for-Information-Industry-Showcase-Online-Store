@@ -143,7 +143,7 @@ public class ProductController {
 		pr.addAttribute("timestamp", date);
 		pr.addAttribute("category", category);
 		
-			return "product";
+			return "_productSearchBarResultsDemo";
 		}		
 		
 	
