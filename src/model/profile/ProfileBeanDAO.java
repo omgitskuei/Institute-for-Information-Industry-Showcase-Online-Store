@@ -62,17 +62,29 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 	
+	@Deprecated
 	@Override
-	public ProfileBean getProfile(int userID) {
+	public ProfileBean getProfile(int userID) {							// WARNING THIS SEARCHES BY PROFILE ID NOT USER ID
 		Session currentSession = sessionFactory.getCurrentSession();
 		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		return theProfile;
 	}
 	
-	public ProfileBean getProfile(ProfileBean thisP) {
+	@Deprecated
+	public ProfileBean getProfile(ProfileBean thisP) {					// WARNING THIS SEARCHES BY PROFILE ID NOT USER ID
 		Session currentSession = sessionFactory.getCurrentSession();
 		int userID = thisP.getUserID();
 		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
+		return theProfile;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public ProfileBean getProfileByUserID(int userID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		String hql = "From ProfileBean where userID =: userID";
+		Query query = currentSession.createQuery(hql); 
+		query.setParameter("userID", userID);
+		ProfileBean theProfile = (ProfileBean)query.uniqueResult();
 		return theProfile;
 	}
 	
@@ -80,10 +92,6 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	public ArrayList<ProfileBean> selectFuzzy(String searchQuery) {
 		System.out.println("		BEGIN: ProfileBeanDAO.selectFuzzy(String)");
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println(session.isConnected());
-		System.out.println(session.isOpen());
-		System.out.println(session.isJoinedToTransaction());
-		
 		String hql = "From ProfileBean where profileFullName like '%"+searchQuery+"%'";
 		Query query = session.createQuery(hql); 
 		// Store query results into List results
@@ -94,8 +102,9 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 
+	@Deprecated
 	@Override
-	public void deleteProfile(int userID) {
+	public void deleteProfile(int userID) {							// WARNING THIS SEARCHES BY PROFILE ID NOT USER ID
 		Session session = sessionFactory.getCurrentSession();
 		ProfileBean theProfile = session.byId(ProfileBean.class).load(userID);
 		session.delete(theProfile);
