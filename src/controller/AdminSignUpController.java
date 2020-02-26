@@ -119,7 +119,7 @@ public class AdminSignUpController {
 				// If user doesn't exist, create new user
 				// uService checkLogin includes validating userEmail and userPwd
 
-				if (uService.checkLogin(bean) == null) {
+				if (uService.checkLogin(bean).getUserID() == 0) {
 					return "forward:/adminSignUpStep3";
 
 				} else {

@@ -154,18 +154,10 @@ public class AdminLoginController {
 	// 3)Chris
 	@RequestMapping("/writeAdminLoginCookie")
 	private String writeLoginCookie(String email, String pwd, Model nextPage, HttpServletResponse response) {
-		// ^ name is synonymous to 'value'
-		// response.addCookie(new Cookie("adminLoginCookie", email));
-
-		System.out.println("	email: " + email);
-//		// Encrypt email before writing to a cookie
-//		byte[] cipherEmail = util.encryptGoogleTinkAEAD(email, "OMGiloveyou");
-//		email = hexConvert.byteArrayToHexString(cipherEmail);
-//		System.out.println("			cookie email(encrypted): " + email);
-		// Write email cookie
+		System.out.println("BEGIN: /writeAdminLoginCookie");
+		System.out.println("	passed email: " + email);
 		Cookie emailCookie = new Cookie("EmailCookie", email);
-
-		System.out.println("	pwd: " + pwd);
+		System.out.println("	passed pwd: " + pwd);
 		// Encrypt pwd before writing to a cookie
 		byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
 		pwd = hexConvert.byteArrayToHexString(cipherPwd);
@@ -177,7 +169,7 @@ public class AdminLoginController {
 		pwdCookie.setMaxAge(60 * 60);
 		response.addCookie(emailCookie);
 		response.addCookie(pwdCookie);
-		System.out.println("有抓Cookie");
+		System.out.println("cookies ["+emailCookie.getName()+", "+pwdCookie.getName()+"] added to response");
 
 		return "writeLoginCookie";
 	}
