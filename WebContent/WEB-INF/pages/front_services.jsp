@@ -63,15 +63,22 @@
 </div>
 </section>
 
+		
+      <div style="position: absolute;" class="py-3">
+        <i class="fa fa-shopping-cart mb-1"></i>
+      	<ul id="show-cart">
+        <li>???????</li>
+      	</ul>
+      <div>總金額:$<span id="total-cart"></span></div>
+	</div>
 
 
-    <!-- SERVICES SECTION -->
+
+<!-- SERVICES SECTION -->
 <section id="services" class="py-3">
     <div class="container">
-
-        <div class="row mb-4 mb-3">
-
-        
+        <div class="row mb-4"> 
+		
         <jstl:forEach var="product" items="${InventoryList}" >
             <div class="col-md-4">
                 <div class="card box-shadow mb-3">
@@ -87,7 +94,7 @@
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
-                        <a href="stock.html" class="btn btn-success text-white mt-2 ml-2">查看</a>
+                        <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
 
                         <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${product.productID}" data-img="${product.productImg}" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
 
@@ -95,14 +102,16 @@
                     </div>
                 </div>
             </div>
+            
         </jstl:forEach>
     <div>
+    </div>
     </div>
     </div>
 </section>
 
 <!-- PAGINATION -->
-<nav class="container pagination">
+<!-- <nav class="container pagination">
   <ul class="pagination">
       <li class="page-item disabled">
           <a class="page-link" href="#">
@@ -126,7 +135,7 @@
           </a>
       </li>
   </ul>
-</nav>
+</nav> -->
 
      
 <!-- FAQ -->
@@ -450,10 +459,18 @@
           console.log("*** Count Cart:" + cartArray.length);
           var output = "";
           for(var i in cartArray) {
-            output += "<td>"+cartArray[i].name+" <input class='item-count' type='number' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'>"+" x " + cartArray[i].price + " = " +cartArray[i].total+ 
-            "<button class='plus-item' data-name='"+cartArray[i].name+"'>+</button>"+
-            "<button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button>" + "<button class='delete-item' data-name='"+cartArray[i].name+"'>X</button>"
-            +"</td>";
+            output +=
+              	"<li class='mb-2'>" +
+                cartArray[i].name +
+                cartArray[i].count +
+                " x " +
+                cartArray[i].price +
+                " = " +
+                cartArray[i].total +
+                " <button class='delete-item btn-sm btn-danger' data-name='" +
+                cartArray[i].name +
+                "'>X</button>" +
+                "</li>";
           }
           // html會渲染所有東西
           $("#show-cart").html(output);

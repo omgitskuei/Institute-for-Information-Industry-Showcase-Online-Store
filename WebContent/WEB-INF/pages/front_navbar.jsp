@@ -21,7 +21,38 @@
  <!-- START -->
  
 <!-- NAVBAR -->
- <nav class="navbar navbar-expand-sm navbar-dark">
+ <nav class="navbar navbar-expand-sm navbar-dark ">
+      <div class="container">
+			<a class="navbar-brand" href=<jstl:url value="/directhomepage"/> style="font-family: 'Kaushan Script', cursive;">FarmVille</a>
+	<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav navbar-left">
+            <li class="nav-item first">
+              <a class="nav-link" href=<jstl:url value="/directaboutus"/>>關於我們</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href=<jstl:url value="/directservices"/>>商品</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href=<jstl:url value="/directcontact"/>>聯絡我們</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <i class="fa fa-shopping-cart" style="display: inline-block;"></i>
+              <a href=<jstl:url value="/directshoppingcart"/> class="nav-link" style="display: inline-block;">購物車</a>
+            </li>
+            <li class="nav-item">
+              <a href=<jstl:url value="/directlogin"/> class="nav-link">登入</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+ <!-- <nav class="navbar navbar-expand-sm navbar-dark">
       <div class="container">
         <a href=<jstl:url value="/directhomepage"/> class="navbar-brand" style="font-family: 'Kaushan Script', cursive;">FarmVille</a>
         <button
@@ -34,9 +65,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item first">
-
               <a href=<jstl:url value="/directaboutus"/> class="nav-link">關於我們</a>
-
             </li>
             <li class="nav-item">
               <a href=<jstl:url value="/directservices"/> class="nav-link">服務</a>
@@ -54,10 +83,11 @@
         </div>
       </div>
     </nav>
-
+ -->
  
 
 
+    
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -66,6 +96,10 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/c3dc04dc4d.js"
       crossorigin="anonymous"
     ></script>
     <script
