@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.user.UserBean;
@@ -187,7 +188,8 @@ public class UserLoginController {
 	
 	// Methods > User sign up account
 	@RequestMapping(path = "/userSignIn", method = RequestMethod.POST)
-	public String userSignIn(@RequestParam(name = "userEmail") String uEmail,
+	public String userSignIn(@SessionAttribute("userEmail") String dEmail, // display 用的
+			@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			@RequestParam(name = "g-recaptcha-response", required = false) boolean recaptcha,
@@ -226,7 +228,7 @@ public class UserLoginController {
 					errors.put("pwdError", "Password is required");
 				}
 			}
-
+			
 			nextPage.addAttribute("errors", errors);
 			return "front_login";
 		} else {
