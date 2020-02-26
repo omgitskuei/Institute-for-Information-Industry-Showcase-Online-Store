@@ -100,7 +100,7 @@ public class AdminInventoryController {
 		System.out.println("fileName=" + fileName);	
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
-		String savePath = request.getSession().getServletContext().getRealPath("/") + "images/productsImage/" + fileName;
+		String savePath =  "images/productsImage/" + fileName;
 		System.out.println("savePath=" + savePath);
 //		
 		
