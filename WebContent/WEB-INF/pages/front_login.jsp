@@ -102,9 +102,10 @@
 								<div class="row d-flex justify-content-end">
 									<div class="col-md-2">
 										<div class="form-group">
-												<input type="submit" value="登入" class="btn btn-success text-white btn-block"> 
+												<input type="submit" value="登入" class="btn btn-success text-white btn-block">	 
 										</div>
 									</div>
+									
 								<!-- OEPN SIGN UP MODAL BUTTON -->
 									<div class="col-md-2">
 										<div class="form-group">
@@ -123,6 +124,7 @@
 								<form action="?" method="POST" >
      								<div style="resize: horizontal;" class="g-recaptcha" data-sitekey="6LdDltsUAAAAACnxxFD8oacBBWlWdgPE7X-2VyCp" data-theme="light" data-size="normal"></div>
 									<br/>
+									<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
 								</form>
 							</div>
 						</div>
@@ -210,10 +212,10 @@
     	})
     	
     	function autofill() {
-			var eml = document.getElementById("userEmail");
-			var pwd = document.getElementById("userPwd");
-			eml.value = "farmvilletaiwan@gmail.com"
-			pwd.value = "Qq22222!";
+			var userEmail = document.getElementById("userEmail");
+			var userPwd = document.getElementById("userPwd");
+			userEmail.value = "farmvilletaiwan@gmail.com"
+			userPwd.value = "Qq22222!";
 		};
     </script>
 </body>
