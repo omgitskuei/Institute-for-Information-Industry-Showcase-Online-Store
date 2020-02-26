@@ -49,7 +49,9 @@ public class EmailUsers {
 					+ " \r\n" 
 					+ "Your code for resetting your password: " + code + "\r\n" 
 					+ " \r\n" 
-					+ "If you did not forget your password and request a reset, \r\n contact support at farmvilletaiwan@gmail.com immediately." + "\r\n"
+					+ "If you did not forget your password and request a reset, \r\n "
+					+ "change your password immediately and contact support \r\n " 
+					+ "at farmvilletaiwan@gmail.com immediately." + "\r\n"
 					+ " \r\n"
 					+ "Thanks," + "\r\n" 
 					+ "The FarmVille Support Team");
