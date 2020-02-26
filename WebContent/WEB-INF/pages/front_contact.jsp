@@ -107,7 +107,7 @@
     <div class="row mb-2">
       <div class="col-md-4">
         <img src="img/glozzom/person1.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>峰哥</h4>
+        <h4>Chris Tung</h4>
         <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
       </div>
       <div class="col-md-4">
