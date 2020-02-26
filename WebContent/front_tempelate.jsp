@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,27 +14,22 @@
     	<%@include file="/WEB-INF/css/frontpage.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-    <title>Farmville | 登入成功</title>
+
+    <title>模板</title>
+
 </head>
 <body>
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                FarmVille　｜　恭喜登入成功
+               	<!-- 要任何錯誤訊息或是登入成功的畫面 -->
+               	<!-- PLEASE ENTER ANY MESSAGE IN HERE -->
+               	恭喜註冊成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
-
-                    <a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">賬號管理 (/directhomepage)</a> <br>
-                    <a href=<jstl:url value="/directaboutus"/> class="btn btn-dark box-shadow">directaboutus</a>  <br>
-                    <a href=<jstl:url value="/directservices"/> class="btn btn-dark box-shadow">directservices</a> <br>
-                    <a href=<jstl:url value="/directcontact"/> class="btn btn-dark box-shadow">directcontact (KUEI FENG WIP)</a> <br>
-                    <a href=<jstl:url value="/showSpecificProduct"/> class="btn btn-dark box-shadow">showSpecificProduct</a> <br>
-                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">directlogin (KUEI FENG WIP-Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directForgotPassword"/> class="btn btn-dark box-shadow">directForgotPassword (KUEI-FENG WIP Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directsignup"/> class="btn btn-dark box-shadow">directsignup</a> <br>
-                    <a href=<jstl:url value="/directshoppingcart"/> class="btn btn-dark box-shadow">directshoppingcart</a> <br>
-
+                		<!-- 導到首頁，有異動再改 -->
+                    <a href="index.html" id="div2" class="btn btn-dark box-shadow">進入網站</a>
                 </div>
             </div>
         </div>
@@ -64,7 +56,6 @@
     $("#main").removeClass("is-loading");
 	}, 100);
     $(a).fadeIn();
-  
     
 });
 </script>

@@ -102,14 +102,20 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 					System.out.println("	Decrypted password: "+clonedBean.getUserPwd());
 					
 					
-					// ---------------------------> RETURN THE CLONE <--------------------------
+					// ---------------------------> RETURN THE CLONE BEAN <--------------------------
 					System.out.println("User Found - Returning User "+ clonedBean.getUserID());
 					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
 					return clonedBean;
 				} else {
-					System.out.println("		User NOT FOUND - Returning NULL");
+					// ---------------------------> RETURN THE EMPTY BEAN <--------------------------
+					System.out.println("		User NOT FOUND - Returning nullBean(0, domain@example.com, Testing123!, 0)");
 					System.out.println("Finish: UserBeanDAO.selecUser(UserBean)");
-					return null;
+					UserBean nullBean = new UserBean();
+					nullBean.setUserID(0);
+					nullBean.setUserEmail("domain@example.com");
+					nullBean.setUserPwd("Testing123!");
+					nullBean.setAdmin(0);
+					return nullBean;
 				}
 			} else {
 				System.out.println("Passed User is NULL - Returning NULL");

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.user.UserBean;
 import model.user.UserBeanService;
+import util.CheckSubstring;
 import util.EncodeHexString;
 import util.EncryptString;
 
@@ -39,15 +41,150 @@ public class UserLoginController {
 
 	// Methods
 	@RequestMapping("/writeUserLoginCookie")
-	private String writeLoginCookie(String email, String pwd, Model nextPage, HttpServletResponse response) {
-		// ^ name is synonymous to 'value'
-		// response.addCookie(new Cookie("adminLoginCookie", email));
+	private String writeUserLoginCookie(String email, String pwd, Model nextPage, HttpServletResponse response) {
+		System.out.println("BEGIN: /writeAdminLoginCookie");
+		System.out.println("	passed email: " + email);
+		Cookie emailCookie = new Cookie("UserEmailCookie", email);
+		System.out.println("	passed pwd: " + pwd);
+		// Encrypt pwd before writing to a cookie
+		byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
+		pwd = hexConvert.byteArrayToHexString(cipherPwd);
+		System.out.println("			cookie pwd(encrpyted): " + pwd);
+		// Write encrypted pwd cookie
+		Cookie pwdCookie = new Cookie("UserPasswordCookie", pwd);
 
-		
+		emailCookie.setMaxAge(60 * 60);
+		pwdCookie.setMaxAge(60 * 60);
+		response.addCookie(emailCookie);
+		response.addCookie(pwdCookie);
+		System.out.println("cookies ["+emailCookie.getName()+", "+pwdCookie.getName()+"] added to response");
 
-		return "writeLoginCookie";
+		return "writeUserLoginCookie";
 	}
 
+	@RequestMapping(path = "userForgotPwd", method = RequestMethod.POST)
+	public String userForgotPwd(
+			Model nextPage,
+			@RequestParam(name="userEmail") String userEmail) {
+		System.out.println("BEGIN /userForgotPwd");
+		// if there are errors, return to previous page, else query the input
+		String result = validateEmailreturnErrors(userEmail);
+		System.out.println("	validate emamil result: "+result);
+		if ( !(result.equals("VALID EMAIL")) ) {
+			System.out.println("		Adding error message to nextPage model");
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("validateError", result);
+			nextPage.addAttribute("errors", errors);
+			System.out.println("	returning to front_forgetpwd.jsp");
+			System.out.println("FINISH /userForgotPwd");
+			return "front_forgetpwd";
+		} else {
+			
+			;
+		}
+		nextPage.addAttribute("", "");
+		return "";
+	}
+	
+	public String validateEmailreturnErrors(String email) {
+		try {
+			// email cant be empty, and must be longer than 5 (x@x.x)
+			if (email != null && email.length() > 5) {
+				// email must have "@"
+				if (email.contains("@")) {
+					// Partition email string based on email syntax; localpart@domain
+					String localpart = email.substring(0, email.indexOf("@"));
+					String domain = email.substring(email.indexOf("@") + 1, email.length());
+
+					// Localpart and Domain each must not exceed 64 characters
+					if (localpart.length() <= 64 && domain.length() <= 63) {
+						// Create empty ArrayList for storing where "." appear in email String
+						ArrayList<Integer> dotIndexes = new ArrayList<Integer>();
+						// Create counter for "@"
+						int countAt = 0;
+						// Create flag for spaces, false will fail;
+						boolean noSpaces = true;
+						// Checking each character of email string for space, @, .
+						for (int index = 0; index < email.length(); index++) {
+							// Split email into substrings
+							String substring = email.substring(index, index + 1);
+							// Count how many "@"
+							if (substring.equals("@")) {
+								countAt++;
+							}
+							// Check if there are any spaces in the email
+							if (substring.equals(" ")) {
+								noSpaces = false;
+							}
+							// Note where "." dots appear in the email, store into ArrayList
+							if (substring.equals(".")) {
+								dotIndexes.add(index);
+							}
+						}
+						// A valid email must have "@" and can only have one "@"
+						if (countAt == 1) {
+							// A valid email must have no spaces
+							if (noSpaces) {
+								// A valid email cannot begin or end on "."
+								if (!(dotIndexes.contains(0) || dotIndexes.contains(email.length() - 1))) {
+									// Email @ sign can't be next to "."
+									boolean atNotNextToDot = true;
+									for (int index = 0; index < dotIndexes.size(); index++) {
+										// if "." is to the left or right of the "@", fail
+										if (email.indexOf("@") - dotIndexes.get(index) == -1
+												|| email.indexOf("@") - dotIndexes.get(index) == 1) {
+											atNotNextToDot = false;
+										}
+									}
+									if (atNotNextToDot) {
+										// Domain must comply with LDH rule (letters, digits, hyphen)
+										CheckSubstring util = new CheckSubstring();
+										if (util.countSpecialCharacters(domain) == 0) {
+											// Domain must contain one "."
+											if (domain.contains(".")) {
+												boolean noConsecutiveDotsFlag = true;
+												// Domain cannot have any consecutive dots
+												for (int index = 0; index < dotIndexes.size() - 1; index++) {
+													if ((dotIndexes.get(index + 1) - dotIndexes.get(index)) == 1) {
+														noConsecutiveDotsFlag = false;
+													}
+												}
+												if (noConsecutiveDotsFlag) {
+													return "VALID EMAIL";
+												}
+											} else {
+												return "Invalid Input: Email domain missing . character";
+											}
+										} else {
+											return "Invalid Input: Email may only use letters, digits, hyphen";
+										}
+									} else {
+										return "Invalid Input: Email cannot have a . character next to a @";
+									}
+								} else {
+									return "Invalid Input: Email may not end on a . character";
+								}
+							} else {
+								return "Invalid Input: Email may not use any Spaces";
+							}
+						} else {
+							return "Invalid Input: Email may only have one @ character";
+						}
+					} else {
+						return "Invalid Input: Email localpart and domain must be under 64 characters";
+					}
+				} else {
+					return "Invalid Input: Email must contain @";
+				}
+			} else {
+				return "Invalid Input: Email is too short";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "EXCEPTION";
+	}
+	
 	// Methods > User sign up account
 	@RequestMapping(path = "/userSignIn", method = RequestMethod.POST)
 	public String userSignIn(@RequestParam(name = "userEmail") String uEmail,
@@ -129,7 +266,7 @@ public class UserLoginController {
 				// Write a Cookie storing email so user don't need to enter email next time
 				if (remMe == true) {
 					System.out.println("	MAKING COOKIE");
-					writeLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
+					writeUserLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
 				} else {
 					System.out.println("	Remember Me == false, DELETING OLD COOKIES");
 					Cookie cookie = new Cookie("UserEmailCookie", "");

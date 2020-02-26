@@ -132,10 +132,10 @@ public class UserSignUp {
 			Model nextPage) {
 
 		System.out.println("BEGIN /userSignUpVerification");
-		System.out.println("User input: confirmCode = " + confirmCode);
-		System.out.println("verificationCode = " + verificationCode);
+		System.out.println("	User input: confirmCode = " + confirmCode);
+		System.out.println("	verificationCode = " + verificationCode);
 		if (confirmCode.equals(verificationCode)) {
-			System.out.println("the 2 codes match!");
+			System.out.println("		the 2 codes match!");
 			// Create new bean with passed values, in order to use Service
 			UserBean bean = new UserBean();
 			bean.setUserEmail(nEmail);
@@ -145,7 +145,7 @@ public class UserSignUp {
 			try {
 				// If user doesn't exist, create new user
 				// uService checkLogin includes validating userEmail and userPwd
-				// In the case that the user isnt already in DB, returned UserId will be 0
+				// In the case that the user is NOT already in DB, returned UserId will be 0
 				if (uService.checkLogin(bean).getUserID() == 0) {
 
 					System.out.println("User not found, creating new user");
@@ -197,7 +197,7 @@ public class UserSignUp {
 																		// Display Name,
 																		// or Full Name
 
-					return "front_about";
+					return "front_intro_signUpSuccess";
 				} else {
 					System.out.println("User already exists in the database, do not create new User");
 					Map<String, String> errors = new HashMap<String, String>();
@@ -207,7 +207,10 @@ public class UserSignUp {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "front_index";
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("notFoundError", "EXCEPTION ERROR - SEE CONSOLE");
+				nextPage.addAttribute("errors", errors);
+				return "front_login";
 			}
 		} else {
 			System.out.println("retry: "+retry);

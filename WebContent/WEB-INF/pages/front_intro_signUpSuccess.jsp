@@ -17,26 +17,18 @@
     	<%@include file="/WEB-INF/css/frontpage.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-    <title>Farmville | 登入成功</title>
+    <title>Farmville | 注冊成功</title>
 </head>
 <body>
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                FarmVille　｜　恭喜登入成功
+                FarmVille　｜　恭喜注冊成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
 
-                    <a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">賬號管理 (/directhomepage)</a> <br>
-                    <a href=<jstl:url value="/directaboutus"/> class="btn btn-dark box-shadow">directaboutus</a>  <br>
-                    <a href=<jstl:url value="/directservices"/> class="btn btn-dark box-shadow">directservices</a> <br>
-                    <a href=<jstl:url value="/directcontact"/> class="btn btn-dark box-shadow">directcontact (KUEI FENG WIP)</a> <br>
-                    <a href=<jstl:url value="/showSpecificProduct"/> class="btn btn-dark box-shadow">showSpecificProduct</a> <br>
-                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">directlogin (KUEI FENG WIP-Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directForgotPassword"/> class="btn btn-dark box-shadow">directForgotPassword (KUEI-FENG WIP Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directsignup"/> class="btn btn-dark box-shadow">directsignup</a> <br>
-                    <a href=<jstl:url value="/directshoppingcart"/> class="btn btn-dark box-shadow">directshoppingcart</a> <br>
+                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">登入</a>
 
                 </div>
             </div>

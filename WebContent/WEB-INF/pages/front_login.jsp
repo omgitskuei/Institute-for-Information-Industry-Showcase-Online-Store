@@ -57,10 +57,10 @@
                                             <input
                                             	type="email"
          										class="form-control"
-         										placeholder="電子信箱："
+         										placeholder="請輸入電子信箱 Email"
          										name="userEmail"
          										id="userEmail"
-												value="${cookie.EmailCookie.getValue()}">
+												value="${cookie.UserEmailCookie.getValue()}">
 											<span style="color: red;" id="emailErrorSpan">${errors.emailError}</span>
                                         </div>
                                     </div>
@@ -70,10 +70,10 @@
                                             <input 
                                             	type="password" 
                                             	class="form-control"
-                                            	placeholder="密碼："
+                                            	placeholder="請輸入密碼 Password"
                                             	name="userPwd"
                                             	id="userPwd"
-												value="${cookie.Password.getValue()}">
+												value="${cookie.UserPasswordCookie.getValue()}">
 											<span style="color: red;" id="pwdErrorSpan">${errors.pwdError}</span>
                                         </div>
                                     </div>

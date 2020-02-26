@@ -26,7 +26,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 m-auto text-center">
-            <h1>忘記密碼</h1>
+            <h1>Farmville | 忘記密碼</h1>
           </div>
         </div>
       </div>
@@ -40,15 +40,20 @@
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
-            <form action="">
-            <h3 class="text-center">請輸入電子信箱</h3>
+            <form action="<jstl:url value="/front_forgetpwd.jspToSOMECONTROLLER..............."/>">
+            <h3 class="text-center">忘記密碼</h3>
             <hr>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="email">電子信箱</label>
-                  <input type="text" class="form-control" placeholder="電子信箱：">
-                  <span style="color: red;" class="ml-auto">系統並無找到資料</span>
+                  <label for="email">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</label>
+                  <input
+                  	type="text"
+                  	class="form-control"
+                  	placeholder="請輸入電子信箱　Email"
+                  	name="userEmail"
+                  	value="">
+                  <span style="color: red;" id="notFoundErrorSpan">${errors.validateError}</span>
                 </div>
               </div> 
               <div class="col-md-12">
