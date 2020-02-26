@@ -33,9 +33,9 @@
             <div class="container">
               <div class="dark-overlay">
               <div class="carousel-caption d-none d-sm-block text-right mb-5">
-                <h1 class="display-3">無農藥</h1>
+                <h1 class="display-3">新鮮直送</h1>
                 <p class="lead">
-                  讓您吃得安心
+                  讓您買得快速，吃得安心
                 </p>
                 <a href=<jstl:url value="/directsignup"/> class="btn btn-success btn-lg btn-color-signup text-white">現在就註冊</a>
               </div>
@@ -47,9 +47,9 @@
             <div class="dark-overlay">
             <div class="container">
               <div class="carousel-caption d-none d-sm-block mb-5">
-                <h1 class="display-3">低GI，低熱量</h1>
+                <h1 class="display-3">嚴格篩檢</h1>
                 <p class="lead">
-                  專為健身減肥的人準備
+                  蔬果送檢皆符合政府規範。保證看不到香菜
                 </p>
               </div>
             </div>
@@ -60,9 +60,9 @@
             <div class="dark-overlay">
             <div class="container">
               <div class="carousel-caption d-none d-sm-block text-right mb-5">
-                <h1 class="display-3">品質保證</h1>
+                <h1 class="display-3">購物新體驗</h1>
                 <p class="lead">
-                  絕對有通過食品安全認證，也...絕對沒有香菜
+                  直覺、方便、快速，退換貨不囉嗦
                 </p>
               </div>
             </div>
@@ -86,23 +86,23 @@
         <div class="row">
           <div class="col-md-4 mb-4 text-center">
             <i class="fas fa-user-shield fa-3x mb-2"> </i>
-            <h3>食品安全</h3>
+            <h3>為消費者把關</h3>
             <p>
-              我們專注於食品安全，所有架上的食品都會通過嚴厲的審核，請購買人士安心
+              我們專注於維護販售蔬果的品質與安全，所有蔬果皆通過政府最高標準檢驗，讓消費者安心
             </p>
           </div>
           <div class="col-md-4 mb-4 text-center">
             <i class="fas fa-shopping-bag fa-3x mb-2"> </i>
-            <h3>不用出門買菜</h3>
+            <h3>從農場到餐桌</h3>
             <p>
-              我們主打食品線上化，不用在煩惱出門得武漢肺癌的疑慮，去到菜市場密集的空間，總是令人擔憂
+              讓您免出門，也能買到新鮮直送的蔬果
             </p>
           </div>
           <div class="col-md-4 mb-4 text-center">
             <i class="fab fa-alipay fa-3x mb-2"> </i>
-            <h3>金錢公開透明</h3>
+            <h3>支付安全透明</h3>
             <p>
-              我們只會比別人便宜不會比別人貴，架上金額就是您所購買的金額，第一年試營運不用運費
+              消費者資訊高度保密。在網站看到的價格絕對是業界最優惠。本公司網站今年首年試營運，免運費！
             </p>
           </div>
         </div>
