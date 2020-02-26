@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-6 m-auto text-center">
                     <h1>聯絡我們</h1>
-                    <p>有任何問題歡迎與我們聯絡... </p>
+                    <!--<p>有任何問題歡迎與我們聯絡... </p>-->
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
-            <h3 class="text-center">請於表單輸入欲表達的內容：</h3>
+            <h3 class="text-center">請在下方輸入您的意見</h3>
             <hr>
             <div class="row">
               <div class="col-md-12">
@@ -90,6 +90,7 @@
                 <div class="form-group">
                   <input type="submit" value="送出" class="btn btn-outline-danger btn-block">
                 </div>
+                <h4 class="text-center">我們將儘快與您聯繫</h4>
               </div>
             </div>
           </div>
@@ -108,34 +109,34 @@
       <div class="col-md-4">
         <img src="img/glozzom/person1.jpg" alt="" class="img fluid rounded-circle mb-2">
         <h4>Chris Tung</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <p>本公司COO－首席營運長，健康蔬果網站發想者，致力於讓健康蔬果經由網路的便利，走進消費者的生活。</p>
       </div>
       <div class="col-md-4">
         <img src="img/glozzom/person2.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>Jone Doe</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <h4>Thomas Lu</h4>
+        <p>本公司CIO－首席資訊長，讓新鮮蔬果的最新資訊，詳實呈現在消費者眼前。</p>
       </div>
       <div class="col-md-4">
         <img src="img/glozzom/person3.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>Jone Doe</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <h4>Jerry Tai</h4>
+        <p>本公司CTO－首席技術長，致力維持網站的穩定，讓消費者得以選購到所要的蔬果。</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <img src="img/glozzom/person4.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>Jone Doe</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <h4>游忠城</h4>
+        <p>負責本公司各項蔬果通路營運，有著對市場變動的高度敏感，致力取得對消費者最友善價格。</p>
       </div>
       <div class="col-md-4">
         <img src="img/glozzom/person4.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>Jone Doe</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <h4>Ming Juang</h4>
+        <p>客服主管，秉持消費者如家人的初衷，處理每一筆消費者的疑問與意見。</p>
       </div>
       <div class="col-md-4">
         <img src="img/glozzom/person4.jpg" alt="" class="img fluid rounded-circle mb-2">
-        <h4>Jone Doe</h4>
-        <p>這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字</p>
+        <h4>Alex Ku</h4>
+        <p>負責蔬果各項送驗與紀錄管理，務求讓消費者吃得安心。</p>
       </div>
     </div> 
   </div>
