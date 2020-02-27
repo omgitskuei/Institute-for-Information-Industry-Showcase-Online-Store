@@ -50,6 +50,7 @@
 			</jstl:if>
             <jstl:if test="${not empty sessionScope.userEmail}">
 			<!-- 如果不為空 才顯示 -->
+
 			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directLogout"/>>登出</a></li>
 			</jstl:if>
           </ul>
