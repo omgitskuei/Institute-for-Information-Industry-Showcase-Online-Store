@@ -44,12 +44,14 @@
                 <table class="table table-striped">
                     <thead>
                      <tr>
-                            <th scope="col"><label class="img"></label> </th>
+                            <th scope="col"><label class="name">商品ID</label></th>
                             <th scope="col"><label class="name">商品</label></th>
+                            <th scope="col"><label class="name">商品圖</label></th>
                       		<th scope="col" class="text-left"><label class="quentity">數量</label></th>
                             <th scope="col" class="text-right"><label class="price">單價</label></th>
-                            <th scope="col" class="text-right"><label class="price">增加</label></th>
-                            <th scope="col" class="text-right"><label class="price">減少</label></th>
+                            <th scope="col" class="text-right"><label class="price">小記</label></th>
+                            <th scope="col" class="text-left"><label class="price">增加</label></th>
+                            <th scope="col" class="text-left"><label class="price">減少</label></th>
                             <th scope="col" class="delete"><label class="price">刪除</label></th>
                             <th><label class="delete"></label></th>
                         </tr>
@@ -315,9 +317,9 @@
           console.log("*** Count Cart:" + cartArray.length);
           var output = "";
           for(var i in cartArray) {
-            output += "<tr><td>"+ cartArray[i].name + "</td><td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td><td>"  +"<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td><td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>" + "<td class='text-right price'>"+cartArray[i].total+ 
-            "</td>"+"<td><button class='plus-item' data-name='"+cartArray[i].name+"'>+</button></td>"+
-            "<td><button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
+            output += "<tr><td>"+ cartArray[i].id + "</td>" +"<td>"+ cartArray[i].name + "</td><td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td><td>"  +"<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>" + "<td class='text-right price'>"+cartArray[i].total+ 
+            "</td>"+"<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>"+
+            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
             
           }	
           // html會渲染所有東西

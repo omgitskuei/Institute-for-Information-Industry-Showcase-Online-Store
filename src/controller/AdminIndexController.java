@@ -23,7 +23,12 @@ public class AdminIndexController {
 		System.out.println("Directing to Adminindex");
 		return "AdminIndex";
 	}
-
+	
+//	@RequestMapping(path = "/sendOutEmail", method = RequestMethod.POST)
+//	public String processAction( Model nextPage) {
+//		System.out.println("Directing to Adminindex");
+//		return "AdminIndex";
+//	}
 
 
 }

@@ -102,9 +102,10 @@
 								<div class="row d-flex justify-content-end">
 									<div class="col-md-2">
 										<div class="form-group">
-												<input type="submit" value="登入" class="btn btn-success text-white btn-block"> 
+												<input type="submit" value="登入" class="btn btn-success text-white btn-block">	 
 										</div>
 									</div>
+									
 								<!-- OEPN SIGN UP MODAL BUTTON -->
 									<div class="col-md-2">
 										<div class="form-group">
@@ -123,6 +124,7 @@
 								<form action="?" method="POST" >
      								<div style="resize: horizontal;" class="g-recaptcha" data-sitekey="6LdDltsUAAAAACnxxFD8oacBBWlWdgPE7X-2VyCp" data-theme="light" data-size="normal"></div>
 									<br/>
+									<input onclick="autofillSignIn()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
 								</form>
 							</div>
 						</div>
@@ -146,22 +148,40 @@
 							action="<jstl:url value="/userSignUp" />" method="post"
 							id="signupForm">
 							<div class="form-group">
-								<label for="email">電子信箱</label> <input type="email"
-									placeholder="電子信箱" class="form-control" name="nEmail">
+								<label for="email">電子信箱</label>
+								<input
+									type="email"
+									placeholder="Enter your email here"
+									class="form-control" 
+									name="nEmail"
+									id="newEmail">
 							</div>
 							<div class="form-group">
-								<label for="password">密碼</label> <input type="password"
-									placeholder="密碼" class="form-control" name="nPwd">
+								<label for="password">密碼</label>
+								<input
+									type="password"
+									placeholder="Enter your new password here" 
+									class="form-control" 
+									name="nPwd"
+									id="newPwd">
 							</div>
 							<div class="form-group">
-								<label for="password2">確認密碼</label> <input type="password"
-									placeholder="確認密碼" class="form-control" name="rPwd">
+								<label for="password2">確認密碼</label> 
+								<input 
+									type="password"
+									placeholder="Enter your new password again" 
+									class="form-control" 
+									name="rPwd"
+									id="confirmPwd">
 							</div>
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary" value="送出">送出</button>
 							</div>
 						</form>
-
+						<br>
+						<div class="col-md-6 mx-auto mt-2">
+							<input onclick="autofillSignUp()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
+						</div>
 					</div>
 
 				</div>
@@ -209,11 +229,21 @@
     		})
     	})
     	
-    	function autofill() {
-			var eml = document.getElementById("userEmail");
-			var pwd = document.getElementById("userPwd");
-			eml.value = "farmvilletaiwan@gmail.com"
-			pwd.value = "Qq22222!";
+    	function autofillSignIn() {
+			var userEmail = document.getElementById("userEmail");
+			var userPwd = document.getElementById("userPwd");
+			userEmail.value = "kueifengtung@yahoo.com"
+			userPwd.value = "Qq22222!";
+		};
+		
+		function autofillSignUp() {
+			var userEmail = document.getElementById("newEmail");
+			userEmail.value = "kueifengtungchris@gmail.com"
+			var userPwd = document.getElementById("newPwd");
+			userPwd.value = "Qq22222!";
+			var confirmPwd = document.getElementById("confirmPwd");
+			confirmPwd.value = "Qq22222!"
+			
 		};
     </script>
 </body>

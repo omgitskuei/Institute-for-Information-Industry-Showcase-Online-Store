@@ -15,7 +15,7 @@
 
     <div class="container">
     
-      <h1>管理員修改電子錢包</h1>
+      <h1 class="mt-3">管理員修改電子錢包</h1>
 
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
 		<c:param name="userID" value="${user.userID}" />

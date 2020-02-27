@@ -18,18 +18,18 @@
           <div class="form-group">
             <label for="inventoryTitle">商品名稱
             </label>
-            <input type="text" name="productName" class="form-control">
+            <input type="text" name="productName" class="form-control" id="productName">
           </div>
           <div class="form-group">
             <label for="productCategory">商品類別</label>
-            <select class="form-control" name="productCategory">
+            <select class="form-control" name="productCategory" id="productCategory">
               <option value="蔬菜">蔬菜</option>
               <option value="水果">水果</option>
             </select>
           </div>
           <div class="form-group">
             <label for="inventoryQuantity">商品數量</label>
-            <input type="number" class="form-control" min="0" name="productStock">
+            <input type="number" class="form-control" min="0" name="productStock" id="productStock">
           </div>
           <div class="form-group">
             <label for="inventoryPrice">商品單價</label>
@@ -37,7 +37,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text">NT$</span>
               </div>
-              <input class="form-control" type="text" name="productPrice">
+              <input class="form-control" type="text" name="productPrice" id="productPrice">
               <div class="input-group-append">
                   <span class="input-group-text">元</span>
               </div>
@@ -54,9 +54,10 @@
           </div>
           <div class="form-group">
             <label for="inventoryDiscription">商品描述</label>
-            <textarea name="productDescription" class="form-control"></textarea>
+            <textarea name="productDescription" class="form-control" id="productDescription"></textarea>
           </div>
         <input type="submit" class="btn btn-primary" value="送出" data-dismiss="modal" />
+        <input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary" id="submit">
         </form>
         </div>
         
@@ -79,6 +80,22 @@ function readURL(input) {
 	$("#imgInput").change(function() {
 	  readURL(this);
 	});
+	</script>
+	
+	<script>
+	function autofill() {
+		var productName = document.getElementById("productName");
+		var productCategory = document.getElementById("productCategory");
+		var productStock = document.getElementById("productStock");
+		var productPrice = document.getElementById("productPrice");
+		var productDescription = document.getElementById("productDescription");
+		
+		productName.value="香蕉"
+		productCategory.value="水果"
+		productStock.value="100"
+		productPrice.value="20"
+		productDescription.value="香蕉中的水溶性膳食纖維、果膠和果寡糖成份有助促進腸胃蠕動及助消化。";
+	};
 </script>
 </body>
 </html>

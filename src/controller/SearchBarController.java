@@ -25,12 +25,12 @@ import model.user.UserBeanService;
 @Controller
 @SessionAttributes(names = { "searchBar" })
 public class SearchBarController {
-
+	// fields
 	private ProductBeanService pService;
 	private UserBeanService uService;
 	private ProfileBeanService profileService;
 	private HttpServletResponse response;
-
+	// constructor
 	@Autowired
 	public SearchBarController(ProductBeanService pService, UserBeanService uService, ProfileBeanService profileService, HttpServletResponse response) {
 		this.pService = pService;
@@ -38,7 +38,7 @@ public class SearchBarController {
 		this.profileService = profileService;
 		this.response = response;
 	}
-
+	// methods
 	@RequestMapping(path = "/searchBarProducts", method = RequestMethod.POST)
 	public String searchBarProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
 		System.out.println("BEGIN: /searchBarProducts");
@@ -61,6 +61,31 @@ public class SearchBarController {
 		System.out.println("FINISH: /searchBarProducts");
 		return "AdminIndex";
 	}
+	
+	
+	@RequestMapping(path = "/AdminProduct/searchInventoryProducts", method = RequestMethod.POST)
+	public String searchInventoryProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
+		System.out.println("BEGIN: /searchInventoryProducts");
+		System.out.println("	User input: " + searchBar);
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+		System.out.println("	QUERY RESULTS:");
+		for (int index = 0; index < fuzzyResults.size(); index++) {
+			System.out.println("	List index #"+index);
+			System.out.println("		id: " + fuzzyResults.get(index).getProductID());
+			System.out.println("		name: " + fuzzyResults.get(index).getProductName());
+			System.out.println("		price: " + fuzzyResults.get(index).getProductPrice());
+			System.out.println("		stock: " + fuzzyResults.get(index).getProductStock());
+			System.out.println("		description: " + fuzzyResults.get(index).getProductDescription());
+			System.out.println("		image: " + fuzzyResults.get(index).getProductImg());
+			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
+			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
+		}
+		// return results
+		nextPage.addAttribute("SearchResults", fuzzyResults);
+		System.out.println("FINISH: /searchInventoryProducts");
+		return "AdminInventory";
+	}
+	
 	
 	@RequestMapping(path = "/AdminProfile/searchBarProfiles", method = RequestMethod.POST)
 	public String searchBarProfiles(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {

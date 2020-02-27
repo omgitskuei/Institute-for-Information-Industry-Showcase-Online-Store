@@ -34,6 +34,10 @@ public class ProfileBeanService implements ProfileBeanServiceInterface {
 	public ProfileBean getProfile(int userID) {
 		return profileDAO.getProfile(userID);
 	}
+	
+//	public ProfileBean getProfileByUserID(int userID) {
+//		return profileDAO.getProfileByUserID(userID);
+//	}
 
 	public ArrayList<ProfileBean> selectFuzzy(String searchQuery) {
 		System.out.println("	BEGIN: ProfileBeanService.selectFuzzy");
