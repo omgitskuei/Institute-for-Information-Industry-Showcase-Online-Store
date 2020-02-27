@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import model.product.ProductBean;
-import model.profile.ProfileBean;
 import util.EncodeHexString;
 import util.EncryptString;
 
@@ -19,7 +17,6 @@ public class UserBeanDAO implements UserBeanDAOInterface {
 
 	// Variables: Local Fields
 	private SessionFactory sessionFactory;
-	private Session session;
 
 	@Autowired
 	public UserBeanDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {

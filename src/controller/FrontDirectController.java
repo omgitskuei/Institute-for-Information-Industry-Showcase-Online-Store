@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.mailingList.MailBean;
+import model.mailingList.MailBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
 import util.EmailUsers;
@@ -29,9 +37,43 @@ import util.EmailUsers;
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
 	
-	@Autowired
+	// Local fields
+	private MailBeanService mService;
 	public ProductBeanService productService;
+	public HttpServletRequest request;
+	public HttpServletResponse response;
+	
+	// Constructors
+	@Autowired
+	public FrontDirectController(MailBeanService mService, ProductBeanService productService, HttpServletRequest request, HttpServletResponse response) {
+		this.mService=mService;
+		this.productService= productService;
+		this.request = request;
+		this.response = response;
+	}
 
+	@RequestMapping(value = "/joinNewsletter", method = RequestMethod.POST)
+	public String joinNewsletter(
+			@RequestParam("inputEmail") String email,
+			Model nextPage
+			) {
+		System.out.println("BEGIN: /joinNewsletter");
+		System.out.println("	從 front_index.jsp Newsletter 導到 FrontDirectController.java /directnewsletter controller");
+		System.out.println("		inputEmail = "+email);
+		try {
+			mService.insertMail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("messageError", "Thank you for joining our newsletter.");
+		nextPage.addAttribute("errors", errors);
+		
+		System.out.println("導回front_index homepage首頁");
+		System.out.println("FINISH: /joinNewsletter");
+		return "front_index";
+	}
+	
 	// 1)進首頁
 	// 2)完成
 	// 3)Thomas
@@ -141,7 +183,7 @@ public class FrontDirectController {
 	@RequestMapping(value = "/directsignup", method = RequestMethod.GET)
 	public String directToServices1() {
 		System.out.println("導到註冊");
-		return "front_signup";
+		return "front_login";
 	}
 	
 	// 1)進購物車
@@ -152,6 +194,19 @@ public class FrontDirectController {
 			System.out.println("導到購物車");
 			return "front_shoppingcart";
 		}
-		
 	
+	@RequestMapping(value = "/directLogout", method = RequestMethod.GET)
+	public String directLogout(
+			) {
+		Cookie cookie = new Cookie("loginSuccessCookie", "omg");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		HttpSession session = request.getSession(false);
+		SecurityContextHolder.clearContext();
+		if (session != null) {
+			session.invalidate();
+			System.out.println("Invalid Session!");
+		}
+		return "front_index";
+	}
 }

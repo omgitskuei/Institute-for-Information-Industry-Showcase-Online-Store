@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
+import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
-import util.CheckSubstring;
 import util.EmailUsers;
 import util.EncodeHexString;
 import util.EncryptString;
@@ -35,18 +34,21 @@ public class UserLoginController {
 	// Local fields
 	private UserBeanService uService;
 	private ProfileBeanService profService;
+	private SettingBeanService sService;
 	private HttpServletResponse response;
 	private EncryptString util = new EncryptString();
 	private EncodeHexString hexConvert = new EncodeHexString();
 	private ValidateString validator = new ValidateString();
 	private String verificationCode = "";
 	private int retry=2;
+	private String emailField;
 
 	// Constructors
 	@Autowired
-	public UserLoginController(UserBeanService uService, ProfileBeanService profService, HttpServletResponse response) {
+	public UserLoginController(UserBeanService uService, ProfileBeanService profService, SettingBeanService sService, HttpServletResponse response) {
 		this.uService = uService;
 		this.profService = profService;
+		this.sService = sService;
 		this.response = response;
 	}
 
@@ -95,7 +97,7 @@ public class UserLoginController {
 			if (lookUpEmail==0) {		// NOT FOUND
 				System.out.println("			User with this Email NOT FOUND");
 				Map<String, String> errors = new HashMap<String, String>();
-				errors.put("validateError", "");
+				errors.put("validateError", "This email is not registered in the system");
 				nextPage.addAttribute("errors", errors);
 				System.out.println("	returning to front_forgetpwd.jsp");
 				System.out.println("FINISH /userForgotPwd");
@@ -114,6 +116,7 @@ public class UserLoginController {
 				System.out.println("	returning to front_forgetpwd2_code.jsp");
 				System.out.println("FINISH /userForgotPwd2");
 				retry = 2;
+				emailField=userEmail;
 				//nextPage.addAttribute("", userEmail);
 				return "front_forgetpwd2_code";
 			}
@@ -131,6 +134,15 @@ public class UserLoginController {
 		System.out.println("	retries left = "+retry);
 		if (confirmCode.equals(verificationCode)) {
 			System.out.println("		the 2 codes match!");
+			// if user has security questions, we can test them
+			// if no questions, then go straight into password update
+			SettingBean bean = sService. uService.selectUserIDByEmail(emailField);
+			if (){
+				;
+			} else {
+				;
+			}
+			
 			System.out.println("	take user to page with password update");
 			return "front_forgetpwd3_updatePwd";
 		} else {
@@ -188,7 +200,8 @@ public class UserLoginController {
 	
 	// Methods > User sign up account
 	@RequestMapping(path = "/userSignIn", method = RequestMethod.POST)
-	public String userSignIn(@SessionAttribute("userEmail") String dEmail, // display 用的
+	public String userSignIn(
+			//@SessionAttribute("userEmail") String dEmail, // display 用的
 			@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
@@ -264,8 +277,12 @@ public class UserLoginController {
 				System.out.println("		Email = " + results.getUserEmail());
 				System.out.println("		Password = " + results.getUserPwd());
 				System.out.println("		Admin = " + results.getAdmin());
+				Cookie cookie = new Cookie("loginSuccessCookie", "omg");
+				cookie.setMaxAge(-1);
+				response.addCookie(cookie);
+				
 				// Write a Cookie storing email so user don't need to enter email next time
-				// Write a Cookie storing email so user don't need to enter email next time
+				// Write a Cookie storing pwd so user don't need to enter email next time
 				if (remMe == true) {
 					System.out.println("	MAKING COOKIE");
 					writeUserLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);

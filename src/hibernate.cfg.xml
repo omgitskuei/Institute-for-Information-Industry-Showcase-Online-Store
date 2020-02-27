@@ -29,7 +29,7 @@
         <mapping class="model.product.ProductBean"/>
         <mapping class="model.order.OrderBean"/>
         <mapping class="model.orderDetails.OrderDetailsBean"/>
-        
+        <mapping class="model.mailingList.MailBean"/>
         
     </session-factory>
 </hibernate-configuration>

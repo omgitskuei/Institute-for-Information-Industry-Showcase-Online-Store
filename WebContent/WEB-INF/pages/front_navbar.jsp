@@ -51,7 +51,7 @@
 			</c:if>
             <c:if test="${not empty sessionScope.userEmail}">
 			<!-- 如果不為空 才顯示 -->
-			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directshoppingcart"/>>登出</a></li>
+			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directLogout"/>>登出</a></li>
 			</c:if>
           </ul>
         </div>

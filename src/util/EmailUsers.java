@@ -28,6 +28,42 @@ public class EmailUsers {
 	}
 
 	// Methods
+	public void sendJoinNewsletterEmail(String emailString) {
+		System.out.println("BEGIN: util.EmailUsers.sendForgotPwdEmail(String, String, String)");
+		// Local Variables
+		String toEmail = emailString;
+		try {
+			// Instantiate SimpleEmail object
+			Email email = new SimpleEmail();
+			// Email sending settings
+			email.setHostName(this.fromEmailHostName);
+			email.setSmtpPort(this.fromEmailPort);
+			// Email sender's credentials
+			email.setAuthenticator(new DefaultAuthenticator(this.fromEmail, this.fromEmailPwd));
+			email.setSSLOnConnect(true);
+			// Email TO / FROM
+			email.setFrom(this.fromEmail);
+			email.addTo(toEmail);
+			// Email body
+			email.setSubject("FarmVille Newsletter: Welcome!");
+			email.setMsg("Hi," + " \r\n"
+					+ " \r\n" 
+					+ "Thank you for joining our mailing list."+ "\r\n" 
+					+ "\r\n" 
+					+ "Now you'll stay tuned to flash sales and mind-blowing discounts!" + "\r\n"
+					+ " \r\n"
+					+ "Thanks," + "\r\n" 
+					+ "The FarmVille Support Team");
+			// Send
+			email.send();
+			System.out.println("Email to [" + toEmail + "] from [" + this.fromEmail + "] sent!");
+		} catch (EmailException e) {
+			e.printStackTrace();
+			System.out.println("ERROR: TestUtil Email Exception");
+		}
+		System.out.println("FINISH: util.EmailUsers.sendForgotPwdEmail(String, String)");
+	}
+	
 	public void sendForgotPwdEmail(String userEmail, String userName, String code) {
 		// String userName can be a user's Display name, Email, or Full name
 		System.out.println("BEGIN: util.EmailUsers.sendForgotPwdEmail(String, String, String)");

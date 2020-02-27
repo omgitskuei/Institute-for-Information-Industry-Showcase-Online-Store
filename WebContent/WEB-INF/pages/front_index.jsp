@@ -227,10 +227,10 @@
           <div class="col">
             <h1>訂閱我們的電子報</h1>
             <p>即時收到本公司的最新通知，有任何食品促銷會在第一時間通知您，您也可以隨時取消訂閱</p>
-            <form action="" class="form-inline justify-content-center">
-              <input type="text" class="form-control mb-2 mr-2" placeholder="輸入電子信箱">
-              <button class="btn btn-success text-white mb-2">送出</button>
-            </form>
+				<form action="<jstl:url value="/joinNewsletter" />" class="form-inline justify-content-center" method="POST">
+					<input type="email" name="inputEmail" class="form-control mb-2 mr-2" placeholder="輸入電子信箱" value="${errors.messageError}">
+					<input type="submit" class="btn btn-success text-white mb-2" value="送出"/>
+				</form>
           </div>
         </div>
       </div>
