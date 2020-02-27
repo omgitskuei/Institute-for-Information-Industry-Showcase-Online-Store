@@ -40,7 +40,7 @@
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
-            <form action="<jstl:url value="/userForgotPwd3"/>" method=post>
+            <form action="<jstl:url value="/userForgotPwd3_5"/>" method=post>
             <h3 class="text-center">忘記密碼：步驟三</h3>
             <hr>
             <div class="row">

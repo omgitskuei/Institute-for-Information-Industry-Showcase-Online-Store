@@ -43,6 +43,7 @@ public class UserLoginController {
 	private String verificationCode = "";
 	private int retry=2;
 	private String emailField;
+	private int userID;
 
 	// Constructors
 	@Autowired
@@ -137,19 +138,18 @@ public class UserLoginController {
 			System.out.println("		the 2 codes match!");
 			// if user has security questions, we can test them
 			// if no questions, then go straight into password update
-			SettingBean bean = sService.select(uService.selectUserIDByEmail(emailField));
-			;
+			userID = uService.selectUserIDByEmail(emailField);
+			SettingBean bean = sService.select(userID);
 			if (!(bean.getSettingSecurityQ().equals("")) ){
 				System.out.println("	this user has security questions, we will go over them now");
 				System.out.println("	take user to page with SecQ");
+				retry=2;
 				return "front_forgetpwd3_securityQuestions";
 			} else {
 				System.out.println("	this user has no security questions.");
 				System.out.println("	take user to page with password update");
 				return "front_forgetpwd3_updatePwd";
 			}
-			
-			
 		} else {
 			System.out.println("Confirm code incorrect");
 			if (retry > 0) {
@@ -162,6 +162,25 @@ public class UserLoginController {
 			} else {
 				return "front_login";
 			}
+		}
+	}
+	
+	@RequestMapping(path = "/userForgotPwd3_5", method = RequestMethod.POST)
+	public String userForgotPwd3_5UpdatePassword(
+			Model nextPage,
+			@RequestParam(name="securityAnswer") String userInput
+			) {
+		System.out.println("user inputed this security Answer: "+userInput);
+		SettingBean bean = sService.select(userID);
+		String correctSecurityAnswer = bean.getSettingSecurityA();
+		if (userInput.equals(correctSecurityAnswer)) {
+			return "front_forgetpwd4_updatePwd";
+		} else {
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("validateError", "Security Question 有錯誤: 您剩下"+retry+"次機會");
+			nextPage.addAttribute("errors", errors);
+			retry--;
+			return "front_forgetpwd3_securityQuestions";
 		}
 	}
 	
