@@ -45,31 +45,47 @@
             <h4>地址：</h4>
             <p>5867 W Walbrook Dr. 95129 San Jose, CA</p>
             <h4>電子信箱：</h4>
-            <p>luchienlin1994@gmail.com</p>
+            <p>farmvilletaiwan@gmail.com</p>
             <h4>電話：</h4>
             <p>(408)366-18888</p>
           </div>
         </div>
       </div>
+      <!-- CONTACT US FORM -->
+     
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
+           <form action="<jstl:url value="/directFrontContactUs"/>" method=post>
             <h3 class="text-center">請在下方輸入您的意見</h3>
             <hr>
             <div class="row">
+              <!-- EMAIL INPUT -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="電子信箱：">
+                  <input 
+                  	type="email" 
+                  	class="form-control" 
+                  	placeholder="電子信箱："
+                  	name="inputEmail">
+                  <span style="color: red;">${errors.emailError}</span>
                 </div>
               </div> 
+              <!-- NAME INPUT -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="姓名：">
+                  <input 
+                  	type="text" 
+                  	class="form-control" 
+                  	placeholder="姓名："
+                  	name="inputName">
+                  <span style="color: red;">${errors.nameError}</span>
                 </div>
               </div> 
+              <!-- CATEGORY INPUT -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <select class="form-control" id="QA">
+                  <select class="form-control" id="inputCategory" name="inputCategory">
                       <option>訂單問題</option>
                       <option>帳號問題</option>
                       <option>付款問題</option>
@@ -77,28 +93,51 @@
                       <option>退換貨問題</option>
                       <option>其他問題</option>
                   </select>
+                  <span style="color: red;">${errors.categoryError}</span>
                 </div>
               </div>
             </div>
             <div class="row">
+              <!-- MESSAGE INPUT -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="內容："></textarea>
+                  <textarea
+                  	name="inputMessage" 
+                  	id="inputMessage" 
+                  	cols="30" 
+                  	rows="10" 
+                  	class="form-control" 
+                  	placeholder="內容">
+                  </textarea>
+                  <span id="messageErrorSpan" style="color: red;">${errors.messageError}</span>
                 </div>
               </div>
+              <!-- SUBMIT BUTTON -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <input type="submit" value="送出" class="btn btn-outline-danger btn-block">
+                  <input type="submit" value="送出" class="btn btn-outline-danger btn-block" onclick="myFunction()">
                 </div>
-                <h4 class="text-center">我們將儘快與您聯繫</h4>
+                <h5 class="text-center">我們將儘快與您聯繫</h5>
               </div>
             </div>
+             </form>
           </div>
         </div>
       </div>
+     
     </div>
   </div>
 </section>
+
+<script>
+function myFunction() {
+	var textArea = document.getElementById("inputMessage");
+	alert("wow");
+	if (textArea.innerHTML.length === 0) {
+		document.getElementById("messageErrorSpan").innerHTML = "Can't be empty";
+	}
+}
+</script>
 
 <!-- STAFF -->
 <section id="staff" class="py-5 text-center bg-dark text-white">

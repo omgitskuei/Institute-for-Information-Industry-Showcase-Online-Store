@@ -62,9 +62,12 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 	
-	
+						
+
+	@SuppressWarnings("rawtypes")
 	@Override
-	public ProfileBean getProfile(int userID) {							
+	public ProfileBean getProfile(int userID) {
+
 		Session currentSession = sessionFactory.getCurrentSession();
 //		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		String hqlQ = "From ProfileBean where userID=:userID";
@@ -74,6 +77,8 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return theProfile;
 	}
 	
+
+	@SuppressWarnings("rawtypes")
 	public ProfileBean getProfile(ProfileBean thisP) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		int userID = thisP.getUserID();
@@ -84,15 +89,15 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return theProfile;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public ProfileBean getProfileByUserID(int userID) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		String hql = "From ProfileBean where userID =: userID";
-		Query query = currentSession.createQuery(hql); 
-		query.setParameter("userID", userID);
-		ProfileBean theProfile = (ProfileBean)query.uniqueResult();
-		return theProfile;
-	}
+//	@SuppressWarnings("rawtypes")
+//	public ProfileBean getProfileByUserID(int userID) {
+//		Session currentSession = sessionFactory.getCurrentSession();
+//		String hql = "From ProfileBean where userID =: userID";
+//		Query query = currentSession.createQuery(hql); 
+//		query.setParameter("userID", userID);
+//		ProfileBean theProfile = (ProfileBean)query.uniqueResult();
+//		return theProfile;
+//	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<ProfileBean> selectFuzzy(String searchQuery) {
@@ -125,5 +130,5 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 //	ProfileBean theProfile = session.byId(ProfileBean.class).load(userID);
 //		session.delete(theProfile);
 
-
+//	}
 }
