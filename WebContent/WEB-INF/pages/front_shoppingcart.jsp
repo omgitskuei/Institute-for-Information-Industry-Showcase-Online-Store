@@ -316,8 +316,8 @@
           var output = "";
           for(var i in cartArray) {
             output += "<tr><td>"+ cartArray[i].name + "</td><td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td><td>"  +"<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>" + "<td class='text-right price'>"+cartArray[i].total+ 
-            "</td>"+"<td><button class='plus-item' data-name='"+cartArray[i].name+"'>+</button></td>"+
-            "<td><button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
+            "</td>"+"<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>"+
+            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
             
           }	
           // html會渲染所有東西
