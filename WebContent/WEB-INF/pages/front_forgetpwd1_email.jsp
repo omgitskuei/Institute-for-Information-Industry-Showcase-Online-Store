@@ -46,14 +46,15 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="email">請輸入您的賬號的電子信箱　－　Farmville　會發給您一次性　"Reset Password　Code"　重設密碼用的驗證碼</label>
+                  <label for="email">請輸入您的賬號的電子信箱, 發給您重設密碼用的驗證碼</label>
+                  <label for="email">Please enter the email associated with your Farmville account to reset your password.</label>
                   <input
-                  	type="text"
+                  	type="email"
                   	class="form-control"
                   	placeholder="請輸入電子信箱　Email"
                   	name="userEmail"
                   	value="">
-                  <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
+                  
                   <span style="color: red;">${errors.validateError}</span>
                 </div>
               </div> 
@@ -61,6 +62,7 @@
                 <div class="form-group">
                   <input type="submit" class="btn btn-success btn-block text-white" value="送出驗證信">
                 </div>
+                <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
               </div>
             </div>
           </form>

@@ -48,18 +48,22 @@
                 <div class="form-group">
                   <label for="email">請輸入一組新的密碼　Update your password.</label>
                   <input
-                  	type="text"
+                  	type="password"
                   	class="form-control"
                   	placeholder="新的密碼 Enter New Password"
                   	name="newPwd"
                   	value="">
+                  	</div>
+                </div>
+                <div class="col-md-12">
+                 <div class="form-group">
                   <input
-                  	type="text"
+                  	type="password"
                   	class="form-control"
                   	placeholder="密碼再輸入一次 Re-enter your new password"
                   	name="confirmPwd"
                   	value="">
-                  <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
+                  
                   <span style="color: red;">${errors.validateError}</span>
                 </div>
               </div> 
@@ -67,6 +71,7 @@
                 <div class="form-group">
                   <input type="submit" class="btn btn-success btn-block text-white" value="確定">
                 </div>
+                <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
               </div>
             </div>
           </form>

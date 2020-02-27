@@ -46,22 +46,23 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="email">請輸入　Farmville　收到您電子信箱的一次性驗證碼　"Reset Password　Code"</label>
+                  <label for="email">請輸入　Farmville　收到您電子信箱的一次性驗證碼　"Reset Password Code"</label>
                   <input
                   	type="text"
                   	class="form-control"
                   	placeholder="請輸入驗證碼  Reset Code"
                   	name="confirmCode"
                   	value="">
-				  <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
+				 
                   <span style="color: red;" id="notFoundErrorSpan">${errors.validateError}</span>
                 </div>
               </div> 
               <div class="col-md-12">
                 <div class="form-group">
-                  <input type="submit" class="btn btn-success btn-block text-white" value="送出驗證碼">
+                  <input type="submit" class="btn btn-success btn-block text-white" value="送出驗證碼"> 
                 </div>
-              </div>
+                <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
+              </div> 
             </div>
           </form>
           </div>
