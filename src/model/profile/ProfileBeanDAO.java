@@ -109,6 +109,12 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 
+//	@Override
+//	public void deleteProfile(int userID) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 
 //  沒有要刪除使用者
 //	@Override
@@ -127,5 +133,4 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 //		session.delete(theProfile);
 
 	}
-
 
