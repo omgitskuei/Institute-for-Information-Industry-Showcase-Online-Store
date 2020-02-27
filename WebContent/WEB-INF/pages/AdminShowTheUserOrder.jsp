@@ -13,7 +13,7 @@
 <%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
 
 <div class="container">
-<h1>管理者管理單一使用者訂單</h1>
+<h1 class="mt-3">管理者管理單一使用者訂單</h1>
 
 <div>
 	<c:url var="updateLink" value="/AdminProfile/updateForm">
