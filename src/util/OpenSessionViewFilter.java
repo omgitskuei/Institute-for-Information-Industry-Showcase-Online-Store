@@ -36,6 +36,7 @@ public class OpenSessionViewFilter implements Filter {
 			chain.doFilter(request, response);
 			sessionFactory.getCurrentSession().getTransaction().commit();
 			
+			
 		} catch (Exception e) {
 			sessionFactory.getCurrentSession().getTransaction().rollback();
 			System.out.println("Transaction RollBack.");
@@ -50,5 +51,7 @@ public class OpenSessionViewFilter implements Filter {
 	public void destroy() {
 		((ConfigurableApplicationContext)context).close();
 	}
+	
+	
 
 }
