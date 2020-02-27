@@ -51,14 +51,9 @@
           <i class="fas fa-plus"></i> 新增庫存
         </a>
       </div>
-      <div class="col-md-3">
-        <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#addOrderModal">
-          <i class="fas fa-plus"></i> 新增訂單
-        </a>
-      </div>
-      <div class="col-md-3">
-        <a href="#" class="btn btn-warning btn-block text-black" data-toggle="modal" data-target="#addUserModal">
-          <i class="fas fa-plus"></i> 新增使用者
+       <div class="col-md-3">
+        <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#addSubscriptionModal">
+          <i class="fas fa-plus"></i> 寄送訂閱信
         </a>
       </div>
     </div>
@@ -261,8 +256,39 @@
   </div>
 </div>
 
+<!-- ADD Subscription MODAL -->
+<div class="modal fade" id="addSubscriptionModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">送出訂閱信</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="inventoryTitle">信件主旨
+            </label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="inventoryDiscription">信件內容</label>
+            <textarea cols="100" rows="10" id="textarea" onfocus="if(value=='限定100字元'){value=''}"
+    onblur="if (value ==''){value='限定100字元'}" class="form-control"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="一鍵送出" class="btn btn-success" data-dismiss="modal" />
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ADD Order MODAL -->
-<div class="modal fade" id="addOrderModal">
+<%-- <div class="modal fade" id="addOrderModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
@@ -324,10 +350,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> --%>
 
 <!-- ADD User MODAL -->
-<div class="modal fade" id="addUserModal">
+<%-- <div class="modal fade" id="addUserModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-warning text-black">
@@ -358,7 +384,7 @@
             </select>
            </div>
         </form>
-      </div>
+      </div> --%>
       <div class="modal-footer">
         <button class="btn btn-warning" data-dismiss="modal">儲存</button>
       </div>

@@ -14,7 +14,7 @@
 
 	<div class="container">
 	
-	<h1>管理者更新密碼</h1>
+	<h1 class="mt-3">管理者更新密碼</h1>
 	
 	
 	

@@ -123,7 +123,7 @@
 						</table>
 
 						<!-- PAGINATION -->
-						<nav class="ml-4">
+					<!-- 	<nav class="ml-4">
 							<ul class="pagination">
 								<li class="page-item disabled"><a href="#"
 									class="page-link">上一頁</a></li>
@@ -134,7 +134,7 @@
 								<li class="page-item"><a href="#" class="page-link">下一頁</a>
 								</li>
 							</ul>
-						</nav>
+						</nav> -->
 					</div>
 				</div>
 			</div>

@@ -64,8 +64,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-<!--             <h4>最新訂單</h4> -->
-              <a href="AdminOrder/updateForm?orderID=0" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>新增訂單</a>
+		<h4>最新訂單</h4> 
+              <a href="AdminOrder/updateForm?orderID=0" class="btn btn-success">新增訂單</a>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
@@ -115,7 +115,7 @@
           </table>
 
           <!-- PAGINATION -->
-          <nav class="ml-4">
+         <!--  <nav class="ml-4">
               <ul class="pagination">
                   <li class="page-item disabled">
                       <a href="#" class="page-link">上一頁</a>
@@ -133,7 +133,7 @@
                     <a href="#" class="page-link">下一頁</a>
                 </li>
               </ul>
-          </nav>
+          </nav> -->
         </div>
       </div>
     </div>

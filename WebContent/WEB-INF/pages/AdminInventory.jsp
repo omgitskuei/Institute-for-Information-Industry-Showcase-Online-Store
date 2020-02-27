@@ -64,8 +64,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-          <a class="btn btn-primary" href="<c:url value="addingProductForm" />">新增商品</a>
             <h4>最新庫存商品</h4>
+            <a class="btn btn-primary" href="<c:url value="addingProductForm" />">新增商品</a>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
@@ -121,7 +121,7 @@
           </table>
 
           <!-- PAGINATION -->
-          <nav class="ml-4">
+         <!--  <nav class="ml-4">
               <ul class="pagination">
                   <li class="page-item disabled">
                       <a href="#" class="page-link">上一頁</a>
@@ -139,7 +139,7 @@
                     <a href="#" class="page-link">下一頁</a>
                 </li>
               </ul>
-          </nav>
+          </nav> -->
         </div>
       </div>
     </div>

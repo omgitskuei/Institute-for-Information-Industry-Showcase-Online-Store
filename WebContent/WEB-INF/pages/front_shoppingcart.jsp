@@ -48,9 +48,8 @@
                             <th scope="col"><label class="name">商品</label></th>
                       		<th scope="col" class="text-left"><label class="quentity">數量</label></th>
                             <th scope="col" class="text-right"><label class="price">單價</label></th>
-                            <th scope="col" class="text-right"><label class="price">小記</label></th>
-                            <th scope="col" class="text-left"><label class="price">增加</label></th>
-                            <th scope="col" class="text-left"><label class="price">減少</label></th>
+                            <th scope="col" class="text-right"><label class="price">增加</label></th>
+                            <th scope="col" class="text-right"><label class="price">減少</label></th>
                             <th scope="col" class="delete"><label class="price">刪除</label></th>
                             <th><label class="delete"></label></th>
                         </tr>
@@ -88,8 +87,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            	<td></td>
                             <td>購買總金額</td>
                             <td class="text-right" id="total-cart">NT$ 180</td>
                       </tr>
@@ -106,7 +104,7 @@
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-sm-2">
-                    <a href="checkout.html" onclick="" class="btn btn-lg btn-block btn-success text-white">結帳</a>
+                    <a href="checkout.html" class="btn btn-lg btn-block btn-success text-white">結帳</a>
                 </div>
             </div>
         </div>
@@ -163,10 +161,8 @@
         // Private methods and properties
         var cart = [];
 
-        function Item(id, img, name, price, count) {
-            this.id = id
-            this.img = img
-        	this.name = name
+        function Item(name, price, count) {
+            this.name = name
             this.price = price
             this.count = count
         }
@@ -189,7 +185,7 @@
         // Public methods and properties
         var obj = {};
 
-        obj.addItemToCart = function (id, img, name, price, count) {
+        obj.addItemToCart = function (name, price, count) {
             for (var i in cart) {
                 if (cart[i].name === name) {
                     cart[i].count += count;
@@ -200,7 +196,7 @@
 
             console.log("addItemToCart:", name, price, count);
 
-            var item = new Item(id, img, name, price, count);
+            var item = new Item(name, price, count);
             cart.push(item);
             saveCart();
         };
@@ -300,7 +296,7 @@
 
           console.log("Click add to cart:"+name+" "+price);
 
-          shoppingCart.addItemToCart(id, img, name, price, 1);
+          shoppingCart.addItemToCart(name, price, 1);
           displayCart();
         });
 
@@ -320,8 +316,8 @@
           var output = "";
           for(var i in cartArray) {
             output += "<tr><td>"+ cartArray[i].name + "</td><td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td><td>"  +"<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>" + "<td class='text-right price'>"+cartArray[i].total+ 
-            "</td>"+"<td><button class='plus-item' data-name='"+cartArray[i].name+"'>+</button></td>"+
-            "<td><button class='subtract-item' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
+            "</td>"+"<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>"+
+            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
             
           }	
           // html會渲染所有東西
@@ -365,28 +361,6 @@
        
 
         displayCart();   
-        
-        
-        // ajax 送出購物車功能
-      
-        
-    			
-    </script>
-    <script>
-    function addToOrder(productId,productCount) {
-    	var buyData = {};
-		buyData.userID = "${userID}";
-		buyData.productID = productID;
-		buyData.productCount = productCount;
-		$.ajax({
-			async : false,
-			type : 'POST',
-			url : '', // post 的路徑
-			data : buyData,
-			dataType : 'json',
-			success : console.log("adding order success.")
-		});
-    }
     </script>
     </body>
 </html>
