@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,10 +49,10 @@
 			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directlogin"/>>登入</a></li>
 			</c:if>
             <c:if test="${cookie.containsKey('loginSuccessCookie')}">
+
 			<!-- 如果不為空 才顯示 -->
 			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directLogout"/>>登出</a></li>
-
-			</c:if>
+			</jstl:if>
           </ul>
         </div>
       </div>
