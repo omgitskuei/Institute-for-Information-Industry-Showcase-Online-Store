@@ -14,13 +14,19 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.profile.ProfileBean;
+import model.profile.ProfileBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
 import util.CheckSubstring;
+import util.EmailUsers;
 import util.EncodeHexString;
 import util.EncryptString;
+import util.GetCode;
+import util.ValidateString;
 
 @Controller
 @SessionAttributes(names = { "userEmail", "userPwd", "rememberMe" })
@@ -28,14 +34,19 @@ public class UserLoginController {
 
 	// Local fields
 	private UserBeanService uService;
+	private ProfileBeanService profService;
 	private HttpServletResponse response;
 	private EncryptString util = new EncryptString();
 	private EncodeHexString hexConvert = new EncodeHexString();
+	private ValidateString validator = new ValidateString();
+	private String verificationCode = "";
+	private int retry=2;
 
 	// Constructors
 	@Autowired
-	public UserLoginController(UserBeanService uService, HttpServletResponse response) {
+	public UserLoginController(UserBeanService uService, ProfileBeanService profService, HttpServletResponse response) {
 		this.uService = uService;
+		this.profService = profService;
 		this.response = response;
 	}
 
@@ -62,132 +73,123 @@ public class UserLoginController {
 		return "writeUserLoginCookie";
 	}
 
-	@RequestMapping(path = "userForgotPwd", method = RequestMethod.POST)
+	@RequestMapping(path = "/userForgotPwd", method = RequestMethod.POST)
 	public String userForgotPwd(
 			Model nextPage,
 			@RequestParam(name="userEmail") String userEmail) {
 		System.out.println("BEGIN /userForgotPwd");
 		// if there are errors, return to previous page, else query the input
-		String result = validateEmailreturnErrors(userEmail);
+		String result = validator.validateEmailreturnErrors(userEmail);
 		System.out.println("	validate emamil result: "+result);
-		if ( !(result.equals("VALID EMAIL")) ) {
+		if ( !(result.equals("VALID EMAIL")) ) {		// NOT VALID EMAIL
 			System.out.println("		Adding error message to nextPage model");
 			Map<String, String> errors = new HashMap<String, String>();
 			errors.put("validateError", result);
 			nextPage.addAttribute("errors", errors);
 			System.out.println("	returning to front_forgetpwd.jsp");
 			System.out.println("FINISH /userForgotPwd");
-			return "front_forgetpwd";
+			return "front_forgetpwd1_email";
 		} else {
-			
-			;
+			System.out.println("		Email is valid, LookUp email, send email if exists");
+			int lookUpEmail = uService.selectUserIDByEmail(userEmail); // returns 0 if not found
+			if (lookUpEmail==0) {		// NOT FOUND
+				System.out.println("			User with this Email NOT FOUND");
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("validateError", "");
+				nextPage.addAttribute("errors", errors);
+				System.out.println("	returning to front_forgetpwd.jsp");
+				System.out.println("FINISH /userForgotPwd");
+				return "front_forgetpwd1_email";
+			} else {
+				System.out.println("			User with this Email FOUND: userID="+lookUpEmail);
+				ProfileBean bean = profService.getProfile(lookUpEmail);
+				System.out.println("			profilebean with this ID = "+bean);
+				String userName = bean.getProfileFullName();
+				System.out.println("			userName = "+userName);
+				GetCode gen = new GetCode(10, true, true, false);
+				verificationCode = gen.generateCode();
+				//nextPage.addAttribute("verificationCode", verificationCode);
+				EmailUsers emailSender = new EmailUsers();
+				emailSender.sendForgotPwdEmail(userEmail, userName, verificationCode);
+				System.out.println("	returning to front_forgetpwd2_code.jsp");
+				System.out.println("FINISH /userForgotPwd2");
+				retry = 2;
+				//nextPage.addAttribute("", userEmail);
+				return "front_forgetpwd2_code";
+			}
 		}
-		nextPage.addAttribute("", "");
-		return "";
 	}
 	
-	public String validateEmailreturnErrors(String email) {
-		try {
-			// email cant be empty, and must be longer than 5 (x@x.x)
-			if (email != null && email.length() > 5) {
-				// email must have "@"
-				if (email.contains("@")) {
-					// Partition email string based on email syntax; localpart@domain
-					String localpart = email.substring(0, email.indexOf("@"));
-					String domain = email.substring(email.indexOf("@") + 1, email.length());
-
-					// Localpart and Domain each must not exceed 64 characters
-					if (localpart.length() <= 64 && domain.length() <= 63) {
-						// Create empty ArrayList for storing where "." appear in email String
-						ArrayList<Integer> dotIndexes = new ArrayList<Integer>();
-						// Create counter for "@"
-						int countAt = 0;
-						// Create flag for spaces, false will fail;
-						boolean noSpaces = true;
-						// Checking each character of email string for space, @, .
-						for (int index = 0; index < email.length(); index++) {
-							// Split email into substrings
-							String substring = email.substring(index, index + 1);
-							// Count how many "@"
-							if (substring.equals("@")) {
-								countAt++;
-							}
-							// Check if there are any spaces in the email
-							if (substring.equals(" ")) {
-								noSpaces = false;
-							}
-							// Note where "." dots appear in the email, store into ArrayList
-							if (substring.equals(".")) {
-								dotIndexes.add(index);
-							}
-						}
-						// A valid email must have "@" and can only have one "@"
-						if (countAt == 1) {
-							// A valid email must have no spaces
-							if (noSpaces) {
-								// A valid email cannot begin or end on "."
-								if (!(dotIndexes.contains(0) || dotIndexes.contains(email.length() - 1))) {
-									// Email @ sign can't be next to "."
-									boolean atNotNextToDot = true;
-									for (int index = 0; index < dotIndexes.size(); index++) {
-										// if "." is to the left or right of the "@", fail
-										if (email.indexOf("@") - dotIndexes.get(index) == -1
-												|| email.indexOf("@") - dotIndexes.get(index) == 1) {
-											atNotNextToDot = false;
-										}
-									}
-									if (atNotNextToDot) {
-										// Domain must comply with LDH rule (letters, digits, hyphen)
-										CheckSubstring util = new CheckSubstring();
-										if (util.countSpecialCharacters(domain) == 0) {
-											// Domain must contain one "."
-											if (domain.contains(".")) {
-												boolean noConsecutiveDotsFlag = true;
-												// Domain cannot have any consecutive dots
-												for (int index = 0; index < dotIndexes.size() - 1; index++) {
-													if ((dotIndexes.get(index + 1) - dotIndexes.get(index)) == 1) {
-														noConsecutiveDotsFlag = false;
-													}
-												}
-												if (noConsecutiveDotsFlag) {
-													return "VALID EMAIL";
-												}
-											} else {
-												return "Invalid Input: Email domain missing . character";
-											}
-										} else {
-											return "Invalid Input: Email may only use letters, digits, hyphen";
-										}
-									} else {
-										return "Invalid Input: Email cannot have a . character next to a @";
-									}
-								} else {
-									return "Invalid Input: Email may not end on a . character";
-								}
-							} else {
-								return "Invalid Input: Email may not use any Spaces";
-							}
-						} else {
-							return "Invalid Input: Email may only have one @ character";
-						}
-					} else {
-						return "Invalid Input: Email localpart and domain must be under 64 characters";
-					}
-				} else {
-					return "Invalid Input: Email must contain @";
-				}
+	@RequestMapping(path = "/userForgotPwd2", method = RequestMethod.POST)
+	public String userForgotPwd2(
+			Model nextPage,
+			@RequestParam(name="confirmCode") String confirmCode
+			) {
+		System.out.println("BEGIN: /userForgotPwd2");
+		System.out.println("	User input: confirmCode = " + confirmCode);
+		System.out.println("	verificationCode = " + verificationCode);
+		System.out.println("	retries left = "+retry);
+		if (confirmCode.equals(verificationCode)) {
+			System.out.println("		the 2 codes match!");
+			System.out.println("	take user to page with password update");
+			return "front_forgetpwd3_updatePwd";
+		} else {
+			System.out.println("Confirm code incorrect");
+			if (retry > 0) {
+				System.out.println("Confirm code incorrect");
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("validateError", "驗證碼有效錯誤: 您剩下"+retry+"次機會");
+				nextPage.addAttribute("errors", errors);
+				retry--;
+				return "front_forgetpwd2_code";
 			} else {
-				return "Invalid Input: Email is too short";
+				return "front_login";
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return "EXCEPTION";
 	}
+	
+	@RequestMapping(path = "/userForgotPwd3", method = RequestMethod.POST)
+	public String userForgotPwd3(
+			Model nextPage,
+			@RequestParam(name="newPwd") String newPwd,
+			@RequestParam(name="confirmPwd") String confirmPwd
+			) {
+		System.out.println("BEGIN: /userForgotPwd3");
+		System.out.println("	User input: newPwd = " + newPwd);
+		System.out.println("	User input: confirmCode = " + confirmPwd);
+		if (newPwd.equals(confirmPwd)) {
+			System.out.println("		the 2 passwords match!");
+			String passwordValidation = validator.validateEmailreturnErrors(newPwd);
+			if(passwordValidation.equals("VALID PASSWORD")) {
+				System.out.println("	new password is valid!");
+				
+				System.out.println("FINISH: /userForgotPwd3");
+				return "front_intro_loginSuccess";
+			} else {
+				System.out.println("	invalid password");
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("validateError", passwordValidation);
+				nextPage.addAttribute("errors", errors);
+				System.out.println("FINISH: /userForgotPwd3");
+				return "front_forgetpwd3_updatePwd";
+			}
+			
+		} else {
+			System.out.println("	passwords don't match");
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("validateError", "兩個密碼必須一樣");
+			nextPage.addAttribute("errors", errors);
+			retry--;
+			System.out.println("FINISH: /userForgotPwd3");
+			return "front_forgetpwd3_updatePwd";
+		}
+	}
+	
 	
 	// Methods > User sign up account
 	@RequestMapping(path = "/userSignIn", method = RequestMethod.POST)
-	public String userSignIn(@RequestParam(name = "userEmail") String uEmail,
+	public String userSignIn(@SessionAttribute("userEmail") String dEmail, // display 用的
+			@RequestParam(name = "userEmail") String uEmail,
 			@RequestParam(name = "userPwd") String uPwd,
 			@RequestParam(name = "rememberMe", required = false, defaultValue = "false") boolean remMe,
 			@RequestParam(name = "g-recaptcha-response", required = false) boolean recaptcha,
@@ -226,7 +228,7 @@ public class UserLoginController {
 					errors.put("pwdError", "Password is required");
 				}
 			}
-
+			
 			nextPage.addAttribute("errors", errors);
 			return "front_login";
 		} else {

@@ -40,26 +40,38 @@
       <div class="col-md-8">
         <div class="card p-4">
           <div class="card-body">
-            <form action="<jstl:url value="/front_forgetpwd.jspToSOMECONTROLLER..............."/>">
-            <h3 class="text-center">忘記密碼</h3>
+            <form action="<jstl:url value="/userForgotPwd3"/>" method=post>
+            <h3 class="text-center">忘記密碼：步驟三</h3>
             <hr>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="email">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</label>
+                  <label for="email">請輸入一組新的密碼　Update your password.</label>
                   <input
-                  	type="text"
+                  	type="password"
                   	class="form-control"
-                  	placeholder="請輸入電子信箱　Email"
-                  	name="userEmail"
+                  	placeholder="新的密碼 Enter New Password"
+                  	name="newPwd"
                   	value="">
-                  <span style="color: red;" id="notFoundErrorSpan">${errors.validateError}</span>
+                  	</div>
+                </div>
+                <div class="col-md-12">
+                 <div class="form-group">
+                  <input
+                  	type="password"
+                  	class="form-control"
+                  	placeholder="密碼再輸入一次 Re-enter your new password"
+                  	name="confirmPwd"
+                  	value="">
+                  
+                  <span style="color: red;">${errors.validateError}</span>
                 </div>
               </div> 
               <div class="col-md-12">
                 <div class="form-group">
-                  <a href="authmail.html" type="submit" class="btn btn-success btn-block text-white">送出驗證信</a>
+                  <input type="submit" class="btn btn-success btn-block text-white" value="確定">
                 </div>
+                <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
               </div>
             </div>
           </form>

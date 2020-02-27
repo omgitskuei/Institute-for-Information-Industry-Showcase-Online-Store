@@ -25,12 +25,12 @@ import model.user.UserBeanService;
 @Controller
 @SessionAttributes(names = { "searchBar" })
 public class SearchBarController {
-
+	// fields
 	private ProductBeanService pService;
 	private UserBeanService uService;
 	private ProfileBeanService profileService;
 	private HttpServletResponse response;
-
+	// constructor
 	@Autowired
 	public SearchBarController(ProductBeanService pService, UserBeanService uService, ProfileBeanService profileService, HttpServletResponse response) {
 		this.pService = pService;
@@ -38,7 +38,7 @@ public class SearchBarController {
 		this.profileService = profileService;
 		this.response = response;
 	}
-
+	// methods
 	@RequestMapping(path = "/searchBarProducts", method = RequestMethod.POST)
 	public String searchBarProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
 		System.out.println("BEGIN: /searchBarProducts");

@@ -1,5 +1,7 @@
 package util;
 
+import java.time.LocalDate;
+
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -47,9 +49,13 @@ public class EmailUsers {
 			email.setSubject("FarmVille Account Support: Resetting your password");
 			email.setMsg("Hi " + userName + "," + " \r\n"
 					+ " \r\n" 
-					+ "Your code for resetting your password: " + code + "\r\n" 
-					+ " \r\n" 
-					+ "If you did not forget your password and request a reset, \r\n contact support at farmvilletaiwan@gmail.com immediately." + "\r\n"
+					+ "Your code for resetting your password: "+ "\r\n" 
+					+ "\r\n" 
+					+ code + "\r\n" 
+					+ " \r\n"
+					+ "If you did not forget your password and request a reset, \r\n "
+					+ "change your password immediately and contact support \r\n " 
+					+ "at farmvilletaiwan@gmail.com immediately." + "\r\n"
 					+ " \r\n"
 					+ "Thanks," + "\r\n" 
 					+ "The FarmVille Support Team");
@@ -121,10 +127,12 @@ public class EmailUsers {
 			email.addTo(toEmail);
 			// Email body
 			email.setSubject("FarmVille Account Support: Your password changed");
-			email.setMsg("Hi " + userName + "," + " \r\n" + " \r\n" + "Your password has been successfully changed. "
+			email.setMsg("Hi " + userName + "," + " \r\n" + " \r\n" + "Your password has successfully been updated. "
 					+ "\r\n" + " \r\n"
-					+ "If you didn’t change your password, contact our support email right away at farmvilletaiwan@gmail.com"
-					+ "\r\n" + " \r\n" + "Just a reminder:" + "\r\n"
+					+ "If you didn’t change your password, contact our support email right away at farmvilletaiwan@gmail.com"+ "\r\n" 
+					+ "\r\n" 
+					+ "Just a reminder:" 
+					+ "\r\n"
 					+ "- Never share your password or security questions with anyone." + "\r\n"
 					+ "- Create passwords that are hard to guess and don’t use personal information. Be sure to include uppercase and lowercase letters, numbers, and symbols."
 					+ "\r\n" + "- Use different passwords for each of your online accounts." + "\r\n" + " \r\n"
@@ -225,8 +233,19 @@ public class EmailUsers {
 		System.out.println("FINISH: util.EmailUsers.sendWelcomeEmail");
 	}
 
-	public void sendMyselfTestEmail(String emailBody) throws Exception {
-		System.out.println("BEGIN: util.EmailUsers.emailSelf");
+	public void sendContactUsEmail(String inputEmail, String inputName, String inputCategory, String inputMessage) throws Exception {
+		System.out.println("	BEGIN: util.EmailUsers.sendContactUsEmail()");
+		GetDateOrTime dateTimeUtil = new GetDateOrTime();
+		LocalDate now = dateTimeUtil.generateLocalDate();
+		String emailBody = 
+				"Timestamp: "+now+"\r\n"
+				+"Customer Name: "+inputName+"\r\n"
+				+"Customer Email: "+inputEmail+"\r\n"
+				+"Support Category: "+inputCategory+"\r\n"
+				+"Message: "+inputMessage+"\r\n"
+				+"\r\n"
+				+"Reminder to staff: "+"\r\n"
+				+"You must respond to customers support within 3 business days from Timestamp!";
 		try {
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.googlemail.com");
@@ -234,14 +253,14 @@ public class EmailUsers {
 			email.setAuthenticator(new DefaultAuthenticator("farmvilletaiwan@gmail.com", "Qq12345!"));
 			email.setSSLOnConnect(true);
 			email.setFrom("farmvilletaiwan@gmail.com");
-			email.setSubject("TestMail");
+			email.setSubject("Support Message: "+now);
 			email.setMsg(emailBody);
 			email.addTo("farmvilletaiwan@gmail.com");
 			email.send();
-
+			System.out.println("		Email to [" + "farmvilletaiwan@gmail.com" + "] from [" + this.fromEmail + "] sent!");
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
-		System.out.println("FINISH: util.EmailUsers.............................................");
+		System.out.println("	FINISH: util.EmailUsers.sendContactUsEmail()");
 	}
 }

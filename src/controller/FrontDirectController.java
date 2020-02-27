@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.product.ProductBean;
 import model.product.ProductBeanService;
+import util.EmailUsers;
 
 
 // TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html
@@ -66,6 +69,33 @@ public class FrontDirectController {
 		return "front_services";
 	}
 	
+	@RequestMapping(value = "/directFrontContactUs", method = RequestMethod.POST)
+	public String frontContactUs(
+			Model nextPage,
+			@RequestParam("inputEmail") String email,
+			@RequestParam("inputName") String name,
+			@RequestParam("inputCategory") String category,
+			@RequestParam("inputMessage") String message
+			) {
+		System.out.println("BEGIN: /directFrontContactUs");
+		System.out.println("	從 front_contact.jsp Contact Us 導到 FrontDirectController.java /directFrontContactUs controller");
+		System.out.println("		email="+email);
+		System.out.println("		name="+name);
+		System.out.println("		category="+category);
+		System.out.println("		message="+message);
+		try {
+			EmailUsers emailer = new EmailUsers();
+			emailer.sendContactUsEmail(email, name, category, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("messageError", "Thank you for sending us an Email. Please allow 3 business days for a response.");
+		nextPage.addAttribute("errors", errors);
+		System.out.println("FINISH: /directFrontContactUs");
+		return "front_contact";
+	}
+	
 	@RequestMapping(value = "/showSpecificProduct", method = RequestMethod.GET)
 	public String showSpecificProduct(@RequestParam("productID") int productID,Model mm) {
 		
@@ -101,8 +131,8 @@ public class FrontDirectController {
 	
 	@RequestMapping(value = "/directForgotPassword", method = RequestMethod.GET)
 	public String directToForgotPassword() {
-		System.out.println("導到Forgot Password; front_forgetpwd.jsp");
-		return "front_forgetpwd";
+		System.out.println("導到Forgot Password; front_forgetpwd1_email.jsp");
+		return "front_forgetpwd1_email";
 	}
 	
 	// 1)進註冊

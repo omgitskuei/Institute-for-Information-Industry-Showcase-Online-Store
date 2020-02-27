@@ -35,10 +35,8 @@ public class GetDateOrTime {
 	public LocalDate generateLocalDate() {
 		// Generate current local date based on system clock
 		LocalDate generatedLocalDate = LocalDate.now();
-		// Format the new local date
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		// Console trail
-		System.out.println("GetDateOrTime generated: "+dateFormat.format(generatedLocalDate)); //prints out current Date
+		System.out.println("GetDateOrTime generated: "+generatedLocalDate); //prints out current Date
 		return generatedLocalDate;
 	}
 	
