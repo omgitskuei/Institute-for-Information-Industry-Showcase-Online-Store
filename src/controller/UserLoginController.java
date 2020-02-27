@@ -288,7 +288,7 @@ public class UserLoginController {
 					writeUserLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
 				} else {
 					System.out.println("	Remember Me == false, DELETING OLD COOKIES");
-					Cookie cookie = new Cookie("UserEmailCookie", "");
+					cookie = new Cookie("UserEmailCookie", "");
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 					cookie = new Cookie("UserPasswordCookie", "");

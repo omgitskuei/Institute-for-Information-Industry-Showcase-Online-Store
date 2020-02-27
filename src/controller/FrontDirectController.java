@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.mailingList.MailBean;
 import model.mailingList.MailBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
-import util.EmailUsers;
 
 
 // TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html
@@ -42,24 +40,21 @@ public class FrontDirectController {
 	public ProductBeanService productService;
 	public HttpServletRequest request;
 	public HttpServletResponse response;
-	
+
 	// Constructors
 	@Autowired
 	public FrontDirectController(MailBeanService mService, ProductBeanService productService, HttpServletRequest request, HttpServletResponse response) {
 		this.mService=mService;
 		this.productService= productService;
-		this.request = request;
+		this.request = request;	
 		this.response = response;
 	}
-
+	
 	@RequestMapping(value = "/joinNewsletter", method = RequestMethod.POST)
-	public String joinNewsletter(
-			@RequestParam("inputEmail") String email,
-			Model nextPage
-			) {
+	public String joinNewsletter(@RequestParam("inputEmail") String email, Model nextPage) {
 		System.out.println("BEGIN: /joinNewsletter");
-		System.out.println("	從 front_index.jsp Newsletter 導到 FrontDirectController.java /directnewsletter controller");
-		System.out.println("		inputEmail = "+email);
+		System.out.println(" 從 front_index.jsp Newsletter 導到 FrontDirectController.java /directnewsletter controller");
+		System.out.println(" inputEmail = " + email);
 		try {
 			mService.insertMail(email);
 		} catch (Exception e) {
@@ -68,7 +63,7 @@ public class FrontDirectController {
 		Map<String, String> errors = new HashMap<String, String>();
 		errors.put("messageError", "Thank you for joining our newsletter.");
 		nextPage.addAttribute("errors", errors);
-		
+
 		System.out.println("導回front_index homepage首頁");
 		System.out.println("FINISH: /joinNewsletter");
 		return "front_index";
@@ -111,33 +106,6 @@ public class FrontDirectController {
 		return "front_services";
 	}
 	
-	@RequestMapping(value = "/directFrontContactUs", method = RequestMethod.POST)
-	public String frontContactUs(
-			Model nextPage,
-			@RequestParam("inputEmail") String email,
-			@RequestParam("inputName") String name,
-			@RequestParam("inputCategory") String category,
-			@RequestParam("inputMessage") String message
-			) {
-		System.out.println("BEGIN: /directFrontContactUs");
-		System.out.println("	從 front_contact.jsp Contact Us 導到 FrontDirectController.java /directFrontContactUs controller");
-		System.out.println("		email="+email);
-		System.out.println("		name="+name);
-		System.out.println("		category="+category);
-		System.out.println("		message="+message);
-		try {
-			EmailUsers emailer = new EmailUsers();
-			emailer.sendContactUsEmail(email, name, category, message);
-		} catch (Exception e) {
-			e.printStackTrace();
-		};
-		Map<String, String> errors = new HashMap<String, String>();
-		errors.put("messageError", "Thank you for sending us an Email. Please allow 3 business days for a response.");
-		nextPage.addAttribute("errors", errors);
-		System.out.println("FINISH: /directFrontContactUs");
-		return "front_contact";
-	}
-	
 	@RequestMapping(value = "/showSpecificProduct", method = RequestMethod.GET)
 	public String showSpecificProduct(@RequestParam("productID") int productID,Model mm) {
 		
@@ -173,8 +141,8 @@ public class FrontDirectController {
 	
 	@RequestMapping(value = "/directForgotPassword", method = RequestMethod.GET)
 	public String directToForgotPassword() {
-		System.out.println("導到Forgot Password; front_forgetpwd1_email.jsp");
-		return "front_forgetpwd1_email";
+		System.out.println("導到Forgot Password; front_forgetpwd.jsp");
+		return "front_forgetpwd";
 	}
 	
 	// 1)進註冊
@@ -183,7 +151,7 @@ public class FrontDirectController {
 	@RequestMapping(value = "/directsignup", method = RequestMethod.GET)
 	public String directToServices1() {
 		System.out.println("導到註冊");
-		return "front_login";
+		return "front_signup";
 	}
 	
 	// 1)進購物車
@@ -196,8 +164,7 @@ public class FrontDirectController {
 		}
 	
 	@RequestMapping(value = "/directLogout", method = RequestMethod.GET)
-	public String directLogout(
-			) {
+	public String directLogout() {
 		Cookie cookie = new Cookie("loginSuccessCookie", "omg");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
@@ -209,4 +176,7 @@ public class FrontDirectController {
 		}
 		return "front_index";
 	}
+	
+		
+	
 }

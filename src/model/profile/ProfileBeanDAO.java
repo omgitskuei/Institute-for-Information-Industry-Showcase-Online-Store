@@ -62,17 +62,11 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 	
-	@Deprecated
-	@Override
-	public ProfileBean getProfile(int userID) {							// WARNING THIS SEARCHES BY PROFILE ID NOT USER ID
-
-						
+					
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public ProfileBean getProfile(int userID) {
-
-
 		Session currentSession = sessionFactory.getCurrentSession();
 //		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		String hqlQ = "From ProfileBean where userID=:userID";
@@ -93,6 +87,8 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		Query query = currentSession.createQuery(hqlQ);
 		query.setParameter("userID", userID);
 		ProfileBean theProfile = (ProfileBean) query.uniqueResult();
+		return theProfile;
+	}
 
 	@SuppressWarnings("rawtypes")
 	public ProfileBean getProfileByUserID(int userID) {

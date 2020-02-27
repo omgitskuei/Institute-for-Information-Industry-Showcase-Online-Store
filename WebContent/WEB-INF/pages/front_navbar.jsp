@@ -45,13 +45,12 @@
               <i class="fa fa-shopping-cart" style="display: inline-block;"></i>
               <a href=<jstl:url value="/directshoppingcart"/> class="nav-link" style="display: inline-block;">購物車</a>
             </li>
-            <c:if test="${empty sessionScope.userEmail}">
+            <c:if test="${empty cookie.loginSuccessCookie}">
 			<!-- 如果為空 才顯示 -->
 			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directlogin"/>>登入</a></li>
 			</c:if>
-            <c:if test="${not empty sessionScope.userEmail}">
+            <c:if test="${cookie.containsKey('loginSuccessCookie')}">
 			<!-- 如果不為空 才顯示 -->
-
 			<li class="nav-item"><a class="nav-link" href=<jstl:url value="/directLogout"/>>登出</a></li>
 
 			</c:if>
