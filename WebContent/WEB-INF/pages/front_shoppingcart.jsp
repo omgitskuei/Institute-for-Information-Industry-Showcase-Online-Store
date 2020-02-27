@@ -162,8 +162,10 @@
         // Private methods and properties
         var cart = [];
 
-        function Item(name, price, count) {
-            this.name = name
+        function Item(id, img, name, price, count) {
+            this.id = id
+            this.img = img
+        	this.name = name
             this.price = price
             this.count = count
         }
@@ -186,7 +188,7 @@
         // Public methods and properties
         var obj = {};
 
-        obj.addItemToCart = function (name, price, count) {
+        obj.addItemToCart = function (id, img, name, price, count) {
             for (var i in cart) {
                 if (cart[i].name === name) {
                     cart[i].count += count;
@@ -197,7 +199,7 @@
 
             console.log("addItemToCart:", name, price, count);
 
-            var item = new Item(name, price, count);
+            var item = new Item(id, img, name, price, count);
             cart.push(item);
             saveCart();
         };
@@ -297,7 +299,7 @@
 
           console.log("Click add to cart:"+name+" "+price);
 
-          shoppingCart.addItemToCart(name, price, 1);
+          shoppingCart.addItemToCart(id, img, name, price, 1);
           displayCart();
         });
 
@@ -365,21 +367,25 @@
         
         
         // ajax 送出購物車功能
-        function addToOrder(productId,productCounts) {
-// 					judgeIsLogin();
-					var butyData = {};
-					butyData.userID = "${userID}";
-					butyData.productID = productID;
-					butyData.productCount = productCount;
-					$.ajax({
-						async : false,
-						type : 'POST',
-						url : '', // post 的路徑
-						data : butyData,
-						dataType : 'json',
-						success : console.log("adding order success.")
-						},
-					});
+      
+        
+    			
+    </script>
+    <script>
+    function addToOrder(productId,productCount) {
+    	var buyData = {};
+		buyData.userID = "${userID}";
+		buyData.productID = productID;
+		buyData.productCount = productCount;
+		$.ajax({
+			async : false,
+			type : 'POST',
+			url : '', // post 的路徑
+			data : buyData,
+			dataType : 'json',
+			success : console.log("adding order success.")
+			};
+		});
     </script>
     </body>
 </html>
