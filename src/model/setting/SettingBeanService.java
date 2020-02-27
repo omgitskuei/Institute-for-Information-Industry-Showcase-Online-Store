@@ -34,6 +34,9 @@ public class SettingBeanService {
 	public SettingBean select(SettingBean selectThisSetting) {
 		return sDAO.selectSetting(selectThisSetting);
 	}
+	public SettingBean select(int userID) {
+		return sDAO.selectSetting(userID);
+	}
 	public boolean updateDisplayName(SettingBean updateThisBean) {
 		System.out.println("BEGIN: SettingBeanService.updateDisplayName(SettingBean)");
 		// Local variables

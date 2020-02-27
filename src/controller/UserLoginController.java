@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
+import model.setting.SettingBean;
 import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
@@ -136,15 +137,19 @@ public class UserLoginController {
 			System.out.println("		the 2 codes match!");
 			// if user has security questions, we can test them
 			// if no questions, then go straight into password update
-			SettingBean bean = sService. uService.selectUserIDByEmail(emailField);
-			if (){
-				;
+			SettingBean bean = sService.select(uService.selectUserIDByEmail(emailField));
+			;
+			if (!(bean.getSettingSecurityQ().equals("")) ){
+				System.out.println("	this user has security questions, we will go over them now");
+				System.out.println("	take user to page with SecQ");
+				return "front_forgetpwd3_securityQuestions";
 			} else {
-				;
+				System.out.println("	this user has no security questions.");
+				System.out.println("	take user to page with password update");
+				return "front_forgetpwd3_updatePwd";
 			}
 			
-			System.out.println("	take user to page with password update");
-			return "front_forgetpwd3_updatePwd";
+			
 		} else {
 			System.out.println("Confirm code incorrect");
 			if (retry > 0) {
@@ -161,7 +166,7 @@ public class UserLoginController {
 	}
 	
 	@RequestMapping(path = "/userForgotPwd3", method = RequestMethod.POST)
-	public String userForgotPwd3(
+	public String userForgotPwd3UpdatePassword(
 			Model nextPage,
 			@RequestParam(name="newPwd") String newPwd,
 			@RequestParam(name="confirmPwd") String confirmPwd
@@ -288,7 +293,7 @@ public class UserLoginController {
 					writeUserLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
 				} else {
 					System.out.println("	Remember Me == false, DELETING OLD COOKIES");
-					Cookie cookie = new Cookie("UserEmailCookie", "");
+					cookie = new Cookie("UserEmailCookie", "");
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 					cookie = new Cookie("UserPasswordCookie", "");
