@@ -137,7 +137,7 @@
             <a href="stock.html" class="btn btn-outline-danger btn-lg">前往觀看</a>
           </div>
           <div class="col-md-6">
-            <img src="img/glozzom/laptop.png" alt="商品圖片，寫死的，可能沒讀到" class="img-fluid" />
+            <img src="https://source.unsplash.com/random/320x200/?food" alt="商品圖片，寫死的，可能沒讀到" class="img-fluid" />
           </div>
         </div>
       </div>
@@ -176,44 +176,44 @@
           <div class="col-md-4">
             <a href="https://source.unsplash.com/random/560x560/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="560"
               data-width="560">
-              <img src="https://source.unsplash.com/random/560x560" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/560x560/?food" alt="" class="img-fluid">
             </a>
           </div>
   
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/561x561" data-toggle="lightbox" data-gallery="img-gallery" data-height="561"
+            <a href="https://source.unsplash.com/random/561x561/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="561"
               data-width="561">
-              <img src="https://source.unsplash.com/random/561x561" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/561x561/?food" alt="" class="img-fluid">
             </a>
           </div>
   
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/562x562" data-toggle="lightbox" data-gallery="img-gallery" data-height="562"
+            <a href="https://source.unsplash.com/random/562x562/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="562"
               data-width="562">
-              <img src="https://source.unsplash.com/random/562x562" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/562x562/?food" alt="" class="img-fluid">
             </a>
           </div>
         </div>
   
         <div class="row mb-4">
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/563x563" data-toggle="lightbox" data-gallery="img-gallery" data-height="563"
+            <a href="https://source.unsplash.com/random/563x563/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="563"
               data-width="563">
-              <img src="https://source.unsplash.com/random/563x563" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/563x563/?food" alt="" class="img-fluid">
             </a>
           </div>
   
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/564x564" data-toggle="lightbox" data-gallery="img-gallery" data-height="564"
+            <a href="https://source.unsplash.com/random/564x564/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="564"
               data-width="564">
-              <img src="https://source.unsplash.com/random/564x564" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/564x564/?food" alt="" class="img-fluid">
             </a>
           </div>
   
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/565x565" data-toggle="lightbox" data-gallery="img-gallery" data-height="565"
+            <a href="https://source.unsplash.com/random/565x565/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="565"
               data-width="565">
-              <img src="https://source.unsplash.com/random/565x565" alt="" class="img-fluid">
+              <img src="https://source.unsplash.com/random/565x565/?food" alt="" class="img-fluid">
             </a>
           </div>
         </div>
