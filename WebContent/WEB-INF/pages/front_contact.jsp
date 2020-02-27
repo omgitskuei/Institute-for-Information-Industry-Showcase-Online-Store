@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +62,7 @@
             <div class="row">
               <!-- EMAIL INPUT -->
               <div class="col-md-12">
-                <div class="form-group">
+                <div class="form-group"> 
                   <input 
                   	type="email" 
                   	class="form-control" 
