@@ -47,9 +47,9 @@ public class ProfileBeanService implements ProfileBeanServiceInterface {
 		return results;
 	}
 	
-	@Override
-	public void deleteProfile(int userID) {
-		profileDAO.deleteProfile(userID);
-	}
+//	@Override
+//	public void deleteProfile(int userID) {
+//		profileDAO.deleteProfile(userID);
+//	}
 
 }

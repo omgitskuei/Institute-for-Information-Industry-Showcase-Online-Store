@@ -12,6 +12,6 @@ public interface ProfileBeanServiceInterface {
 	
 	public ProfileBean getProfile(int userId);
 	
-	public void deleteProfile(int userId);
+//	public void deleteProfile(int userId);
 
 }
