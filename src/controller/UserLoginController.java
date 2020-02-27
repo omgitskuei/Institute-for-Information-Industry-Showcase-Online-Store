@@ -39,7 +39,6 @@ public class UserLoginController {
 	private EncryptString util = new EncryptString();
 	private EncodeHexString hexConvert = new EncodeHexString();
 	private ValidateString validator = new ValidateString();
-	private EmailUsers emailSender = new EmailUsers();
 	private String verificationCode = "";
 	private int retry=2;
 
@@ -92,8 +91,8 @@ public class UserLoginController {
 			return "front_forgetpwd1_email";
 		} else {
 			System.out.println("		Email is valid, LookUp email, send email if exists");
-			int userID = uService.selectUserIDByEmail(userEmail); // returns 0 if not found
-			if (userID==0) {		// NOT FOUND
+			int lookUpEmail = uService.selectUserIDByEmail(userEmail); // returns 0 if not found
+			if (lookUpEmail==0) {		// NOT FOUND
 				System.out.println("			User with this Email NOT FOUND");
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("validateError", "");
@@ -102,19 +101,19 @@ public class UserLoginController {
 				System.out.println("FINISH /userForgotPwd");
 				return "front_forgetpwd1_email";
 			} else {
-				System.out.println("			User with this Email FOUND: userID="+userID);
-				ProfileBean bean = profService.getProfile(userID);
+				System.out.println("			User with this Email FOUND: userID="+lookUpEmail);
+				ProfileBean bean = profService.getProfile(lookUpEmail);
 				System.out.println("			profilebean with this ID = "+bean);
 				String userName = bean.getProfileFullName();
 				System.out.println("			userName = "+userName);
 				GetCode gen = new GetCode(10, true, true, false);
 				verificationCode = gen.generateCode();
 				//nextPage.addAttribute("verificationCode", verificationCode);
+				EmailUsers emailSender = new EmailUsers();
 				emailSender.sendForgotPwdEmail(userEmail, userName, verificationCode);
 				System.out.println("	returning to front_forgetpwd2_code.jsp");
 				System.out.println("FINISH /userForgotPwd2");
 				retry = 2;
-				nextPage.addAttribute("userEmail", userEmail);
 				//nextPage.addAttribute("", userEmail);
 				return "front_forgetpwd2_code";
 			}
@@ -124,8 +123,7 @@ public class UserLoginController {
 	@RequestMapping(path = "/userForgotPwd2", method = RequestMethod.POST)
 	public String userForgotPwd2(
 			Model nextPage,
-			@RequestParam(name="confirmCode") String confirmCode,
-			@RequestParam(name="userEmail") String userEmail
+			@RequestParam(name="confirmCode") String confirmCode
 			) {
 		System.out.println("BEGIN: /userForgotPwd2");
 		System.out.println("	User input: confirmCode = " + confirmCode);
@@ -154,36 +152,17 @@ public class UserLoginController {
 	public String userForgotPwd3(
 			Model nextPage,
 			@RequestParam(name="newPwd") String newPwd,
-			@RequestParam(name="confirmPwd") String confirmPwd,
-			@RequestParam(name="userEmail") String userEmail
+			@RequestParam(name="confirmPwd") String confirmPwd
 			) {
 		System.out.println("BEGIN: /userForgotPwd3");
 		System.out.println("	User input: newPwd = " + newPwd);
 		System.out.println("	User input: confirmCode = " + confirmPwd);
 		if (newPwd.equals(confirmPwd)) {
 			System.out.println("		the 2 passwords match!");
-			String passwordValidation = validator.validatePwdreturnErrors(newPwd);
+			String passwordValidation = validator.validateEmailreturnErrors(newPwd);
 			if(passwordValidation.equals("VALID PASSWORD")) {
 				System.out.println("	new password is valid!");
-				int id = uService.selectUserIDByEmail(userEmail);
-				ProfileBean bean = profService.getProfile(id);
-				System.out.println("	sending email to ["+userEmail+"] userID "+id);
-				System.out.println("	user's profileFullName = "+bean.getProfileFullName());
-				emailSender.sendChangePwdEmail(userEmail, bean.getProfileFullName());
-				UserBean updateThisUser = uService.selectUser(id);
-				System.out.println("	updating this user:");
-				System.out.println("		id:"+updateThisUser.getUserID());
-				System.out.println("		email:"+updateThisUser.getUserEmail());
-				System.out.println("		pwd:"+updateThisUser.getUserPwd());
-				System.out.println("		admin:"+updateThisUser.getAdmin());
-				boolean updateResult = uService.updatePwd(updateThisUser, newPwd);
-				System.out.println("	update result:"+ updateResult);
-				updateThisUser = uService.selectUser(id);
-				System.out.println("	FINISHED updating this user:");
-				System.out.println("		id:"+updateThisUser.getUserID());
-				System.out.println("		email:"+updateThisUser.getUserEmail());
-				System.out.println("		pwd:"+updateThisUser.getUserPwd());
-				System.out.println("		admin:"+updateThisUser.getAdmin());
+				
 				System.out.println("FINISH: /userForgotPwd3");
 				return "front_intro_loginSuccess";
 			} else {
@@ -194,6 +173,7 @@ public class UserLoginController {
 				System.out.println("FINISH: /userForgotPwd3");
 				return "front_forgetpwd3_updatePwd";
 			}
+			
 		} else {
 			System.out.println("	passwords don't match");
 			Map<String, String> errors = new HashMap<String, String>();
@@ -241,6 +221,7 @@ public class UserLoginController {
 			if (uEmail == null || uEmail.length() == 0) {
 				errors.put("emailError", "Email is required");
 			}
+
 			if (uPwd == null || uPwd.length() < 8) {
 				errors.put("pwdError", "Password is too short");
 				if (uPwd == null || uPwd.length() == 0) {
@@ -284,7 +265,7 @@ public class UserLoginController {
 				System.out.println("		Password = " + results.getUserPwd());
 				System.out.println("		Admin = " + results.getAdmin());
 				// Write a Cookie storing email so user don't need to enter email next time
-				// same for password cookie
+				// Write a Cookie storing email so user don't need to enter email next time
 				if (remMe == true) {
 					System.out.println("	MAKING COOKIE");
 					writeUserLoginCookie(bean.getUserEmail(), bean.getUserPwd(), nextPage, response);
