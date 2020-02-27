@@ -384,8 +384,8 @@
 			data : buyData,
 			dataType : 'json',
 			success : console.log("adding order success.")
-			};
 		});
+    }
     </script>
     </body>
 </html>
