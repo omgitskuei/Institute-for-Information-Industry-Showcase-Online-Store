@@ -87,7 +87,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            	<td></td>
+                            <td></td>
+                            <td></td>
                             <td>購買總金額</td>
                             <td class="text-right" id="total-cart">NT$ 180</td>
                       </tr>
@@ -104,7 +105,7 @@
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-sm-2">
-                    <a href="checkout.html" class="btn btn-lg btn-block btn-success text-white">結帳</a>
+                    <a href="checkout.html" onclick="" class="btn btn-lg btn-block btn-success text-white">結帳</a>
                 </div>
             </div>
         </div>
@@ -361,6 +362,24 @@
        
 
         displayCart();   
+        
+        
+        // ajax 送出購物車功能
+        function addToOrder(productId,productCounts) {
+// 					judgeIsLogin();
+					var butyData = {};
+					butyData.userID = "${userID}";
+					butyData.productId = productId;
+					butyData.productCounts = productCounts;
+					$.ajax({
+						async : false,
+						type : 'POST',
+						url : '', // post 的路徑
+						data : butyData,
+						dataType : 'json',
+						success : console.log("adding order success.")
+						}
+					});
     </script>
     </body>
 </html>

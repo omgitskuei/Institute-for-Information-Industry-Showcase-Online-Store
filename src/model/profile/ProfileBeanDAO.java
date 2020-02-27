@@ -62,9 +62,12 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 	
+						
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public ProfileBean getProfile(int userID) {
+
 		Session currentSession = sessionFactory.getCurrentSession();
 //		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
 		String hqlQ = "From ProfileBean where userID=:userID";
@@ -74,6 +77,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return theProfile;
 	}
 	
+
 	@SuppressWarnings("rawtypes")
 	public ProfileBean getProfile(ProfileBean thisP) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -125,5 +129,6 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 //	Session session = sessionFactory.getCurrentSession();
 //	ProfileBean theProfile = session.byId(ProfileBean.class).load(userID);
 //		session.delete(theProfile);
+
 //	}
 }
