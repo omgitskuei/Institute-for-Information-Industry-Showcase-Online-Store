@@ -62,11 +62,16 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 		return results;
 	}
 	
+	@Deprecated
+	@Override
+	public ProfileBean getProfile(int userID) {							// WARNING THIS SEARCHES BY PROFILE ID NOT USER ID
+
 						
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public ProfileBean getProfile(int userID) {
+
 
 		Session currentSession = sessionFactory.getCurrentSession();
 //		ProfileBean theProfile = currentSession.get(ProfileBean.class, userID);
@@ -78,14 +83,25 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	}
 	
 
+
 	@SuppressWarnings("rawtypes")
 	public ProfileBean getProfile(ProfileBean thisP) {
+
 		Session currentSession = sessionFactory.getCurrentSession();
 		int userID = thisP.getUserID();
 		String hqlQ = "From ProfileBean where userID=:userID";
 		Query query = currentSession.createQuery(hqlQ);
 		query.setParameter("userID", userID);
 		ProfileBean theProfile = (ProfileBean) query.uniqueResult();
+
+	@SuppressWarnings("rawtypes")
+	public ProfileBean getProfileByUserID(int userID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		String hql = "From ProfileBean where userID =: userID";
+		Query query = currentSession.createQuery(hql); 
+		query.setParameter("userID", userID);
+		ProfileBean theProfile = (ProfileBean)query.uniqueResult();
+
 		return theProfile;
 	}
 	
@@ -114,6 +130,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 	}
 
 
+
 //  沒有要刪除使用者
 //	@Override
 //	public void deleteProfile(int userID) {
@@ -130,5 +147,7 @@ public class ProfileBeanDAO implements ProfileBeanDAOInterface {
 //	ProfileBean theProfile = session.byId(ProfileBean.class).load(userID);
 //		session.delete(theProfile);
 
+
 //	}
 }
+

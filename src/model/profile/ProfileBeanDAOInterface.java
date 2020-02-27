@@ -10,6 +10,7 @@ public interface ProfileBeanDAOInterface {
 	
 	public ProfileBean getProfile(int userID);
 	
+
 //	public void deleteProfile(int userID);
 
 	public void updateProfile(ProfileBean theProfile);
