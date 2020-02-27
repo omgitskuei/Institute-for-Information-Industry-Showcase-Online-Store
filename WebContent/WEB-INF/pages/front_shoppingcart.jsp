@@ -369,8 +369,8 @@
 // 					judgeIsLogin();
 					var butyData = {};
 					butyData.userID = "${userID}";
-					butyData.productId = productId;
-					butyData.productCounts = productCounts;
+					butyData.productID = productID;
+					butyData.productCount = productCount;
 					$.ajax({
 						async : false,
 						type : 'POST',
@@ -378,7 +378,7 @@
 						data : butyData,
 						dataType : 'json',
 						success : console.log("adding order success.")
-						}
+						},
 					});
     </script>
     </body>
