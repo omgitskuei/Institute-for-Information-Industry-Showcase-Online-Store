@@ -43,12 +43,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 ml-auto">
+         <form class="form" name="searchForm" action="<jstl:url value="searchInventoryProducts" />" method="post">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="搜尋庫存商品...">
+            <input type="text" class="form-control" placeholder="搜尋庫存商品..." name="searchBar">
             <div class="input-group-append">
-                <a href=<jstl:url value="/controller.FindProductByName"/> class="btn btn-primary">搜尋</a>
+                <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
         </div>
+      </form>
       </div>
     </div>
   </div>
@@ -81,7 +83,9 @@
               </tr>
             </thead>
             <tbody>
-            	<jstl:forEach var="product" items="${InventoryList}" >
+            <c:if test="${not empty SearchResults}">
+			<c:forEach var="product" items="${SearchResults}" varStatus="status">
+            	
              <!-- construct an "update" link with customer id -->
 					<c:url var="updateLink" value="/AdminProduct/updateForm">
 						<c:param name="productID" value="${product.productID}" />
@@ -111,7 +115,8 @@
                   </a>
                 </td>
               </tr>
-              </jstl:forEach>
+  	        </c:forEach>
+			</c:if>
             </tbody>
           </table>
 
