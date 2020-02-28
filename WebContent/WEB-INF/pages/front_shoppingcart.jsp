@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table id="cartTable" class="table table-striped">
                     <thead>
                      <tr>
                             <th scope="col"><label class="name">商品ID</label></th>
@@ -106,7 +106,7 @@
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-sm-2">
-                    <a href="checkout.html" class="btn btn-lg btn-block btn-success text-white">結帳</a>
+                    <a href="#" onclick="addToOrder()" class="btn btn-lg btn-block btn-success text-white">結帳</a>
                 </div>
             </div>
         </div>
@@ -131,10 +131,9 @@
 
 
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -151,8 +150,33 @@
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
       
-
       
+
+      function addToOrder() {
+    	  var buyData = $('table#cartTable tr:has(td)').map(function() {
+    		  var $td =  $('td', this);
+        	        return {
+        	                 userID: "userID",
+        	                 ProductID: $td.eq(0).text(),
+        	                 ProductName: $td.eq(1).text(),
+        	                 ProductCount: $td.eq(3).find("input").val(),
+        	                 ProductPrice: $td.eq(4).text()               
+        	               }
+        	}).get();
+       console.log("buyData Array are: ")
+       console.log(buyData); 
+       console.log(JSON.stringify(buyData));
+  		
+  		$.ajax({
+  			type : 'POST',
+  			url : '', // post 的路徑
+  			data : buyData,
+  			contentType: "application/json; charset=utf-8",
+  			dataType : 'json',
+        success : console.log("adding order success.")
+      });
+  	};
+  	
     </script>
     
          <script>
