@@ -175,7 +175,7 @@ public class FrontDirectController {
 			session.invalidate();
 			System.out.println("Invalid Session!");
 		}
-		return "front_index";
+		return "front_intro_logoutSuccess";
 	}
 	
 	@RequestMapping(value = "/directFrontContactUs", method = RequestMethod.POST)
@@ -192,16 +192,21 @@ public class FrontDirectController {
 		System.out.println("		name="+name);
 		System.out.println("		category="+category);
 		System.out.println("		message="+message);
-		try {
-			EmailUsers emailer = new EmailUsers();
-			emailer.sendContactUsEmail(email, name, category, message);
-		} catch (Exception e) {
-			e.printStackTrace();
-		};
 		Map<String, String> errors = new HashMap<String, String>();
-		errors.put("messageError", "Thank you for sending us an Email. Please allow 3 business days for a response.");
-		nextPage.addAttribute("errors", errors);
-		System.out.println("FINISH: /directFrontContactUs");
+		if (email.length()==0 || name.length()==0 || message.length()==0) {
+			errors.put("messageError", "To send this form, all fields must be filld out.");
+			nextPage.addAttribute("errors", errors);
+		} else {
+			try {
+				EmailUsers emailer = new EmailUsers();
+				emailer.sendContactUsEmail(email, name, category, message);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			errors.put("messageError", "Thank you for sending us an Email. Please allow 3 business days for a response.");
+			nextPage.addAttribute("errors", errors);
+			System.out.println("FINISH: /directFrontContactUs");
+		}
 		return "front_contact";
 	}
 	

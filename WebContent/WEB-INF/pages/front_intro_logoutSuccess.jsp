@@ -17,19 +17,17 @@
     	<%@include file="/WEB-INF/css/frontpage.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-    <title>Farmville | 注冊成功</title>
+    <title>Farmville | 登入成功</title>
 </head>
 <body>
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                FarmVille　｜　注冊成功
+                FarmVille　｜　登出成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
-
-                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">登入</a>
-
+                    <a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">回去首頁 － Return to Homepage</a> <br>
                 </div>
             </div>
         </div>

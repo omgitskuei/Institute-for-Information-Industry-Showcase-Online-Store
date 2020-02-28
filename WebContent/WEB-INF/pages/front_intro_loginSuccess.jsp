@@ -23,7 +23,7 @@
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                FarmVille　｜　恭喜登入成功
+                FarmVille　｜　登入成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">

@@ -128,13 +128,13 @@
 </section>
 
 <script>
-function myFunction() {
-	var textArea = document.getElementById("inputMessage");
-	alert("wow");
-	if (textArea.innerHTML.length === 0) {
-		document.getElementById("messageErrorSpan").innerHTML = "Can't be empty";
-	}
-}
+// function myFunction() {
+// 	var textArea = document.getElementById("inputMessage");
+// 	alert("wow");
+// 	if (textArea.innerHTML.length === 0) {
+// 		document.getElementById("messageErrorSpan").innerHTML = "Can't be empty";
+// 	}
+// }
 </script>
 
 <!-- STAFF -->
