@@ -100,7 +100,14 @@
                         <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
 
 
-                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${product.productID}" data-img="${product.productImg}" data-name="${product.productName}" data-price="${product.productPrice}">加入購物車</a>   
+                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" 
+                        data-id="${product.productID}" 
+                        data-img="${product.productImg}" 
+                        data-name="${product.productName}" 
+                        data-price="${product.productPrice}" 
+                        data-toggle="modal" 
+                        data-target="#modalConfirmDelete"
+                        >加入購物車</a>   
 
 
                       </div>
@@ -142,6 +149,36 @@
   </ul>
 </nav> -->
 
+
+<!-- Model -->
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <h4>已加入購物車</h4>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fas fa-shopping-cart fa-4x"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-success text-white mt-2 ml-2" data-dismiss="modal">OK !</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+<!-- Model -->
      
 <!-- FAQ -->
 <section id="faq" class="p-5 bg-dark text-white">
@@ -267,9 +304,7 @@
         </div>
       </div>
     </footer>
-
-
-
+	
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
