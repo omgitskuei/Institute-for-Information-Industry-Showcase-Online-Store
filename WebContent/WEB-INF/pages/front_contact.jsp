@@ -102,14 +102,12 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <textarea
-                  	name="inputMessage" 
-                  	id="inputMessage" 
-                  	cols="30" 
-                  	rows="10" 
-                  	class="form-control" 
-                  	placeholder="內容">
-                  </textarea>
-                  <span id="messageErrorSpan" style="color: red;">${errors.messageError}</span>
+                  	name="inputMessage"
+                  	id="inputMessage"
+                  	cols="30"
+                  	rows="10"
+                  	class="form-control"
+                  	placeholder="內容"></textarea><span id="messageErrorSpan" style="color: red;">${errors.messageError}</span>
                 </div>
               </div>
               <!-- SUBMIT BUTTON -->

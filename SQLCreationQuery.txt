@@ -83,6 +83,13 @@ ProductPrice decimal(18, 2) Not NULL
 )
 GO
 
+-- (3.h.)
+CREATE table MailingListTable(
+mailingListID int Identity(1,1) primary key,
+email NVarchar(max),
+)
+GO
+
 --程式1:
 --DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
 --LocalDateTime now = LocalDateTime.now();

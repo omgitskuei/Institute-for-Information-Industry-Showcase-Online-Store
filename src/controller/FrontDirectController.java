@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.mailingList.MailBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
+import util.EmailUsers;
 
 
 // TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html
@@ -177,6 +178,31 @@ public class FrontDirectController {
 		return "front_index";
 	}
 	
-		
+	@RequestMapping(value = "/directFrontContactUs", method = RequestMethod.POST)
+	public String frontContactUs(
+			Model nextPage,
+			@RequestParam("inputEmail") String email,
+			@RequestParam("inputName") String name,
+			@RequestParam("inputCategory") String category,
+			@RequestParam("inputMessage") String message
+			) {
+		System.out.println("BEGIN: /directFrontContactUs");
+		System.out.println("	從 front_contact.jsp Contact Us 導到 FrontDirectController.java /directFrontContactUs controller");
+		System.out.println("		email="+email);
+		System.out.println("		name="+name);
+		System.out.println("		category="+category);
+		System.out.println("		message="+message);
+		try {
+			EmailUsers emailer = new EmailUsers();
+			emailer.sendContactUsEmail(email, name, category, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("messageError", "Thank you for sending us an Email. Please allow 3 business days for a response.");
+		nextPage.addAttribute("errors", errors);
+		System.out.println("FINISH: /directFrontContactUs");
+		return "front_contact";
+	}
 	
 }

@@ -46,7 +46,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="email">${errors.securityQuestion}</label>
+                  <label for="email">請回答您的　Security　Question: ${errors.securityQuestion}</label>
                   <input
                   	type="text"
                   	class="form-control"

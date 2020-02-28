@@ -144,6 +144,9 @@ public class UserLoginController {
 				System.out.println("	this user has security questions, we will go over them now");
 				System.out.println("	take user to page with SecQ");
 				retry=2;
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("securityQuestion", bean.getSettingSecurityQ());
+				nextPage.addAttribute("errors", errors);
 				return "front_forgetpwd3_securityQuestions";
 			} else {
 				System.out.println("	this user has no security questions.");
@@ -170,17 +173,25 @@ public class UserLoginController {
 			Model nextPage,
 			@RequestParam(name="securityAnswer") String userInput
 			) {
-		System.out.println("user inputed this security Answer: "+userInput);
 		SettingBean bean = sService.select(userID);
 		String correctSecurityAnswer = bean.getSettingSecurityA();
+		System.out.println("user inputed this security Answer: "+userInput);
+		System.out.println("correct Security answer is: "+correctSecurityAnswer);
+		System.out.println("retry = "+retry);
 		if (userInput.equals(correctSecurityAnswer)) {
 			return "front_forgetpwd4_updatePwd";
 		} else {
-			Map<String, String> errors = new HashMap<String, String>();
-			errors.put("validateError", "Security Question 有錯誤: 您剩下"+retry+"次機會");
-			nextPage.addAttribute("errors", errors);
-			retry--;
-			return "front_forgetpwd3_securityQuestions";
+			if(retry>0) {
+				System.out.println("retry>0");
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("validateError", "Security Question 有錯誤: 您剩下"+retry+"次機會");
+				nextPage.addAttribute("errors", errors);
+				retry--;
+				return "front_forgetpwd3_securityQuestions";
+			} else {
+				System.out.println("	ran out of retries, so directing to front_login");
+				return "front_login";
+			}
 		}
 	}
 	
