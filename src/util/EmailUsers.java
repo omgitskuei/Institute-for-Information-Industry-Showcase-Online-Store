@@ -28,6 +28,33 @@ public class EmailUsers {
 	}
 
 	// Methods
+	public void sendOutNewsletter(String emailSubject, String emailBody, String toEmail) {
+		System.out.println("BEGIN: util.EmailUsers.sendOutNewsletter(String, String)");
+		try {
+			// Instantiate SimpleEmail object
+			Email email = new SimpleEmail();
+			// Email sending settings
+			email.setHostName(this.fromEmailHostName);
+			email.setSmtpPort(this.fromEmailPort);
+			// Email sender's credentials
+			email.setAuthenticator(new DefaultAuthenticator(this.fromEmail, this.fromEmailPwd));
+			email.setSSLOnConnect(true);
+			// Email TO / FROM
+			email.setFrom(this.fromEmail);
+			email.addTo(toEmail);
+			// Email body
+			email.setSubject(emailSubject);
+			email.setMsg(emailBody);
+			// Send
+			email.send();
+			System.out.println("Email to [" + toEmail + "] from [" + this.fromEmail + "] sent!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("FINISH: util.EmailUsers.sendOutNewsletter(String, String)");
+	}
+	
 	public void sendJoinNewsletterEmail(String emailString) {
 		System.out.println("BEGIN: util.EmailUsers.sendForgotPwdEmail(String, String, String)");
 		// Local Variables

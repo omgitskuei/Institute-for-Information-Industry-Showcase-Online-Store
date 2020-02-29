@@ -30,25 +30,21 @@ public class MailBean {
 	@Column(name="mailingListID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getMailingListID() {
-		System.out.println("			BEGIN: MailBean.getMailingListID()");
-		System.out.println("			FINISH: Returning ["+mailingListID+"]");
+		System.out.println("MailBean.getMailingListID() Returning ["+mailingListID+"]");
 		return mailingListID;
 	}
 	public void setMailingListID(int mailingListID) {
-		System.out.println("			BEGIN: MailBean.setMailingListID()");
-		System.out.println("			FINISH: Setting ["+mailingListID+"]");
+		System.out.println("MailBean.setMailingListID() Setting ["+mailingListID+"]");
 		this.mailingListID = mailingListID;
 	}
 	
 	@Column(name="email")
 	public String getEmail() {
-		System.out.println("			BEGIN: MailBean.getEmail()");
-		System.out.println("			FINISH: Returning ["+email+"]");
+		System.out.println("MailBean.getEmail() Returning ["+email+"]");
 		return email;
 	}
 	public void setEmail(String email) {
-		System.out.println("			BEGIN: MailBean.setEmail()");
-		System.out.println("			FINISH: Setting ["+email+"]");
+		System.out.println("MailBean.setEmail() Setting ["+email+"]");
 		this.email = email;
 	}
 }

@@ -144,8 +144,11 @@
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
-						<form class="form" name="signupForm"
-							action="<jstl:url value="/userSignUp" />" method="post"
+						<form 
+							class="form" 
+							name="signupForm"
+							action="<jstl:url value="/userSignUp" />" 
+							method="post"
 							id="signupForm">
 							<div class="form-group">
 								<label for="email">電子信箱</label>
@@ -159,10 +162,10 @@
 							<div class="form-group">
 								<label for="password">密碼</label>
 								<input
+									name="nPwd"
 									type="password"
 									placeholder="Enter your new password here" 
 									class="form-control" 
-									name="nPwd"
 									id="newPwd">
 							</div>
 							<div class="form-group">

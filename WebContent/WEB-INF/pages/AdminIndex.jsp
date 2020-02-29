@@ -44,20 +44,21 @@
 
 <!-- ACTIONS -->
 <section id="actions" class="py-4 bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addInventoryModal">
-          <i class="fas fa-plus"></i> 新增庫存
-        </a>
-      </div>
-       <div class="col-md-3">
-        <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#addSubscriptionModal">
-          <i class="fas fa-plus"></i> 寄送訂閱信
-        </a>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addInventoryModal">
+					<i class="fas fa-plus"></i> 新增庫存
+ 				</a>
+			</div>
+			<!-- Send Newsletter Button - Opens Modal -->
+			<div class="col-md-3">
+				<a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#sendNewsletterModal">
+					<i class="fas fa-plus"></i> 寄送訂閱信
+				</a>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- SEARCH -->
@@ -65,9 +66,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 ml-auto">
+      <!-- FORM URL -->
       <form class="form" name="searchForm" action="<jstl:url value="searchBarProducts" />" method="post">
         <div class="input-group">
+        	<!-- SEARCH BAR -->
             <input type="search" class="form-control" placeholder="搜尋..." name="searchBar">
+            <!-- SUBMIT BUTTON -->
             <div class="input-group-append">
                 <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
@@ -144,9 +148,6 @@
 								</a>
 							</td>
 						</tr>
-<%-- 						<c:if test="${not status.last}"> --%>
-<!-- 							<hr/> -->
-<%-- 						</c:if> --%>
 					</c:forEach>
 				</c:if>
             </tbody>
@@ -256,37 +257,57 @@
   </div>
 </div>
 
-<!-- ADD Subscription MODAL -->
-<div class="modal fade" id="addSubscriptionModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title">送出訂閱信</h5>
-        <button class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="inventoryTitle">信件主旨
-            </label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="inventoryDiscription">信件內容</label>
-            <textarea cols="100" rows="10" id="textarea" onfocus="if(value=='限定100字元'){value=''}"
-    onblur="if (value ==''){value='限定100字元'}" class="form-control"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <input type="submit" value="一鍵送出" class="btn btn-success" data-dismiss="modal" />
-      </div>
-    </div>
-  </div>
-</div>
-
+<!-- SEND OUT Newsletter MODAL -->
+<section>
+	<div class="modal fade" id="sendNewsletterModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Close button -->
+				<div class="modal-header bg-success text-white">
+					<h5 class="modal-title">送出訂閱信</h5>
+					<button class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Newsletter email header and email message body form-->
+				<div class="modal-body">
+					<form 
+						class="form"
+						name="sendNewsletterForm" 
+						action="<jstl:url value="sendNewsletter" />" 
+						method="post">
+						<div class="form-group">
+							<label for="title">信件主旨 - Email Subject</label>
+							<input
+								name="title"
+								type="text"
+								placeholder="Enter email subject here"
+								class="form-control"
+								id="title">
+						</div>
+						<div class="form-group">
+							<label for="messageBody">信件內容 - Message Body</label>
+							<textarea
+								name="messageBody"
+								cols="100"
+								rows="10"
+								id="messageBody"
+								onfocus="if(value=='限定100字元'){value=''}"
+								onblur="if (value ==''){value='限定100字元'}"
+								class="form-control">
+							</textarea>
+						</div>
+						<!-- Submit button -->
+						<div class="modal-footer">
+							<input type="submit" value="一鍵送出" class="btn btn-success" />
+						</div>
+					</form>
+					<div class="col-md-6 mx-auto mt-2">
+						<input onclick="autofillSendNewsletter()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <!-- ADD Order MODAL -->
 <%-- <div class="modal fade" id="addOrderModal">
   <div class="modal-dialog modal-lg">
@@ -384,13 +405,14 @@
             </select>
            </div>
         </form>
-      </div> --%>
+      </div>
       <div class="modal-footer">
         <button class="btn btn-warning" data-dismiss="modal">儲存</button>
       </div>
     </div>
   </div>
-</div>
+</div> --%>
+
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -399,7 +421,13 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 
-  <script>
+	<script>
+		function autofillSendNewsletter() {
+		var title = document.getElementById("title");
+		var body = document.getElementById("messageBody");
+		title.value = "March Sales!"
+		body.value = "Celebrate this month with in-season fruits and vegetables: Asparagus, Apples, Artichokes, Avocados, Bananas, Beets, Broccoli, Brussels Sprouts! - FarmVille Produce Curator";
+	};
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 
