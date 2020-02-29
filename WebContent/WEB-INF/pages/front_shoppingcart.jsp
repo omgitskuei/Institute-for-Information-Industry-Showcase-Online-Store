@@ -86,8 +86,14 @@
                     
                      <tfoot class="text-right">
                       <tr>
-                         <td><h4>購買總金額</h4></td>
-                         <td class="text-right" style="font-size:2em;" id="total-cart">NT$ 180</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td><h5>購買總金額</h5></td>
+                         <td class="text-right" style="font-size:2rem;" id="total-cart">NT$ 180</td>
                       </tr>
                      </tfoot>
                            
