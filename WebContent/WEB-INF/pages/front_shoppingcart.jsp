@@ -83,16 +83,15 @@
                             <td class="text-right"><strong id="total-cart">198</strong></td>
                         </tr> -->
                     </tbody>
-                    	<tbody class="list_area">
-                     <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            	<td></td>
-                            <td>購買總金額</td>
-                            <td class="text-right" id="total-cart">NT$ 180</td>
+                    
+                     <tfoot class="text-right">
+                      <tr>
+                         <td><h4>購買總金額</h4></td>
+                         <td class="text-right" style="font-size:2em;" id="total-cart">NT$ 180</td>
                       </tr>
+                     </tfoot>
+                           
+                      
                    </tbody>
                 </table>
             </div>
@@ -153,7 +152,7 @@
       
 
       function addToOrder() {
-    	  var buyData = $('table#cartTable tr:has(td)').map(function() {
+    	  var buyData = $('table#cartTable tbody tr:has(td)').map(function() {
     		  var $td =  $('td', this);
         	        return {
         	                 userID: "userID",
@@ -164,8 +163,8 @@
         	               }
         	}).get();
        console.log("buyData Array are: ")
-       console.log(buyData); 
-       console.log(JSON.stringify(buyData));
+       console.log(buyData); // 1 arrayJson
+       console.log(JSON.stringify(buyData)); //2 JSON.stringify, 可能這兩種資料
   		
   		$.ajax({
   			type : 'POST',
@@ -173,7 +172,8 @@
   			data : buyData,
   			contentType: "application/json; charset=utf-8",
   			dataType : 'json',
-        success : console.log("adding order success.")
+            success : console.log("adding order success."),
+            error: console.log("something wrong")
       });
   	};
   	
@@ -341,10 +341,18 @@
           console.log("*** Count Cart:" + cartArray.length);
           var output = "";
           for(var i in cartArray) {
-            output += "<tr><td>"+ cartArray[i].id + "</td>" +"<td>"+ cartArray[i].name + "</td><td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td><td>"  +"<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+"<td class='text-right price'>" + cartArray[i].price + "</td>" + "<td class='text-right price'>"+cartArray[i].total+ 
-            "</td>"+"<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>"+
-            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td></tr>"
-            
+            output += 
+            "<tr>" + 
+            "<td>"+ cartArray[i].id + "</td>" + 
+            "<td>"+ cartArray[i].name + "</td>" + 
+            "<td>" + "<img src='" + cartArray[i].img + "' width='50px' />" + "</td>"+ 
+            "<td>" + "<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+
+            "<td class='text-right price'>" + cartArray[i].price + "</td>" + 
+            "<td class='text-right price'>" + cartArray[i].total + "</td>" + 
+            "<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>" +
+            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + 
+            "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td>" +
+            "</tr>"  
           }	
           // html會渲染所有東西
           $("#show-cart").html(output);
