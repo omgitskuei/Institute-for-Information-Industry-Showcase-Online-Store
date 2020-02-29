@@ -106,7 +106,7 @@
                         data-name="${product.productName}" 
                         data-price="${product.productPrice}" 
                         data-toggle="modal" 
-                        data-target="#modalConfirmDelete"
+                        data-target="#modalCartConfirm"
                         >加入購物車</a>   
 
 
@@ -152,14 +152,14 @@
 
 <!-- Model -->
 <!--Modal: modalConfirmDelete-->
-<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalCartConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-sm modal-notify modal-info" role="document">
     <!--Content-->
     <div class="modal-content text-center">
       <!--Header-->
       <div class="modal-header d-flex justify-content-center">
-        <h4>已加入購物車</h4>
+        <h5>已加入購物車!!</h5>
       </div>
 
       <!--Body-->
