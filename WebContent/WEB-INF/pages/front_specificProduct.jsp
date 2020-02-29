@@ -67,7 +67,14 @@
                   </div>
                   <hr>
                   <div class="input-group mt-3">
-                      <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" data-id="${theProduct.productID}" data-img="${theProduct.productImg}" data-name="${theProduct.productName}" data-price="${theProduct.productPrice}">加入購物車</a>                  
+                      <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" 
+                      data-id="${theProduct.productID}" 
+                      data-img="${theProduct.productImg}" 
+                      data-name="${theProduct.productName}" 
+                      data-price="${theProduct.productPrice}"
+                      data-toggle="modal" 
+                      data-target="#modalCartConfirm"
+                      >加入購物車</a>                  
                        </div>
               </div>
 
@@ -101,6 +108,36 @@
       </div>
   </div>
 </section>
+
+<!-- Model -->
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalCartConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <h5>已加入購物車!!</h5>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fas fa-shopping-cart fa-4x"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-success text-white mt-2 ml-2" data-dismiss="modal">OK !</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+<!-- Model -->
 
 
     <!-- FOOTER -->
