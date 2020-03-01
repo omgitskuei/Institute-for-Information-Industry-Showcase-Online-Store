@@ -1,22 +1,25 @@
 package controller;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.format.datetime.joda.LocalDateParser;
-
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.PaymentMethod;
+import com.stripe.model.checkout.Session;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import model.order.OrderBeanService;
 import model.orderDetails.OrderDetailsBeanService;
 import model.product.ProductBeanService;
 import model.user.UserBeanService;
-
+@Controller
 public class StripePaymentController {
 	// fields
 	private UserBeanService uService;
@@ -24,16 +27,17 @@ public class StripePaymentController {
 	private OrderBeanService oService;
 	private OrderDetailsBeanService odService;
 	// constructors
-	public StripePaymentController() {
+	@Autowired
+	public StripePaymentController(UserBeanService uService, ProductBeanService pService, OrderBeanService oService, OrderDetailsBeanService odService) {
 		System.out.println("BEGIN: StripePaymentController");
-		
-	}
-	// executable
-	public static void main(String args[]) {
-		
+		this.uService = uService;
+		this.pService = pService;
+		this.oService = oService;
+		this.odService = odService;
 	}
 	
 	// methods
+	
 	public HashMap<String,Object> makeOrderItem (String name, String description, int amount, String currency, int quantity) {
 
 		HashMap<String, Object> orderItem = new HashMap<String, Object>();
@@ -47,13 +51,20 @@ public class StripePaymentController {
 		return orderItem;
 	}
 	
-	public void callStripePay() throws StripeException {
-		// Set your secret key. Remember to switch to your live secret key in production!
-		// See your keys here: https://dashboard.stripe.com/account/apikeys
+	@RequestMapping(path="/stripeCheckout", method = RequestMethod.POST)
+	public void callStripePay(
+			@RequestParam(name = "currency") String currency, 
+			@RequestParam(name = "totalAmount") int totalAmount, 
+			@RequestParam(name = "email") String receiptEmail, 
+			Model nextPage) throws StripeException {
+		currency = "TWD";
+		totalAmount = 1000;
+		receiptEmail = "kueifengtungchris@gmail.com";
+		
 		Stripe.setMaxNetworkRetries(5);
 		
 		System.out.println("Stripe API Version: "+Stripe.API_VERSION);
-		
+		// var stripe = Stripe('pk_test_Duy0yIyahW97FmFzVqBDG0wh00Pwl5FMks');
 		Stripe.apiKey = "sk_test_s56neoj7TwIIkY5oFr45aZHd00cvXIHSQo";
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -64,29 +75,37 @@ public class StripePaymentController {
 		
 		ArrayList< HashMap<String, Object> > allOrderItems = new ArrayList<>();
 		
-		HashMap<String, Object> orderItem = new StripePaymentController().makeOrderItem("T-Shirt", "100% cotton shirt", 500, "TWD", 1);
+		HashMap<String, Object> orderItem = makeOrderItem("T-Shirt", "100% cotton shirt", 500, "TWD", 1);
 		
 		allOrderItems.add(orderItem);
 		
 		
 		
-		
+		// add all order items of the bill to the params
 		params.put("line_items", allOrderItems);
-
-		params.put("success_url", "https://example.com/success?session_id={CHECKOUT_SESSION_ID}");
-		params.put("cancel_url", "https://example.com/cancel");
+		// 
 		
 		
+		// total amount of bill
+		params.put("amount", totalAmount);
 		
-		params.put("amount", 1000);
+		params.put("currency", currency);
 		
-		params.put("currency", "usd");
-		
-		params.put("receipt_email", "kueifengtungchris@gmail.com");
+		params.put("receipt_email", receiptEmail);
 		
 		params.put("statement_descriptor", "Purchase at Farmville");
 		
-		
+		// After the PaymentIntent is created, attach a payment method and confirm to continue the payment
 		PaymentIntent.create(params);
+		
+		PaymentMethod.
+		Session session = Session.create(params);
+
+		params.put("success_url", "https://example.com/success?session_id="+session);			// TO DO <------------------------
+		// the URL link given if user cancels, put the checkout link prior to redirecting to STRIPE
+		params.put("cancel_url", "https://example.com/cancel");												// TO DO <------------------------
+		
+		nextPage.addAttribute("sessionID", session);
+		
 	}
 }
