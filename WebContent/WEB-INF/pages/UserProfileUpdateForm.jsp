@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,33 @@
     <!-- PAGE HEADER -->
     
     <div class="container">
+    
     <br>
     <h2>使用者資料修改</h2>
-    <p>${success}</p>
+    
+    <!-- 選單 -->
+    <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
+		<jstl:param name="userID" value="${profile.userID}" />
+	</jstl:url>
+	
+	<jstl:url var="updatePasswordLink" value="/UserProfile/userUpdatePasswordForm">
+		<jstl:param name="userID" value="${profile.userID}" />
+	</jstl:url>
+	
+	<jstl:url var="updateWalletLink" value="/UserProfile/showUserWallet">
+		<jstl:param name="userID" value="${profile.userID}" />
+	</jstl:url>
+	
+	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrer">
+		<jstl:param name="userID" value="${profile.userID}" />
+	</jstl:url>
+	
+	<a href="${updateLink}">更新使用者基本資料</a>
+	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${updateWalletLink}">查看電子錢包</a>
+	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<!-- 選單 -->
+	
 		   <form:form method="POST" action="userUpdateProfile" modelAttribute="profile">
 				<div class="form-group">
 				<form:hidden path="userID" />
