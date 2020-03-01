@@ -8,6 +8,13 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>17.16.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
 		<dependency>
