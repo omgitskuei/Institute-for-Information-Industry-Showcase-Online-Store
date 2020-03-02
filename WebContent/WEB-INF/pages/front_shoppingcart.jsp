@@ -116,6 +116,8 @@
                 </div>
                 <div class="col-sm-2">
                     <a href="#" onclick="addToOrder()" class="btn btn-lg btn-block btn-success text-white">結帳</a>
+<!--                    暫放 綠界測試結帳 -->
+                    <a href="https://p.ecpay.com.tw/206D0" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
                 </div>
             </div>
         </div>
