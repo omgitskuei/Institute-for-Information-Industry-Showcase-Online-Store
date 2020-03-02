@@ -3,7 +3,9 @@
  <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+    
 <head>
+
  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -15,7 +17,9 @@
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 <title>購物車</title>
+
  </head>
+ 
   <body>
     <!-- START -->
   <%@include file="/WEB-INF/pages/front_navbar.jsp" %>
@@ -135,10 +139,8 @@
 
 
 
-    <script
-			  src="https://code.jquery.com/jquery-3.4.1.min.js"
-			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -161,7 +163,6 @@
     	  var buyData = $('table#cartTable tbody tr:has(td)').map(function() {
     		  var $td =  $('td', this);
         	        return {
-        	                 userID: "userID",
         	                 ProductID: $td.eq(0).text(),
         	                 ProductName: $td.eq(1).text(),
         	                 ProductCount: $td.eq(3).find("input").val(),
@@ -171,15 +172,22 @@
        console.log("buyData Array are: ")
        console.log(buyData); // 1 arrayJson
        console.log(JSON.stringify(buyData)); //2 JSON.stringify, 可能這兩種資料
+       console.log(JSON.parse(JSON.stringify(buyData)));
   		
   		$.ajax({
   			type : 'POST',
-  			url : '', // post 的路徑
-  			data : buyData,
-  			contentType: "application/json; charset=utf-8",
-  			dataType : 'json',
-            success : console.log("adding order success."),
-            error: console.log("something wrong")
+  			url : 'userAddToOrder',
+  			data : {
+  				'dataArray': JSON.stringify(buyData),
+  			},
+  			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+  			dataType : 'JSON',
+            success : function (succ){
+            	  alert('success')
+            },
+            error: function(err){
+            	  alert('error');
+            }
       });
   	};
   	
@@ -401,6 +409,8 @@
        
 
         displayCart();   
+    </script>
+    <script>
     </script>
     </body>
 </html>
