@@ -90,14 +90,18 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 
 		List<OrderBean> results = (List<OrderBean>) query.list();
 
-		System.out.println("selectAll:" + results.get(0).getClass());
-		for (int index = 0; index < results.size(); index++) {
-			System.out.println(results.get(index).getOrderID());
-			System.out.println(results.get(index).getUserID());
-			System.out.println(results.get(index).getTotal());
-			System.out.println(results.get(index).getMailingAddress());
-			System.out.println(results.get(index).getMailingPhone());
-			System.out.println(results.get(index).getOrderTime());
+		if (results.size() <= 0) {
+			System.out.println("NO RESULTS");
+		} else {
+			System.out.println("selectAll:" + results.get(0).getClass());
+			for (int index = 0; index < results.size(); index++) {
+				System.out.println(results.get(index).getOrderID());
+				System.out.println(results.get(index).getUserID());
+				System.out.println(results.get(index).getTotal());
+				System.out.println(results.get(index).getMailingAddress());
+				System.out.println(results.get(index).getMailingPhone());
+				System.out.println(results.get(index).getOrderTime());
+			}
 		}
 		System.out.println("FINISH: OrderBeanDAO.selectAll()");
 		return results;
