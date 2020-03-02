@@ -42,7 +42,7 @@ public class AdminInventoryController {
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model) {
 		System.out.println("Directing to AdminInventory");
 		List<ProductBean> Inventorylist=productService.selectAll();
-		model.addAttribute("InventoryList", Inventorylist);
+		model.addAttribute("SearchResults", Inventorylist);
 		return "AdminInventory";
 	}
 	
@@ -108,7 +108,7 @@ public class AdminInventoryController {
 		productService.saveProduct(productBean);
 		System.out.println("Finish adding productImg");
 		
-		return "AdminIndex";
+		return "AdminInventory";
 	}
 
 //	// URL address for this controller, method POST/GET, what data fields
