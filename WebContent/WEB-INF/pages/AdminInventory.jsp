@@ -83,9 +83,10 @@
               </tr>
             </thead>
             <tbody>
+           
             <c:if test="${not empty SearchResults}">
 			<c:forEach var="product" items="${SearchResults}" varStatus="status">
-            	
+			
              <!-- construct an "update" link with customer id -->
 					<c:url var="updateLink" value="/AdminProduct/updateForm">
 						<c:param name="productID" value="${product.productID}" />
@@ -95,6 +96,7 @@
 					<c:url var="deleteLink" value="/AdminProduct/delete">
 						<c:param name="productID" value="${product.productID}" />
 					</c:url>
+					 
               <tr>
                 <td>${product.productID}</td>
                 <td>${product.productName}</td>
@@ -117,6 +119,7 @@
               </tr>
   	        </c:forEach>
 			</c:if>
+			
             </tbody>
           </table>
 
@@ -143,7 +146,7 @@
         </div>
       </div>
     </div>
-  </div>${resultName}
+  </div>
 </section>
 
 

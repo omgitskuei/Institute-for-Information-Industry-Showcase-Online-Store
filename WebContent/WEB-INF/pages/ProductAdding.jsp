@@ -18,48 +18,62 @@
 	<h1>庫存資料內容修改</h1>
 
 	<form:form method="POST" action="saveProduct" modelAttribute="product">
-		<table>
-			<tr>
-				<td></td>
-				<td><form:hidden path="productID" /></td>
-			</tr>
-			<tr>
-				<td>Name :</td>
-				<td><form:input path="productName" /></td>
-			</tr>
-			<tr>
-				<td>Price :</td>
-				<td><form:input path="productPrice" /></td>
-			</tr>
-			<tr>
-				<td>Stock :</td>
-				<td><form:input path="productStock" /></td>
-			</tr>
-			
-			<tr>
-				<td>Img :</td>
-				<td><form:input path="productImg" /></td>
-			</tr>
-			<tr>
-				<td>Timestamp :</td>
-				<td><form:input path="productTimestamp" /></td>
-			</tr>
-			<tr>
-				<td>Category :</td>
-				<td><form:input path="productCategory" /></td>
-			</tr>
-<tr>
-				<td>Description :</td>
-				<td>
-				<form:textarea type="text" path="productDescription" name="description" cols="22" rows="5" ></form:textarea> </td>
+		
+		<div class="form-group">
+				<form:hidden path="productID" />
+				</div>
 				
-			</tr>
-			<tr>
-				<td></td>
+				<div class="form-group">
+				<label>產品名稱</label>
+				<form:input cssClass="form-control" path="productName" />
+				</div>
+		
+		<div class="form-group">
+				<label>產品價位</label>
+				<form:input cssClass="form-control" path="productPrice" />
+				</div>
 				
-				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">儲存</form:button></td>
-			</tr>
-		</table>
-	</form:form>
-
-
+				<div class="form-group">
+				<label>產品庫存</label>
+				<form:input cssClass="form-control" path="productStock" />
+				</div>
+				
+			<%-- 	
+				 <div class="form-group">
+            <label for="image">上傳圖片</label>
+            <div class="custom-file">
+              <input type="file" name="file" class="custom-file-input" id="imgInput" >
+              <label for="image" class="custom-file-label">選擇檔案</label>
+              <img id="output" width="100px" src="#" alt="your image" />
+            </div>
+            <small class="form-text text-muted">檔案勿超過3MB</small>
+          </div>
+			--%>	
+				
+				<div class="form-group">
+				<label hidden="true">產品圖片</label>
+				<form:hidden cssClass="form-control" path="productImg"/>
+				</div>
+				
+				<div class="form-group">
+				<label>上架時間</label>
+				<form:input cssClass="form-control" path="productTimestamp" readonly="true" />
+				</div>
+				
+				<div class="form-group">
+				<label>產品類別</label>
+				<form:select cssClass="form-control" path="productCategory">
+				<form:option value="蔬菜">蔬菜</form:option>
+				<form:option value="水果">水果</form:option>
+				</form:select>
+				</div>
+				
+				<div class="form-group">
+				<label>產品敘述</label>
+				<form:textarea cssClass="form-control" path="productDescription" rows="5" />
+				</div>
+		
+			<form:button class="btn btn-info" type="submit"
+							 value="儲存"
+								>儲存</form:button>
+			</form:form>
