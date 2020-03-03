@@ -59,7 +59,7 @@ public class CheckSubstring {
 		}
 		return counter;
 	}
-	
+
 	public int countSpaces(String checkThisString) {
 		// Define counter
 		int counter = 0;
@@ -92,17 +92,46 @@ public class CheckSubstring {
 		}
 		return counter;
 	}
-	
+
 	public ArrayList<String> delimitAtDot(String delimitThisString) {
 		// Makes substrings, split at "."
 		int dotIndex = delimitThisString.indexOf(".");
 		String beforeDot = delimitThisString.substring(0, dotIndex);
-		String afterDot = delimitThisString.substring(dotIndex+1, delimitThisString.length());
-		
+		String afterDot = delimitThisString.substring(dotIndex + 1, delimitThisString.length());
+
 		ArrayList<String> delimitedString = new ArrayList<String>();
-		
+
 		delimitedString.add(beforeDot);
 		delimitedString.add(afterDot);
 		return delimitedString;
+	}
+
+	public ArrayList<String> removeAnyChar(ArrayList<String> slicedStrings, String removeThisChar) { // For "" quotation marks, use \"
+
+		for (int index = 0; index < slicedStrings.size(); index++) {
+			String result = "";
+			for (int index1 = 0; index1 < slicedStrings.get(index).length(); index1++) {
+				if (!slicedStrings.get(index).substring(index1, index1 + 1).equals(removeThisChar)) {
+					result = result + slicedStrings.get(index).substring(index1, index1 + 1);
+				}
+			}
+			slicedStrings.set(index, result);
+		}
+		return slicedStrings;
+	}
+
+	public ArrayList<String> delimitAtAnyChar(String delimitThisString, String delimiterChar) {
+		ArrayList<Integer> delimiterIndex = new ArrayList<Integer>();
+		ArrayList<String> slicedStrings = new ArrayList<String>();
+		for (int index = 0; index < delimitThisString.length() - 1; index++) {
+			if (delimitThisString.substring(index, index + 1).equals(delimiterChar)) {
+				delimiterIndex.add(index);
+			}
+		}
+		for (int index = 0; index < delimiterIndex.size() - 1; index++) {
+			String slice = delimitThisString.substring(delimiterIndex.get(index), delimiterIndex.get(index + 1));
+			slicedStrings.add(slice);
+		}
+		return slicedStrings;
 	}
 }
