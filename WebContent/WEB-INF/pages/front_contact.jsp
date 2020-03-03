@@ -67,7 +67,9 @@
                   	type="email" 
                   	class="form-control" 
                   	placeholder="電子信箱："
-                  	name="inputEmail">
+                  	name="inputEmail"
+                  	id="userEmail"
+                  	>
                   <span style="color: red;">${errors.emailError}</span>
                 </div>
               </div> 
@@ -78,7 +80,9 @@
                   	type="text" 
                   	class="form-control" 
                   	placeholder="姓名："
-                  	name="inputName">
+                  	name="inputName"
+                  	id="userName"
+                  	>
                   <span style="color: red;">${errors.nameError}</span>
                 </div>
               </div> 
@@ -114,6 +118,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <input type="submit" value="送出" class="btn btn-outline-danger btn-block" onclick="myFunction()">
+                  <input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
                 </div>
                 <h5 class="text-center">我們將儘快與您聯繫</h5>
               </div>
@@ -214,6 +219,18 @@
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
 
+    </script>
+    <script>
+	function autofill() {
+		var eml = document.getElementById("userEmail");
+		var name = document.getElementById("userName");
+		var category = document.getElementById("inputCategory");
+		var text = document.getElementById("inputMessage");
+		eml.value = "farmvilletaiwan@gmail.com";
+		name.value = "王大明";
+		category.value = "退換貨問題";
+		text.value = "我把紅蘿蔔買成白蘿蔔了！怎麼辦啊？我拆了外包裝，還可以換貨嗎？"
+	};
     </script>
   </body>
 </html>
