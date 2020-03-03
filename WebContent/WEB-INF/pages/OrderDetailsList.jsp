@@ -71,19 +71,17 @@
         <div class="card">
           <div class="card-header">
             <h4>訂單編號	${orderInfo.orderID}</h4>
-            				<td><a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a></td>
-            
+            <a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a>
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-<!--                 <th>訂單編號</th> -->
                 <th>訂購時間</th>
                 <th>訂購人ID</th>
                 <th>寄送地址</th>
                 <th>寄送電話</th>
-                <th>總價</th>
-                
+                <th></th>
+<!--                 <th>總價</th> -->
               </tr>
             </thead>
             <tbody>
@@ -93,7 +91,8 @@
    				<th>${orderInfo.orderID}</th>
    				<td>${orderInfo.mailingAddress}</td>
 				<td>${orderInfo.mailingPhone}</td>
-				<td>${orderInfo.total}</td>
+   				<th></th>
+<%-- 				<td>${orderInfo.total}</td> --%>
               </tr>
             </tbody>
 </jstl:forEach>
@@ -124,7 +123,7 @@
                <tr>
                 <td>${orderDetailsList.productID}</td>	
 				<td>${orderDetailsList.productName}</td>
-				<td>${orderDetailsList.productPrice}</td>	
+				<td >${orderDetailsList.productPrice}</td>	
 				<td>${orderDetailsList.productCount}</td>
 				<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>
 				 <c:set var="subtotal" value="${subtotal+orderDetailsList.productPrice*orderDetailsList.productCount}" />

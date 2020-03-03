@@ -32,6 +32,7 @@ import util.EmailUsers;
 // 5)進登入
 // 6)進註冊 V
 // 7)進購物車
+// 8)進結帳頁面
 @Controller 
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
@@ -208,6 +209,12 @@ public class FrontDirectController {
 			System.out.println("FINISH: /directFrontContactUs");
 		}
 		return "front_contact";
+	}
+	
+	@RequestMapping(value = "/directCheckOutPage", method = RequestMethod.GET)
+	public String checkOutPage() {
+		System.out.println("導到結帳頁面");
+		return "front_checkout";
 	}
 	
 }
