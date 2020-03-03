@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 m-auto text-center">
-                    <h1>服務</h1>
+                    <h1>購物中心</h1>
                     <p>讓您購買安心與食用安心是本公司的最高原則</p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                             <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
                         <p class="card-text service-discription">
-                          <samll class="text-muted">${product.productDescription}</samll>
+                          <small class="text-muted">${product.productDescription}</small>
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
