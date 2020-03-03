@@ -122,12 +122,17 @@ public class CheckSubstring {
 
 	public ArrayList<String> delimitAtAnyChar(String delimitThisString, String delimiterChar) {
 		ArrayList<Integer> delimiterIndex = new ArrayList<Integer>();
+		// Add first
+		delimiterIndex.add(0);
+		// Slice
 		ArrayList<String> slicedStrings = new ArrayList<String>();
 		for (int index = 0; index < delimitThisString.length() - 1; index++) {
 			if (delimitThisString.substring(index, index + 1).equals(delimiterChar)) {
 				delimiterIndex.add(index);
 			}
 		}
+		// Add Last
+		delimiterIndex.add(delimitThisString.length());
 		for (int index = 0; index < delimiterIndex.size() - 1; index++) {
 			String slice = delimitThisString.substring(delimiterIndex.get(index), delimiterIndex.get(index + 1));
 			slicedStrings.add(slice);
