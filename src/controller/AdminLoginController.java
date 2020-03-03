@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -9,15 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.google.crypto.tink.Aead;
-
+import model.order.OrderBean;
+import model.order.OrderBeanService;
+import model.product.ProductBean;
+import model.product.ProductBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
 import util.EncodeHexString;
@@ -28,13 +30,17 @@ import util.EncryptString;
 public class AdminLoginController {
 
 	private UserBeanService uService;
+	private ProductBeanService pService;
+	private OrderBeanService oService;
 	private HttpServletResponse response;
 	private EncryptString util = new EncryptString();
 	private EncodeHexString hexConvert = new EncodeHexString();
 
 	@Autowired
-	public AdminLoginController(UserBeanService service, HttpServletResponse response) {
+	public AdminLoginController(UserBeanService service, ProductBeanService pService, OrderBeanService oService, HttpServletResponse response) {
 		this.uService = service;
+		this.pService = pService;
+		this.oService = oService;
 		this.response = response;
 	}
 
@@ -144,6 +150,31 @@ public class AdminLoginController {
 				nextPage.addAttribute("userEmail", uEmail);
 				nextPage.addAttribute("loggedInUserEmail", uEmail);
 				nextPage.addAttribute("loggedInUserPwd", uPwd);
+				
+				
+				
+				List<ProductBean> totalP = pService.selectAll();
+				int totalPCount = totalP.size();
+				String totalPCountString = Integer.toString(totalPCount);
+				System.out.println("TOTAL PRODUCT COUNT: "+totalPCount);
+				
+				List<OrderBean> totalO = oService.selectAll();
+				int totalOCount = totalO.size();
+				String totalOCountString = Integer.toString(totalOCount);
+				System.out.println("TOTAL ORDER COUNT: "+totalOCount);
+				
+				List<UserBean> totalU = uService.selectFuzzy("");
+				int totalUCount = totalU.size();
+				String totalUCountString = Integer.toString(totalUCount);
+				System.out.println("TOTAL USER COUNT: "+totalUCount);
+				
+				Map<String, String> dataNum = new HashMap<String, String>();
+				dataNum.put("product", totalPCountString);
+				dataNum.put("order", totalOCountString);
+				dataNum.put("user", totalUCountString);
+				
+				nextPage.addAttribute("dataNum", dataNum);
+				
 				return "AdminIndex";
 			}
 		}

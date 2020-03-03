@@ -1,5 +1,9 @@
 package controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.order.OrderBean;
+import model.order.OrderBeanService;
+import model.product.ProductBean;
+import model.product.ProductBeanService;
+import model.user.UserBean;
+import model.user.UserBeanService;
 import util.EncodeHexString;
 import util.EncryptString;
 
@@ -24,10 +34,16 @@ import util.EncryptString;
 public class AdminLogoutController {
 
 	private HttpServletResponse response;
-
+	private UserBeanService uService;
+	private ProductBeanService pService;
+	private OrderBeanService oService;
+	
 	@Autowired
-	public AdminLogoutController(HttpServletResponse response) {
+	public AdminLogoutController(HttpServletResponse response, UserBeanService service, ProductBeanService pService, OrderBeanService oService) {
 		this.response = response;
+		this.uService = service;
+		this.pService = pService;
+		this.oService = oService;
 	}
 
 	// 1)回首頁
@@ -36,7 +52,28 @@ public class AdminLogoutController {
 	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	public String processActionLogout(@SessionAttribute("userEmail") String uEmail, Model nextPage) {
 		System.out.println("Directing to 首頁");
-
+		
+		List<ProductBean> totalP = pService.selectAll();
+		int totalPCount = totalP.size();
+		String totalPCountString = Integer.toString(totalPCount);
+		System.out.println("TOTAL PRODUCT COUNT: "+totalPCount);
+		
+		List<OrderBean> totalO = oService.selectAll();
+		int totalOCount = totalO.size();
+		String totalOCountString = Integer.toString(totalOCount);
+		System.out.println("TOTAL ORDER COUNT: "+totalOCount);
+		
+		List<UserBean> totalU = uService.selectFuzzy("");
+		int totalUCount = totalU.size();
+		String totalUCountString = Integer.toString(totalUCount);
+		System.out.println("TOTAL USER COUNT: "+totalUCount);
+		
+		Map<String, String> dataNum = new HashMap<String, String>();
+		dataNum.put("product", totalPCountString);
+		dataNum.put("order", totalOCountString);
+		dataNum.put("user", totalUCountString);
+		nextPage.addAttribute("dataNum", dataNum);
+		
 		nextPage.addAttribute("userEmail", uEmail);
 		return "AdminIndex";
 	}
