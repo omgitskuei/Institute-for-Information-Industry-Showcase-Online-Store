@@ -4,8 +4,6 @@
 	pageEncoding="UTF-8"
 %>
 
-
-<%@ taglib prefix="c"    uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -75,23 +73,23 @@
             <div class="input-group-append">
                 <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
+            <div class="input-group-append">
+           		<select name="selectCategory" id="theme" class="form-control">
+      			<option selected value="搜尋商品類別">搜尋商品類別</option>
+      			<option value="蔥類">蔥類</option>
+      			<option value="根菜類">根菜類</option>
+      			<option value="莖菜類">莖菜類</option>
+      			<option value="瓜果類">瓜果類</option>
+      			</select>
+            </div>
         </div>
+        
+        
+        
       </form>
       </div>
       <div class="col-md-6 ml-auto">
-      	<div class="form-group">
-      		<select name="#" id="theme" class="form-control">
-      			<option>搜尋全部...</option>
-      			<option>商品名稱</option>
-      			<option>商品類別</option>
-      			<option>訂單編號</option>
-      			<option>寄送方式</option>
-      			<option>買家帳號</option>
-      			<option>付款方式</option>
-      			<option>電子郵件</option>
-      			<option>身份</option>
-      		</select>
-      	</div>
+      	
       </div>
      </div>
     </div>
@@ -120,16 +118,16 @@
               </tr>
             </thead>
             <tbody>
-            	<c:if test="${not empty SearchResults}">
-            		<c:forEach var="product" items="${SearchResults}" varStatus="status">
+            	<jstl:if test="${not empty SearchResults}">
+            		<jstl:forEach var="product" items="${SearchResults}" varStatus="status">
 						<!-- construct an "update" link with customer id -->
-						<c:url var="updateLink" value="/AdminProduct/updateForm">
-							<c:param name="productID" value="${product.productID}" />
-						</c:url>
+						<jstl:url var="updateLink" value="/AdminProduct/updateForm">
+							<jstl:param name="productID" value="${product.productID}" />
+						</jstl:url>
 						<!-- construct an "delete" link with customer id -->
-						<c:url var="deleteLink" value="/AdminProduct/delete">
-							<c:param name="productID" value="${product.productID}" />
-						</c:url>
+						<jstl:url var="deleteLink" value="/AdminProduct/delete">
+							<jstl:param name="productID" value="${product.productID}" />
+						</jstl:url>
 						<tr>
 							<td>${product.productID}</td>
  							<td>${product.productName}</td>
@@ -148,8 +146,8 @@
 								</a>
 							</td>
 						</tr>
-					</c:forEach>
-				</c:if>
+					</jstl:forEach>
+				</jstl:if>
             </tbody>
           </table>
         </div>
