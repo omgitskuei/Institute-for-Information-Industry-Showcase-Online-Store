@@ -32,7 +32,8 @@ public class AdminInventoryController {
 	@Autowired
 	ProductBeanService productService;
 	
-	public AdminInventoryController() {
+	public AdminInventoryController(ProductBeanService productService) {
+		this.productService = productService;
 	}
 	
 	// 1)導到AdminInventory頁面，並傳庫存資料產生表格
