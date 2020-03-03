@@ -28,6 +28,10 @@ public class ProductBeanService implements ProductBeanServiceInterface {
 	public List<ProductBean> selectFuzzy(String productName, String productCategory, String description) {
 		return productDAO.selectFuzzy(productName, productCategory, description);
 	}
+	
+	public List<ProductBean> selectFuzzy(String productName, String productCategory) {
+		return productDAO.selectFuzzy(productName, productCategory);
+	}
 
 	@Override
 	public ProductBean getProduct(int productID) {
