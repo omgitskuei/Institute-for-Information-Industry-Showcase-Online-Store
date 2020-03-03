@@ -235,7 +235,7 @@
     	function autofillSignIn() {
 			var userEmail = document.getElementById("userEmail");
 			var userPwd = document.getElementById("userPwd");
-			userEmail.value = "farmvilletaiwan@gmail.com"
+			userEmail.value = "kueifengtung@yahoo.com"
 			userPwd.value = "Qq22222!";
 		};
 		
