@@ -91,8 +91,8 @@ public class EncryptString {
 	// Executable
 	public static void main(String args[]) {
 		// Get Input
-//		GetRuntimeInput util = new GetRuntimeInput("Input String:");
-//		String plainText = util.input;
+		GetRuntimeInput util = new GetRuntimeInput("Input String:");
+		String plainText = util.input;
 
 		EncryptString util1 = new EncryptString();
 		// Refreshes the encryption keys in keyset.json.
@@ -104,7 +104,7 @@ public class EncryptString {
 		
 		
 		// encrypt
-		byte[] cipher = util1.encryptGoogleTinkAEAD("Qq1!qwer", "OMGiloveyou");
+		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
 		String encrypted = s.byteArrayToHexString(cipher);
 		
 		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key
