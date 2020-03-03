@@ -62,11 +62,15 @@
 		<p>${user.userEmail}</p>
 		</div>
 		
-		<div class="form-group">
-		<label>密碼</label>
-		<input class="form-control" name="newPwd" value="${user.userPwd}" />
+		<div class="form-group"> 
+		<label>請輸入您的密碼</label> <span style="color: red;" id="notFoundErrorSpan">${errors.mismatchError}</span>	
+		<input class="form-control" name="currentPwd" placeholder="Enter your current password here" />
 		</div>
 		
+		<div class="form-group">
+		<label>請輸入您的新密碼</label> <span style="color: red;" id="notFoundErrorSpan">${errors.invalidError}</span>	
+		<input class="form-control" name="newPwd" placeholder="Enter your new password here" /> 
+		</div>
 		<button class="btn btn-info" type="submit"
 						>儲存</button>
 		

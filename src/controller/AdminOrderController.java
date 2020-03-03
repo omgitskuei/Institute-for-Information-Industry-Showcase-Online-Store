@@ -32,8 +32,12 @@ public class AdminOrderController {
 		System.out.println("Directing to AdminOrder");
 //		nextPage.addAttribute("userEmail", uEmail);
 		List<OrderBean> orderList=dao.selectAll();
-		model.addAttribute("orderList", orderList);
-		return "AdminOrder";
+		if (orderList.size()<=0) {
+			return "AdminOrder";
+		} else {
+			model.addAttribute("orderList", orderList);
+			return "AdminOrder";
+		}
 	}
 
 }

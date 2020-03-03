@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -26,6 +28,7 @@ import model.user.UserBean;
 import model.user.UserBeanService;
 import model.wallet.WalletBean;
 import model.wallet.WalletBeanService;
+import util.ValidateString;
 
 // Admin 的 Profile 控制器
 @Controller
@@ -104,10 +107,27 @@ public class AdminProfileController {
 	// 儲存修改後的密碼
 	@PostMapping("/savePassword")
 	public String savePassword(@ModelAttribute UserBean updateThisUser, 
+							   @RequestParam(value = "currentPwd", required = true) String currentPwd,
 							   @RequestParam(value = "newPwd", required = true) String newPwd, 
-							   @RequestParam(value = "userID",required = true) int userID) {
-		userService.updatePwd(updateThisUser, newPwd);
-		return "redirect:/AdminProfile/list";
+							   @RequestParam(value = "userID",required = true) int userID,
+							   Model nextPage) {
+		UserBean bean = userService.selectUser(userID);
+		if (bean.getUserPwd().equals(currentPwd)) {
+			userService.updatePwd(updateThisUser, newPwd);
+			return "redirect:/AdminProfile/list";
+		} else {
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("mismatchError", "To verify your identity, please enter correct old password");
+			ValidateString util = new ValidateString();
+			if (!util.validatePwd(newPwd)) {
+				errors.put("invalidError", "Please enter a valid new password");
+				
+			} 
+			nextPage.addAttribute("errors", errors);
+			return "UserUpdatePasswordForm";
+		}
+		
+		
 	}
 	
 	// 秀出修改電子錢包表格

@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Noto+Sans+TC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
     <style>
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
@@ -100,11 +100,11 @@
                       </tbody>
 
                   </table>
-
-
+</div>
+				</div>
               </div>
           </div>
-
+</div>
           <div class="card text-center my-5 border-0">
               <div class="card-header border-0">
                   <div class="h3 mt-1"> 訂購人資訊 </div>
@@ -156,6 +156,7 @@
                       <a href="orderfinish.html" type="submit" class="btn btn-success">確認付款</a>
                   </div>
               </form>
+              </div>
               </section>
 
     <!-- FOOTER -->

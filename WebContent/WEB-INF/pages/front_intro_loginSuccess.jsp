@@ -27,15 +27,11 @@
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
-
-                    <a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">賬號管理 (/directhomepage)</a> <br>
-                    <a href=<jstl:url value="/directaboutus"/> class="btn btn-dark box-shadow">directaboutus</a>  <br>
+					<a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">回去首頁</a> <br>
+					<br>
                     <a href=<jstl:url value="/directservices"/> class="btn btn-dark box-shadow">directservices</a> <br>
-                    <a href=<jstl:url value="/directcontact"/> class="btn btn-dark box-shadow">directcontact (KUEI FENG WIP)</a> <br>
                     <a href=<jstl:url value="/showSpecificProduct"/> class="btn btn-dark box-shadow">showSpecificProduct</a> <br>
-                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">directlogin (KUEI FENG WIP-Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directForgotPassword"/> class="btn btn-dark box-shadow">directForgotPassword (KUEI-FENG WIP Forgot password)</a> <br>
-                    <a href=<jstl:url value="/directsignup"/> class="btn btn-dark box-shadow">directsignup</a> <br>
+
                     <a href=<jstl:url value="/directshoppingcart"/> class="btn btn-dark box-shadow">directshoppingcart</a> <br>
 
                 </div>

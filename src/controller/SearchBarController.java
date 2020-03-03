@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,30 @@ public class SearchBarController {
 	}
 	// methods
 	@RequestMapping(path = "/searchBarProducts", method = RequestMethod.POST)
-	public String searchBarProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
+	public String searchBarProducts(
+			HttpServletRequest request,
+			@RequestParam(name = "searchBar") String searchBar, 
+			@RequestParam(name = "selectCategory") String selectCategory,
+			Model nextPage) {
+//		String s = request.getParameter("selectCategory");
+//		System.out.println(s);
+		
 		System.out.println("BEGIN: /searchBarProducts");
-		System.out.println("	User input: " + searchBar);
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+		System.out.println("	User input (searchBar): [" + searchBar+"]");
+		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
+		String category = "";
+		if (selectCategory.equals("蔥類")) {
+			category = "蔥類";
+		} else if (selectCategory.equals("根菜類")) {
+			category = "根菜類";
+		} else if (selectCategory.equals("莖菜類")) {
+			category = "莖菜類";
+		} else if (selectCategory.equals("瓜果類")) {
+			category = "瓜果類";
+		} else {
+			category = searchBar;
+		}
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);
@@ -56,12 +77,10 @@ public class SearchBarController {
 			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
-		// return results
 		nextPage.addAttribute("SearchResults", fuzzyResults);
 		System.out.println("FINISH: /searchBarProducts");
 		return "AdminIndex";
 	}
-	
 	
 	@RequestMapping(path = "/AdminProduct/searchInventoryProducts", method = RequestMethod.POST)
 	public String searchInventoryProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {

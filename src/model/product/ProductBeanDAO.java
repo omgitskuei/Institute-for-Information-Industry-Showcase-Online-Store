@@ -278,6 +278,21 @@ public class ProductBeanDAO implements ProductBeanDAOInterface {
 		return results;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<ProductBean> selectFuzzy(String productName, String productCategory) {
+		System.out.println("BEGIN: ProductBeanDAO.selectFuzzy(String, String, String)");
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "From ProductBean where ProductName like '%"+productName+"%' and ProductCategory like '%"+productCategory+"%'";
+		Query query = session.createQuery(hql); 
+		// Store query results into List results
+		List<ProductBean> results = (List<ProductBean>) query.list();
+		System.out.println("	# of results: " + results.size());
+		// Return List results
+		System.out.println("FINISH: ProductBeanDAO.selectFuzzy(String, String, String)");
+		return results;
+	}
+	
 	@Override
 	public void deleteProduct(int productID) {
 		Session session = sessionFactory.getCurrentSession();

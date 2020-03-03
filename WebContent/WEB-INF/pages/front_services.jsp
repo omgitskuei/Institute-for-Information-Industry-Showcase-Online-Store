@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 m-auto text-center">
-                    <h1>服務</h1>
+                    <h1>購物中心</h1>
                     <p>讓您購買安心與食用安心是本公司的最高原則</p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                             <small class="text-muted">上架時間: ${product.productTimestamp}</small>
                         </p>
                         <p class="card-text service-discription">
-                          <samll class="text-muted">${product.productDescription}</samll>
+                          <small class="text-muted">${product.productDescription}</small>
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
@@ -192,14 +192,14 @@
             <div class="card-header">
               <h5 class="mb-0">
                 <a href="#collapseOne" data-toggle="collapse" data-parent="accordion" aria-expanded="true" class="">
-                  Q1：如果貨送過來爛掉了怎麼辦？
+                  Q1：如果商品送達，打開發現爛掉了怎麼辦？
                 </a>
               </h5>
             </div>
 
             <div id="collapseOne" class="collapse show" style="">
               <div class="card-body">
-                請透過聯絡我們告知本公司，本公司會派勿六去做回收食物，再透過物流寄送一批新貨給您，不用負擔任何費用，彼此做人留一線，日後好相見。
+                請透過「聯絡我們」告知本公司，本公司會聯絡物流儘速到府回收商品，並同時透過物流寄送一批新貨給您。保證您不用負擔任何費用。我們相信售後做得好，消費沒煩惱；做人留一線，日後好相見。
               </div>
             </div>
           </div>
@@ -208,14 +208,14 @@
             <div class="card-header">
               <h5 class="mb-0">
                 <a href="#collapseTwo" data-toggle="collapse" data-parent="accordion">
-                  Q2：如果發現某超商賣的貨源比較便宜怎辦？
+                  Q2：如果跟你們買了以後，發現其他通路賣得比你們便宜，怎麼辦？
                 </a>
               </h5>
             </div>
 
             <div id="collapseTwo" class="collapse">
               <div class="card-body">
-                麻煩透過聯絡我們吿訴我們，提出證明，本公司會給予補助。
+                請透過「聯絡我們」告知本公司，本公司將派出貨價調查員前往通路，並秉持「買貴補差價」確認金額差距，給予消費者價差回饋。
               </div>
             </div>
           </div>
@@ -231,7 +231,7 @@
 
             <div id="collapseThree" class="collapse">
               <div class="card-body">
-                目前沒有喔，未來也沒打算。
+                目前沒有喔，未來也沒打算寄往台澎金馬以外的地方。
               </div>
             </div>
           </div>
@@ -243,14 +243,14 @@
             <div class="card-header">
               <h5 class="mb-0">
                 <a href="#collapseFour" data-toggle="collapse" data-parent="accordion">
-                  Q4：為何不進貨香菜？
+                  Q4：為何不進貨香菜？我很喜歡香菜欸！
                 </a>
               </h5>
             </div>
 
             <div id="collapseFour" class="collapse">
               <div class="card-body">
-                本公司的創辦人，不愛香菜，因而本公司禁止出現香菜任何字眼與圖片。
+                本公司的創辦人及過半的員工，都對香菜敬而遠之，因而本公司禁止出現與香菜相關的任何字眼與圖片。
               </div>
             </div>
           </div>
@@ -266,7 +266,7 @@
 
             <div id="collapseFive" class="collapse">
               <div class="card-body">
-                本公司不提供實體店面。
+                本公司無實體店面。
               </div>
             </div>
           </div>
