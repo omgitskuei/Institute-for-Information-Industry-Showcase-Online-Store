@@ -63,8 +63,10 @@
 				<div class="form-group">
 				<label>產品類別</label>
 				<form:select cssClass="form-control" path="productCategory">
-				<form:option value="蔬菜">蔬菜</form:option>
-				<form:option value="水果">水果</form:option>
+				<form:option value="蔥類">蔥類</form:option>
+				<form:option value="根菜類">根菜類</form:option>
+				<form:option value="莖菜類">莖菜類</form:option>
+				<form:option value="瓜果類">瓜果類</form:option>
 				</form:select>
 				</div>
 				
