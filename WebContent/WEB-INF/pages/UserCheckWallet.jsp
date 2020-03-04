@@ -27,7 +27,6 @@
     <div class="container">
     
     <br>
-    <h2>使用者資料修改</h2>
     
     <!-- 選單 -->
     <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
@@ -42,7 +41,7 @@
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
-	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrer">
+	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrder">
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
@@ -52,7 +51,7 @@
 	<a href="${showTheUserOrderLink}">查看訂單</a>
 	<!-- 選單 -->
 	<br>
-<div class="container">
+
 <h3>使用者查看電子錢包</h3>
 <br>
 <h4>目前餘額: ${wallet.walletAmount}</h4>

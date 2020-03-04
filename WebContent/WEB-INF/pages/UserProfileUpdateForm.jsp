@@ -44,7 +44,7 @@
 		<jstl:param name="userID" value="${profile.userID}" />
 	</jstl:url>
 	
-	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrer">
+	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrder">
 		<jstl:param name="userID" value="${profile.userID}" />
 	</jstl:url>
 	

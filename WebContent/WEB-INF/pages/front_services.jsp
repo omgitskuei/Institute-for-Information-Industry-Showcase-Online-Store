@@ -66,14 +66,14 @@
 </section>
 
 		
-      <div style="position: absolute;" class="py-3">
+<!--       <div style="position: absolute;" class="py-3">
         <i class="fa fa-shopping-cart mb-1"></i>
       	<ul id="show-cart">
         <li>???????</li>
       	</ul>
       <div>總金額:$<span id="total-cart"></span></div>
 	</div>
-
+ -->
 
 
 <!-- SERVICES SECTION -->
