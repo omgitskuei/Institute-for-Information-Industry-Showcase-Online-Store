@@ -553,5 +553,10 @@
 
         displayCart();   
     </script>
+    //商品搜尋下拉式選單可以展開(但點選後還是不能顯示所選的項目)
+    <script>$(document).ready(function() {
+    	$('.dropdown-toggle').dropdown();
+    });
+    </script>
   </body>
 </html>
