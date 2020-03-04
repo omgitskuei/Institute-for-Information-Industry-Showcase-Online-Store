@@ -55,6 +55,11 @@
 	<jstl:url var="showTheUserOrderLink" value="/UserProfile/showTheUserOrder">
 		<jstl:param name="userID" value="${profile.userID}" />
 	</jstl:url>
+	
+	<jstl:url var="showTheUserSettingLink" value="/UserProfile/showTheUserSetting">
+		<jstl:param name="userID" value="${user.userID}" />
+	</jstl:url>
+	
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" href="${updateLink}">使用者基本資料</a></li>
 		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
