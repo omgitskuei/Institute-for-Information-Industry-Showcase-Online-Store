@@ -151,6 +151,7 @@ public class UserProfileController {
 	    setting.setSettingAllowMetadata(settingAllowMetadata);
 		
 		return "UserUpdateSettingForm";
+	}
 
 	//使用者查看訂單明細
 	@GetMapping("/userDetails")
