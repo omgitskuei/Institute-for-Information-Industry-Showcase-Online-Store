@@ -48,8 +48,13 @@
 		<jstl:param name="userID" value="${profile.userID}" />
 	</jstl:url>
 	
+	<jstl:url var="showTheUserSettingLink" value="/UserProfile/showTheUserSetting">
+		<jstl:param name="userID" value="${profile.userID}" />
+	</jstl:url>
+	
 	<a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${showTheUserSettingLink}">更改安全問題</a>
 	<a href="${updateWalletLink}">查看電子錢包</a>
 	<a href="${showTheUserOrderLink}">查看訂單</a>
 	<!-- 選單 -->
