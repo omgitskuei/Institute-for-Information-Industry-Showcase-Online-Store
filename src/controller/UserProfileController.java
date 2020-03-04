@@ -26,6 +26,7 @@ import model.orderDetails.OrderDetailsBeanDAO;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
 import model.setting.SettingBean;
+import model.setting.SettingBeanDAO;
 import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
@@ -52,8 +53,11 @@ public class UserProfileController {
 	
 	@Autowired
 	private SettingBeanService settingService;
+	
+	@Autowired
+	private SettingBeanDAO settingDAO;
 
-  @Autowired
+    @Autowired
 	private OrderDetailsBeanDAO odDAO;
 
 	
@@ -136,19 +140,23 @@ public class UserProfileController {
 	}
 	
 	@PostMapping("/updateSetting")
-	public String updateSetting(@RequestParam(value = "settingID",required = true) int settingID,
-							  @RequestParam(value = "userID",required = true) int userID,
-			                  @RequestParam(value="settingSecurityQ", required=false) String settingSecurityQ,
-			                  @RequestParam(value="settingSecurityA", required=false) String settingSecurityA,
-			                  @RequestParam(value="settingDisplayName", required=true) String settingDisplayName,
-			                  @RequestParam(value="settingAllowMetadata", required=true) boolean settingAllowMetadata) {
-	    SettingBean setting = new SettingBean();
-	    setting.setSettingID(settingID);
-	    setting.setUserID(userID);
-	    setting.setSettingSecurityQ(settingSecurityQ);
-	    setting.setSettingSecurityA(settingSecurityA);
-	    setting.setSettingDisplayName(settingDisplayName);
-	    setting.setSettingAllowMetadata(settingAllowMetadata);
+	public String updateSetting(@ModelAttribute SettingBean updateThisSetting,
+			                  @RequestParam(value="settingSecurityQ", required=false) String newQ,
+			                  @RequestParam(value="settingSecurityA", required=false) String newA,
+			                  @RequestParam(value="settingDisplayName", required=true) String newSettingDisplayName,
+			                  @RequestParam(value="settingAllowMetadata", required=true) boolean newSettingAllowMetadata) {
+//	    SettingBean setting = new SettingBean();
+//	    setting.setSettingID(settingID);
+//	    setting.setUserID(userID);
+//	    setting.setSettingSecurityQ(settingSecurityQ);
+//	    setting.setSettingSecurityA(settingSecurityA);
+//	    setting.setSettingDisplayName(settingDisplayName);
+//	    setting.setSettingAllowMetadata(settingAllowMetadata);
+		
+		settingDAO.updateSettingSecurityQ(updateThisSetting, newQ);
+		settingDAO.updateSettingSecurityA(updateThisSetting, newA);
+		settingDAO.updateSettingDisplayName(updateThisSetting, newSettingDisplayName);
+		settingDAO.updateSettingAllowMetadata(updateThisSetting, newSettingAllowMetadata);
 		
 		return "UserUpdateSettingForm";
 	}
