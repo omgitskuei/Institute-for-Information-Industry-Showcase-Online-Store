@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
         </ol>
       </div>
     <div class="col-md-6 ml-auto">
-      <form action="#" class="form-inline">
+      <form  class="form-inline" name="searchForm" action="<jstl:url value="directservicesProducts" />" method="post" >
         <div class="dropdown mx-4">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             選擇類型
@@ -54,7 +55,7 @@
             <a class="dropdown-item" href="#">水果</a>
           </div>
         </div>
-        <input type="text" class="form-control mr-2" placeholder="搜尋商品">
+        <input type="text" class="form-control mr-2" placeholder="搜尋商品" name="searchBar">
         <button class="btn btn-outline-success">搜尋</button>
 
       </form>
@@ -79,7 +80,8 @@
     <div class="container">
         <div class="row mb-4"> 
 		
-        <jstl:forEach var="product" items="${InventoryList}" >
+       <c:if test="${not empty SearchResults}">
+			<c:forEach var="product" items="${SearchResults}" varStatus="status">
         <jstl:url var="theProductLink" value="/showSpecificProduct">
 				<jstl:param name="productID" value="${product.productID}" />
 		</jstl:url>
@@ -114,8 +116,8 @@
                     </div>
                 </div>
             </div>
-            
-        </jstl:forEach>
+        </c:forEach>    
+        </c:if>
     <div>
     </div>
     </div>

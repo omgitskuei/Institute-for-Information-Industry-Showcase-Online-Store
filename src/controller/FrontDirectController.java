@@ -101,7 +101,7 @@ public class FrontDirectController {
 		
 		List<ProductBean> Inventorylist= productService.selectAll();
 
-		mm.addAttribute("InventoryList", Inventorylist);
+		mm.addAttribute("SearchResults", Inventorylist);
 		System.out.println("塞進去以後的 model : " + mm );
 		System.out.println("Get Inventiry content: " + Inventorylist );
 		
