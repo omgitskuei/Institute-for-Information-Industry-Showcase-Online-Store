@@ -100,10 +100,10 @@
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
-                        <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
+                        <a href="${theProductLink}" class="btn btn-secondary text-white mt-2 ml-2">查看</a>
 
 
-                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" 
+                        <a href="#" class="btn btn-success text-white mt-2 ml-2 add-to-cart" 
                         data-id="${product.productID}" 
                         data-img="${product.productImg}" 
                         data-name="${product.productName}" 
@@ -168,7 +168,7 @@
       <!--Body-->
       <div class="modal-body">
 
-        <i class="fas fa-shopping-cart fa-4x"></i>
+        <i class="fas fa-shopping-cart fa-4x" style="color: #292b2c;"></i>
 
       </div>
 
@@ -556,7 +556,6 @@
 
         displayCart();   
     </script>
-    //商品搜尋下拉式選單可以展開(但點選後還是不能顯示所選的項目)
     <script>$(document).ready(function() {
     	$('.dropdown-toggle').dropdown();
     });

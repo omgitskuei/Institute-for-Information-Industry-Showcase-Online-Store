@@ -142,7 +142,7 @@
             <p>
               這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字
             </p>
-            <a href="stock.html" class="btn btn-outline-danger btn-lg">前往觀看</a>
+            <a href="stock.html" class="btn btn-success btn-lg text-white">前往觀看</a>
           </div>
           <div class="col-md-6">
             <img src="https://source.unsplash.com/random/320x200/?food" alt="商品圖片，寫死的，可能沒讀到" class="img-fluid" />

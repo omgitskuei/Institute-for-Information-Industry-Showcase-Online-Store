@@ -154,7 +154,7 @@
 								<label for="email">電子信箱</label>
 								<input
 									type="email"
-									placeholder="Enter your email here"
+									placeholder="請輸入電子信箱 Email"
 									class="form-control" 
 									name="nEmail"
 									id="newEmail">
@@ -164,7 +164,7 @@
 								<input
 									name="nPwd"
 									type="password"
-									placeholder="Enter your new password here" 
+									placeholder="請輸入密碼 Password" 
 									class="form-control" 
 									id="newPwd">
 							</div>
@@ -172,18 +172,18 @@
 								<label for="password2">確認密碼</label> 
 								<input 
 									type="password"
-									placeholder="Enter your new password again" 
+									placeholder="請再輸入密碼 Password" 
 									class="form-control" 
 									name="rPwd"
 									id="confirmPwd">
 							</div>
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary" value="送出">送出</button>
+								<button type="submit" class="btn btn-success text-white" value="送出">送出</button>
 							</div>
 						</form>
 						<br>
 						<div class="col-md-6 mx-auto mt-2">
-							<input onclick="autofillSignUp()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
+							<input onclick="autofillSignUp()" type="button" value="一鍵輸入" class="btn btn-secondary btn-block" id="submit">
 						</div>
 					</div>
 

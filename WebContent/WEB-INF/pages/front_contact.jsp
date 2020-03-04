@@ -117,8 +117,8 @@
               <!-- SUBMIT BUTTON -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <input type="submit" value="送出" class="btn btn-outline-danger btn-block" onclick="myFunction()">
-                  <input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-primary btn-block" id="submit">
+                  <input type="submit" value="送出" class="btn btn-success text-white btn-block" onclick="myFunction()">
+                  <input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-secondary btn-block" id="submit">
                 </div>
                 <h5 class="text-center">我們將儘快與您聯繫</h5>
               </div>
