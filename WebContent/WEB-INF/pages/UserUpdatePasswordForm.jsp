@@ -26,7 +26,7 @@
     <!-- PAGE HEADER -->
 <div class="container">
  <br>
- <h3>使用者修改密碼</h3>
+ <!-- <h3>使用者修改密碼</h3> -->
  
  <!-- 選單 -->
     <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
@@ -45,15 +45,25 @@
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
-	<jstl:url var="showTheUserSettingLink" value="/UserProfile/showTheUserSetting">
-		<jstl:param name="userID" value="${user.userID}" />
-	</jstl:url>
-	
-	<a href="${updateLink}">更新使用者基本資料</a>
+
+<!-- <a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
 	<a href="${showTheUserSettingLink}">更改安全問題</a>
 	<a href="${updateWalletLink}">查看電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<a href="${showTheUserOrderLink}">查看訂單</a> -->
+	
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    請選擇要更新資料
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="userUpdateForm">更新基本資料</a>
+    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
+    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
+    <a class="dropdown-item" href="showTheUserOrder">查看訂單</a>
+  </div>
+</div>
 	<!-- 選單 -->
 	
 	

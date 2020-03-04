@@ -29,7 +29,7 @@
     <div class="container">
     
     <br>
-    <h2>使用者資料修改</h2>
+    <!-- <h2>使用者資料修改</h2> -->
     
     <!-- 選單 -->
     <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
@@ -48,15 +48,27 @@
 		<jstl:param name="userID" value="${profile.userID}" />
 	</jstl:url>
 	
-	<jstl:url var="showTheUserSettingLink" value="/UserProfile/showTheUserSetting">
-		<jstl:param name="userID" value="${profile.userID}" />
-	</jstl:url>
-	
-	<a href="${updateLink}">更新使用者基本資料</a>
+
+	<!-- <a href="${updateLink}">更新使用者基本資料</a>
 	<a href="${updatePasswordLink}">更改密碼</a>
 	<a href="${showTheUserSettingLink}">更改安全問題</a>
 	<a href="${updateWalletLink}">查看電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<a href="${showTheUserOrderLink}">查看訂單</a> -->
+	
+
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    請選擇要更新資料
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
+    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
+    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
+    <a class="dropdown-item" href="showTheUserOrder">查看訂單</a>
+  </div>
+</div>
+	
 	<!-- 選單 -->
 	
 		   <form:form method="POST" action="userUpdateProfile" modelAttribute="profile">
@@ -119,7 +131,20 @@
 								>儲存</form:button>
 			</form:form>
       </div>
- 
+      
+<!-- <script>
+    document.getElementById("userInfo").onchange = function() {
+        if (this.selectedIndex!==0) {
+            window.location.href = this.value;
+        }        
+    };
+</script> -->
+<script type="text/javascript">
+function handleSelect(elm)
+{
+window.location = elm.value+".jsp";
+}
+</script>
       
 </body>
 </html>

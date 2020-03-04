@@ -47,13 +47,14 @@
     <div class="col-md-6 ml-auto">
       <form  class="form-inline" name="searchForm" action="<jstl:url value="directservicesProducts" />" method="post" >
         <div class="dropdown mx-4">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            選擇類型
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">蔬菜</a>
-            <a class="dropdown-item" href="#">水果</a>
-          </div>
+         
+          	<select name="selectCategory" id="theme" class="form-control">
+      			<option selected value="類別">類別</option>
+      			<option value="蔥類">蔥類</option>
+      			<option value="根菜類">根菜類</option>
+      			<option value="莖菜類">莖菜類</option>
+      			<option value="瓜果類">瓜果類</option>
+      			</select>
         </div>
         <input type="text" class="form-control mr-2" placeholder="搜尋商品" name="searchBar">
         <button class="btn btn-outline-success">搜尋</button>
@@ -65,14 +66,14 @@
 </section>
 
 		
-      <div style="position: absolute;" class="py-3">
+<!--       <div style="position: absolute;" class="py-3">
         <i class="fa fa-shopping-cart mb-1"></i>
       	<ul id="show-cart">
         <li>???????</li>
       	</ul>
       <div>總金額:$<span id="total-cart"></span></div>
 	</div>
-
+ -->
 
 
 <!-- SERVICES SECTION -->
@@ -99,10 +100,10 @@
                         </p>
                         <h3 id="productPrice" class="card-text">價格: ${product.productPrice} 元</h3>
                         <div class="row ml-5">
-                        <a href="${theProductLink}" class="btn btn-success text-white mt-2 ml-2">查看</a>
+                        <a href="${theProductLink}" class="btn btn-secondary text-white mt-2 ml-2">查看</a>
 
 
-                        <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" 
+                        <a href="#" class="btn btn-success text-white mt-2 ml-2 add-to-cart" 
                         data-id="${product.productID}" 
                         data-img="${product.productImg}" 
                         data-name="${product.productName}" 
@@ -167,7 +168,7 @@
       <!--Body-->
       <div class="modal-body">
 
-        <i class="fas fa-shopping-cart fa-4x"></i>
+        <i class="fas fa-shopping-cart fa-4x" style="color: #292b2c;"></i>
 
       </div>
 
@@ -555,7 +556,6 @@
 
         displayCart();   
     </script>
-    //商品搜尋下拉式選單可以展開(但點選後還是不能顯示所選的項目)
     <script>$(document).ready(function() {
     	$('.dropdown-toggle').dropdown();
     });

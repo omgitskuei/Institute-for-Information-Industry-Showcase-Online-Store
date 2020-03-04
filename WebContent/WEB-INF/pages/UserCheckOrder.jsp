@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@
     <div class="container">
     
     <br>
-    <h2>使用者查看訂單</h2>
+    <!-- <h2>使用者查看訂單</h2> -->
     
     <!-- 選單 -->
     <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
@@ -46,15 +46,26 @@
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
-	<jstl:url var="showTheUserSettingLink" value="/UserProfile/showTheUserSetting">
-		<jstl:param name="userID" value="${user.userID}" />
-	</jstl:url>
-	
-	<a href="${updateLink}">更新使用者基本資料</a>
+
+	<!-- <a href="${updateLink}">更新使用者基本資料</a>
+
 	<a href="${updatePasswordLink}">更改密碼</a>
 	<a href="${showTheUserSettingLink}">更改安全問題</a>
 	<a href="${updateWalletLink}">查看電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<a href="${showTheUserOrderLink}">查看訂單</a> -->
+	
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    請選擇要更新資料
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="userUpdateForm">更新基本資料</a>
+    <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
+    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
+    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
+  </div>
+</div>
 	<!-- 選單 -->
 	
 	
@@ -72,7 +83,8 @@
 		        <jstl:forEach var="userOrder" items="${userOrder}">
 	    <tbody>
 		    <tr>
-		        <td>${userOrder.orderID}</td>
+                <td><a  href='<c:url value='userDetails.do?orderID=${userOrder.orderID}' />' target="_blank">
+                ${userOrder.orderID}</a></td>
 				<td>${userOrder.userID}</td>
 				<td>${userOrder.total}</td>
 				<td>${userOrder.mailingAddress}</td>

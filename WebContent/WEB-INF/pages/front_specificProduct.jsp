@@ -67,7 +67,7 @@
                   </div>
                   <hr>
                   <div class="input-group mt-3">
-                      <a href="#" class="btn btn-danger  mt-2 ml-2 add-to-cart" 
+                      <a href="#" class="btn btn-success text-white  mt-2 ml-2 add-to-cart" 
                       data-id="${theProduct.productID}" 
                       data-img="${theProduct.productImg}" 
                       data-name="${theProduct.productName}" 

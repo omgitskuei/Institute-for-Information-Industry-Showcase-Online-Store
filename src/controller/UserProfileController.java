@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.order.OrderBean;
 import model.order.OrderBeanDAO;
+import model.orderDetails.OrderDetailsBean;
+import model.orderDetails.OrderDetailsBeanDAO;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
 import model.setting.SettingBean;
@@ -50,6 +52,10 @@ public class UserProfileController {
 	
 	@Autowired
 	private SettingBeanService settingService;
+
+  @Autowired
+	private OrderDetailsBeanDAO odDAO;
+
 	
 	@GetMapping("/userUpdateForm")
 	public String showFormForUpdate(@SessionAttribute("userEmail") String uEmail, Model m) {
@@ -112,6 +118,7 @@ public class UserProfileController {
 		m.addAttribute("userOrder", theUserOrder);
 		return "UserCheckOrder";
 	}
+
 	
 	@GetMapping("/showTheUserSetting")
 	public String showTheUserSetting(@SessionAttribute("userEmail") String uEmail, Model m) {
@@ -144,5 +151,18 @@ public class UserProfileController {
 	    setting.setSettingAllowMetadata(settingAllowMetadata);
 		
 		return "UserUpdateSettingForm";
+
+	//使用者查看訂單明細
+	@GetMapping("/userDetails")
+	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model, @RequestParam("orderID")int OrderID ) {
+		//顯示Order部分
+		List<OrderBean> orderToDetailsList=orderDAO.selectByOrderID(OrderID);
+		model.addAttribute("orderToDetailsList", orderToDetailsList);
+		//顯示OrderDetails部分
+		List<OrderDetailsBean> detailsList=odDAO.selectAllByOrderID(OrderID);
+		model.addAttribute("detailsList", detailsList);
+
+		return "UserDetailsList";
+
 	}
 }
