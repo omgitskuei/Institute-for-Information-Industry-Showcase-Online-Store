@@ -44,11 +44,22 @@
     <div class="row">
       <div class="col-md-6 ml-auto">
          <form class="form" name="searchForm" action="<jstl:url value="searchInventoryProducts" />" method="post">
+          
         <div class="input-group">
+         <div class="col-md-3">
+     	 	<select name="selectCategory" id="theme" class="form-control">
+      			<option selected value="類別">類別</option>
+      			<option value="蔥類">蔥類</option>
+      			<option value="根菜類">根菜類</option>
+      			<option value="莖菜類">莖菜類</option>
+      			<option value="瓜果類">瓜果類</option>
+      			</select>
+   		   </div>
             <input type="text" class="form-control" placeholder="搜尋庫存商品..." name="searchBar">
             <div class="input-group-append">
                 <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
+         
         </div>
       </form>
       </div>
