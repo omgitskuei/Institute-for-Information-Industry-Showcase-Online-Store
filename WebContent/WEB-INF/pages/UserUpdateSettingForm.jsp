@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+ <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+    	<%@include file="/WEB-INF/css/bootstrap.css"%>
+        <%@include file="/WEB-INF/css/style.css"%>
+    </style>
 <title>使用者更新安全問題</title>
 </head>
 <body>
@@ -25,24 +34,21 @@
     <!-- PAGE HEADER -->
     
 <div class="container">
-<br>
- <!-- 選單 -->
- <div class="userMenu">
-    <div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    請選擇要更新資料
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
-    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
-    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
-    <a class="dropdown-item" href="showTheUserOrder">查看訂單</a>
-  </div>
-</div>
-	<!-- 選單 -->
-</div>
-<h3>使用者更新安全問題</h3>
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-12">
+    <h2 class="my-3">使用者更新安全問題</h2>
+    
+    <!-- 選單 -->
+    
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link active" href="${showTheUserSettingLink}">更改安全問題</a>
+		<li class="nav-item"><a class="nav-link" href="${updateWalletLink}">查看電子錢包</a></li>
+		<li class="nav-item"><a class="nav-link" href="${showTheUserOrderLink}">查看訂單</a></li>
+	</ul>
+	</div>
+	</div>
 
 <form method="POST" action="<jstl:url value="/UserProfile/updateSetting" />" >
 		<div class="form-group">
@@ -79,6 +85,12 @@
 						>儲存</button>
 		
 		</form>
+		
 </div>
+<script src="https://kit.fontawesome.com/c3dc04dc4d.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>

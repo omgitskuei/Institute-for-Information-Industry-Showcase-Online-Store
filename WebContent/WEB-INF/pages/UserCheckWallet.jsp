@@ -63,6 +63,7 @@
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
 		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link" href="${showTheUserSettingLink}">更改安全問題</a>
 		<li class="nav-item"><a class="nav-link active" href="${updateWalletLink}">查看電子錢包</a></li>
 		<li class="nav-item"><a class="nav-link" href="${showTheUserOrderLink}">查看訂單</a></li>
 	</ul>
