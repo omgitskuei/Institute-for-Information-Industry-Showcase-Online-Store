@@ -63,27 +63,6 @@
 	<li class="nav-item"><a class="nav-link active" href="${showTheUserOrderLink}">查看訂單</a></li>
 	</ul>
 
-
-	<!-- <a href="${updateLink}">更新使用者基本資料</a>
-
-	<a href="${updatePasswordLink}">更改密碼</a>
-	<a href="${showTheUserSettingLink}">更改安全問題</a>
-	<a href="${updateWalletLink}">查看電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a> -->
-<!--	
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    請選擇要更新資料
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="userUpdateForm">更新基本資料</a>
-    <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
-    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
-    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
-  </div>
-</div>
--->
 	<!-- 選單 -->
 	
 	</div>
