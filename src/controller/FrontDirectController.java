@@ -144,7 +144,7 @@ public class FrontDirectController {
 	@RequestMapping(value = "/directForgotPassword", method = RequestMethod.GET)
 	public String directToForgotPassword() {
 		System.out.println("導到Forgot Password; front_forgetpwd.jsp");
-		return "front_forgetpwd";
+		return "front_forgetpwd1_email";
 	}
 	
 	// 1)進註冊
