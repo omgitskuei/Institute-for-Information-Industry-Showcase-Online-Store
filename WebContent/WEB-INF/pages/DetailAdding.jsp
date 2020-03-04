@@ -64,8 +64,8 @@
 			OrderID.value = location.search.substr (9,2)
 			ProductID.value = "3"
 			ProductName.value = "大蒜"
-			ProductCount.value = "193"
-			ProductPrice.value = "10";
+			ProductCount.value = "2"
+			ProductPrice.value = "193";
 		};
 	</script>
 
