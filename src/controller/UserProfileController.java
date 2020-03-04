@@ -97,7 +97,7 @@ public class UserProfileController {
 		return "UserCheckWallet";
 	}
 	
-	@GetMapping("/showTheUserOrer")
+	@GetMapping("/showTheUserOrder")
 	public String showTheUserOrder(@SessionAttribute("userEmail") String uEmail, Model m) {
 		int userID = userService.selectUserIDByEmail(uEmail);
 		System.out.println("userID is: " + userID);

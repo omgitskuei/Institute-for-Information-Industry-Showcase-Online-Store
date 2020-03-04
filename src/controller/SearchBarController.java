@@ -111,11 +111,32 @@ public class SearchBarController {
 		return "AdminIndex";
 	}
 	
+	
 	@RequestMapping(path = "/AdminProduct/searchInventoryProducts", method = RequestMethod.POST)
-	public String searchInventoryProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
+	public String searchInventoryProducts(
+			HttpServletRequest request,
+			@RequestParam(name = "searchBar") String searchBar, 
+			@RequestParam(name = "selectCategory") String selectCategory,
+			Model nextPage) {
+//		String s = request.getParameter("selectCategory");
+//		System.out.println(s);
+		
 		System.out.println("BEGIN: /searchInventoryProducts");
-		System.out.println("	User input: " + searchBar);
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+		System.out.println("	User input (searchBar): [" + searchBar+"]");
+		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
+		String category = "";
+		if (selectCategory.equals("蔥類")) {
+			category = "蔥類";
+		} else if (selectCategory.equals("根菜類")) {
+			category = "根菜類";
+		} else if (selectCategory.equals("莖菜類")) {
+			category = "莖菜類";
+		} else if (selectCategory.equals("瓜果類")) {
+			category = "瓜果類";
+		} else {
+			category = searchBar;
+		}
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);
@@ -128,17 +149,37 @@ public class SearchBarController {
 			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
-		// return results
 		nextPage.addAttribute("SearchResults", fuzzyResults);
+	
 		System.out.println("FINISH: /searchInventoryProducts");
 		return "AdminInventory";
 	}
 	
 	@RequestMapping(path = "/directservicesProducts", method = RequestMethod.POST)
-	public String searchserviceProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
-		System.out.println("BEGIN: /searchservicesProducts");
-		System.out.println("	User input: " + searchBar);
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+	public String searchserviceProducts(
+			HttpServletRequest request,
+			@RequestParam(name = "searchBar") String searchBar, 
+			@RequestParam(name = "selectCategory") String selectCategory,
+			Model nextPage) {
+//		String s = request.getParameter("selectCategory");
+//		System.out.println(s);
+		
+		System.out.println("BEGIN: /searchserviceProducts");
+		System.out.println("	User input (searchBar): [" + searchBar+"]");
+		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
+		String category = "";
+		if (selectCategory.equals("蔥類")) {
+			category = "蔥類";
+		} else if (selectCategory.equals("根菜類")) {
+			category = "根菜類";
+		} else if (selectCategory.equals("莖菜類")) {
+			category = "莖菜類";
+		} else if (selectCategory.equals("瓜果類")) {
+			category = "瓜果類";
+		} else {
+			category = searchBar;
+		}
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);
@@ -151,9 +192,9 @@ public class SearchBarController {
 			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
-		// return results
 		nextPage.addAttribute("SearchResults", fuzzyResults);
-		System.out.println("FINISH: /searchservicesProducts");
+	
+		System.out.println("FINISH: /searchserviceProducts");
 		return "front_services";
 	}
 	

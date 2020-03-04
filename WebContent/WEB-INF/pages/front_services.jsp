@@ -47,13 +47,14 @@
     <div class="col-md-6 ml-auto">
       <form  class="form-inline" name="searchForm" action="<jstl:url value="directservicesProducts" />" method="post" >
         <div class="dropdown mx-4">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            選擇類型
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">蔬菜</a>
-            <a class="dropdown-item" href="#">水果</a>
-          </div>
+         
+          	<select name="selectCategory" id="theme" class="form-control">
+      			<option selected value="類別">類別</option>
+      			<option value="蔥類">蔥類</option>
+      			<option value="根菜類">根菜類</option>
+      			<option value="莖菜類">莖菜類</option>
+      			<option value="瓜果類">瓜果類</option>
+      			</select>
         </div>
         <input type="text" class="form-control mr-2" placeholder="搜尋商品" name="searchBar">
         <button class="btn btn-outline-success">搜尋</button>
