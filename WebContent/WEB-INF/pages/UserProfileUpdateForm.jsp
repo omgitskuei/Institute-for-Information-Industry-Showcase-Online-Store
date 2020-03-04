@@ -63,6 +63,30 @@
 	</ul>
 	</div>
 	</div>
+
+	
+
+	<!-- <a href="${updateLink}">更新使用者基本資料</a>
+	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${showTheUserSettingLink}">更改安全問題</a>
+	<a href="${updateWalletLink}">查看電子錢包</a>
+	<a href="${showTheUserOrderLink}">查看訂單</a> -->
+	
+<!--
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    請選擇要更新資料
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
+    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
+    <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
+    <a class="dropdown-item" href="showTheUserOrder">查看訂單</a>
+  </div>
+</div>
+-->	
+
 	<!-- 選單 -->
 	
 		   <form:form method="POST" action="userUpdateProfile" modelAttribute="profile">
@@ -133,5 +157,21 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      
+<!-- <script>
+    document.getElementById("userInfo").onchange = function() {
+        if (this.selectedIndex!==0) {
+            window.location.href = this.value;
+        }        
+    };
+</script> -->
+<script type="text/javascript">
+function handleSelect(elm)
+{
+window.location = elm.value+".jsp";
+}
+</script>
+      
 </body>
 </html>
