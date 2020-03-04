@@ -43,7 +43,7 @@ public class FindUniqueProductController {
 		System.out.println("thisBean"+thisBean);
 		System.out.println("input"+input);
 		
-		byte[] productImage=thisBean.getProductImg();
+		String productImage=thisBean.getProductImg();
 		nextPage.addAttribute("resultImg", productImage);
 		// name
 		nextPage.addAttribute("resultName", thisBean.getProductName());

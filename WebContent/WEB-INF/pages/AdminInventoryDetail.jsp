@@ -82,8 +82,10 @@
               <div class="form-group">
                 <label for="inventoryCategory">商品類別</label>
                 <select class="form-control">
-                  <option value="" selected>蔬菜</option>
-                  <option value="">水果</option>
+                  <option value="" selected>蔥類</option>
+                  <option value="">根菜類</option>
+                  <option value="">莖菜類</option>
+                  <option value="">瓜果類</option>
                 </select>
               </div>
               <div class="form-group">
