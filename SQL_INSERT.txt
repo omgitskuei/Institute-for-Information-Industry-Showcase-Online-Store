@@ -3,7 +3,7 @@ go
 
 INSERT INTO UsersTable(userEmail,userPwd,admin)
 VALUES ('farmvilletaiwan@gmail.com', '010d6e1ac5555bd143b696887592a9029999cb15b364c476937f60b9a126f340eed7296b9c9270e274', 1), --Qq22222!
-	   ('kueifengtung@yahoo.com', '010d6e1ac5555bd143b696887592a9029999cb15b364c476937f60b9a126f340eed7296b9c9270e274', 0), --Qq22222!
+	   ('leon123@yahoo.com.tw', '010d6e1ac5555bd143b696887592a9029999cb15b364c476937f60b9a126f340eed7296b9c9270e274', 0), --Qq22222!
 	   ('kueifengtungchris@gmail.com', '010d6e1ac5fd1c2b2eac68b0ebec0130e23327d6851971bdd17bcf191e9e6ba7568c81e870924a227c', 0) --Qq1!qwer
 go
 
