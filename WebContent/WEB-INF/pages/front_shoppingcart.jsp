@@ -109,15 +109,13 @@
         <div class="col mb-2">
             <div class="row d-flex justify-content-end">
                 <div class="col-sm-2">
-                    <a href=<jstl:url value="/directservices"/> class="btn btn-lg btn-block btn-light">繼續購物</a>
+                    <a href=<jstl:url value="/directservices"/> class="btn btn-lg btn-block btn-secondary">繼續購物</a>
                 </div>
                 <div class="col-sm-2">
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-sm-2">
-                    <a href=<jstl:url value="/directCheckOutPage"/> onclick="addToOrder()" class="btn btn-lg btn-block btn-success text-white">結帳</a>
-<!--                    暫放 綠界測試結帳 -->
-                    <a href="https://p.ecpay.com.tw/206D0" class="mt-1" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
+                    <a href="#"  onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
                 </div>
             </div>
         </div>
@@ -365,8 +363,8 @@
             "<td>" + "<input class='item-count form-control' type='text' data-name='"+cartArray[i].name+"' value='"+cartArray[i].count+"'/>" + "</td>"+
             "<td class='text-right price'>" + cartArray[i].price + "</td>" + 
             "<td class='text-right price'>" + cartArray[i].total + "</td>" + 
-            "<td><button class='plus-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>" +
-            "<td><button class='subtract-item btn btn-secondary btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + 
+            "<td><button class='plus-item btn btn-light btn-sm' data-name='"+cartArray[i].name+"'>+</button></td>" +
+            "<td><button class='subtract-item btn btn-light btn-sm' data-name='"+cartArray[i].name+"'>-</button></td>" + 
             "<td><button class='delete-item btn btn-sm btn-danger' data-name='"+cartArray[i].name+"'>X</button></td>" +
             "</tr>"  
           }	

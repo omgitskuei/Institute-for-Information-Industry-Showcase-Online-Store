@@ -41,7 +41,7 @@
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <i class="fa fa-shopping-cart" style="display: inline-block;"></i>
+              <i class="fa fa-shopping-cart" style="display: inline-block; color: #3E5902;"></i>
               <a href=<jstl:url value="/directshoppingcart"/> class="nav-link" style="display: inline-block;">購物車</a>
             </li>
             
