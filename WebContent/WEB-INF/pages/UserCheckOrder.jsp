@@ -83,8 +83,8 @@
 		        <jstl:forEach var="userOrder" items="${userOrder}">
 	    <tbody>
 		    <tr>
-                <td><a  href='<c:url value='userDetails.do?orderID=${userOrder.orderID}' />' target="_blank">
-                ${userOrder.orderID}</a></td>
+                <td><a class="btn btn-info" href='<c:url value='userDetails.do?orderID=${userOrder.orderID}' />' target="_blank">
+                ${userOrder.orderID} 查看明細</a></td>
 				<td>${userOrder.userID}</td>
 				<td>${userOrder.total}</td>
 				<td>${userOrder.mailingAddress}</td>
