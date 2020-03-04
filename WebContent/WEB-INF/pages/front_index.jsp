@@ -37,7 +37,15 @@
                 <p class="lead">
                   讓您買得快速，吃得安心
                 </p>
-                <a href=<jstl:url value="/directlogin"/> class="btn btn-success btn-lg btn-color-signup text-white">現在就登入</a>
+                <!-- 如果為空 才顯示 -->
+				<jstl:if test="${empty cookie.loginSuccessCookie}">
+					<a href=<jstl:url value="/directlogin"/> class="btn btn-success btn-lg btn-color-signup text-white">現在就登入</a>
+				</jstl:if>
+				<!-- 如果不為空 才顯示 -->
+				<jstl:if test="${cookie.containsKey('loginSuccessCookie')}">
+					<a href=<jstl:url value="/directservices"/> class="btn btn-success btn-lg btn-color-signup text-white">現在就購物</a>
+				</jstl:if>
+                
               </div>
               </div>
             </div>

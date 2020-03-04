@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sun.xml.bind.CycleRecoverable.Context;
 
+import model.order.OrderBean;
+import model.order.OrderBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
 import model.profile.ProfileBean;
@@ -29,13 +33,15 @@ public class SearchBarController {
 	// fields
 	private ProductBeanService pService;
 	private UserBeanService uService;
+	private OrderBeanService oService;
 	private ProfileBeanService profileService;
 	private HttpServletResponse response;
 	// constructor
 	@Autowired
-	public SearchBarController(ProductBeanService pService, UserBeanService uService, ProfileBeanService profileService, HttpServletResponse response) {
+	public SearchBarController(OrderBeanService oService, ProductBeanService pService, UserBeanService uService, ProfileBeanService profileService, HttpServletResponse response) {
 		this.pService = pService;
 		this.uService = uService;
+		this.oService = oService;
 		this.profileService = profileService;
 		this.response = response;
 	}
@@ -78,6 +84,29 @@ public class SearchBarController {
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
 		nextPage.addAttribute("SearchResults", fuzzyResults);
+		
+		List<ProductBean> totalP = pService.selectAll();
+		int totalPCount = totalP.size();
+		String totalPCountString = Integer.toString(totalPCount);
+		System.out.println("TOTAL PRODUCT COUNT: "+totalPCount);
+		
+		List<OrderBean> totalO = oService.selectAll();
+		int totalOCount = totalO.size();
+		String totalOCountString = Integer.toString(totalOCount);
+		System.out.println("TOTAL ORDER COUNT: "+totalOCount);
+		
+		List<UserBean> totalU = uService.selectFuzzy("");
+		int totalUCount = totalU.size();
+		String totalUCountString = Integer.toString(totalUCount);
+		System.out.println("TOTAL USER COUNT: "+totalUCount);
+		
+		Map<String, String> dataNum = new HashMap<String, String>();
+		dataNum.put("product", totalPCountString);
+		dataNum.put("order", totalOCountString);
+		dataNum.put("user", totalUCountString);
+		
+		nextPage.addAttribute("dataNum", dataNum);
+		
 		System.out.println("FINISH: /searchBarProducts");
 		return "AdminIndex";
 	}
@@ -105,6 +134,28 @@ public class SearchBarController {
 		return "AdminInventory";
 	}
 	
+	@RequestMapping(path = "/directservicesProducts", method = RequestMethod.POST)
+	public String searchserviceProducts(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {
+		System.out.println("BEGIN: /searchservicesProducts");
+		System.out.println("	User input: " + searchBar);
+		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
+		System.out.println("	QUERY RESULTS:");
+		for (int index = 0; index < fuzzyResults.size(); index++) {
+			System.out.println("	List index #"+index);
+			System.out.println("		id: " + fuzzyResults.get(index).getProductID());
+			System.out.println("		name: " + fuzzyResults.get(index).getProductName());
+			System.out.println("		price: " + fuzzyResults.get(index).getProductPrice());
+			System.out.println("		stock: " + fuzzyResults.get(index).getProductStock());
+			System.out.println("		description: " + fuzzyResults.get(index).getProductDescription());
+			System.out.println("		image: " + fuzzyResults.get(index).getProductImg());
+			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
+			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
+		}
+		// return results
+		nextPage.addAttribute("SearchResults", fuzzyResults);
+		System.out.println("FINISH: /searchservicesProducts");
+		return "front_services";
+	}
 	
 	@RequestMapping(path = "/AdminProfile/searchBarProfiles", method = RequestMethod.POST)
 	public String searchBarProfiles(@RequestParam(name = "searchBar") String searchBar, Model nextPage) {

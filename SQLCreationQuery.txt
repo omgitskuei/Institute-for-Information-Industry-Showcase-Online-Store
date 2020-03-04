@@ -24,7 +24,7 @@ profileJoinDate datetime Not NULL,	-- Will automatically set value to Now with J
 profileBirthdate datetime,
 profileSex char(1),
 profilePhone NVarchar(50) Not NULL,
-profileAddress NVarchar(50),	-- NULL allowed when updating Profile, but NOT NULL for checkout
+profileAddress NVarchar(max),	-- NULL allowed when updating Profile, but NOT NULL for checkout
 profileVIP int DEFAULT '0' Not NULL,  	-- Defaults to '0' for 'NO, user is NOT VIP'
 )
 GO

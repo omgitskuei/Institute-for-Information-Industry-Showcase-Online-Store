@@ -63,7 +63,7 @@
 <section id="search" class="py-4 mb-4 bg-light">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 ml-auto">
+      <div class="col-md-9">
       <!-- FORM URL -->
       <form class="form" name="searchForm" action="<jstl:url value="searchBarProducts" />" method="post">
         <div class="input-group">
@@ -73,24 +73,20 @@
             <div class="input-group-append">
                 <input type="submit" class="btn btn-primary" value="搜尋">
             </div>
-            <div class="input-group-append">
-           		<select name="selectCategory" id="theme" class="form-control">
+
+            <div class="col-md-3">
+     	 	<select name="selectCategory" id="theme" class="form-control">
       			<option selected value="搜尋商品類別">搜尋商品類別</option>
       			<option value="蔥類">蔥類</option>
       			<option value="根菜類">根菜類</option>
       			<option value="莖菜類">莖菜類</option>
       			<option value="瓜果類">瓜果類</option>
       			</select>
-            </div>
+   		   </div>
         </div>
-        
-        
-        
       </form>
       </div>
-      <div class="col-md-6 ml-auto">
-      	
-      </div>
+      
      </div>
     </div>
    </section>
@@ -159,9 +155,8 @@
           <div class="card-body">
             <h3>庫存商品</h3>
             <h4 class="display-4">
-              <i class="fas fa-pencil-alt"></i> 6
+              <i class="fas fa-pencil-alt"></i> ${dataNum.product}
             </h4>
-            <a href=<jstl:url value="/AdminProduct/inventories"/> class="btn btn-outline-light btn-sm">檢視</a>
           </div>
         </div>
 
@@ -169,9 +164,8 @@
           <div class="card-body">
             <h3>訂單</h3>
             <h4 class="display-4">
-              <i class="fas fa-folder"></i> 4
+              <i class="fas fa-folder"></i> ${dataNum.order}
             </h4>
-            <a href=<jstl:url value="/orders"/> class="btn btn-outline-light btn-sm">檢視</a>
           </div>
         </div>
 
@@ -179,9 +173,8 @@
           <div class="card-body">
             <h3>使用者</h3>
             <h4 class="display-4">
-              <i class="fas fa-users"></i> 4
+              <i class="fas fa-users"></i> ${dataNum.user}
             </h4>
-            <a href="<jstl:url value="/AdminProfile/list" />" class="btn btn-outline-light btn-sm" > Show Profile </a>
           </div>
         </div>
       </div>
