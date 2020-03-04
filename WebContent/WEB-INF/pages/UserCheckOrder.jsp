@@ -24,10 +24,12 @@
     </header>
     <!-- PAGE HEADER -->
     
-    <div class="container">
     
-    <br>
-    <h2>使用者查看訂單</h2>
+    <div class="container">
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-12">
+    
+    <h2 class="my-3">使用者查看訂單</h2>
     
     <!-- 選單 -->
     <jstl:url var="updateLink" value="/UserProfile/userUpdateForm">
@@ -46,14 +48,19 @@
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
-	<a href="${updateLink}">更新使用者基本資料</a>
-	<a href="${updatePasswordLink}">更改密碼</a>
-	<a href="${updateWalletLink}">查看電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<ul class="nav nav-tabs">
+	<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
+	<li class="nav-tiem"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+	<li class="nav-item"><a class="nav-link" href="${updateWalletLink}">查看電子錢包</a></li>
+	<li class="nav-item"><a class="nav-link active" href="${showTheUserOrderLink}">查看訂單</a></li>
+	</ul>
 	<!-- 選單 -->
 	
+	</div>
+	</div>
 	
-	<table class="table">
+	
+	<table class="table mt-4">
 		<thead>
 	    <tr>
 	      <th scope="col">訂單 ID(OrderID):</th>
