@@ -46,8 +46,11 @@
 		<jstl:param name="userID" value="${user.userID}" />
 	</jstl:url>
 	
+
 	<!-- <a href="${updateLink}">更新使用者基本資料</a>
+
 	<a href="${updatePasswordLink}">更改密碼</a>
+	<a href="${showTheUserSettingLink}">更改安全問題</a>
 	<a href="${updateWalletLink}">查看電子錢包</a>
 	<a href="${showTheUserOrderLink}">查看訂單</a> -->
 	
@@ -59,6 +62,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <a class="dropdown-item" href="userUpdateForm">更新基本資料</a>
     <a class="dropdown-item" href="userUpdatePasswordForm">更改密碼</a>
+    <a class="dropdown-item" href="showTheUserSetting">更改安全問題</a>
     <a class="dropdown-item" href="showUserWallet">查看電子錢包</a>
   </div>
 </div>

@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -24,6 +25,8 @@ import model.orderDetails.OrderDetailsBean;
 import model.orderDetails.OrderDetailsBeanDAO;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
+import model.setting.SettingBean;
+import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
 import model.wallet.WalletBean;
@@ -48,7 +51,11 @@ public class UserProfileController {
 	private OrderBeanDAO orderDAO;
 	
 	@Autowired
+	private SettingBeanService settingService;
+
+  @Autowired
 	private OrderDetailsBeanDAO odDAO;
+
 	
 	@GetMapping("/userUpdateForm")
 	public String showFormForUpdate(@SessionAttribute("userEmail") String uEmail, Model m) {
@@ -111,6 +118,40 @@ public class UserProfileController {
 		m.addAttribute("userOrder", theUserOrder);
 		return "UserCheckOrder";
 	}
+
+	
+	@GetMapping("/showTheUserSetting")
+	public String showTheUserSetting(@SessionAttribute("userEmail") String uEmail, Model m) {
+		int userID = userService.selectUserIDByEmail(uEmail);
+		SettingBean theUserSetting = settingService.select(userID);
+		System.out.println("Setting ID is " + theUserSetting.getSettingID());
+		System.out.println("User ID is " + theUserSetting.getUserID());
+		System.out.println("Security Q is " + theUserSetting.getSettingSecurityQ());
+		System.out.println("Security A is " + theUserSetting.getSettingSecurityA());
+		System.out.println("Allow metadata is " + theUserSetting.getSettingAllowMetadata());
+		
+		m.addAttribute("userSetting",theUserSetting);
+		System.out.println("UserSetting is :" + theUserSetting);
+		return "UserUpdateSettingForm";
+	}
+	
+	@PostMapping("/updateSetting")
+	public String updateSetting(@RequestParam(value = "settingID",required = true) int settingID,
+							  @RequestParam(value = "userID",required = true) int userID,
+			                  @RequestParam(value="settingSecurityQ", required=false) String settingSecurityQ,
+			                  @RequestParam(value="settingSecurityA", required=false) String settingSecurityA,
+			                  @RequestParam(value="settingDisplayName", required=true) String settingDisplayName,
+			                  @RequestParam(value="settingAllowMetadata", required=true) boolean settingAllowMetadata) {
+	    SettingBean setting = new SettingBean();
+	    setting.setSettingID(settingID);
+	    setting.setUserID(userID);
+	    setting.setSettingSecurityQ(settingSecurityQ);
+	    setting.setSettingSecurityA(settingSecurityA);
+	    setting.setSettingDisplayName(settingDisplayName);
+	    setting.setSettingAllowMetadata(settingAllowMetadata);
+		
+		return "UserUpdateSettingForm";
+
 	//使用者查看訂單明細
 	@GetMapping("/userDetails")
 	public String showForm(@SessionAttribute("userEmail") String uEmail, Model model, @RequestParam("orderID")int OrderID ) {
@@ -122,5 +163,6 @@ public class UserProfileController {
 		model.addAttribute("detailsList", detailsList);
 
 		return "UserDetailsList";
+
 	}
 }
