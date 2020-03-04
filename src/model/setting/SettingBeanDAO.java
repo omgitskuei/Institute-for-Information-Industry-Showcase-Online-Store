@@ -93,6 +93,7 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 		if (existingSetting != null) {
 			String oldQ = existingSetting.getSettingSecurityQ();
 			existingSetting.setSettingSecurityQ(newQ);
+			session.update(existingSetting);
 			System.out.println("Setting Security Q UPDATED from " + oldQ + " to " + newQ);
 			System.out.println("FINISH: SettingBean.updateSettingSecurityQ(SettingBean, String)");
 			return true;
@@ -112,6 +113,7 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 			if (existingSetting != null) {
 				String oldA = existingSetting.getSettingSecurityA();
 				existingSetting.setSettingSecurityA(newA);
+				session.update(existingSetting);
 				System.out.println("Setting Security Answer UPDATED from " + oldA + " to " + newA);
 				System.out.println("FINISH: SettingBean.updateSettingSecurityA(SettingBean, String)");
 				return true;
@@ -136,6 +138,7 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 			if (existingSetting != null) {
 				String oldName = existingSetting.getSettingDisplayName();
 				existingSetting.setSettingDisplayName(newSettingDisplayName);
+				session.update(existingSetting);
 				System.out.println("Setting Display name UPDATED from " + oldName + " to " + newSettingDisplayName);
 				System.out.println("FINISH: SettingBean.updateSettingDisplayName(SettingBean, String)");
 				return true;
@@ -160,6 +163,7 @@ public class SettingBeanDAO implements SettingBeanDAOInterface {
 			if (existingSetting != null) {
 				boolean oldAllow = existingSetting.getSettingAllowMetadata();
 				existingSetting.setSettingAllowMetadata(newSettingAllowMetadata);
+				session.update(existingSetting);
 				System.out.println("Setting AllowMetadata Updated from "+oldAllow+" to "+newSettingAllowMetadata);
 				System.out.println("FINISH: SettingBean.updateSettingAllowMetadata(SettingBean, boolean)");
 				return true;

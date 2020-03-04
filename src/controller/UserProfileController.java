@@ -145,20 +145,13 @@ public class UserProfileController {
 			                  @RequestParam(value="settingSecurityA", required=false) String newA,
 			                  @RequestParam(value="settingDisplayName", required=true) String newSettingDisplayName,
 			                  @RequestParam(value="settingAllowMetadata", required=true) boolean newSettingAllowMetadata) {
-//	    SettingBean setting = new SettingBean();
-//	    setting.setSettingID(settingID);
-//	    setting.setUserID(userID);
-//	    setting.setSettingSecurityQ(settingSecurityQ);
-//	    setting.setSettingSecurityA(settingSecurityA);
-//	    setting.setSettingDisplayName(settingDisplayName);
-//	    setting.setSettingAllowMetadata(settingAllowMetadata);
 		
 		settingDAO.updateSettingSecurityQ(updateThisSetting, newQ);
 		settingDAO.updateSettingSecurityA(updateThisSetting, newA);
 		settingDAO.updateSettingDisplayName(updateThisSetting, newSettingDisplayName);
 		settingDAO.updateSettingAllowMetadata(updateThisSetting, newSettingAllowMetadata);
 		
-		return "UserUpdateSettingForm";
+		return "redirect:/UserProfile/showTheUserSetting";
 	}
 
 	//使用者查看訂單明細
