@@ -83,7 +83,7 @@ public class AdminSignUpController {
 				
 				// Send 
 				EmailUsers emailSender = new EmailUsers();
-				emailSender.sendVerifyEmail(nEmail, nEmail, verificationCode);
+				emailSender.sendVerifyEmailAdminOnly(nEmail, verificationCode);
 				System.out.println("	Redirecting to AdminLoginConfirm.jsp");
 				return "AdminLoginConfirm";
 			} catch (Exception e) {
