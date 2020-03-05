@@ -52,6 +52,12 @@ public class FrontDirectController {
 		this.response = response;
 	}
 	
+	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
+	public String directCheckoutSuccess() {
+		System.out.println("導到　結賬成功頁面");
+		return "front_intro_checkoutSuccess";
+	}
+	
 	@RequestMapping(value = "/joinNewsletter", method = RequestMethod.POST)
 	public String joinNewsletter(@RequestParam("inputEmail") String email, Model nextPage) {
 		System.out.println("BEGIN: /joinNewsletter");
@@ -75,7 +81,7 @@ public class FrontDirectController {
 	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directhomepage", method = RequestMethod.GET)
-	public String direct() {
+	public String directHomepage() {
 		System.out.println("導到首頁");
 		return "front_index";
 	}

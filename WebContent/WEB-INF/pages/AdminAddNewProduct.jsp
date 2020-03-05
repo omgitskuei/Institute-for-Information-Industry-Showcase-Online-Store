@@ -23,8 +23,10 @@
           <div class="form-group">
             <label for="productCategory">商品類別</label>
             <select class="form-control" name="productCategory" id="productCategory">
-              <option value="蔬菜">蔬菜</option>
-              <option value="水果">水果</option>
+              <option value="蔥類">蔥類</option>
+              <option value="根菜類">根菜類</option>
+              <option value="莖菜類">莖菜類</option>
+              <option value="瓜果類">瓜果類</option>
             </select>
           </div>
           <div class="form-group">
@@ -90,11 +92,11 @@ function readURL(input) {
 		var productPrice = document.getElementById("productPrice");
 		var productDescription = document.getElementById("productDescription");
 		
-		productName.value="香蕉"
-		productCategory.value="水果"
-		productStock.value="100"
-		productPrice.value="20"
-		productDescription.value="香蕉中的水溶性膳食纖維、果膠和果寡糖成份有助促進腸胃蠕動及助消化。";
+		productName.value="馬鈴薯"
+		productCategory.value="莖菜類"
+		productStock.value="19"
+		productPrice.value="29.0"
+		productDescription.value="	一顆煮熟的馬鈴薯有3.2克的抗性澱粉，能幫助降低脂肪儲存。";
 	};
 </script>
 </body>

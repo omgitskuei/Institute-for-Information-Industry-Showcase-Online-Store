@@ -59,18 +59,23 @@ public class SearchBarController {
 		System.out.println("	User input (searchBar): [" + searchBar+"]");
 		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
 		String category = "";
+		List<ProductBean> fuzzyResults = new ArrayList<ProductBean>();
 		if (selectCategory.equals("蔥類")) {
 			category = "蔥類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("根菜類")) {
 			category = "根菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("莖菜類")) {
 			category = "莖菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("瓜果類")) {
 			category = "瓜果類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else {
 			category = searchBar;
+			fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
 		}
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);
@@ -78,8 +83,7 @@ public class SearchBarController {
 			System.out.println("		name: " + fuzzyResults.get(index).getProductName());
 			System.out.println("		price: " + fuzzyResults.get(index).getProductPrice());
 			System.out.println("		stock: " + fuzzyResults.get(index).getProductStock());
-			System.out.println("		description: " + fuzzyResults.get(index).getProductDescription());
-			System.out.println("		image: " + fuzzyResults.get(index).getProductImg());
+
 			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
@@ -111,7 +115,6 @@ public class SearchBarController {
 		return "AdminIndex";
 	}
 	
-	
 	@RequestMapping(path = "/AdminProduct/searchInventoryProducts", method = RequestMethod.POST)
 	public String searchInventoryProducts(
 			HttpServletRequest request,
@@ -125,18 +128,23 @@ public class SearchBarController {
 		System.out.println("	User input (searchBar): [" + searchBar+"]");
 		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
 		String category = "";
+		List<ProductBean> fuzzyResults = new ArrayList<ProductBean>();
 		if (selectCategory.equals("蔥類")) {
 			category = "蔥類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("根菜類")) {
 			category = "根菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("莖菜類")) {
 			category = "莖菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("瓜果類")) {
 			category = "瓜果類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else {
 			category = searchBar;
+			fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
 		}
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);
@@ -144,8 +152,6 @@ public class SearchBarController {
 			System.out.println("		name: " + fuzzyResults.get(index).getProductName());
 			System.out.println("		price: " + fuzzyResults.get(index).getProductPrice());
 			System.out.println("		stock: " + fuzzyResults.get(index).getProductStock());
-			System.out.println("		description: " + fuzzyResults.get(index).getProductDescription());
-			System.out.println("		image: " + fuzzyResults.get(index).getProductImg());
 			System.out.println("		timestamp: " + fuzzyResults.get(index).getProductTimestamp());
 			System.out.println("		category: " + fuzzyResults.get(index).getProductCategory());
 		}
@@ -168,18 +174,23 @@ public class SearchBarController {
 		System.out.println("	User input (searchBar): [" + searchBar+"]");
 		System.out.println("	User input (selectCategory): [" + selectCategory+"]");
 		String category = "";
+		List<ProductBean> fuzzyResults = new ArrayList<ProductBean>();
 		if (selectCategory.equals("蔥類")) {
 			category = "蔥類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("根菜類")) {
 			category = "根菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("莖菜類")) {
 			category = "莖菜類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else if (selectCategory.equals("瓜果類")) {
 			category = "瓜果類";
+			fuzzyResults = pService.selectFuzzy(searchBar, category);
 		} else {
 			category = searchBar;
+			fuzzyResults = pService.selectFuzzy(searchBar, searchBar, searchBar);
 		}
-		List<ProductBean> fuzzyResults = pService.selectFuzzy(searchBar, category);
 		System.out.println("	QUERY RESULTS:");
 		for (int index = 0; index < fuzzyResults.size(); index++) {
 			System.out.println("	List index #"+index);

@@ -29,7 +29,7 @@
 				</div>
 		
 		<div class="form-group">
-				<label>產品價位</label>
+				<label>產品單價</label>
 				<form:input cssClass="form-control" path="productPrice" />
 				</div>
 				
@@ -38,17 +38,17 @@
 				<form:input cssClass="form-control" path="productStock" />
 				</div>
 				
-			<%-- 	
+			<%-- 
 				 <div class="form-group">
             <label for="image">上傳圖片</label>
             <div class="custom-file">
-              <input type="file" name="file" class="custom-file-input" id="imgInput" >
-              <label for="image" class="custom-file-label">選擇檔案</label>
+              <form:input type="file" name="file" class="custom-file-input" id="imgInput" path="productImg"  />
+              <label for="imgInput" class="custom-file-label">選擇檔案</label>
               <img id="output" width="100px" src="#" alt="your image" />
             </div>
             <small class="form-text text-muted">檔案勿超過3MB</small>
           </div>
-			--%>	
+			--%>		
 				
 				<div class="form-group">
 				<label hidden="true">產品圖片</label>
