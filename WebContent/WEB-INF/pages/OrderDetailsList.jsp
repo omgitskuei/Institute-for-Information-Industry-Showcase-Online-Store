@@ -65,7 +65,7 @@
           <div class="card-header">
 			<jstl:forEach var="orderInfo" items="${orderToDetailsList}">
             <h4>訂單編號	${orderInfo.orderID}</h4>
-            <a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a>
+<%--             <a href="orderDetails/updateForm?orderID=${orderInfo.orderID}" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>編輯明細</a> --%>
 			</jstl:forEach>
           </div>
           <table class="table table-striped">

@@ -65,7 +65,7 @@
         <div class="card">
           <div class="card-header">
 		<h4>最新訂單</h4> 
-              <a href="AdminOrder/updateForm?orderID=0" class="btn btn-success">新增訂單</a>
+<!--               <a href="AdminOrder/updateForm?orderID=0" class="btn btn-success">新增訂單</a> -->
           </div>
           <table class="table table-striped">
             <thead class="thead-dark">
@@ -105,9 +105,9 @@
                   </a>
                 </td>
                 <td>
-                  <a href="${deleteLink}" class="btn btn-danger">
-                    <i class="fas fa-angle-double-right"></i> 刪除
-                  </a>
+<%--                   <a href="${deleteLink}" class="btn btn-danger"> --%>
+<!--                     <i class="fas fa-angle-double-right"></i> 刪除 -->
+<!--                   </a> -->
                 </td>
               </tr>
              </jstl:forEach>
