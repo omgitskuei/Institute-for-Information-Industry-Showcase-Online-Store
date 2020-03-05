@@ -44,37 +44,14 @@ public class EncodeHexString {
 	// Methods
 	public String byteArrayToHexString(byte[] byteArray) {
 		System.out.println("	Converting "+byteArray+" to HexString");
-		StringBuffer HexStringBuffer = new StringBuffer();
-		for (int i = 0; i < byteArray.length; i++) {
-			char[] hexDigits = new char[2];
-			hexDigits[0] = Character.forDigit((byteArray[i] >> 4) & 0xF, 16);
-			hexDigits[1] = Character.forDigit((byteArray[i] & 0xF), 16);
-			HexStringBuffer.append(new String(hexDigits));
-		}
-		String result = HexStringBuffer.toString();
+		String result = new String(byteArray);
 		System.out.println("	Result HexString: "+result);
 		return result;
 	}
 
 	public byte[] HexStringToByteArray(String hexString) {
 		System.out.println("	Converting "+hexString+" to byte[]");
-		if (hexString.length() % 2 == 1) {
-			throw new IllegalArgumentException("Invalid hexadecimal String supplied.");
-		}
-		byte[] bytes = new byte[hexString.length() / 2];
-		for (int i = 0; i < hexString.length(); i += 2) {
-			int firstDigit = Character.digit(hexString.substring(i, i + 2).charAt(0), 16);
-			if (firstDigit == -1) {
-				throw new IllegalArgumentException(
-						"	Invalid Hexadecimal Character: " + hexString.substring(i, i + 2).charAt(0));
-			}
-			int secondDigit = Character.digit(hexString.substring(i, i + 2).charAt(1), 16);
-			if (secondDigit == -1) {
-				throw new IllegalArgumentException(
-						"	Invalid Hexadecimal Character: " + hexString.substring(i, i + 2).charAt(1));
-			}
-			bytes[i / 2] = (byte) ((firstDigit << 4) + secondDigit);
-		}
+		byte[] bytes = hexString.getBytes();
 		System.out.println("	Result byte[]: "+bytes);
 		return bytes;
 	}

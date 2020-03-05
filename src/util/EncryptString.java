@@ -91,26 +91,52 @@ public class EncryptString {
 	// Executable
 	public static void main(String args[]) {
 		// Get Input
-		GetRuntimeInput util = new GetRuntimeInput("Input String:");
-		String plainText = util.input;
+		GetRuntimeInput util = new GetRuntimeInput();
+		String plainText = util.getConsoleInputBR("Input exactly: \r\n"
+				+ "1. Encrypt Yes(y)/No(n), \r\n"
+				+ "2. Decrypt Yes(y)/No(n), \r\n"
+				+ "3. Your query string.");
 
 		EncryptString util1 = new EncryptString();
 		// Refreshes the encryption keys in keyset.json.
 		// WARNING: information encrypted with OLD key cannot be decrypted with new key
 		//util1.newCleartextAEADKeyset();
 		
+		String commands = plainText.substring(0, 2); //End index is excluded from substring
+		String query = plainText.substring(2);
+		
 		EncodeHexString s = new EncodeHexString();
-		
 		EncodeHexString t = new EncodeHexString();
+		if (query.length()>0) {
+			if (commands.equals("yy")) {
+				byte[] cipher = util1.encryptGoogleTinkAEAD(query, "OMGiloveyou");
+				String encrypted = s.byteArrayToHexString(cipher);
+				
+				byte[] bytearray = t.HexStringToByteArray(encrypted);
+				String decrypted = util1.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+				
+			} else if (commands.equals("yn")) {
+				byte[] cipher = util1.encryptGoogleTinkAEAD(query, "OMGiloveyou");
+				String encrypted = s.byteArrayToHexString(cipher);
+				
+			} else if (commands.equals("ny")) {
+				byte[] bytearray = t.HexStringToByteArray(query);
+				String decrypted = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
+				
+			} else if (commands.equals("nn")) {
+				System.out.println("Nothing done.");
+			} else {
+				System.out.println("Invalid Commands.");;
+			}
+		} else {
+			System.out.println("Empty query");;
+		}
 		
-		// encrypt
-		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
-		String encrypted = s.byteArrayToHexString(cipher);
+		
 		
 		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key
 		
 		// decrypt	
-		byte[] bytearray = t.HexStringToByteArray(encrypted);
-		String decrypted = util1.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+		
 	}
 }

@@ -113,21 +113,33 @@ public class AdminProfileController {
 							   @RequestParam(value = "newPwd", required = true) String newPwd, 
 							   @RequestParam(value = "userID",required = true) int userID,
 							   Model nextPage) {
+		System.out.println("currentPwd"+currentPwd);
+		System.out.println("newPwd"+newPwd);
+		System.out.println("userID"+userID);
+		
 		UserBean bean = userService.selectUser(userID);
 		String encrypted = bean.getUserPwd();
 		EncodeHexString encoder = new EncodeHexString();
-		byte[] hex = encoder.HexStringToByteArray(encrypted);
+		byte[] cipher = encoder.HexStringToByteArray(encrypted);
 		EncryptString tink = new EncryptString();
-		String decrypted = tink.decryptGoogleTinkAEAD(hex, "OMGiloveyou");
-		if (decrypted.equals(currentPwd)) {
+		String decrypted = tink.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+		
+		if(newPwd.length()==0 || newPwd==null) {
+			newPwd = " ";
+		}
+		
+		if (bean != null && bean.getUserID()!=0) {
+		//if (decrypted.equals(currentPwd)) {
 			userService.updatePwd(updateThisUser, newPwd);
-			return "redirect:/AdminProfile/list";
+			return "UserUpdatePasswordForm";
 		} else {
 			Map<String, String> errors = new HashMap<String, String>();
 			errors.put("mismatchError", "To verify your identity, please enter correct old password");
 			ValidateString util = new ValidateString();
-			if (!util.validatePwd(newPwd)) {
-				errors.put("invalidError", "Please enter a valid new password");
+			
+			String validateResult = util.validatePwdreturnErrors(newPwd);
+			if (!validateResult.equals("VALID PASSWORD")) {
+				errors.put("invalidError", validateResult);
 				
 			} 
 			nextPage.addAttribute("errors", errors);
