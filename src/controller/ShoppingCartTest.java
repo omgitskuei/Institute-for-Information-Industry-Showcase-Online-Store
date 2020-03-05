@@ -33,65 +33,65 @@ public class ShoppingCartTest {
 	 * [{"ProductID":"1" "ProductName":"蔥" "ProductCount":"20" "ProductPrice":"20"}
 	 * {"ProductID":"3" "ProductName":"大蒜" "ProductCount":"5" "ProductPrice":"193"}]
 	 * 
-	 * @param test
+	 * @param importedData
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/userAddToOrder")
-	public String userAddToOrder(@RequestParam(name = "dataArray") ArrayList<String> test) {
+	public String userAddToOrder(@RequestParam(name = "dataArray") ArrayList<String> importedData) {
 		// System.out.println(oderDetail.getProductID());
 		
 		
-		System.out.println("原始JSON資料："+test);
+		System.out.println("原始JSON資料："+importedData);
 		try {
 			CheckSubstring removeItem = new CheckSubstring();
-			test = removeItem.removeAnyChar(test, "[");
-			test = removeItem.removeAnyChar(test, "]");
-			test = removeItem.removeAnyChar(test, "{");
-			test = removeItem.removeAnyChar(test, "}");
-			test = removeItem.removeAnyChar(test, "\"");
-			test = removeItem.removeAnyChar(test, " ");
-			test = removeItem.removeAnyChar(test, ",");
+			importedData = removeItem.removeAnyChar(importedData, "[");
+			importedData = removeItem.removeAnyChar(importedData, "]");
+			importedData = removeItem.removeAnyChar(importedData, "{");
+			importedData = removeItem.removeAnyChar(importedData, "}");
+			importedData = removeItem.removeAnyChar(importedData, "\"");
+			importedData = removeItem.removeAnyChar(importedData, " ");
+			importedData = removeItem.removeAnyChar(importedData, ",");
 			
 			
-			ArrayList<String> test2 = new ArrayList<String>();
-			ArrayList<String> test3 = new ArrayList<String>();
-			ArrayList<String> uPrice = new ArrayList<String>();
+			ArrayList<String> delimitedData = new ArrayList<String>();
+			ArrayList<String> dataValues = new ArrayList<String>();
+			ArrayList<String> unitPrice = new ArrayList<String>();
 			ArrayList<String> count = new ArrayList<String>();
 			int sum = 0;
-			for(int i=0; i < test.size(); i++ ) {
-				 test2.addAll(removeItem.delimitAtAnyChar((String)test.get(i), ":"));
+			for(int i=0; i < importedData.size(); i++ ) {
+				 delimitedData.addAll(removeItem.delimitAtAnyChar((String)importedData.get(i), ":"));
 			}
 			
-			for(int i=0; i < test2.size(); i++) {
+			for(int i=0; i < delimitedData.size(); i++) {
 				if(i%2!=0) {
-					test3.add(test2.get(i));
+					dataValues.add(delimitedData.get(i));
 					
 				}
 			}
-			test2 = removeItem.removeAnyChar(test2, ":");
-			test3 = removeItem.removeAnyChar(test3, ":");
-			// 處理過後的JSON：[1, 蔥, 個數：24, 單價：20, 3, 大蒜, 5, 193, 5, 山藥, 2, 100]
-			for(int i = 2; i < test3.size(); i+=4) {
-				count.add(test3.get(i));
+			delimitedData = removeItem.removeAnyChar(delimitedData, ":");
+			dataValues = removeItem.removeAnyChar(dataValues, ":");
+			// 處理過後的JSON：[ID 1, 蔥, 個數：24, 單價：20, 3, 大蒜, 5, 193, 5, 山藥, 2, 100]
+			for(int i = 2; i < dataValues.size(); i+=4) {
+				count.add(dataValues.get(i));
 			}
-			for(int i = 3; i < test3.size(); i+=4) {
-				uPrice.add(test3.get(i));
+			for(int i = 3; i < dataValues.size(); i+=4) {
+				unitPrice.add(dataValues.get(i));
 			}
 			for(int i = 0; i < count.size(); i++) {
-				sum += Integer.parseInt(count.get(i)) * Integer.parseInt(uPrice.get(i)); 	
+				sum += Integer.parseInt(count.get(i)) * Integer.parseInt(unitPrice.get(i)); 	
 			}
 			
 			
 			
-			System.out.println("處理過後的JSON："+test3 + "總金額：" + sum);
+			System.out.println("處理過後的JSON："+dataValues + "總金額：" + sum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		
 		// 到綠界
-		return "TEST";
+		return "GReen world wow placeholder";
 	}
 
 }
