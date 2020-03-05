@@ -117,36 +117,49 @@ public class AdminProfileController {
 		System.out.println("newPwd"+newPwd);
 		System.out.println("userID"+userID);
 		
-		UserBean bean = userService.selectUser(userID);
-		String encrypted = bean.getUserPwd();
-		EncodeHexString encoder = new EncodeHexString();
-		byte[] cipher = encoder.HexStringToByteArray(encrypted);
-		EncryptString tink = new EncryptString();
-		String decrypted = tink.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
-		
 		if(newPwd.length()==0 || newPwd==null) {
 			newPwd = " ";
 		}
-		
-		if (bean != null && bean.getUserID()!=0) {
-		//if (decrypted.equals(currentPwd)) {
-			userService.updatePwd(updateThisUser, newPwd);
-			return "UserUpdatePasswordForm";
-		} else {
-			Map<String, String> errors = new HashMap<String, String>();
-			errors.put("mismatchError", "To verify your identity, please enter correct old password");
-			ValidateString util = new ValidateString();
-			
-			String validateResult = util.validatePwdreturnErrors(newPwd);
-			if (!validateResult.equals("VALID PASSWORD")) {
-				errors.put("invalidError", validateResult);
-				
-			} 
-			nextPage.addAttribute("errors", errors);
-			return "UserUpdatePasswordForm";
+		if(currentPwd.length()==0 || currentPwd==null) {
+			currentPwd = " ";
 		}
 		
+		ValidateString util = new ValidateString();
+		String validateNewPwdResult = util.validatePwdreturnErrors(newPwd);
+		System.out.println("validate new pwd results: "+ validateNewPwdResult);
+		String validateOldPwdResult = util.validatePwdreturnErrors(currentPwd);
+		System.out.println("validate current pwd results: "+ validateOldPwdResult);
 		
+		if (validateNewPwdResult.equals("VALID PASSWORD") && validateOldPwdResult.equals("VALID PASSWORD")) {
+			
+			UserBean bean = userService.selectUser(userID);
+			String encrypted = bean.getUserPwd();
+			EncodeHexString encoder = new EncodeHexString();
+			byte[] cipher = encoder.HexStringToByteArray(encrypted);
+			EncryptString tink = new EncryptString();
+			String decrypted = tink.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+			
+			//if (decrypted.equals(currentPwd)) {
+			if (bean != null && bean.getUserID()!=0) {
+				userService.updatePwd(updateThisUser, newPwd);
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("mismatchError", "Password Updated!");
+				nextPage.addAttribute("errors", errors);
+				return "UserUpdatePasswordForm";
+			} else {
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("mismatchError", "To verify your identity, please enter correct old password");
+				errors.put("invalidError", validateNewPwdResult);
+				nextPage.addAttribute("errors", errors);
+				return "UserUpdatePasswordForm";
+			}
+		} else {
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("mismatchError", validateOldPwdResult);
+			errors.put("invalidError", validateNewPwdResult);
+			nextPage.addAttribute("errors", errors);
+			return "UserUpdatePasswordForm";
+		}		
 	}
 	
 	// 秀出修改電子錢包表格
