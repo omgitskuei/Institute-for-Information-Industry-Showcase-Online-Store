@@ -108,14 +108,17 @@
         </div>
         <div class="col mb-2">
             <div class="row d-flex justify-content-end">
-                <div class="col-sm-2">
+                <div class="col-6 col-sm-3">
                     <a href=<jstl:url value="/directservices"/> class="btn btn-lg btn-block btn-secondary">繼續購物</a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-6 col-sm-3">
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-6 col-sm-3">
                     <a href="#"  onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
+                </div>
+                <div class="col-6 col-sm-3 border-5 border-dark">
+                    <a href="<jstl:url value="/directStripeCheckoutStep1"/>" class=""><img src="https://imgur.com/ByLq6Pg.png" class="rounded-lg" width=200px alt="Stripe checkout Button"/></a>
                 </div>
             </div>
         </div>
@@ -186,7 +189,7 @@
             	  alert('success')
             },
             error: function(err){
-            	  alert('error');
+            	  
             }
       });
   	};

@@ -52,10 +52,15 @@ public class FrontDirectController {
 		this.response = response;
 	}
 	
-	@RequestMapping(value = "/directStripeCheckout", method = RequestMethod.GET)
-	public String directStripeCheckout() {
+	@RequestMapping(value = "/directStripeCheckoutStep1", method = RequestMethod.GET)
+	public String directStripeCheckoutStep1() {
 		System.out.println("導到 Stripe 結賬頁面");
-		return "front_checkout";
+		return "front_checkout_stripe_mailingDetails";
+	}
+	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.GET)
+	public String directStripeCheckoutStep2() {
+		System.out.println("導到 Stripe 結賬頁面");
+		return "front_checkout_stripe_paymentDetails";
 	}
 	
 	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
