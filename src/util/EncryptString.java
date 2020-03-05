@@ -101,7 +101,7 @@ public class EncryptString {
 		
 		EncodeHexString s = new EncodeHexString();
 		
-		
+		EncodeHexString t = new EncodeHexString();
 		
 		// encrypt
 		byte[] cipher = util1.encryptGoogleTinkAEAD(plainText, "OMGiloveyou");
@@ -110,7 +110,7 @@ public class EncryptString {
 		// util1.newCleartextAEADKeyset();	// Uncomment to refresh key
 		
 		// decrypt	
-		byte[] bytearray = s.HexStringToByteArray(encrypted);
-		String decrypted = util1.decryptGoogleTinkAEAD(bytearray, "OMGiloveyou");
+		byte[] bytearray = t.HexStringToByteArray(encrypted);
+		String decrypted = util1.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
 	}
 }

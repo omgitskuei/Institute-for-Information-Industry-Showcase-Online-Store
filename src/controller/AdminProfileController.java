@@ -28,6 +28,8 @@ import model.user.UserBean;
 import model.user.UserBeanService;
 import model.wallet.WalletBean;
 import model.wallet.WalletBeanService;
+import util.EncodeHexString;
+import util.EncryptString;
 import util.ValidateString;
 
 // Admin 的 Profile 控制器
@@ -112,7 +114,12 @@ public class AdminProfileController {
 							   @RequestParam(value = "userID",required = true) int userID,
 							   Model nextPage) {
 		UserBean bean = userService.selectUser(userID);
-		if (bean.getUserPwd().equals(currentPwd)) {
+		String encrypted = bean.getUserPwd();
+		EncodeHexString encoder = new EncodeHexString();
+		byte[] hex = encoder.HexStringToByteArray(encrypted);
+		EncryptString tink = new EncryptString();
+		String decrypted = tink.decryptGoogleTinkAEAD(hex, "OMGiloveyou");
+		if (decrypted.equals(currentPwd)) {
 			userService.updatePwd(updateThisUser, newPwd);
 			return "redirect:/AdminProfile/list";
 		} else {
