@@ -35,10 +35,14 @@
 	<c:url var="showTheUserOrderLink" value="/AdminProfile/showTheUserOrer">
 		<c:param name="userID" value="${profile.userID}" />
 	</c:url>
-	<a href="${updateLink}">更新使用者基本資料</a>
-	<a href="${updatePasswordLink}">更改密碼</a>
-	<a href="${updateWalletLink}">更改電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	
+	
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link active" href="${updateLink}">使用者基本資料</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updateWalletLink}">查看電子錢包</a></li>
+		<li class="nav-item"><a class="nav-link" href="${showTheUserOrderLink}">查看訂單</a></li>
+	</ul>
 	
 	</div>
 
@@ -104,7 +108,10 @@
 	</form:form>
 	</div>
 
-
+	<script src="https://kit.fontawesome.com/c3dc04dc4d.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<script>
 		function joinDateCheck() {

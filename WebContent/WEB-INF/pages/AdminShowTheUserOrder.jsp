@@ -28,10 +28,12 @@
 	<c:url var="showTheUserOrderLink" value="/AdminProfile/showTheUserOrer">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
-	<a href="${updateLink}">更新使用者基本資料</a>
-	<a href="${updatePasswordLink}">更改密碼</a>
-	<a href="${updateWalletLink}">更改電子錢包</a>
-	<a href="${showTheUserOrderLink}">查看訂單</a>
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updateWalletLink}">查看電子錢包</a></li>
+		<li class="nav-item"><a class="nav-link active" href="${showTheUserOrderLink}">查看訂單</a></li>
+	</ul>
 	
 	</div>
 	
@@ -41,7 +43,7 @@
 	<table class="table">
 		<thead>
 	    <tr>
-	      <th scope="col">訂單 ID(OrderID):</th>
+	      <th scope="col">訂單 ID:</th>
 	      <th scope="col">使用者 ID</th>
 	      <th scope="col">總金額</th>
 	      <th scope="col">寄件地址</th>

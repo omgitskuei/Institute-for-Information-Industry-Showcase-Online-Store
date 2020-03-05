@@ -13,7 +13,7 @@
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-<title>使用者更新安全問題</title>
+<title>使用者更改安全問題</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
     <div class="col-md-12">
-    <h2 class="my-3">使用者更新安全問題</h2>
+    <h2 class="my-3">使用者更改安全問題</h2>
     
     <!-- 選單 -->
     
