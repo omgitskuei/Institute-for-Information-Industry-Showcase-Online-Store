@@ -59,7 +59,7 @@
 					<div class="card-header  d-flex justify-content-between" id="headingOne">
 						<div class="h3 d-inline-block mt-3">Total Cost</div>
 						<div class="h3 d-inline-block mt-2">
-							<strong>$ 1059</strong>
+							<div name=sumTotal><strong>${sumTotal}</strong></div>
 						</div>
 					</div>
 				</div>
@@ -73,110 +73,51 @@
 		<div class="col-md-6">
 			<div class="card text-center my-5 border-0">
 				<div class="card-header border-0">
-					<div class="h3 mt-1"> 訂購人資訊 </div>
+					<div class="h3 mt-1"> 付款資訊 </div>
 				</div>
 				<form class="needs-validation" novalidate>
-					<div class="form-row text-left mt-3">
+					<div class="form-row text-left mt-3 ">
 						<div class="form-group col-md-6">
-							<label for="name">姓名</label>
-							<input type="text" class="form-control " id="name" placeholder="姓名" required>
-							<div class="invalid-feedback">請填寫姓名</div>
+							<label for="cardNum">信用卡卡號</label>
+							<input type="text" class="form-control " name="cardNum" id="cardNum" placeholder="Card number" required>
+							<div class="cardNumError"></div>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="mail">Email</label>
-							<input type="email" class="form-control" id="mail" placeholder="Email" required>
-							<div class="invalid-feedback">請填寫Email</div>
+							<label for="expDate">有效期限</label>
+							<input type="text" class="form-control " name="expiry" id="expiry" placeholder="Card expiration Year (MM/YY)" maxlength="5" required>
+							<div class="expDateError"></div>
 						</div>
 					</div>
-				<div class="form-row text-left">
-					<div class="form-group col-md-4">
-						<label for="section">國家</label>
-							<select name="" id="section" class="form-control">
-								<option value="">台灣</option>
-								<option value="">美國</option>
-								<option value="">日本</option>
-								<option value="">韓國</option>
-								<option value="">菲律賓</option>
-								<option value="">習近平</option>
-								<option value="">越南</option>
-							</select>
+					<div class="form-row text-left">
+						<div class="form-group col-md-4">
+							<label for="section">卡片背面後3碼 (CVC) </label>
+							<input type="text" class="form-control " name="cvCode" id="cvCode" placeholder="Card CVC (###)" maxlength="4" required>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="zone">城市</label>
+							<label for="zone">發票</label>
 							<select name="" id="zone" class="form-control">
-								<option value="">台北市</option>
-								<option value="">台中市</option>
-								<option value="">高雄市</option>
+								<option value="personalReceipt">個人電子發票</option>
+								<option value="donateReceipt">捐贈發票</option>
+								<option value="companyReceipt">公司戶電子發票</option>
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="postal-code">郵遞區號</label>
-							<input type="text" class="form-control" id="postal-code" placeholder="" required>
+							<label for="couponCode">折價卷</label>
+							<input type="text" class="form-control" id="couponCode" placeholder="Coupon Code" maxlength="10">
 						</div>
 					</div>
 					<div class="form-row">
-						<label for="address">地址</label>
-						<input type="text" class="form-control" id="mail" required>
+						<label for="walletAmount">會員錢包</label>
+						<input type="text" class="form-control" id="mail" placeholder="0.00" required>
 					</div>
-					<div class="form-row">
-						<label for="shipaddress">送貨地址</label>
-						<input type="text" class="form-control" id="mailaddress" required>
-					</div>
+
 					
-					<div class="card-header border-0">
-					<div class="h3 mt-1"> 訂購人資訊 </div>
-				</div>
-				<form class="needs-validation" novalidate>
-					<div class="form-row text-left mt-3">
-						<div class="form-group col-md-6">
-							<label for="name">姓名</label>
-							<input type="text" class="form-control " id="name" placeholder="姓名" required>
-							<div class="invalid-feedback">請填寫姓名</div>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="mail">Email</label>
-							<input type="email" class="form-control" id="mail" placeholder="Email" required>
-							<div class="invalid-feedback">請填寫Email</div>
-						</div>
-					</div>
-				<div class="form-row text-left">
-					<div class="form-group col-md-4">
-						<label for="section">國家</label>
-							<select name="" id="section" class="form-control">
-								<option value="">台灣</option>
-								<option value="">美國</option>
-								<option value="">日本</option>
-								<option value="">韓國</option>
-								<option value="">菲律賓</option>
-								<option value="">習近平</option>
-								<option value="">越南</option>
-							</select>
-						</div>
-						<div class="form-group col-md-4">
-							<label for="zone">城市</label>
-							<select name="" id="zone" class="form-control">
-								<option value="">台北市</option>
-								<option value="">台中市</option>
-								<option value="">高雄市</option>
-							</select>
-						</div>
-						<div class="form-group col-md-4">
-							<label for="postal-code">郵遞區號</label>
-							<input type="text" class="form-control" id="postal-code" placeholder="" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<label for="address">地址</label>
-						<input type="text" class="form-control" id="mail" required>
-					</div>
-					<div class="form-row">
-						<label for="shipaddress">送貨地址</label>
-						<input type="text" class="form-control" id="mailaddress" required>
-					</div>
+					
 					
 					<div class="mt-3 d-flex justify-content-end">
-						<a href="service.html" class="btn btn-secondary mr-2">繼續選購</a>
-						<a href="<jstl:url value="/directCheckoutSuccess"/>" type="submit" class="btn btn-success text-white">確認付款</a>
+						<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3">繼續選購</a>
+						<a href="<jstl:url value="/directStripeCheckoutStep1"/>" type="submit" class="btn btn-warning text-white mr-3">回上一頁</a>
+						<a href="<jstl:url value="/directCheckoutSuccess"/>" type="submit" class="btn btn-success text-white mr-3">確認付款</a>
 					</div>
 				</form>
 			</div>

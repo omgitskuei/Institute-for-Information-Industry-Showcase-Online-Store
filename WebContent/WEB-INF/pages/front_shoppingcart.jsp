@@ -99,6 +99,8 @@
                          <td><h5>購買總金額</h5></td>
                          <td class="text-right" style="font-size:2rem;" id="total-cart">NT$ 180</td>
                       </tr>
+
+
                      </tfoot>
                            
                       
@@ -117,6 +119,7 @@
                 <div class="col-6 col-sm-3">
                     <a href="#"  onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
                 </div>
+                <!-- Stripe Checkout button -->
                 <div class="col-6 col-sm-3 border-5 border-dark">
                     <a href="<jstl:url value="/directStripeCheckoutStep1"/>" class=""><img src="https://imgur.com/ByLq6Pg.png" class="rounded-lg" width=200px alt="Stripe checkout Button"/></a>
                 </div>
@@ -300,6 +303,7 @@
             for (var i in cart) {
                 totalCost += cart[i].price * cart[i].count;
             }
+            document.cookie = "totalCookie="+totalCost;
             return totalCost.toFixed(2);
         };
 
@@ -375,6 +379,7 @@
           $("#show-cart").html(output);
           $("#count-cart").html(shoppingCart.countCart());
           $("#total-cart").html(shoppingCart.totalCart());
+          
         }
         // 不太確定這邊的on是為什麼
         $("#show-cart").on("click", ".delete-item", function(event){

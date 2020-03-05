@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,7 @@ public class FrontDirectController {
 	public ProductBeanService productService;
 	public HttpServletRequest request;
 	public HttpServletResponse response;
+	private String total;
 
 	// Constructors
 	@Autowired
@@ -53,16 +55,26 @@ public class FrontDirectController {
 	}
 	
 	@RequestMapping(value = "/directStripeCheckoutStep1", method = RequestMethod.GET)
-	public String directStripeCheckoutStep1() {
-		System.out.println("導到 Stripe 結賬頁面");
+	public String directStripeCheckoutStep1(
+			@CookieValue(name="totalCookie") String shoppingCartTotal,
+			Model nextPage) {
+		System.out.println(shoppingCartTotal);
+		total = shoppingCartTotal+".00";
+		System.out.println("Total is = " +total);
+		System.out.println("導到 Stripe 結賬#1頁面");
+		nextPage.addAttribute("sumTotal", total);
 		return "front_checkout_stripe_mailingDetails";
 	}
 	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.GET)
-	public String directStripeCheckoutStep2() {
-		System.out.println("導到 Stripe 結賬頁面");
+	public String directStripeCheckoutStep2(
+			@CookieValue(name="totalCookie") String shoppingCartTotal,
+			Model nextPage) {
+		System.out.println("導到 Stripe 結賬#2頁面");
+		nextPage.addAttribute("sumTotal", total);
+		
+
 		return "front_checkout_stripe_paymentDetails";
 	}
-	
 	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
 	public String directCheckoutSuccess() {
 		System.out.println("導到　結賬成功頁面");

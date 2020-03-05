@@ -59,7 +59,7 @@
 					<div class="card-header  d-flex justify-content-between" id="headingOne">
 						<div class="h3 d-inline-block mt-3">Total Cost</div>
 						<div class="h3 d-inline-block mt-2">
-							<strong>$ 1059</strong>
+							<strong>${sumTotal}</strong>
 						</div>
 					</div>
 				</div>
@@ -125,8 +125,9 @@
 					
 
 						<div class="mt-3 d-flex justify-content-end">
-							<a href="service.html" class="btn btn-secondary mr-2">繼續選購</a>
-							<a href="<jstl:url value="/directStripeCheckoutStep2"/>" type="submit" class="btn btn-success text-white">進行下一步</a>
+							<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3">繼續選購</a>
+							<a href="<jstl:url value="/directshoppingcart"/>" type="submit" class="btn btn-warning text-white mr-3">回上一頁</a>
+							<a href="<jstl:url value="/directStripeCheckoutStep2"/>" type="submit" class="btn btn-success text-white mr-3">進行下一步</a>
 						</div>
 					</form>
 				</div>
