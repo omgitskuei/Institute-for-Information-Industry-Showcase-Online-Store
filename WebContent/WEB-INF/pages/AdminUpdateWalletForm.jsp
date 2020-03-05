@@ -29,17 +29,25 @@
 	<c:url var="showTheUserOrderLink" value="/AdminProfile/showTheUserOrer">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
-	<a href="${updateLink}">更新使用者基本資料</a>
-	<a href="${updatePasswordLink}">更改密碼</a>
-	<a href="${updateWalletLink}">更改電子錢包</a>
-    <a href="${showTheUserOrderLink}">查看訂單</a>
 	
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
+		<li class="nav-item"><a class="nav-link" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link active" href="${updateWalletLink}">查看電子錢包</a></li>
+		<li class="nav-item"><a class="nav-link" href="${showTheUserOrderLink}">查看訂單</a></li>
+	</ul>
 	
-     
+		
+     	
         <p>目前: ${wallet.walletAmount}</p>
 
 		<form method="POST" action="<c:url value="/AdminProfile/saveWallet" />" >
 		<input hidden="true" name="userID" value="${user.userID}" />
+		
+		<div class="form-group">
+		<label>帳號</label>
+		<p>${user.userEmail}</p>
+		</div>
 		
 		<div class="form-group">
 		<label>修改金額: </label>
