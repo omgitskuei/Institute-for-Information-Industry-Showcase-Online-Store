@@ -136,16 +136,18 @@
     <!-- INFO SECTION -->
     <section id="info" class="py-3">
       <div class="container">
+       <jstl:url var="theProductLink" value="/showSpecificProduct">
+				<jstl:param name="productID" value="${product[0].productID}" />
+	   </jstl:url>
         <div class="row">
           <div class="col-md-6 align-self-center">
-            <h3>本月主打商品</h3>
-            <p>
-              這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字
-            </p>
-            <a href="stock.html" class="btn btn-success btn-lg text-white">前往觀看</a>
+            <h4>本月主打商品</h4>
+            <h5> ${product[0].productName} </h5>
+            <p>${product[0].productDescription}</p>
+            <a href="${theProductLink}" class="btn btn-success btn-lg text-white">前往觀看</a>
           </div>
           <div class="col-md-6">
-            <img src="https://source.unsplash.com/random/320x200/?food" alt="商品圖片，寫死的，可能沒讀到" class="img-fluid" />
+            <img src="${product[0].productImg }" alt="商品圖片" class="img-fluid" width="250px" />
           </div>
         </div>
       </div>
