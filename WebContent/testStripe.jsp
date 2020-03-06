@@ -44,7 +44,9 @@
 					<!-- Used to display form errors. -->
 					<div id="card-errors" role="alert"></div>
 				</div>
-
+				<br>
+				<br>
+				Send $500 to stripe
   				<input type="submit" value="Submit!" class="btn btn-success text-white btn-block">
 			</form>
             
