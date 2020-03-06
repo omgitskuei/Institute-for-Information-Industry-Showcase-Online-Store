@@ -104,8 +104,12 @@ public class FrontDirectController {
 	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directhomepage", method = RequestMethod.GET)
-	public String directHomepage() {
+	public String directHomepage(Model m) {
 		System.out.println("導到首頁");
+		
+		List<ProductBean> Inventorylist= productService.selectAll();
+
+		m.addAttribute("product", Inventorylist);
 		return "front_index";
 	}
 	
