@@ -136,16 +136,18 @@
     <!-- INFO SECTION -->
     <section id="info" class="py-3">
       <div class="container">
+       <jstl:url var="theProductLink" value="/showSpecificProduct">
+				<jstl:param name="productID" value="${product[0].productID}" />
+	   </jstl:url>
         <div class="row">
           <div class="col-md-6 align-self-center">
-            <h3>本月主打商品</h3>
-            <p>
-              這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字這是文字
-            </p>
-            <a href="stock.html" class="btn btn-success btn-lg text-white">前往觀看</a>
+            <h4>本月主打商品</h4>
+            <h5> ${product[0].productName} </h5>
+            <p>${product[0].productDescription}</p>
+            <a href="${theProductLink}" class="btn btn-success btn-lg text-white">前往觀看</a>
           </div>
           <div class="col-md-6">
-            <img src="https://source.unsplash.com/random/320x200/?food" alt="商品圖片，寫死的，可能沒讀到" class="img-fluid" />
+            <img src="${product[0].productImg }" alt="商品圖片" class="img-fluid" width="250px" />
           </div>
         </div>
       </div>
@@ -181,49 +183,19 @@
         <h1 class="text-center">促銷商品</h1>
         <p class="text-center">點按商品可以看更多商品資訊</p>
         <div class="row mb-4">
+        
+        <jstl:forEach begin="4" end="9" var="product" items="${product}">
+          <jstl:url var="theProductLink" value="/showSpecificProduct">
+				<jstl:param name="productID" value="${product.productID}" />
+		  </jstl:url>
           <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/560x560/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="560"
+            <a href="${theProductLink}" data-height="560"
               data-width="560">
-              <img src="https://source.unsplash.com/random/560x560/?food" alt="" class="img-fluid">
+              <img src="${product.productImg}" alt="" class="img-fluid">
             </a>
           </div>
-  
-          <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/561x561/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="561"
-              data-width="561">
-              <img src="https://source.unsplash.com/random/561x561/?food" alt="" class="img-fluid">
-            </a>
-          </div>
-  
-          <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/562x562/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="562"
-              data-width="562">
-              <img src="https://source.unsplash.com/random/562x562/?food" alt="" class="img-fluid">
-            </a>
-          </div>
-        </div>
-  
-        <div class="row mb-4">
-          <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/563x563/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="563"
-              data-width="563">
-              <img src="https://source.unsplash.com/random/563x563/?food" alt="" class="img-fluid">
-            </a>
-          </div>
-  
-          <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/564x564/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="564"
-              data-width="564">
-              <img src="https://source.unsplash.com/random/564x564/?food" alt="" class="img-fluid">
-            </a>
-          </div>
-  
-          <div class="col-md-4">
-            <a href="https://source.unsplash.com/random/565x565/?food" data-toggle="lightbox" data-gallery="img-gallery" data-height="565"
-              data-width="565">
-              <img src="https://source.unsplash.com/random/565x565/?food" alt="" class="img-fluid">
-            </a>
-          </div>
+       </jstl:forEach>
+        
         </div>
       </div>
     </section>
