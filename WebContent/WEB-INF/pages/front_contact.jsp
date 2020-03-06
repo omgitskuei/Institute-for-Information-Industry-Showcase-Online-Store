@@ -149,34 +149,34 @@
     <hr>
     <div class="row mb-2">
       <div class="col-md-4">
-        <img src="https://i.imgur.com/29tFOYR.gif" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/6xmTE3n.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>Chris Tung</h4>
         <p>本公司COO－首席營運長，健康蔬果網站發想者，致力於讓健康蔬果經由網路的便利，走進消費者的生活。</p>
       </div>
       <div class="col-md-4">
-        <img src="https://i.imgur.com/6pz8CGt.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/cpOSqoL.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>Thomas Lu</h4>
         <p>本公司工程師，維護網頁美觀與資訊，讓新鮮蔬果的最新資訊，詳實呈現在消費者眼前。</p>
       </div>
       <div class="col-md-4">
-        <img src="https://i.imgur.com/29tFOYR.gif" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/hqe3GF9.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>Jerry Tai</h4>
         <p>本公司CTO－首席技術長，致力維持網站的穩定，讓消費者得以選購到所要的蔬果。</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
-        <img src="https://i.imgur.com/29tFOYR.gif" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/UmQdsfi.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>游忠城</h4>
         <p>負責本公司各項蔬果通路營運，有著對市場變動的高度敏感，致力取得對消費者最友善價格。</p>
       </div>
       <div class="col-md-4">
-        <img src="https://i.imgur.com/29tFOYR.gif" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/VlJYeaf.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>Ming Juang</h4>
         <p>客服主管，秉持消費者如家人的初衷，處理每一筆消費者的疑問與意見。</p>
       </div>
       <div class="col-md-4">
-        <img src="https://i.imgur.com/29tFOYR.gif" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
+        <img src="https://i.imgur.com/c2xAsfw.jpg" alt="" class="img fluid rounded-circle mb-2" style="height: 200px; width: 200px;">
         <h4>Alex Ku</h4>
         <p>負責蔬果各項送驗與紀錄管理，務求讓消費者吃得安心。</p>
       </div>

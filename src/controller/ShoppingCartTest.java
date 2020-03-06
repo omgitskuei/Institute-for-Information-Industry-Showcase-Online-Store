@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import model.order.OrderBeanService;
 import model.orderDetails.OrderDetailsBeanService;
 import util.CheckSubstring;
@@ -88,8 +90,21 @@ public class ShoppingCartTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	
 		
 		
+//		String merchantTradeNo = "9849398987";//訂單編號
+//		String merchantTradeDate = "2017/01/01 08:05:23";//購買日期
+//		String totalAmount = "50";//金額
+//		String tradeDesc = "test Description";//交易描述 null
+//		String itemName = "TestItem";//商品名稱
+//		String returnURL = "http://211.23.128.214:5000";//付款完成路徑
+//		String needExtraPaidInfo = "N";//是否需要額外付款資訊
+		
+		
+		
+		
+		// AioCheckOutOneTime obj = new AioCheckOutOneTime();
 		// 到綠界
 		return "GReen world wow placeholder";
 	}
