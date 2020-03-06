@@ -145,20 +145,20 @@ public class AdminProfileController {
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("mismatchError", "Password Updated!");
 				nextPage.addAttribute("errors", errors);
-				return "UserUpdatePasswordForm";
+				return "AdminUpdatePasswordForm";
 			} else {
 				Map<String, String> errors = new HashMap<String, String>();
 				errors.put("mismatchError", "To verify your identity, please enter correct old password");
 				errors.put("invalidError", validateNewPwdResult);
 				nextPage.addAttribute("errors", errors);
-				return "UserUpdatePasswordForm";
+				return "AdminUpdatePasswordForm";
 			}
 		} else {
 			Map<String, String> errors = new HashMap<String, String>();
 			errors.put("mismatchError", validateOldPwdResult);
 			errors.put("invalidError", validateNewPwdResult);
 			nextPage.addAttribute("errors", errors);
-			return "UserUpdatePasswordForm";
+			return "AdminUpdatePasswordForm";
 		}		
 	}
 	

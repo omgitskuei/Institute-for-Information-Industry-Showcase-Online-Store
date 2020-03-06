@@ -29,11 +29,7 @@
                 <div class="col-md-12">
 					<a href=<jstl:url value="/directhomepage"/> class="btn btn-dark box-shadow">回去首頁</a> <br>
 					<br>
-                    <a href=<jstl:url value="/directservices"/> class="btn btn-dark box-shadow">directservices</a> <br>
-                    <a href=<jstl:url value="/showSpecificProduct"/> class="btn btn-dark box-shadow">showSpecificProduct</a> <br>
-
-                    <a href=<jstl:url value="/directshoppingcart"/> class="btn btn-dark box-shadow">directshoppingcart</a> <br>
-
+                    
                 </div>
             </div>
         </div>
