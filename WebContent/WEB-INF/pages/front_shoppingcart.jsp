@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     
@@ -117,7 +117,7 @@
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-6 col-sm-3">
-                    <a href="#"  onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
+                    <a href=<jstl:url value="/userAddToOrder"/> onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
                 </div>
                 <!-- Stripe Checkout button -->
                 <div class="col-6 col-sm-3 border-5 border-dark">
@@ -185,18 +185,18 @@
   		
   		$.ajax({
   			type : 'POST', // 送資料POST
-  			url : 'userAddToOrder', // 路徑對到Java的Controller
+  			url : "<jstl:url value='/userAddToOrder'/>", // 路徑對到Java的Controller
   			data : {
   				'dataArray': JSON.stringify(buyData), // 欲輸入的資料
   			},
   			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
   			dataType : 'JSON', // 型態
            	// 做測試
-  			success : function (succ){
-            	  alert('success') 
+  			success : function (response){
+            	  alert('success'); 
             },
-            error: function(err){
-            	  
+            error: function(){
+            		alert('fail');
             }
       });
   	};
