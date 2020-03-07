@@ -33,8 +33,8 @@ public class AdminLoginController {
 	private ProductBeanService pService;
 	private OrderBeanService oService;
 	private HttpServletResponse response;
-	private EncryptString util = new EncryptString();
-	private EncodeHexString hexConvert = new EncodeHexString();
+	//private EncryptString util = new EncryptString();
+	//private EncodeHexString hexConvert = new EncodeHexString();
 
 	@Autowired
 	public AdminLoginController(UserBeanService service, ProductBeanService pService, OrderBeanService oService, HttpServletResponse response) {
@@ -98,9 +98,9 @@ public class AdminLoginController {
 			UserBean bean = new UserBean();
 			if (emailCookie != null && pwdCookie != null) {
 				bean.setUserEmail(emailCookie.getValue());
-				byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
-				String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
-				bean.setUserPwd(pwd);
+				//byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
+				//String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
+				bean.setUserPwd(pwdCookie.getValue());
 				bean.setAdmin(1);
 			} else {
 				bean.setUserEmail(uEmail);
@@ -190,8 +190,8 @@ public class AdminLoginController {
 		Cookie emailCookie = new Cookie("EmailCookie", email);
 		System.out.println("	passed pwd: " + pwd);
 		// Encrypt pwd before writing to a cookie
-		byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
-		pwd = hexConvert.byteArrayToHexString(cipherPwd);
+		//byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
+		//pwd = hexConvert.byteArrayToHexString(cipherPwd);
 		System.out.println("			cookie pwd(encrpyted): " + pwd);
 		// Write encrypted pwd cookie
 		Cookie pwdCookie = new Cookie("PasswordCookie", pwd);

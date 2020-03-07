@@ -62,8 +62,8 @@ public class UserLoginController {
 		Cookie emailCookie = new Cookie("UserEmailCookie", email);
 		System.out.println("	passed pwd: " + pwd);
 		// Encrypt pwd before writing to a cookie
-		byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
-		pwd = hexConvert.byteArrayToHexString(cipherPwd);
+		//byte[] cipherPwd = util.encryptGoogleTinkAEAD(pwd, "OMGiloveyou");
+		//pwd = hexConvert.byteArrayToHexString(cipherPwd);
 		System.out.println("			cookie pwd(encrpyted): " + pwd);
 		// Write encrypted pwd cookie
 		Cookie pwdCookie = new Cookie("UserPasswordCookie", pwd);
@@ -206,7 +206,7 @@ public class UserLoginController {
 		System.out.println("	User input: confirmCode = " + confirmPwd);
 		if (newPwd.equals(confirmPwd)) {
 			System.out.println("		the 2 passwords match!");
-			String passwordValidation = validator.validateEmailreturnErrors(newPwd);
+			String passwordValidation = validator.validatePwdreturnErrors(newPwd);
 			if(passwordValidation.equals("VALID PASSWORD")) {
 				System.out.println("	new password is valid!");
 				
@@ -283,9 +283,10 @@ public class UserLoginController {
 			UserBean bean = new UserBean();
 			if (emailCookie != null && pwdCookie != null) {
 				bean.setUserEmail(emailCookie.getValue());
-				byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
-				String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
-				bean.setUserPwd(pwd);
+				//byte[] pwdCipher = hexConvert.HexStringToByteArray(pwdCookie.getValue());
+				//String pwd = util.decryptGoogleTinkAEAD(pwdCipher, "OMGiloveyou");
+				//bean.setUserPwd(pwd);
+				bean.setUserPwd(pwdCookie.getValue());
 				bean.setAdmin(0);
 			} else {
 				bean.setUserEmail(uEmail);

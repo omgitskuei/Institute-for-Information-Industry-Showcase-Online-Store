@@ -92,6 +92,21 @@ public class CheckSubstring {
 		}
 		return counter;
 	}
+	
+	public int countAnyChar(String checkThisString, String countThis) {
+		// Define counter
+		int counter = 0;
+		// For each letter of String checkThisString, ...
+		for (int index = 0; index < checkThisString.length(); index++) {
+			// ... Match the letter to the regex pattern
+			;
+			// If the letter is found within the regex pattern, add 1 to counter
+			if (checkThisString.substring(index, index + 1).equals(countThis)) {
+				counter++;
+			}
+		}
+		return counter;
+	}
 
 	public ArrayList<String> delimitAtDot(String delimitThisString) {
 		// Makes substrings, split at "."

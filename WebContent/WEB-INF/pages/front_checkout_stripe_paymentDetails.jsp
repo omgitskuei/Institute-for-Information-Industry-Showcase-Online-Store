@@ -107,10 +107,6 @@
 						<label for="walletAmount">會員錢包</label>
 						<input type="text" class="form-control" id="mail" placeholder="0.00" required>
 					</div>
-
-					
-					
-					
 					<div class="mt-3 d-flex justify-content-end">
 						<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3">繼續選購</a>
 						<a href="<jstl:url value="/directStripeCheckoutStep1"/>" type="submit" class="btn btn-warning text-white mr-3">回上一頁</a>

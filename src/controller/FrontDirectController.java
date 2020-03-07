@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,23 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.model.checkout.Session;
 
 import model.mailingList.MailBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
+import model.profile.ProfileBean;
+import model.profile.ProfileBeanService;
+import model.setting.SettingBean;
+import model.user.UserBean;
+import model.user.UserBeanService;
+import util.CheckSubstring;
 import util.EmailUsers;
 
 
@@ -40,15 +53,20 @@ public class FrontDirectController {
 	
 	// Local fields
 	private MailBeanService mService;
+	private UserBeanService uService;
+	private ProfileBeanService pService;
 	public ProductBeanService productService;
 	public HttpServletRequest request;
 	public HttpServletResponse response;
 	private String total;
+	private ArrayList<String> frontCheckoutStripeMailingDetailsInfo = new ArrayList<String>();
 
 	// Constructors
 	@Autowired
-	public FrontDirectController(MailBeanService mService, ProductBeanService productService, HttpServletRequest request, HttpServletResponse response) {
+	public FrontDirectController(MailBeanService mService, ProfileBeanService pService, UserBeanService uService, ProductBeanService productService, HttpServletRequest request, HttpServletResponse response) {
 		this.mService=mService;
+		this.uService=uService;
+		this.pService=pService;
 		this.productService= productService;
 		this.request = request;	
 		this.response = response;
@@ -56,29 +74,119 @@ public class FrontDirectController {
 	
 	@RequestMapping(value = "/directStripeCheckoutStep1", method = RequestMethod.GET)
 	public String directStripeCheckoutStep1(
+			@SessionAttribute("userEmail") String userEmail,
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
 			Model nextPage) {
 		System.out.println(shoppingCartTotal);
 		total = shoppingCartTotal+".00";
 		System.out.println("Total is = " +total);
 		System.out.println("導到 Stripe 結賬#1頁面");
+		System.out.println("SessionAttribute userEmail"+userEmail);
+		UserBean uBean = new UserBean();
+		uBean.setUserEmail(userEmail);
+		int userID = uService.selectUserIDByEmail(userEmail);
+		uBean = uService.selectUser(userID);
+		
+		ProfileBean pBean = pService.getProfile(userID);
+		String name = pBean.getProfileFullName();
+		String address = pBean.getProfileAddress();
+		
+		Map<String, String> userData = new HashMap<String, String>();
+		userData.put("email", userEmail);
+		userData.put("name", name);
+		userData.put("address", address);
+		nextPage.addAttribute("userData", userData);
+		
 		nextPage.addAttribute("sumTotal", total);
 		return "front_checkout_stripe_mailingDetails";
 	}
 	
 	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.GET)
 	public String directStripeCheckoutStep2(
+//			@RequestParam("name") String name,
+//			@RequestParam("email") String email,
+//			@RequestParam("country") String country,
+//			@RequestParam("city") String city,
+//			@RequestParam("zipcode") String zipcode,
+//			@RequestParam("address") String address,
+//			@RequestParam("shipaddress") String shipaddress,
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
 			Model nextPage) {
 		System.out.println("導到 Stripe 結賬#2頁面");
-		nextPage.addAttribute("sumTotal", total);
+//		System.out.println("name"+name);
+//		System.out.println("email"+email);
+//		System.out.println("country"+country);
+//		System.out.println("city"+city);
+//		System.out.println("zipcode"+zipcode);
+//		System.out.println("address"+address);
+//		System.out.println("shipaddress"+shipaddress);
+//		frontCheckoutStripeMailingDetailsInfo.add(name);
+//		frontCheckoutStripeMailingDetailsInfo.add(email);
+//		frontCheckoutStripeMailingDetailsInfo.add(country);
+//		frontCheckoutStripeMailingDetailsInfo.add(city);
+//		frontCheckoutStripeMailingDetailsInfo.add(zipcode);
+//		frontCheckoutStripeMailingDetailsInfo.add(address);
+//		frontCheckoutStripeMailingDetailsInfo.add(shipaddress);
 		
+		nextPage.addAttribute("sumTotal", total);
 
 		return "front_checkout_stripe_paymentDetails";
 	}
 	
 	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
 	public String directCheckoutSuccess() {
+		Stripe.apiKey = "sk_test_s56neoj7TwIIkY5oFr45aZHd00cvXIHSQo";
+		
+//		Customer newCustomer = createNewCustomer("kueifengtung@yahoo.com");
+
+		// Retrieving Stripe Customer
+		Customer retrievedCustomer;
+		try {
+			retrievedCustomer = Customer.retrieve("cus_GquXSUfYCXaNAF");
+			System.out.println(""+retrievedCustomer);
+		} catch (StripeException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		HashMap<String, Object> paymentIntentData = new HashMap<String, Object>();
+		paymentIntentData.put("setup_future_usage", "off_session");
+		params.put("payment_intent_data", paymentIntentData);
+		
+		params.put("customer_email", "kueifengtung@yahoo.com");
+		
+		ArrayList<String> paymentMethodTypes = new ArrayList<>();
+		paymentMethodTypes.add("card");
+		params.put("payment_method_types", paymentMethodTypes);
+
+		ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
+		HashMap<String, Object> lineItem = new HashMap<String, Object>();
+		lineItem.put("name", "T-shirt");
+		lineItem.put("description", "Comfortable cotton t-shirt");
+		
+		double totalDouble = Double.parseDouble(total);
+		int totalInt = (int) totalDouble*100;
+		lineItem.put("amount", totalInt);
+		
+		lineItem.put("currency", "usd");
+		lineItem.put("quantity", 1);
+		lineItems.add(lineItem);
+		params.put("line_items", lineItems);
+
+		HttpSession thisSession = request.getSession(false);
+		
+		params.put("success_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directCheckoutSuccess?session_id="+thisSession.getId());
+		params.put("cancel_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directshoppingcart");
+
+		try {
+			Session session = Session.create(params);
+		} catch (StripeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("導到　結賬成功頁面");
 		return "front_intro_checkoutSuccess";
 	}
@@ -106,8 +214,12 @@ public class FrontDirectController {
 	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directhomepage", method = RequestMethod.GET)
-	public String directHomepage() {
+	public String directHomepage(Model m) {
 		System.out.println("導到首頁");
+		
+		List<ProductBean> Inventorylist= productService.selectAll();
+
+		m.addAttribute("product", Inventorylist);
 		return "front_index";
 	}
 	
@@ -143,13 +255,70 @@ public class FrontDirectController {
 	// 2)完成
 	// 3)Jerry
 	@RequestMapping(value = "/showSpecificProduct", method = RequestMethod.GET)
-	public String showSpecificProduct(@RequestParam("productID") int productID,Model mm) {
+	public String showSpecificProduct(
+			@RequestParam("productID") int productID,
+			@CookieValue(value = "historyCookie", required = false) Cookie historyCookie,
+			Model mm) {
 		
 		System.out.println("導到 show Specific Product");
 		System.out.println("Directing to showSpecificProduct");
 		
 		ProductBean theProduct = productService.getProduct(productID);
+		
 
+		System.out.println("-------------------------HISTORY COOKIE:"+historyCookie);
+		if (historyCookie != null) {
+			System.out.println("historyCookie!=null");
+			// Cookie already exist, extract value
+			String cookieValue = historyCookie.getValue();
+			System.out.println("cookie value: " + cookieValue);
+			// string value will look like this format;
+			// ... "1,1,13,4,55,,13,34" where these # are productID
+			
+			// Add new id onto old value
+			String productIDString = String.valueOf(productID);
+			System.out.println("productIDString: "+productIDString);
+			
+			CheckSubstring checker = new CheckSubstring();
+			if(checker.countAnyChar(cookieValue, ".")<5) {
+				System.out.println("is less than 5");
+				cookieValue = cookieValue+"."+productIDString;
+				
+			} else {
+				System.out.println("is more than 5");
+				ArrayList<String> delimited = checker.delimitAtAnyChar(cookieValue, ".");
+				System.out.println("delimited: "+delimited);
+				
+				delimited = checker.removeAnyChar(delimited, ".");
+				System.out.println("delimited: "+delimited);
+				
+				delimited.remove(0);
+				System.out.println("delimited (post slice, remove, addall, remove first: "+delimited);
+				delimited.add(productIDString);
+				cookieValue = delimited.get(0);
+				for(int index = 1; index<delimited.size(); index++) {
+					cookieValue = cookieValue + "."+delimited.get(index);
+				}
+				System.out.println("cookieValue final: "+cookieValue);
+			}
+			
+			
+			System.out.println("cookieValue: "+cookieValue);
+			historyCookie.setValue(cookieValue);
+//			Cookie cookie = new Cookie("historyCookie", cookieValue);
+			historyCookie.setMaxAge(-1);
+			response.addCookie(historyCookie);
+			
+		} else {
+			// No cookie right now, make new cookie
+			String productIDString = String.valueOf(productID);
+			Cookie cookie = new Cookie("historyCookie", productIDString);
+			cookie.setMaxAge(-1);
+			response.addCookie(cookie);
+		}
+
+		
+		
 		mm.addAttribute("theProduct", theProduct);
 		System.out.println(" theProduct 塞進去以後的 model : " + mm );
 		System.out.println("抓到的商品物件: " + theProduct );

@@ -66,7 +66,7 @@
 
 	
 	
-	<form method="POST" action="<jstl:url value="/AdminProfile/savePassword" />" >
+	<form method="POST" action="<jstl:url value="/UserProfile/savePassword" />" >
 		<div class="form-group">
 		<input class="form-control" type="hidden" name="userID" value="${user.userID}" />
 		</div>

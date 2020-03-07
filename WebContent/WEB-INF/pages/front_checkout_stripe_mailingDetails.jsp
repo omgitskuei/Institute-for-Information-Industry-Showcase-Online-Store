@@ -75,52 +75,52 @@
 				<div class="card-header border-0">
 					<div class="h3 mt-1"> 訂購人資訊 </div>
 				</div>
-				<form class="needs-validation" novalidate>
+				<form action="<jstl:url value="/directStripeCheckoutStep2"/>" method=get class="needs-validation" novalidate>
 					<div class="form-row text-left mt-3">
 						<div class="form-group col-md-6">
 							<label for="name">姓名</label>
-							<input type="text" class="form-control " id="name" placeholder="姓名" required>
+							<input type="text" class="form-control " name="name" id="name" placeholder="姓名" value="${userData.name}">
 							<div class="invalid-feedback">請填寫姓名</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="mail">Email</label>
-							<input type="email" class="form-control" id="mail" placeholder="Email" required>
+							<label for="email">Email</label>
+							<input type="email" class="form-control" name="email" id="email" placeholder="Email" value="${userData.email}">
 							<div class="invalid-feedback">請填寫Email</div>
 						</div>
 					</div>
-				<div class="form-row text-left">
+					<div class="form-row text-left">
 					<div class="form-group col-md-4">
-						<label for="section">國家</label>
-							<select name="" id="section" class="form-control">
+						<label for="country">國家</label>
+							<select name="" id="country" name="country" class="form-control">
 								<option value="">台灣</option>
-								<option value="">美國</option>
-								<option value="">日本</option>
-								<option value="">韓國</option>
-								<option value="">菲律賓</option>
-								<option value="">習近平</option>
-								<option value="">越南</option>
+<!-- 								<option value="">美國</option> -->
+<!-- 								<option value="">日本</option> -->
+<!-- 								<option value="">韓國</option> -->
+<!-- 								<option value="">菲律賓</option> -->
+<!-- 								<option value="">習近平</option> -->
+<!-- 								<option value="">越南</option> -->
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="zone">城市</label>
-							<select name="" id="zone" class="form-control">
+							<label for="city">城市</label>
+							<select name="" id="city" name="city" class="form-control">
 								<option value="">台北市</option>
 								<option value="">台中市</option>
 								<option value="">高雄市</option>
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="postal-code">郵遞區號</label>
-							<input type="text" class="form-control" id="postal-code" placeholder="" required>
+							<label for="zipcode">郵遞區號</label>
+							<input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="000">
 						</div>
 					</div>
 					<div class="form-row">
 						<label for="address">地址</label>
-						<input type="text" class="form-control" id="mail" required>
+						<input type="text" class="form-control" name="address" id="mail" value="${userData.address}">
 					</div>
 					<div class="form-row">
 						<label for="shipaddress">送貨地址</label>
-						<input type="text" class="form-control" id="mailaddress" required>
+						<input type="text" class="form-control" name="shipaddress" id="mailaddress" required>
 					</div>
 					
 

@@ -117,7 +117,7 @@ public class StripePaymentController {
 			HashMap<String, Object> lineItem = new HashMap<String, Object>();
 			lineItem.put("name", "T-shirt");
 			lineItem.put("description", "Comfortable cotton t-shirt");
-			lineItem.put("amount", 500);
+			lineItem.put("amount", 50000);
 			lineItem.put("currency", "usd");
 			lineItem.put("quantity", 1);
 			lineItems.add(lineItem);
@@ -134,7 +134,7 @@ public class StripePaymentController {
 //			retrievedCustomer.setPhone("0963-798-118");
 //			System.out.println("Finished setting phone number");
 //			
-//			// Add a new card to this retrieved customer
+			// Add a new card to this retrieved customer
 //			Map<String, Object> cardParam = new HashMap<String, Object>();  // Adds <card info>
 //			cardParam.put("number","4242424242424242");
 //			cardParam.put("exp_month", "8");

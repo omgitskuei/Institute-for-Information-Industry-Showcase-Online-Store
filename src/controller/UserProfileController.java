@@ -32,6 +32,9 @@ import model.user.UserBean;
 import model.user.UserBeanService;
 import model.wallet.WalletBean;
 import model.wallet.WalletBeanService;
+import util.EncodeHexString;
+import util.EncryptString;
+import util.ValidateString;
 
 // 使用者 Profile 控制器
 @Controller
@@ -95,12 +98,58 @@ public class UserProfileController {
 	// 儲存修改後的密碼
 		@PostMapping("/savePassword")
 		public String savePassword(@ModelAttribute UserBean updateThisUser, 
+								   @RequestParam(value = "currentPwd", required = true) String currentPwd,
 								   @RequestParam(value = "newPwd", required = true) String newPwd, 
-								   @RequestParam(value = "userID",required = true) int userID) {
-			userService.updatePwd(updateThisUser, newPwd);
-			return "redirect:/UserProfile/userUpdateForm";
+								   @RequestParam(value = "userID",required = true) int userID,
+								   Model nextPage) {
+			System.out.println("currentPwd"+currentPwd);
+			System.out.println("newPwd"+newPwd);
+			System.out.println("userID"+userID);
+			
+			if(newPwd.length()==0 || newPwd==null) {
+				newPwd = " ";
+			}
+			if(currentPwd.length()==0 || currentPwd==null) {
+				currentPwd = " ";
+			}
+			
+			ValidateString util = new ValidateString();
+			String validateNewPwdResult = util.validatePwdreturnErrors(newPwd);
+			System.out.println("validate new pwd results: "+ validateNewPwdResult);
+			String validateOldPwdResult = util.validatePwdreturnErrors(currentPwd);
+			System.out.println("validate current pwd results: "+ validateOldPwdResult);
+			
+			if (validateNewPwdResult.equals("VALID PASSWORD") && validateOldPwdResult.equals("VALID PASSWORD")) {
+				
+				UserBean bean = userService.selectUser(userID);
+				String encrypted = bean.getUserPwd();
+				EncodeHexString encoder = new EncodeHexString();
+				byte[] cipher = encoder.HexStringToByteArray(encrypted);
+				EncryptString tink = new EncryptString();
+				String decrypted = tink.decryptGoogleTinkAEAD(cipher, "OMGiloveyou");
+				
+				//if (decrypted.equals(currentPwd)) {
+				if (bean != null && bean.getUserID()!=0) {
+					userService.updatePwd(updateThisUser, newPwd);
+					Map<String, String> errors = new HashMap<String, String>();
+					errors.put("mismatchError", "Password Updated!");
+					nextPage.addAttribute("errors", errors);
+					return "UserUpdatePasswordForm";
+				} else {
+					Map<String, String> errors = new HashMap<String, String>();
+					errors.put("mismatchError", "To verify your identity, please enter correct old password");
+					errors.put("invalidError", validateNewPwdResult);
+					nextPage.addAttribute("errors", errors);
+					return "UserUpdatePasswordForm";
+				}
+			} else {
+				Map<String, String> errors = new HashMap<String, String>();
+				errors.put("mismatchError", validateOldPwdResult);
+				errors.put("invalidError", validateNewPwdResult);
+				nextPage.addAttribute("errors", errors);
+				return "UserUpdatePasswordForm";
+			}		
 		}
-	
 	
 	// user 查看電子錢包餘額
 	@GetMapping("/showUserWallet")

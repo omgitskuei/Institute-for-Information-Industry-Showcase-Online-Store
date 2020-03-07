@@ -28,7 +28,7 @@
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
 
-                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">登入</a>
+                    <a href=<jstl:url value="/directlogin"/> class="btn btn-dark box-shadow">回去登入</a>
 
                 </div>
             </div>
