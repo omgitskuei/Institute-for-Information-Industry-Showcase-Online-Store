@@ -24,7 +24,7 @@ public class AdminOrderController {
 	public AdminOrderController() {
 	}
 
-	// 1)導到訂單並產生資料
+	// 1)導到訂單並顯示訂單資料
 	// 2)已完成
 	// 3)Thomas
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
