@@ -14,6 +14,7 @@
 
 <div class="container">
 <h1>新增商品</h1>
+<!-- 新增商品表單 -->
  <form action="<c:url value="/AdminProduct/addProduct"/>" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="inventoryTitle">商品名稱
@@ -84,6 +85,7 @@ function readURL(input) {
 	});
 	</script>
 	
+	<!-- 一鍵輸入 -->
 	<script>
 	function autofill() {
 		var productName = document.getElementById("productName");

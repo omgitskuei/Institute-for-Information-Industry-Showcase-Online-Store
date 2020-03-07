@@ -25,15 +25,15 @@ import model.product.ProductBeanService;
 import util.EmailUsers;
 
 
-// TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html
+// TODO 現在出現很奇怪的狀況，GET換頁沒寫錯，但有時成功有時失敗...他都還是讀到原本寫的html（已解決）
 // 1)進首頁 V
 // 2)進關於我們 V
-// 3)進服務
+// 3)進服務 V
 // 4)進聯絡我們 
-// 5)進登入
+// 5)進登入 V
 // 6)進註冊 V
-// 7)進購物車
-// 8)進結帳頁面
+// 7)進購物車 V
+// 8)進結帳頁面 V
 @Controller 
 @SessionAttributes(names= { "userEmail", "userPwd", "rememberMe" })
 public class FrontDirectController {
@@ -65,6 +65,7 @@ public class FrontDirectController {
 		nextPage.addAttribute("sumTotal", total);
 		return "front_checkout_stripe_mailingDetails";
 	}
+	
 	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.GET)
 	public String directStripeCheckoutStep2(
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
@@ -75,6 +76,7 @@ public class FrontDirectController {
 
 		return "front_checkout_stripe_paymentDetails";
 	}
+	
 	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
 	public String directCheckoutSuccess() {
 		System.out.println("導到　結賬成功頁面");
@@ -119,7 +121,7 @@ public class FrontDirectController {
 	}
 	
 	// 1)進服務(商品頁面，User Products Page)
-	// 2)測試
+	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directservices", method = RequestMethod.GET)
 	public String directToServices(Model mm) {
@@ -137,6 +139,9 @@ public class FrontDirectController {
 		return "front_services";
 	}
 	
+	// 1)導到單一商品畫面
+	// 2)完成
+	// 3)Jerry
 	@RequestMapping(value = "/showSpecificProduct", method = RequestMethod.GET)
 	public String showSpecificProduct(@RequestParam("productID") int productID,Model mm) {
 		
@@ -177,7 +182,7 @@ public class FrontDirectController {
 	}
 	
 	// 1)進註冊
-	// 2)測試
+	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directsignup", method = RequestMethod.GET)
 	public String directToServices1() {
@@ -186,7 +191,7 @@ public class FrontDirectController {
 	}
 	
 	// 1)進購物車
-	// 2)測試
+	// 2)完成
 	// 3)Thomas
 	@RequestMapping(value = "/directshoppingcart", method = RequestMethod.GET)
 	public String directToShoppingCart() {
@@ -194,6 +199,9 @@ public class FrontDirectController {
 			return "front_shoppingcart";
 		}
 	
+	// 1)登出
+	// 2)完成
+	// 3)Chris
 	@RequestMapping(value = "/directLogout", method = RequestMethod.GET)
 	public String directLogout() {
 		Cookie cookie = new Cookie("loginSuccessCookie", "omg");
@@ -240,6 +248,9 @@ public class FrontDirectController {
 		return "front_contact";
 	}
 	
+	// 1)導到結帳頁面
+	// 2)已完成
+	// 3)Thomas
 	@RequestMapping(value = "/directCheckOutPage", method = RequestMethod.GET)
 	public String checkOutPage() {
 		System.out.println("導到結帳頁面");

@@ -50,13 +50,11 @@
       </div>
       <div class="col-md-3">
         <a href="index.html" class="btn btn-success btn-block">
-        <!-- 儲存的Controller沒寫，還沒效 -->
           <i class="fas fa-check"></i> 儲存庫存
         </a>
       </div>
       <div class="col-md-3">
         <a href="index.html" class="btn btn-warning btn-block">
-        <!-- 刪除的Controller沒寫，還沒效 -->
           <i class="fas fa-plus"></i> 刪除庫存
         </a>
       </div>
@@ -142,6 +140,7 @@
 		crossorigin="anonymous"></script>
 
 	<script>
+	/* Footer年份 */
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 

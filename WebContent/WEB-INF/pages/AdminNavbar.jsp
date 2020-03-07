@@ -30,6 +30,7 @@
 </head>
 
 <body>
+	<!-- 管理者NavBar -->
    <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
       <div class="container">
 		<a href=<jstl:url value="/redirect"/> class="navbar-brand">管理者</a>

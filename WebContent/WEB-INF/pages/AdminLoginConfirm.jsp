@@ -25,6 +25,7 @@
 
 </head>
 <body>
+	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
 			<span class="navbar-brand">管理者</span>
@@ -126,6 +127,7 @@
 
 <script>
 	// Get the current year for the copyright
+	/* 管理者Footer年份 */
 	$('#year').text(new Date().getFullYear());
 
 	$(function() {

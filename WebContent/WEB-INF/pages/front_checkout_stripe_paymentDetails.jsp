@@ -13,9 +13,6 @@
     <style>
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
-        *{
-        	border:2px,solid,black;
-        }
     </style>
    <title>結帳</title>
   </head>

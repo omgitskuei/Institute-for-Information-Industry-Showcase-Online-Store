@@ -27,6 +27,7 @@ public class ImgConversion {
 
 	}
 
+	// 圖片存路徑
 	public String addProductImg(MultipartFile file, HttpServletRequest request) {
 		if (file == null) {
 			return "";

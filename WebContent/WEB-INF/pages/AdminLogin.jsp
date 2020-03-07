@@ -19,14 +19,15 @@
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
 <title>Admin's Login | 管理者登入頁</title>
+
 <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 <!-- Dictate which Stylesheets to use for this webpage -->
-
+<!-- Google 我不是機器人 Api -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-
+	<!-- Admin登入頁面NAVBAR -->
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
 		<div class="container">
 			<span class="navbar-brand">管理者</span>
@@ -177,12 +178,13 @@
 	crossorigin="anonymous"></script>
 
 <script>
+	/* Footer年份 */
 	// Get the current year for the copyright
 	$('#year').text(new Date().getFullYear());
 
 	// Function of Cookie to Remember Email 
 	// 如果判斷cookie有值把密碼給他
-	$(function() {
+	/* $(function() {
 		$("#userEmail").keyup(function() {
 			var userEmail = $("#userEmail").val();
 			if (userEmail != "") {
@@ -194,8 +196,9 @@
 
 			}
 		})
-	})
+	}) */
 </script>
+<!-- 一鍵輸入 -->
 <script>
 	function autofill() {
 		var eml = document.getElementById("userEmail");

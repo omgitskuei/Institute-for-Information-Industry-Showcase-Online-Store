@@ -33,7 +33,7 @@
 
 
 
-<!-- FOOTER -->
+<!-- 管理介面FOOTER -->
 <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
   <div class="container">
     <div class="row">
@@ -58,7 +58,7 @@
   <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 
   <script>
-    // Get the current year for the copyright
+    /* footer年份 */
     $('#year').text(new Date().getFullYear());
 
     CKEDITOR.replace('editor1');

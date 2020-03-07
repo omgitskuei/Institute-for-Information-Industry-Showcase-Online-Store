@@ -66,8 +66,7 @@
     </div>
   </div>
 </section>
-<!-- <!-- BACK TO LAST PAGE 
-<a href="javascript:history.go(-1)">返回上一頁</a> -->
+
 <!-- INVENTORY -->
 <section id="inventory">
   <div class="container">
@@ -175,6 +174,7 @@
     crossorigin="anonymous"></script>
 
   <script>
+  	/* footer年份 */
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 

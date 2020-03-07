@@ -164,32 +164,36 @@
       $("#year").text(new Date().getFullYear());
       
       
-
+	
       function addToOrder() {
+    	  // 用map選取每一個這些屬性標籤，並存取於變數中
     	  var buyData = $('table#cartTable tbody tr:has(td)').map(function() {
+    		  // 每個td裡面對應的物件
     		  var $td =  $('td', this);
         	        return {
-        	                 ProductID: $td.eq(0).text(),
-        	                 ProductName: $td.eq(1).text(),
-        	                 ProductCount: $td.eq(3).find("input").val(),
-        	                 ProductPrice: $td.eq(4).text()               
+        	        						
+        	                 ProductID: $td.eq(0).text(), // 第一行
+        	                 ProductName: $td.eq(1).text(), // 第二行
+        	                 ProductCount: $td.eq(3).find("input").val(), // 是input的第三行
+        	                 ProductPrice: $td.eq(4).text() // 第四行              
         	               }
-        	}).get();
+        	}).get(); 
        console.log("buyData Array are: ")
        console.log(buyData); // 1 arrayJson
        console.log(JSON.stringify(buyData)); //2 JSON.stringify, 可能這兩種資料
-       console.log(JSON.parse(JSON.stringify(buyData)));
+       // console.log(JSON.parse(JSON.stringify(buyData))); 
   		
   		$.ajax({
-  			type : 'POST',
-  			url : 'userAddToOrder',
+  			type : 'POST', // 送資料POST
+  			url : 'userAddToOrder', // 路徑對到Java的Controller
   			data : {
-  				'dataArray': JSON.stringify(buyData),
+  				'dataArray': JSON.stringify(buyData), // 欲輸入的資料
   			},
   			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-  			dataType : 'JSON',
-            success : function (succ){
-            	  alert('success')
+  			dataType : 'JSON', // 型態
+           	// 做測試
+  			success : function (succ){
+            	  alert('success') 
             },
             error: function(err){
             	  
@@ -201,36 +205,43 @@
     
          <script>
     // ***************************************************
-    // Shopping Cart functions
+    // 購物車所有功能
 
     var shoppingCart = (function () {
         // Private methods and properties
+        // 宣告一個空陣列存多筆物件，因為有key跟value
         var cart = [];
 
+        // 欲抓取的欄位
         function Item(name, price, count) {
             this.name = name
             this.price = price
             this.count = count
         }
-
+		
+        // 存取localStorage
         function saveCart() {
             localStorage.setItem("shoppingCart", JSON.stringify(cart));
         }
 
+       	// 取出
         function loadCart() {
             cart = JSON.parse(localStorage.getItem("shoppingCart"));
+            	// 如果都沒東西給的，給個預設值，空陣列
             if (cart === null) {
                 cart = []
             }
         }
 
+       	// 執行
         loadCart();
 
 
 
         // Public methods and properties
         var obj = {};
-
+		
+        // 抓物件
         obj.addItemToCart = function (name, price, count) {
             for (var i in cart) {
                 if (cart[i].name === name) {
@@ -361,6 +372,7 @@
           var cartArray = shoppingCart.listCart();
           console.log("*** Count Cart:" + cartArray.length);
           var output = "";
+          // 寫output格式
           for(var i in cartArray) {
             output += 
             "<tr>" + 

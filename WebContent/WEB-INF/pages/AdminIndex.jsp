@@ -299,110 +299,7 @@
 		</div>
 	</div>
 </section>
-<!-- ADD Order MODAL -->
-<%-- <div class="modal fade" id="addOrderModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title">新增訂單</h5>
-        <button class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-          <label for="orderTitle">商品名稱
-            </label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="orderCategory">商品類別</label>
-            <select class="form-control">
-              <option value="">蔬菜</option>
-              <option value="">水果</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="inventoryQuantity">商品數量</label>
-            <input type="number" class="form-control" min="0">
-          </div>
-          <div class="form-group">
-            <label for="orderUserID">買家帳號</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="orderTransportMethod">寄送方式</label>
-            <select class="form-control">
-              <option value="">全家</option>
-              <option value="">7-11</option>
-              <option value="">郵局</option>
-              <option value="">黑貓宅急便</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="orderPayMethod">付款方式</label>
-            <select class="form-control">
-              <option value="">貨到付款</option>
-              <option value="">信用卡付款</option>
-              <option value="">轉帳</option>
-              <option value="">Apple Pay</option>
-              <option value="">街口支付</option>
-              <option value="">Line Pay</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="orderQuote">備註</label>
-            <textarea name="editor1" class="form-control"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-success" data-dismiss="modal">儲存</button>
-      </div>
-    </div>
-  </div>
-</div> --%>
 
-<!-- ADD User MODAL -->
-<%-- <div class="modal fade" id="addUserModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-warning text-black">
-        <h5 class="modal-title">新增使用者</h5>
-        <button class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form name="newUserForm" action="<jstl:url value="/controller.AdminNewUserController" />" method="post">
-          <div class="form-group">
-            <label for="email">電子信箱</label>
-            <input type="email" class="form-control" name="newEmail">
-          </div>
-          <div class="form-group">
-            <label for="password">密碼</label>
-            <input type="password" class="form-control" name="newPwd">
-          </div>
-          <div class="form-group">
-            <label for="password2">確認密碼</label>
-            <input type="password" class="form-control" name="repeatPwd">
-          </div>
-          <div class="form-group">
-            <label for="orderPayMethod">身份</label>
-            <select class="form-control" name="userType">
-              <option value="">一般使用者</option>
-              <option value="">管理者</option>
-            </select>
-           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-warning" data-dismiss="modal">儲存</button>
-      </div>
-    </div>
-  </div>
-</div> --%>
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
@@ -419,10 +316,10 @@
 		title.value = "March Sales!"
 		body.value = "Celebrate this month with in-season fruits and vegetables: Asparagus, Apples, Artichokes, Avocados, Bananas, Beets, Broccoli, Brussels Sprouts! - FarmVille Produce Curator";
 	};
+	/* footer年份 */
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
 
-   /*  CKEDITOR.replace('editor1'); */
   </script>
 </body>
 
