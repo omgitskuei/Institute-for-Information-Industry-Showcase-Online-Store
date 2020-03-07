@@ -40,10 +40,10 @@
 	
 	
 
-	<table class="table">
+	<table class="table mt-4">
 		<thead>
 	    <tr>
-	      <th scope="col">訂單 ID:</th>
+	      <th scope="col">訂單 ID(OrderID):</th>
 	      <th scope="col">使用者 ID</th>
 	      <th scope="col">總金額</th>
 	      <th scope="col">寄件地址</th>
@@ -51,10 +51,11 @@
 	      <th scope="col">訂購時間</th>
 	    </tr>
 	    </thead>
-		        <c:forEach var="userOrder" items="${userOrder}">
+		        <jstl:forEach var="userOrder" items="${userOrder}">
 	    <tbody>
 		    <tr>
-		        <td>${userOrder.orderID}</td>
+                <td><a class="btn btn-info" href='<c:url value='userDetails.do?orderID=${userOrder.orderID}' />' target="_blank">
+                ${userOrder.orderID} 查看明細</a></td>
 				<td>${userOrder.userID}</td>
 				<td>${userOrder.total}</td>
 				<td>${userOrder.mailingAddress}</td>
@@ -62,8 +63,8 @@
 				<td>${userOrder.orderTime}</td>
 		    </tr>
 	    </tbody>						<!-- construct an "update" link with customer id -->
-				</c:forEach>
-	</table>	
+				</jstl:forEach>
+	</table>
 
 </div>
 </body>

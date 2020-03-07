@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.order.OrderBean;
@@ -55,6 +56,7 @@ public class AdminProfileController {
 	
 	@Autowired
 	private OrderDetailsBeanDAO orderDetailsDAO;
+
 	
 	// 列出所有使用者頁面
 	@GetMapping("/list")
@@ -191,6 +193,19 @@ public class AdminProfileController {
 		m.addAttribute("user", theUser);
 		m.addAttribute("userOrder", theUserOrder);
 		return "AdminShowTheUserOrder";
+	}
+	
+	// Admin 查看訂單詳細 Order Details
+	@GetMapping("/userDetails")
+	public String showOrderDetails(@RequestParam("orderID")int OrderID, Model model) {
+		//顯示Order部分
+		List<OrderBean> orderToDetailsList = orderDAO.selectByOrderID(OrderID);
+		model.addAttribute("orderToDetailsList", orderToDetailsList);
+		//顯示OrderDetails部分
+		List<OrderDetailsBean> detailsList = orderDetailsDAO.selectAllByOrderID(OrderID);
+		model.addAttribute("detailsList", detailsList);
+
+		return "OrderDetailsList";
 	}
 	
 	
