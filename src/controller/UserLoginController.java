@@ -80,7 +80,8 @@ public class UserLoginController {
 	@RequestMapping(path = "/userForgotPwd", method = RequestMethod.POST)
 	public String userForgotPwd(
 			Model nextPage,
-			@RequestParam(name="userEmail") String userEmail) {
+			@RequestParam(name="userEmail") String userEmail
+			) {
 		System.out.println("BEGIN /userForgotPwd");
 		// if there are errors, return to previous page, else query the input
 		String result = validator.validateEmailreturnErrors(userEmail);

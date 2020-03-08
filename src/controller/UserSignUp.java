@@ -54,7 +54,9 @@ public class UserSignUp {
 	// Admin attempts to sign up. If credentials Don't match, prepare to create new
 	// admin; must enter email verification code.
 	@RequestMapping(path = "/userSignUp", method = RequestMethod.POST)
-	public String userSignUp(@RequestParam(name = "nEmail") String nEmail, @RequestParam(name = "nPwd") String nPwd,
+	public String userSignUp(
+			@RequestParam(name = "nEmail") String nEmail, 
+			@RequestParam(name = "nPwd") String nPwd,
 			@RequestParam(name = "rPwd") String cPwd, Model nextPage) {
 		System.out.println("BEGIN /userSignUp");
 		System.out.println("	User input: ");

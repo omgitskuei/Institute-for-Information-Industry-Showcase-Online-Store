@@ -75,64 +75,102 @@
 				<div class="card-header border-0">
 					<div class="h3 mt-1"> 訂購人資訊 </div>
 				</div>
-				<form action="<jstl:url value="/directStripeCheckoutStep2"/>" method=get class="needs-validation" novalidate>
-					<div class="form-row text-left mt-3">
+				<form action="<jstl:url value="/directStripeCheckoutStep2"/>" method=POST class="needs-validation">
+				<!-- ROW 1, 2 groups so md-6 -->
+					<div class="form-row text-left mt-2">
+					<!-- Group: Name -->
 						<div class="form-group col-md-6">
-							<label for="name">姓名</label>
-							<input type="text" class="form-control " name="name" id="name" placeholder="姓名" value="${userData.name}">
+							<label for="fullname">姓名</label>
+							<input type="text" class="form-control " name="fullname" id="fullname" placeholder="姓名" value="${userData.fullname}">
 							<div class="invalid-feedback">請填寫姓名</div>
 						</div>
+					<!-- Group: Email -->
 						<div class="form-group col-md-6">
 							<label for="email">Email</label>
 							<input type="email" class="form-control" name="email" id="email" placeholder="Email" value="${userData.email}">
 							<div class="invalid-feedback">請填寫Email</div>
 						</div>
 					</div>
+				<!-- ROW 2, 3 groups so md-4 -->
 					<div class="form-row text-left">
-					<div class="form-group col-md-4">
-						<label for="country">國家</label>
-							<select name="" id="country" name="country" class="form-control">
-								<option value="">台灣</option>
-<!-- 								<option value="">美國</option> -->
-<!-- 								<option value="">日本</option> -->
-<!-- 								<option value="">韓國</option> -->
-<!-- 								<option value="">菲律賓</option> -->
-<!-- 								<option value="">習近平</option> -->
-<!-- 								<option value="">越南</option> -->
+					<!-- Group: Country -->
+						<div class="form-group col-md-4">
+							<label for="country">國家</label>
+							<select name="country" id="country" name="country" class="form-control">
+								<option value="">挑選國家</option>
+								<option value="台灣">台灣</option>
+ 								<option value="美國">美國</option>
+	 							<option value="日本">日本</option>
 							</select>
 						</div>
+					<!-- Group: City -->
 						<div class="form-group col-md-4">
 							<label for="city">城市</label>
-							<select name="" id="city" name="city" class="form-control">
-								<option value="">台北市</option>
-								<option value="">台中市</option>
-								<option value="">高雄市</option>
+							<select name="city" id="city" name="city" class="form-control">
+								<option value="">挑選城市</option>
+								<option value="台北市">台北市</option>
+								<option value="台中市">台中市</option>
+								<option value="高雄市">高雄市</option>
 							</select>
 						</div>
+					<!-- Group: ZipCode -->
 						<div class="form-group col-md-4">
 							<label for="zipcode">郵遞區號</label>
-							<input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="000">
+							<input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="000" value="">
 						</div>
 					</div>
-					<div class="form-row">
-						<label for="address">地址</label>
-						<input type="text" class="form-control" name="address" id="mail" value="${userData.address}">
+				<!-- ROW 3, 1 group so md-12 -->
+					<div class="form-row text-left">
+					<!-- Group: Address -->
+						<div class="form-group col-md-12">
+							<label for="address">地址</label>
+							<input type="text" class="form-control" name="address" id="address" value="${userData.address}">
+						</div>
 					</div>
-					<div class="form-row">
-						<label for="shipaddress">送貨地址</label>
-						<input type="text" class="form-control" name="shipaddress" id="mailaddress" required>
+				<!-- ROW 4, 1 group so md-12  -->
+					<div class="form-row text-left">
+					<!-- Group: ShipAddress -->
+						<div class="form-group col-md-12">
+							<label for="shipAddress">送貨地址</label>
+							<input type="text" class="form-control" name="shipAddress" id="shipAddress" value="">
+						</div>
 					</div>
-					
-
-						<div class="mt-3 d-flex justify-content-end">
+				<!-- ROW 5, 1 group so md-12  -->
+					<div class="form-row text-left">
+					<!-- Group: Buttons -->
+						<div class="form-group col-md-12">
 							<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3">繼續選購</a>
 							<a href="<jstl:url value="/directshoppingcart"/>" type="submit" class="btn btn-warning text-white mr-3">回上一頁</a>
-							<a href="<jstl:url value="/directStripeCheckoutStep2"/>" type="submit" class="btn btn-success text-white mr-3">進行下一步</a>
+							<input type="submit" value="進下一步" class="btn btn-success text-white mr-3">	 
 						</div>
+					</div>
+						
+						
 					</form>
 				</div>
 			</div>
 		</div>
+						<div class="col-md-6 mx-auto md-12">
+							<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-secondary btn-block" id="submit">
+						</div>
+						<script>
+							function autofill() {
+								var fullname = document.getElementById("fullname");
+								var email = document.getElementById("email");
+								var country = document.getElementById("country");
+								var city = document.getElementById("city");
+								var zipcode = document.getElementById("zipcode");
+								var address = document.getElementById("address");
+								var shipaddress = document.getElementById("shipAddress");
+								fullname.value = "Leon Chen";
+								email.value = "leon123@yahoo.com.tw";
+								country.value = "台灣";
+								city.value = "台北市";
+								zipcode.value = "105";
+								address.value = "No. 110號, Section 3, Minquan East Road, Songshan District";
+								shipaddress.value = "No. 110號, Section 3, Minquan East Road, Songshan District";
+							};
+						</script>
 	</div>
 </section>
 

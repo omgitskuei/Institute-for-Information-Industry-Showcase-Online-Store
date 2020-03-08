@@ -59,7 +59,7 @@ public class FrontDirectController {
 	public HttpServletRequest request;
 	public HttpServletResponse response;
 	private String total;
-	private ArrayList<String> frontCheckoutStripeMailingDetailsInfo = new ArrayList<String>();
+	private ArrayList<String> checkoutStripeUserInput = new ArrayList<String>();
 
 	// Constructors
 	@Autowired
@@ -74,12 +74,15 @@ public class FrontDirectController {
 	
 	@RequestMapping(value = "/directStripeCheckoutStep1", method = RequestMethod.GET)
 	public String directStripeCheckoutStep1(
+			@CookieValue(name="loginSuccessCookie", required = false) Cookie loginSuccessCookie,
+			@CookieValue(value = "UserEmailCookie", required = false) Cookie emailCookie,
 			@SessionAttribute("userEmail") String userEmail,
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
 			Model nextPage) {
-		System.out.println(shoppingCartTotal);
 		total = shoppingCartTotal+".00";
-		System.out.println("Total is = " +total);
+		System.out.println("CookieValue is"+shoppingCartTotal+ ", Total is = " +total);
+		System.out.println("UserEmailCookie "+emailCookie+", UserEmailCokokie"+emailCookie.getValue());
+		
 		System.out.println("導到 Stripe 結賬#1頁面");
 		System.out.println("SessionAttribute userEmail"+userEmail);
 		UserBean uBean = new UserBean();
@@ -93,7 +96,7 @@ public class FrontDirectController {
 		
 		Map<String, String> userData = new HashMap<String, String>();
 		userData.put("email", userEmail);
-		userData.put("name", name);
+		userData.put("fullname", name);
 		userData.put("address", address);
 		nextPage.addAttribute("userData", userData);
 		
@@ -101,40 +104,67 @@ public class FrontDirectController {
 		return "front_checkout_stripe_mailingDetails";
 	}
 	
-	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.GET)
+	@RequestMapping(value = "/directStripeCheckoutStep2", method = RequestMethod.POST)
 	public String directStripeCheckoutStep2(
-//			@RequestParam("name") String name,
-//			@RequestParam("email") String email,
-//			@RequestParam("country") String country,
-//			@RequestParam("city") String city,
-//			@RequestParam("zipcode") String zipcode,
-//			@RequestParam("address") String address,
-//			@RequestParam("shipaddress") String shipaddress,
+			@RequestParam(value="fullname") String fullname,
+			@RequestParam(value="email") String email,
+			@RequestParam(value="country") String country,
+			@RequestParam(value="city") String city,
+			@RequestParam(value="zipcode") String zipcode,
+			@RequestParam(value="address") String address,
+			@RequestParam(value="shipAddress") String shipAddress,
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
 			Model nextPage) {
-		System.out.println("導到 Stripe 結賬#2頁面");
-//		System.out.println("name"+name);
+//		System.out.println("導到 Stripe 結賬#2頁面");
+//		System.out.println("fullname"+fullname);
 //		System.out.println("email"+email);
 //		System.out.println("country"+country);
 //		System.out.println("city"+city);
 //		System.out.println("zipcode"+zipcode);
 //		System.out.println("address"+address);
-//		System.out.println("shipaddress"+shipaddress);
-//		frontCheckoutStripeMailingDetailsInfo.add(name);
-//		frontCheckoutStripeMailingDetailsInfo.add(email);
-//		frontCheckoutStripeMailingDetailsInfo.add(country);
-//		frontCheckoutStripeMailingDetailsInfo.add(city);
-//		frontCheckoutStripeMailingDetailsInfo.add(zipcode);
-//		frontCheckoutStripeMailingDetailsInfo.add(address);
-//		frontCheckoutStripeMailingDetailsInfo.add(shipaddress);
+//		System.out.println("shipaddress"+shipAddress);
+		checkoutStripeUserInput.add(fullname);
+		checkoutStripeUserInput.add(email);
+		checkoutStripeUserInput.add(country);
+		checkoutStripeUserInput.add(city);
+		checkoutStripeUserInput.add(zipcode);
+		checkoutStripeUserInput.add(address);
+		checkoutStripeUserInput.add(shipAddress);
 		
+		nextPage.addAttribute(checkoutStripeUserInput);
 		nextPage.addAttribute("sumTotal", total);
 
 		return "front_checkout_stripe_paymentDetails";
 	}
 	
-	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.GET)
-	public String directCheckoutSuccess() {
+	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.POST)
+	public String directCheckoutSuccess(
+			@RequestParam(name="cardNum") String cardNum,
+			@RequestParam(name="expiry") String expiry,
+			@RequestParam(name="cvCode") String cvCode,
+			@RequestParam(name="receipt") String receipt,
+			@RequestParam(name="couponCode") String couponCode,
+			@RequestParam(name="walletAmount") String walletAmount,
+//			@RequestParam("checkoutStripeUserInput") ArrayList<String> checkoutStripeUserInput,
+			@CookieValue(name="totalCookie") String shoppingCartTotal
+			) {
+//		System.out.println("cardNum"+cardNum);
+//		System.out.println("expiry"+expiry);
+//		System.out.println("cvCode"+cvCode);
+//		System.out.println("receipt"+receipt);
+//		System.out.println("couponCode"+couponCode);
+//		System.out.println("walletAmount"+walletAmount);
+//		System.out.println("	totalCookie"+shoppingCartTotal);
+		checkoutStripeUserInput.add(cardNum);
+		checkoutStripeUserInput.add(expiry);
+		checkoutStripeUserInput.add(cvCode);
+		checkoutStripeUserInput.add(receipt);
+		checkoutStripeUserInput.add(couponCode);
+		checkoutStripeUserInput.add(walletAmount);
+		
+		System.out.println("print all user input" + checkoutStripeUserInput);
+		
+		
 		Stripe.apiKey = "sk_test_s56neoj7TwIIkY5oFr45aZHd00cvXIHSQo";
 		
 //		Customer newCustomer = createNewCustomer("kueifengtung@yahoo.com");
