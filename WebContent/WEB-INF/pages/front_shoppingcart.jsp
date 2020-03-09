@@ -195,8 +195,9 @@
   			success : function (response){
             	  alert('success'); 
             },
-            error: function(){
-            		alert('fail');
+            error: function(err){
+            		alert('error' + err);
+            		console.log(err); // 這邊可以看到錯誤訊息
             }
       });
   	};
