@@ -26,6 +26,7 @@ import model.profile.ProfileBean;
 import model.profile.ProfileBeanDAO;
 import model.profile.ProfileBeanService;
 import model.setting.SettingBean;
+import model.setting.SettingBeanDAO;
 import model.setting.SettingBeanService;
 import model.user.UserBean;
 import model.user.UserBeanService;
@@ -61,6 +62,9 @@ public class AdminProfileController {
 	
 	@Autowired
 	private SettingBeanService settingService;
+	
+	@Autowired
+	private SettingBeanDAO settingDAO;
 
 	
 	// 列出所有使用者頁面
@@ -227,20 +231,21 @@ public class AdminProfileController {
 		return "AdminShowTheUserSetting";
 	}
 	
-//	@PostMapping("/updateSetting")
-//	public String updateSetting(@ModelAttribute SettingBean updateThisSetting,
-//			                  @RequestParam(value="settingSecurityQ", required=false) String newQ,
-//			                  @RequestParam(value="settingSecurityA", required=false) String newA,
-//			                  @RequestParam(value="settingDisplayName", required=true) String newSettingDisplayName,
-//			                  @RequestParam(value="settingAllowMetadata", required=true) boolean newSettingAllowMetadata) {
-//		
-//		settingDAO.updateSettingSecurityQ(updateThisSetting, newQ);
-//		settingDAO.updateSettingSecurityA(updateThisSetting, newA);
-//		settingDAO.updateSettingDisplayName(updateThisSetting, newSettingDisplayName);
-//		settingDAO.updateSettingAllowMetadata(updateThisSetting, newSettingAllowMetadata);
-//		
-//		return "redirect:/UserProfile/showTheUserSetting";
-//	}
+	@PostMapping("/updateSetting")
+	public String updateSetting(@ModelAttribute SettingBean updateThisSetting,
+			                  @RequestParam(value = "userID", required = true) int userID,
+			                  @RequestParam(value="settingSecurityQ", required=false) String newQ,
+			                  @RequestParam(value="settingSecurityA", required=false) String newA,
+			                  @RequestParam(value="settingDisplayName", required=true) String newSettingDisplayName,
+			                  @RequestParam(value="settingAllowMetadata", required=true) boolean newSettingAllowMetadata) {
+		
+		settingDAO.updateSettingSecurityQ(updateThisSetting, newQ);
+		settingDAO.updateSettingSecurityA(updateThisSetting, newA);
+		settingDAO.updateSettingDisplayName(updateThisSetting, newSettingDisplayName);
+		settingDAO.updateSettingAllowMetadata(updateThisSetting, newSettingAllowMetadata);
+		
+		return "redirect:/AdminProfile/list";
+	}
 	
 	
 
