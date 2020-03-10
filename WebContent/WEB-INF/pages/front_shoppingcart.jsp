@@ -122,7 +122,7 @@
                 		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界"/>
                 	</form> 
                 	
-                <a href="<jstl:url value="/userAddToOrder"/>" onclick="addToOrder()" class="btn-lg mt-2"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"  alt=""/></a>
+                <button onclick="addToOrder()" class="btn-lg mt-2"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"  alt=""/></button>
                 	
                 </div>
                 <!-- Stripe Checkout button -->
@@ -184,7 +184,7 @@
         	                 ProductPrice: $td.eq(4).text() // 第四行              
         	               }
         	}).get(); 
-       alert("buyData Array are: ")
+       console.log("buyData Array are: ")
        console.log(buyData); // 1 arrayJson
        console.log(JSON.stringify(buyData)); //2 JSON.stringify, 可能這兩種資料
        // console.log(JSON.parse(JSON.stringify(buyData))); 
@@ -195,16 +195,17 @@
   			data : {
   				'dataArray': JSON.stringify(buyData), // 欲輸入的資料
   			},
-  			cache: false,
+  			// cache: false,
   			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-  			dataType : 'JSON', // 型態
+  			dataType : 'html', // 型態
            	// 做測試
 
   			success : function (response){
-            	  alert('success'); 
+            	  console.log('success');
+            	  console.log(response);
             },
             error: function(err){
-            		alert('error' + err);
+            	    console.log('error' + err);
             		console.log(err); // 這邊可以看到錯誤訊息
 
             }
