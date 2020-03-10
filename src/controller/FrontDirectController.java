@@ -1,6 +1,8 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +28,13 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.checkout.Session;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import model.mailingList.MailBeanService;
 import model.product.ProductBean;
 import model.product.ProductBeanService;
 import model.profile.ProfileBean;
 import model.profile.ProfileBeanService;
-import model.setting.SettingBean;
 import model.user.UserBean;
 import model.user.UserBeanService;
 import util.CheckSubstring;
@@ -61,6 +64,13 @@ public class FrontDirectController {
 	private String total;
 	private ArrayList<String> checkoutStripeUserInput = new ArrayList<String>();
 
+	
+	public static AllInOne all;
+
+	
+	private static void initial() {
+		all = new AllInOne(null);
+	}
 	// Constructors
 	@Autowired
 	public FrontDirectController(MailBeanService mService, ProfileBeanService pService, UserBeanService uService, ProductBeanService productService, HttpServletRequest request, HttpServletResponse response) {
@@ -454,6 +464,54 @@ public class FrontDirectController {
 	public String checkOutPage() {
 		System.out.println("導到結帳頁面");
 		return "front_checkout";
+	}
+	
+	
+	// 1)導到綠界
+	// 2)已完成，但無法回首頁
+	// 3)Thomas
+	@RequestMapping(value = "/greenPay.controller")
+	public String greenPay(
+			@CookieValue(name="totalCookie") String shoppingCartTotal, 
+			Model m) {
+		try {
+			initial();
+			AioCheckOutOneTime obj = new AioCheckOutOneTime();// 產生信用卡一次付清訂單物件
+			
+			// String total = importedData.get(importedData.size()-1);// 抓取總金額
+			String id = "temporaryID";// 取得會員 利用會員Id跟日期 創建訂單編號
+
+			Date date = new Date();// 目前時間
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");// 設定日期格式 給訂單編號用
+			String dateString = sdf.format(date);// 進行轉換
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");// 設定日期格式 給日期用
+			String dateStringToMerchantTradeDate = sdf1.format(date);// 進行轉換
+			String merchantTradeNo = id.toString() + dateString;// 合併訂單編號
+			
+			System.out.println("有進綠界");
+			obj.setMerchantTradeNo(dateString);
+			obj.setMerchantTradeDate(dateStringToMerchantTradeDate);
+			obj.setTotalAmount(shoppingCartTotal);
+			obj.setTradeDesc("FarmVille一些商品");
+			obj.setItemName("FarmVille一堆商品");
+			obj.setReturnURL("http://localhost:8080/EEIT111FinalProject/front_intro.jsp");
+			obj.setNeedExtraPaidInfo("N");
+			String form = all.aioCheckOut(obj, null);
+			
+			m.addAttribute("form", form);
+
+
+			System.out.println(form);
+
+			return "greenTest";
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		return "greenTest";
 	}
 	
 }

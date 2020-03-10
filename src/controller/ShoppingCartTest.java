@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import ecpay.payment.integration.domain.InvoiceObj;
 import model.order.OrderBeanService;
 import model.orderDetails.OrderDetailsBeanService;
 import model.product.ProductBeanService;
@@ -27,6 +31,8 @@ import util.CheckSubstring;
  * @author chienlin
  */
 @Controller
+@ResponseBody
+@SessionAttributes(names={"form"})
 public class ShoppingCartTest {
 
 	private OrderBeanService oService;
@@ -37,6 +43,7 @@ public class ShoppingCartTest {
 	
 	public static AllInOne all;
 
+	
 	private static void initial() {
 		all = new AllInOne(null);
 	}
@@ -47,6 +54,7 @@ public class ShoppingCartTest {
 		this.odService = odService;
 		this.uEmail = uEmail;
 		this.pService = pService;
+		
 	}
 	
 	public HashMap<String, Object> makeOrderItem (String name, String description, int amount, String currency, int quantity){
@@ -107,95 +115,118 @@ public class ShoppingCartTest {
 	 * @param importedData
 	 * @return
 	 */
-	@RequestMapping(value= "/userAddToOrder")
+	
+	@RequestMapping("/userAddToOrder")
 	@ResponseBody
-	public String userAddToOrder(@RequestParam(name = "dataArray", required = false) ArrayList<String> importedData) {
+	public String userAddToOrder(@RequestParam(name = "dataArray", required = false) ArrayList<String> importedData, Model m) {
 
-			System.out.println("原始JSON資料：" + importedData);
-	
-			// 刪除階段一：刪除以下符號並傳給ArrayList: importedData
-			CheckSubstring removeItem = new CheckSubstring();
-			importedData = removeItem.removeAnyChar(importedData, "[");
-			importedData = removeItem.removeAnyChar(importedData, "]");
-			importedData = removeItem.removeAnyChar(importedData, "{");
-			importedData = removeItem.removeAnyChar(importedData, "}");
-			importedData = removeItem.removeAnyChar(importedData, "\"");
-			importedData = removeItem.removeAnyChar(importedData, " ");
-			importedData = removeItem.removeAnyChar(importedData, ",");
+				System.out.println("原始JSON資料：" + importedData);
 
-			ArrayList<String> delimitedData = new ArrayList<String>();
-			ArrayList<String> dataValues = new ArrayList<String>();
-			ArrayList<String> unitPrice = new ArrayList<String>();
-			ArrayList<String> count = new ArrayList<String>();
-			// totalData目的是把總金額放進同一個arrayList，但現在先測試用importedData 因為發生NullPointException
-			ArrayList<String> totalData = new ArrayList<String>();
+				// 刪除階段一：刪除以下符號並傳給ArrayList: importedData
+				CheckSubstring removeItem = new CheckSubstring();
+				importedData = removeItem.removeAnyChar(importedData, "[");
+				importedData = removeItem.removeAnyChar(importedData, "]");
+				importedData = removeItem.removeAnyChar(importedData, "{");
+				importedData = removeItem.removeAnyChar(importedData, "}");
+				importedData = removeItem.removeAnyChar(importedData, "\"");
+				importedData = removeItem.removeAnyChar(importedData, " ");
+				importedData = removeItem.removeAnyChar(importedData, ",");
 
-			Integer sum = 0;
-			// 刪除階段二：依造":"分割為兩筆資料並存入ArrayList: delimitedData
-			for (int i = 0; i < importedData.size(); i++) {
-				delimitedData.addAll(removeItem.delimitAtAnyChar((String) importedData.get(i), ":"));
-			}
-			// 刪除階段三：將ArrayList：delimitedData 只取出奇位數資料，並存入ArrayList: delimitedData
-			for (int i = 0; i < delimitedData.size(); i++) {
-				if (i % 2 != 0) {
-					dataValues.add(delimitedData.get(i));
+				ArrayList<String> delimitedData = new ArrayList<String>();
+				ArrayList<String> dataValues = new ArrayList<String>();
+				ArrayList<String> unitPrice = new ArrayList<String>();
+				ArrayList<String> count = new ArrayList<String>();
+				// totalData目的是把總金額放進同一個arrayList，但現在先測試用importedData 因為發生NullPointException
+				ArrayList<String> totalData = new ArrayList<String>();
 
+				Integer sum = 0;
+				// 刪除階段二：依造":"分割為兩筆資料並存入ArrayList: delimitedData
+				for (int i = 0; i < importedData.size(); i++) {
+					delimitedData.addAll(removeItem.delimitAtAnyChar((String) importedData.get(i), ":"));
 				}
-			}
-			delimitedData = removeItem.removeAnyChar(delimitedData, ":");
-			dataValues = removeItem.removeAnyChar(dataValues, ":");
+				// 刪除階段三：將ArrayList：delimitedData 只取出奇位數資料，並存入ArrayList: delimitedData
+				for (int i = 0; i < delimitedData.size(); i++) {
+					if (i % 2 != 0) {
+						dataValues.add(delimitedData.get(i));
 
-			// 處理過後的JSON：[ID：1, 名稱：蔥, 個數：24, 單價：20, 3, 大蒜, 5, 193, 5, 山藥, 2, 100]
-			for (int i = 2; i < dataValues.size(); i += 4) {
-				count.add(dataValues.get(i));
-			}
-			for (int i = 3; i < dataValues.size(); i += 4) {
-				unitPrice.add(dataValues.get(i));
-			}
-			for (int i = 0; i < count.size(); i++) {
-				sum += Integer.parseInt(count.get(i)) * Integer.parseInt(unitPrice.get(i));
-			}
-		
-			System.out.println("處理過後的JSON：" + dataValues + "總金額：" + sum);
-			
-			
-			importedData.addAll(dataValues);
-			importedData.add(sum.toString());
-			System.out.println("最後的importedData: " + importedData);
-			
-			// ****************************************綠界*******************************************************************
-			initial();
-			AioCheckOutOneTime obj = new AioCheckOutOneTime();// 產生信用卡一次付清訂單物件
+					}
+				}
+				delimitedData = removeItem.removeAnyChar(delimitedData, ":");
+				dataValues = removeItem.removeAnyChar(dataValues, ":");
 
-			String total = importedData.get(importedData.size()-1);// 抓取總金額
-			String id = "temporaryID";// 取得會員 利用會員Id跟日期 創建訂單編號
-	
-			Date date = new Date();// 目前時間
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");// 設定日期格式 給訂單編號用
-			String dateString = sdf.format(date);// 進行轉換
-			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");// 設定日期格式 給日期用
-			String dateStringToMerchantTradeDate = sdf1.format(date);// 進行轉換
-			String merchantTradeNo = id.toString() + dateString;// 合併訂單編號
+				// 處理過後的JSON：[ID：1, 名稱：蔥, 個數：24, 單價：20, 3, 大蒜, 5, 193, 5, 山藥, 2, 100]
+				for (int i = 2; i < dataValues.size(); i += 4) {
+					count.add(dataValues.get(i));
+				}
+				for (int i = 3; i < dataValues.size(); i += 4) {
+					unitPrice.add(dataValues.get(i));
+				}
+				for (int i = 0; i < count.size(); i++) {
+					sum += Integer.parseInt(count.get(i)) * Integer.parseInt(unitPrice.get(i));
+				}
 
-			obj.setMerchantTradeNo(merchantTradeNo);// 合作特店交易編號
-			obj.setMerchantTradeDate(dateStringToMerchantTradeDate);// 訂單日期
-			obj.setTotalAmount(total);// 繳費總額
-			obj.setTradeDesc("FarmVille交易");// 設定TradeDesc 交易描述
-			obj.setItemName("FarmVille交易");// 設定ItemName 商品名稱
-			obj.setReturnURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
-			obj.setOrderResultURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
-			obj.setNeedExtraPaidInfo("N");// 設定OrderResultURL Client端回傳付款結果網址
-			// obj.setRedeem("Y");
-			String form = all.aioCheckOut(obj, null);
-			return form;
-			
-			
-			
-			
-	
+				System.out.println("處理過後的JSON：" + dataValues + "總金額：" + sum);
+				
+				importedData.clear();
+				importedData.addAll(dataValues);
+				importedData.add(sum.toString());
+				System.out.println("最後的importedData: " + importedData);
+				
+				System.out.println("test");
+				
+				String form = " ";
+				InvoiceObj iObj2 = new InvoiceObj();
+				
+				try {
+					initial();
+					AioCheckOutOneTime obj = new AioCheckOutOneTime();// 產生信用卡一次付清訂單物件
+					
+					String total = importedData.get(importedData.size()-1);// 抓取總金額
+					String id = "temporaryID";// 取得會員 利用會員Id跟日期 創建訂單編號
 
+					Date date = new Date();// 目前時間
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");// 設定日期格式 給訂單編號用
+					String dateString = sdf.format(date);// 進行轉換
+					SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");// 設定日期格式 給日期用
+					String dateStringToMerchantTradeDate = sdf1.format(date);// 進行轉換
+					String merchantTradeNo = id.toString() + dateString;// 合併訂單編號
+					
+					System.out.println("test");
+					obj.setMerchantTradeNo("testCompany0004");
+					obj.setMerchantTradeDate("2017/01/01 08:05:23");
+					obj.setTotalAmount("50");
+					obj.setTradeDesc("test Description");
+					obj.setItemName("TestItem");
+					obj.setReturnURL("http://211.23.128.214:5000");
+					obj.setNeedExtraPaidInfo("N");
+					form = all.aioCheckOut(obj, null);
+					
+					m.addAttribute("form", form);
+					
+//				obj.setMerchantTradeNo(merchantTradeNo);// 合作特店交易編號
+//				obj.setMerchantTradeDate(dateStringToMerchantTradeDate);// 訂單日期
+//				obj.setTotalAmount(total);// 繳費總額
+//				obj.setTradeDesc("FarmVille交易");// 設定TradeDesc 交易描述
+//				obj.setItemName("FarmVille交易");// 設定ItemName 商品名稱
+//				obj.setReturnURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
+//				obj.setOrderResultURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
+//				obj.setNeedExtraPaidInfo("N");// 設定OrderResultURL Client端回傳付款結果網址
+					// obj.setRedeem("Y");
+//				String form = all.aioCheckOut(obj, null);
+					System.out.println("test");
+					System.out.println("測試"+form);
+//			
 
-
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return form;
+			
 	}
+	
+
 
 }
