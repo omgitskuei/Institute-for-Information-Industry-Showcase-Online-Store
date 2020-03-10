@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -113,13 +115,14 @@ public class ShoppingCartTest {
 	 * 11, 馬鈴薯, 2, 29, 10, 綠竹筍, 1, 95, 8, 白蘿蔔, 1, 45, 7, 牛蒡, 2, 23]
 	 * 
 	 * @param importedData
-	 * @return
 	 */
 	
-	@RequestMapping("/userAddToOrder")
+	@PostMapping("/userAddToOrder")
 	@ResponseBody
-	public String userAddToOrder(@RequestParam(name = "dataArray", required = false) ArrayList<String> importedData, Model m) {
-
+	public String userAddToOrder(@RequestParam(name = "dataArray", required = false) ArrayList<String> importedData, @CookieValue(name="totalCookie") String shoppingCartTotal, Model m) {
+                
+		
+		        initial();
 				System.out.println("原始JSON資料：" + importedData);
 
 				// 刪除階段一：刪除以下符號並傳給ArrayList: importedData
@@ -174,14 +177,11 @@ public class ShoppingCartTest {
 				
 				System.out.println("test");
 				
-				String form = " ";
-				InvoiceObj iObj2 = new InvoiceObj();
-				
 				try {
 					initial();
 					AioCheckOutOneTime obj = new AioCheckOutOneTime();// 產生信用卡一次付清訂單物件
 					
-					String total = importedData.get(importedData.size()-1);// 抓取總金額
+					// String total = importedData.get(importedData.size()-1);// 抓取總金額
 					String id = "temporaryID";// 取得會員 利用會員Id跟日期 創建訂單編號
 
 					Date date = new Date();// 目前時間
@@ -191,42 +191,30 @@ public class ShoppingCartTest {
 					String dateStringToMerchantTradeDate = sdf1.format(date);// 進行轉換
 					String merchantTradeNo = id.toString() + dateString;// 合併訂單編號
 					
-					System.out.println("test");
-					obj.setMerchantTradeNo("testCompany0004");
-					obj.setMerchantTradeDate("2017/01/01 08:05:23");
-					obj.setTotalAmount("50");
-					obj.setTradeDesc("test Description");
-					obj.setItemName("TestItem");
-					obj.setReturnURL("http://211.23.128.214:5000");
+					System.out.println("有進綠界");
+					obj.setMerchantTradeNo(dateString);
+					obj.setMerchantTradeDate(dateStringToMerchantTradeDate);
+					obj.setTotalAmount(shoppingCartTotal);
+					obj.setTradeDesc("FarmVille一些商品");
+					obj.setItemName("FarmVille一堆商品");
+					obj.setReturnURL("http://localhost:8080/EEIT111FinalProject/front_intro.jsp");
 					obj.setNeedExtraPaidInfo("N");
-					form = all.aioCheckOut(obj, null);
+					String form = all.aioCheckOut(obj, null);
 					
 					m.addAttribute("form", form);
-					
-//				obj.setMerchantTradeNo(merchantTradeNo);// 合作特店交易編號
-//				obj.setMerchantTradeDate(dateStringToMerchantTradeDate);// 訂單日期
-//				obj.setTotalAmount(total);// 繳費總額
-//				obj.setTradeDesc("FarmVille交易");// 設定TradeDesc 交易描述
-//				obj.setItemName("FarmVille交易");// 設定ItemName 商品名稱
-//				obj.setReturnURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
-//				obj.setOrderResultURL("http://localhost:8080/EEIT111FinalProject/");// 設定OrderResultURL Client端回傳付款結果網址
-//				obj.setNeedExtraPaidInfo("N");// 設定OrderResultURL Client端回傳付款結果網址
-					// obj.setRedeem("Y");
-//				String form = all.aioCheckOut(obj, null);
-					System.out.println("test");
-					System.out.println("測試"+form);
-//			
 
+
+					System.out.println(form);
+
+					return form;
 					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				return form;
 			
-	}
-	
-
-
+				return "greenTest";
+			}
+			
 }
