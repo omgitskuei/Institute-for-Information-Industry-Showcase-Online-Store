@@ -199,9 +199,14 @@
   			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
   			dataType : 'JSON', // 型態
            	// 做測試
-  			success : function (result){
-  			  alert("i am in.");
-            	  $("#green").val(result);
+
+  			success : function (response){
+            	  alert('success'); 
+            },
+            error: function(err){
+            		alert('error' + err);
+            		console.log(err); // 這邊可以看到錯誤訊息
+
             }
             
       });

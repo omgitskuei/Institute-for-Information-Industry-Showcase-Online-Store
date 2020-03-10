@@ -31,10 +31,14 @@
 	<c:url var="showTheUserOrderLink" value="/AdminProfile/showTheUserOrer">
 		<c:param name="userID" value="${user.userID}" />
 	</c:url>
+	<c:url var="showTheUserSetitngLink" value="/AdminProfile/showTheUserSetting">
+		<c:param name="userID" value="${user.userID}" />
+	</c:url>
 	
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link" href="${updateLink}">使用者基本資料</a></li>
 		<li class="nav-item"><a class="nav-link active" href="${updatePasswordLink}">更改密碼</a></li>
+		<li class="nav-item"><a class="nav-link" href="${showTheUserSetitngLink}">查看安全設定</a></li>
 		<li class="nav-item"><a class="nav-link" href="${updateWalletLink}">查看電子錢包</a></li>
 		<li class="nav-item"><a class="nav-link" href="${showTheUserOrderLink}">查看訂單</a></li>
 	</ul>
