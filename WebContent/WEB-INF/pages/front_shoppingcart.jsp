@@ -132,6 +132,7 @@
             </div>
         </div>
     </div>
+    <div id="success"></div>
 </div>
 </section>
 
@@ -169,7 +170,6 @@
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
       
-      
 	
       function addToOrder() {
     	  // 用map選取每一個這些屬性標籤，並存取於變數中
@@ -203,6 +203,7 @@
   			success : function (response){
             	  console.log('success');
             	  console.log(response);
+            	  $('#success').html(response);
             },
             error: function(err){
             	    console.log('error' + err);
