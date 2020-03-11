@@ -1,30 +1,46 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.Customer;
+import com.stripe.model.PaymentIntent;
+import com.stripe.model.PaymentSourceCollection;
+import com.stripe.model.ShippingDetails;
+import com.stripe.model.Source;
 import com.stripe.model.checkout.Session;
+import com.stripe.param.CustomerCreateParams;
+import com.stripe.model.Address;
 
 import model.mailingList.MailBeanService;
 import model.product.ProductBean;
@@ -59,7 +75,8 @@ public class FrontDirectController {
 	public HttpServletRequest request;
 	public HttpServletResponse response;
 	private String total;
-	private ArrayList<String> checkoutStripeUserInput = new ArrayList<String>();
+	private Map<String, String> userData = new HashMap<String, String>();
+	private ArrayList<String> cartSliced = new ArrayList<String>();
 
 	// Constructors
 	@Autowired
@@ -72,35 +89,57 @@ public class FrontDirectController {
 		this.response = response;
 	}
 	
+	//@ResponseBody
 	@RequestMapping(value = "/directStripeCheckoutStep1", method = RequestMethod.GET)
 	public String directStripeCheckoutStep1(
-			@CookieValue(name="loginSuccessCookie", required = false) Cookie loginSuccessCookie,
-			@CookieValue(value = "UserEmailCookie", required = false) Cookie emailCookie,
+			//@CookieValue(value = "UserEmailCookie", required = false) Cookie emailCookie,
 			@SessionAttribute("userEmail") String userEmail,
 			@CookieValue(name="totalCookie") String shoppingCartTotal,
+			@CookieValue(name="cartCookie", required=false) Cookie cartCookie,
+			@CookieValue(name="loginSuccessCookie", required = false) Cookie loginSuccessCookie,
+			//@RequestParam(name="cartCookie") String cartCookie,
+			HttpServletRequest request,
+			//HttpServletResponse response,
 			Model nextPage) {
-		total = shoppingCartTotal+".00";
-		System.out.println("CookieValue is"+shoppingCartTotal+ ", Total is = " +total);
-		System.out.println("UserEmailCookie "+emailCookie+", UserEmailCokokie"+emailCookie.getValue());
+		String cartValue = cartCookie.getValue();
+		CheckSubstring checker = new CheckSubstring();
+		cartSliced = checker.delimitAtAnyChar(cartValue, ".");
+		cartSliced = checker.removeAnyChar(cartSliced, ".");
+		cartSliced = checker.removeEmptyValues(cartSliced);
 		
-		System.out.println("導到 Stripe 結賬#1頁面");
-		System.out.println("SessionAttribute userEmail"+userEmail);
-		UserBean uBean = new UserBean();
-		uBean.setUserEmail(userEmail);
-		int userID = uService.selectUserIDByEmail(userEmail);
-		uBean = uService.selectUser(userID);
+		System.out.println(cartSliced);
 		
-		ProfileBean pBean = pService.getProfile(userID);
-		String name = pBean.getProfileFullName();
-		String address = pBean.getProfileAddress();
+		if (loginSuccessCookie==null) {
+			return "front_intro_checkoutPleaseSignIn";
+		} else {
+			try {
+				total = shoppingCartTotal+".00";
+				
+				System.out.println("導到 Stripe 結賬#1頁面");
+
+				UserBean uBean = new UserBean();
+				uBean.setUserEmail(userEmail);
+				int userID = uService.selectUserIDByEmail(userEmail);
+				uBean = uService.selectUser(userID);
+				
+				ProfileBean pBean = pService.getProfile(userID);
+				String name = pBean.getProfileFullName();
+				String address = pBean.getProfileAddress();
+				
+				// add all user input into one map, these 3 data is for auto-filling the payment form with user data in db
+				userData.put("email", userEmail);
+				userData.put("fullname", name);
+				userData.put("address", address);
+				nextPage.addAttribute("userData", userData);
+				
+				nextPage.addAttribute("sumTotal", total);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
-		Map<String, String> userData = new HashMap<String, String>();
-		userData.put("email", userEmail);
-		userData.put("fullname", name);
-		userData.put("address", address);
-		nextPage.addAttribute("userData", userData);
-		
-		nextPage.addAttribute("sumTotal", total);
+		//response.sendRedirect("front_checkout_stripe_paymentDetails");
 		return "front_checkout_stripe_mailingDetails";
 	}
 	
@@ -113,112 +152,196 @@ public class FrontDirectController {
 			@RequestParam(value="zipcode") String zipcode,
 			@RequestParam(value="address") String address,
 			@RequestParam(value="shipAddress") String shipAddress,
-			@CookieValue(name="totalCookie") String shoppingCartTotal,
+			//@RequestParam(value="userData") Map<String, String> userData,
+			//@CookieValue(name="totalCookie") String shoppingCartTotal,
 			Model nextPage) {
-//		System.out.println("導到 Stripe 結賬#2頁面");
-//		System.out.println("fullname"+fullname);
-//		System.out.println("email"+email);
-//		System.out.println("country"+country);
-//		System.out.println("city"+city);
-//		System.out.println("zipcode"+zipcode);
-//		System.out.println("address"+address);
-//		System.out.println("shipaddress"+shipAddress);
-		checkoutStripeUserInput.add(fullname);
-		checkoutStripeUserInput.add(email);
-		checkoutStripeUserInput.add(country);
-		checkoutStripeUserInput.add(city);
-		checkoutStripeUserInput.add(zipcode);
-		checkoutStripeUserInput.add(address);
-		checkoutStripeUserInput.add(shipAddress);
+		System.out.println("導到 Stripe 結賬#2頁面");
+		userData.put("country", country);
+		userData.put("city", city);
+		userData.put("zipcode", zipcode);
+		userData.put("shipAddress", shipAddress);
 		
-		nextPage.addAttribute(checkoutStripeUserInput);
+		nextPage.addAttribute("userData", userData);
 		nextPage.addAttribute("sumTotal", total);
-
+		
 		return "front_checkout_stripe_paymentDetails";
 	}
 	
 	@RequestMapping(value = "/directCheckoutSuccess", method = RequestMethod.POST)
 	public String directCheckoutSuccess(
-			@RequestParam(name="cardNum") String cardNum,
-			@RequestParam(name="expiry") String expiry,
-			@RequestParam(name="cvCode") String cvCode,
+			@RequestParam(name="cardNumber") String cardNumber,
+			@RequestParam(name="cardExpiry") String cardExpiry,
+			@RequestParam(name="cardCvc") String cardCvc,
 			@RequestParam(name="receipt") String receipt,
 			@RequestParam(name="couponCode") String couponCode,
 			@RequestParam(name="walletAmount") String walletAmount,
-//			@RequestParam("checkoutStripeUserInput") ArrayList<String> checkoutStripeUserInput,
-			@CookieValue(name="totalCookie") String shoppingCartTotal
+			//@RequestParam(value="userData") Map<String, String> userData,
+			@CookieValue(name="totalCookie") String shoppingCartTotal,
+			HttpServletRequest request
 			) {
-//		System.out.println("cardNum"+cardNum);
-//		System.out.println("expiry"+expiry);
-//		System.out.println("cvCode"+cvCode);
-//		System.out.println("receipt"+receipt);
-//		System.out.println("couponCode"+couponCode);
-//		System.out.println("walletAmount"+walletAmount);
-//		System.out.println("	totalCookie"+shoppingCartTotal);
-		checkoutStripeUserInput.add(cardNum);
-		checkoutStripeUserInput.add(expiry);
-		checkoutStripeUserInput.add(cvCode);
-		checkoutStripeUserInput.add(receipt);
-		checkoutStripeUserInput.add(couponCode);
-		checkoutStripeUserInput.add(walletAmount);
+		System.out.println("導到 Stripe 結賬#3頁面 (direct to success)");
+		userData.put("cardNumber", cardNumber);
+		userData.put("cardExpiry", cardExpiry);
+		userData.put("cardCvc", cardCvc);
+		userData.put("receipt", receipt);
+		userData.put("couponCode", couponCode);
+		userData.put("walletAmount", walletAmount);
 		
-		System.out.println("print all user input" + checkoutStripeUserInput);
-		
+		System.out.println("SYSOUT ALL userData: " + userData);
 		
 		Stripe.apiKey = "sk_test_s56neoj7TwIIkY5oFr45aZHd00cvXIHSQo";
 		
-//		Customer newCustomer = createNewCustomer("kueifengtung@yahoo.com");
-
 		// Retrieving Stripe Customer
-		Customer retrievedCustomer;
-		try {
-			retrievedCustomer = Customer.retrieve("cus_GquXSUfYCXaNAF");
-			System.out.println(""+retrievedCustomer);
-		} catch (StripeException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+					Customer retrievedCustomer;
+					try {
+						retrievedCustomer = Customer.retrieve("cus_GquXSUfYCXaNAF");
+						System.out.println(""+retrievedCustomer);
+					} catch (StripeException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
 
-		Map<String, Object> params = new HashMap<String, Object>();
+					Map<String, Object> params = new HashMap<String, Object>();
 
-		HashMap<String, Object> paymentIntentData = new HashMap<String, Object>();
-		paymentIntentData.put("setup_future_usage", "off_session");
-		params.put("payment_intent_data", paymentIntentData);
-		
-		params.put("customer_email", "kueifengtung@yahoo.com");
-		
-		ArrayList<String> paymentMethodTypes = new ArrayList<>();
-		paymentMethodTypes.add("card");
-		params.put("payment_method_types", paymentMethodTypes);
+					HashMap<String, Object> paymentIntentData = new HashMap<String, Object>();
+					paymentIntentData.put("setup_future_usage", "off_session");
+					params.put("payment_intent_data", paymentIntentData);
+					
+					params.put("customer_email", "kueifengtung@yahoo.com");
+					
+					ArrayList<String> paymentMethodTypes = new ArrayList<>();
+					paymentMethodTypes.add("card");
+					params.put("payment_method_types", paymentMethodTypes);
 
-		ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
-		HashMap<String, Object> lineItem = new HashMap<String, Object>();
-		lineItem.put("name", "T-shirt");
-		lineItem.put("description", "Comfortable cotton t-shirt");
+					ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
+					
+					HashMap<String, Object> lineItem = new HashMap<String, Object>();
+					
+					//lineItem = makeOrderItem(name, "", amount, "TWD", quantity);
+					
+					for(int index=0; index<cartSliced.size(); index+=7) {
+						System.out.println(cartSliced.subList(0, index));
+						if(index%3==0) {
+							System.out.println("name? = "+cartSliced.get(index));
+						}
+					}
+					lineItem.put("name", "T-shirt");
+					lineItem.put("description", "Comfortable cotton t-shirt");
+					lineItem.put("amount", 50000);
+					lineItem.put("currency", "usd");
+					lineItem.put("quantity", 1);
+					lineItems.add(lineItem);
+					lineItem.put("name", "T-Boots");
+					lineItem.put("description", "Comfortable cotton t-shirt");
+					lineItem.put("amount", 20000);
+					lineItem.put("currency", "usd");
+					lineItem.put("quantity", 2);
+					lineItems.add(lineItem);
+					params.put("line_items", lineItems);
+					HttpSession thisSession = request.getSession(false);
+					params.put("success_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directCheckoutSuccess?session_id="+thisSession.getId());
+					params.put("cancel_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directshoppingcart");
+					try {
+						Session session = Session.create(params);
+					} catch (StripeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		
-		double totalDouble = Double.parseDouble(total);
-		int totalInt = (int) totalDouble*100;
-		lineItem.put("amount", totalInt);
 		
-		lineItem.put("currency", "usd");
-		lineItem.put("quantity", 1);
-		lineItems.add(lineItem);
-		params.put("line_items", lineItems);
-
-		HttpSession thisSession = request.getSession(false);
 		
-		params.put("success_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directCheckoutSuccess?session_id="+thisSession.getId());
-		params.put("cancel_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directshoppingcart");
-
-		try {
-			Session session = Session.create(params);
-		} catch (StripeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+//		// try to create new customer, if customer exists, triggers stripeException, in which case we use existing.
+//		try {
+//			// Create new customer
+//			Map<String, Object> customerParams = new HashMap<String, Object>();
+////			Address addressObj = new Address();
+////			addressObj.setCity(userData.get("city"));
+////			addressObj.setCountry(userData.get("country"));
+////			addressObj.setLine1(userData.get("address"));
+////			addressObj.setPostalCode(userData.get("zipcode"));
+////			customerParams.put("address", addressObj);
+//			customerParams.put("email", userData.get("email"));
+//			int id = uService.selectUserIDByEmail(userData.get("email"));
+//			customerParams.put("id", id);
+//			customerParams.put("name", userData.get("fullname"));
+//			String phone = pService.getProfile(id).getProfilePhone();
+//			customerParams.put("phone", phone);
+////			ShippingDetails ship = new ShippingDetails();
+////			ship.setAddress(addressObj);
+////			ship.setName(userData.get("fullname")); // recipient name
+////			ship.setCarrier("Fedex");
+////			ship.setPhone(phone);
+////			customerParams.put("shipping", userData.get("shipAddress"));
+//			Customer newCustomer = Customer.create(customerParams);
+//		} catch (StripeException e) {
+//			e.printStackTrace();
+//			System.out.println("Customer already exists! StripeException triggered");
+//			// Retrieving Stripe Customer
+//			Customer retrievedCustomer;
+//			try {
+//				retrievedCustomer = Customer.retrieve("cus_GquXSUfYCXaNAF");
+//				System.out.println(""+retrievedCustomer);
+//			} catch (StripeException e1) {
+//				e1.printStackTrace();
+//				System.out.println("Fail to use existing customer");
+//			}
+//		}
+//		
+//
+//		// Create payment intent
+//		Map<String, Object> params = new HashMap<String, Object>();
+//
+//		// payment intent - pay method type; card
+//		HashMap<String, Object> paymentIntentData = new HashMap<String, Object>();
+//		paymentIntentData.put("setup_future_usage", "off_session");
+////		params.put("payment_intent_data", paymentIntentData);
+////		params.put("customer_email", userData.get("email"));
+//		params.put("payment_method_types", Arrays.asList("card"));
+//		
+//		// payment intent - create payment item(s) and amount(s)
+//		LocalDate generatedLocalDate = LocalDate.now();
+//		String now = generatedLocalDate.toString();
+//		
+//		double totalDouble = Double.parseDouble(total);
+//		long total = (long) totalDouble*100;
+//		
+////		HashMap<String, Object> lineItem = new HashMap<String, Object>();
+//		// private method (name, description, amount, currency, quantity)
+////		lineItem = makeOrderItem("Farmville Grocers Total", "Your farmville purchase on"+now, total, "usd", 1);
+//		
+////		ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
+////		lineItems.add(lineItem);
+//		params.put("amount", total);
+//		params.put("currency", "USD");
+//		params.put("receipt_email", userData.get("email"));
+////		params.put("status", "succeeded");
+//		// Send out payment intent
+//		PaymentIntent intent;
+//		try {
+//			intent = PaymentIntent.create(params);
+//		} catch (StripeException e1) {
+//			e1.printStackTrace();
+//		}
+//		
+//		HttpSession thisSession = request.getSession(false);
+//		
+//		params.put("success_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directCheckoutSuccess?session_id="+thisSession.getId());
+//		params.put("cancel_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directshoppingcart");
+//		
 		System.out.println("導到　結賬成功頁面");
 		return "front_intro_checkoutSuccess";
+	}
+	private HashMap<String,Object> makeOrderItem (String name, String description, int amount, String currency, int quantity) {
+		HashMap<String, Object> orderItem = new HashMap<String, Object>();
+		orderItem.put("name", name);
+		orderItem.put("description", description);
+		orderItem.put("amount", amount);
+		orderItem.put("currency", currency);
+		orderItem.put("quantity", quantity);
+		return orderItem;
 	}
 	
 	@RequestMapping(value = "/joinNewsletter", method = RequestMethod.POST)
