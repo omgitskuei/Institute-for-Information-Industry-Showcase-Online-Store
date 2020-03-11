@@ -98,9 +98,9 @@
 							<label for="country">國家</label>
 							<select name="country" id="country" name="country" class="form-control">
 								<option value="">挑選國家</option>
-								<option value="台灣">台灣</option>
- 								<option value="美國">美國</option>
-	 							<option value="日本">日本</option>
+								<option value="Taiwan">台灣</option>
+ 								<option value="United States">美國</option>
+	 							<option value="Japan">日本</option>
 							</select>
 						</div>
 					<!-- Group: City -->
@@ -108,9 +108,9 @@
 							<label for="city">城市</label>
 							<select name="city" id="city" name="city" class="form-control">
 								<option value="">挑選城市</option>
-								<option value="台北市">台北市</option>
-								<option value="台中市">台中市</option>
-								<option value="高雄市">高雄市</option>
+								<option value="Taipei">台北市</option>
+								<option value="Taichung">台中市</option>
+								<option value="Kaohsiung">高雄市</option>
 							</select>
 						</div>
 					<!-- Group: ZipCode -->
@@ -164,8 +164,8 @@
 								var shipaddress = document.getElementById("shipAddress");
 								fullname.value = "Leon Chen";
 								email.value = "leon123@yahoo.com.tw";
-								country.value = "台灣";
-								city.value = "台北市";
+								country.value = "Taiwan";
+								city.value = "Taipei";
 								zipcode.value = "105";
 								address.value = "No. 110號, Section 3, Minquan East Road, Songshan District";
 								shipaddress.value = "No. 110號, Section 3, Minquan East Road, Songshan District";
