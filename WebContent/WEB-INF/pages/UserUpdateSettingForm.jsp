@@ -102,8 +102,12 @@
 		    <option value=false>否</option>
 		</select>
 		</div>
-		<button class="btn btn-info" type="submit"
+		<div class="row d-flex justify-content-end">
+		<div class="col-md-12">
+		<button class="btn btn-success text-white" type="submit"
 						>儲存</button>
+						</div>
+						</div>
 		
 		</form>
 		

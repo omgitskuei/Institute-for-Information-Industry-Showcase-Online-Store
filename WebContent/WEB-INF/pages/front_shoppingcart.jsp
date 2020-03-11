@@ -117,7 +117,13 @@
                     <button class="btn btn-lg btn-block btn-danger text-white" id="clear-cart">清除商品</button>
                 </div>
                 <div class="col-6 col-sm-3">
-                    <a href=<jstl:url value="/userAddToOrder"/> onclick="addToOrder()" class="btn-lg" target="_blank"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
+               	<form action=<jstl:url value="/greenPay.controller"/> method="post" >
+               		<input id="green" type="hidden" name="greenTestForm"/>
+                		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界"/>
+                	</form> 
+                	
+                <button onclick="addToOrder()" class="btn-lg mt-2"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"  alt=""/></button>
+                	
                 </div>
                 <!-- Stripe Checkout button -->
                 <div class="col-6 col-sm-3 border-5 border-dark">
@@ -150,6 +156,7 @@
             </div>
         </div>
     </div>
+    <div id="success"></div>
 </div>
 </section>
 
@@ -187,7 +194,6 @@
       // Get the current year for copyright
       $("#year").text(new Date().getFullYear());
       
-      
 	
       function addToOrder() {
     	  // 用map選取每一個這些屬性標籤，並存取於變數中
@@ -211,22 +217,29 @@
   		
   		$.ajax({
   			type : 'POST', // 送資料POST
-  			url : "<jstl:url value='/userAddToOrder'/>", // 路徑對到Java的Controller
+  			url : 'userAddToOrder', // 路徑對到Java的Controller
   			data : {
   				'dataArray': JSON.stringify(buyData), // 欲輸入的資料
   			},
+  			// cache: false,
   			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-  			dataType : 'JSON', // 型態
+  			dataType : 'html', // 型態
            	// 做測試
+
   			success : function (response){
-            	  alert('success'); 
+            	  console.log('success');
+            	  console.log(response);
+            	  $('#success').html(response);
             },
             error: function(err){
-            		alert('error' + err);
+            	    console.log('error' + err);
             		console.log(err); // 這邊可以看到錯誤訊息
+
             }
+            
       });
-  	};
+  		
+      };
   	
     </script>
     
