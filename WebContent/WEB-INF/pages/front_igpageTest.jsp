@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>IG</title>
 <style>
     	<%@include file="/WEB-INF/css/reset.css"%>
         <%@include file="/WEB-INF/css/ig.css"%>
@@ -21,8 +21,8 @@
 					<img src="https://i.imgur.com/gqwPW1N.jpg" alt="">
 				</div>
 				<div class="text">
-					<h1>Hello</h1>
-					<h2>Welcome to our <a href="https://www.instagram.com/far_mville/?hl=zh-tw">Instagram</a> Fan's Page</h2>
+					<h1>您好</h1>
+					<h2>歡迎來到FarmVille的 <a href="https://www.instagram.com/far_mville/?hl=zh-tw">Instagram</a> 粉絲專頁</h2>
 				</div>
 			</div>
 			<div class="mouse"></div>
