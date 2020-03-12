@@ -615,8 +615,8 @@ public class FrontDirectController {
 			obj.setMerchantTradeNo(dateString);
 			obj.setMerchantTradeDate(dateStringToMerchantTradeDate);
 			obj.setTotalAmount(shoppingCartTotal);
-			obj.setTradeDesc("FarmVille一些商品");
-			obj.setItemName("FarmVille一堆商品");
+			obj.setTradeDesc("FarmVille測試商品");
+			obj.setItemName("FarmVille測試商品");
 			obj.setReturnURL("http://211.23.128.214:5000");
 			obj.setClientBackURL("http://localhost:8080/EEIT111FinalProject/front_intro.jsp");
 			obj.setNeedExtraPaidInfo("N");
