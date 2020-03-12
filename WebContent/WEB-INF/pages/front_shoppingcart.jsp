@@ -119,7 +119,7 @@
                 <div class="col-6 col-sm-3">
                	<form action=<jstl:url value="/greenPay.controller"/> method="post" >
                		<input id="green" type="hidden" name="greenTestForm"/>
-                		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界" id="cleanLocalGreenPay"/>
+                		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界"/>
                 	</form> 
                 	
                 	
@@ -241,8 +241,26 @@
       };
   	
     </script>
+    <script>
+    var localTest = (function(){
+        // 1) 最近看過的東西
+        var history = [];
+
+        // 2) 欲抓取的欄位
+        function HistoryTest(name, img, price){
+            this.name = name;
+            this.img = img;
+            this.price = price;
+        }
+
+        // 3) 存取LocalStorage
+        function 
+
+    })
     
-         <script>
+    
+    </script>
+    <script>
     // ***************************************************
     // 購物車所有功能
 
