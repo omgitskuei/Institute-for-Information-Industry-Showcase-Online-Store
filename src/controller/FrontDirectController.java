@@ -659,4 +659,16 @@ public class FrontDirectController {
 		return "greenTest";
 	}
 	
+	// 1) 導到ig
+	// 2) 測試
+	// 3) Thomas Lu
+	@RequestMapping(value = "/directIG", method = RequestMethod.GET)
+	public String ig() {
+		System.out.println("導到IG頁面");
+		return "front_igpageTest";
+		
+	}
+	
 }
+
+
