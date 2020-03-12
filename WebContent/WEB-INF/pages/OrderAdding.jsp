@@ -18,38 +18,43 @@
 	<h1 class="mt-3">編輯訂單資料</h1>
 	
 	<form:form method="POST" action="saveOrder" modelAttribute="order">
-		<table>
-			<tr>
-				<td>訂單編號 :</td>
-				<td><form:input path="orderID" readonly="true"/></td>
-			</tr>
-			<tr>
-				<td>訂購時間 :</td>
-				<td><form:input path="OrderTime" readonly="true" /></td>
-			</tr>
-			<tr>
-				<td>訂購人ID :</td>
-				<td><form:input path="UserID" readonly="true" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><form:hidden path="Total" readonly="true" /></td>
-			</tr>
-			<tr>
-				<td>寄送地址 :</td>
-				<td><form:input path="MailingAddress" /></td>
-			</tr>
-			<tr>
-				<td>寄送電話 :</td>
-				<td><form:input path="MailingPhone" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><form:button cssClass="btn btn-info" type="submit" value="儲存">完成</form:button> 
-					<input onclick="autofill()"	type="button" value="一鍵輸入" class="btn btn-primary" id="submit">
-				</td>
-			</tr>
-		</table>
+		 <div class="from-group">
+		<form:hidden cssClass="form-control" path="orderID" />
+		</div>
+
+		<div class="from-group">
+		<label>訂購時間</label>
+		<form:input cssClass="form-control" path="OrderTime" />
+		</div>
+
+		<div class="from-group">
+			<label>訂購人 ID</label>
+			<form:input cssClass="form-control" path="UserID" />
+		</div>
+
+		<div class="from-group">
+			<form:hidden cssClass="form-control" path="Total" readonly="true"  />
+		</div>
+		
+		<div class="from-group">
+			<label>寄送地址</label>
+			<form:input cssClass="form-control" path="MailingAddress" />
+		</div>
+
+		<div class="from-group">
+			<label>寄送電話</label>
+			<form:input cssClass="form-control" path="MailingPhone" />
+		</div>
+
+			
+		<div class="from-group mt-3">
+		<div class="row d-flex justify-content-end">
+				<div class="col-md-12">
+		<form:button class="btn btn-secondary" type="submit" value="儲存" >下一步</form:button>
+				<input onclick="autofill()"	type="button" value="一鍵輸入" class="btn btn-primary" id="submit">
+				</div>
+			</div>
+		</div>
 	</form:form>
 	</div>
 	<script>
