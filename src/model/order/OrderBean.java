@@ -87,7 +87,7 @@ public class OrderBean {
 	}
 
 	@Column(name = "OrderTime")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date getOrderTime() {
 		return orderTime;
 	}
