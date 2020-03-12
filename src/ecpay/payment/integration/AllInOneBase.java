@@ -40,7 +40,7 @@ public class AllInOneBase {
 //			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
 //			doc = EcpayFunction.xmlParser(configPath);
 			/* when using testing code*/
-			String paymentConfPath = "/Users/chienlin/Documents/FinalProjectWorkspace/EEIT111FinalProject/src/payment_conf.xml";
+			String paymentConfPath = "D:\\Projects\\springMVCWorkspace\\EEIT111FinalProject\\src\\payment_conf.xml";
 			doc = EcpayFunction.xmlParser(paymentConfPath);
 			
 			doc.getDocumentElement().normalize();
