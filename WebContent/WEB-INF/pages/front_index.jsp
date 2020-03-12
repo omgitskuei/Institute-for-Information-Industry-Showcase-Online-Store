@@ -15,7 +15,7 @@
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-<title>首頁</title>
+<title>Farmville 首頁</title>
  </head>
   <body>
     <!-- START -->
