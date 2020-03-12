@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>管理者更新密碼</title>
+<title>Farmville | 更新密碼</title>
 </head>
 <body>
 <!-- NAVBAR -->

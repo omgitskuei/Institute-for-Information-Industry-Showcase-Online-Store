@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>使用者修改密碼</title>
+<title>Farmville | 修改密碼</title>
 </head>
 <body>
 

@@ -13,7 +13,7 @@
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-<title>使用者資料</title>
+<title>Farmville | 使用者資料</title>
 </head>
 <body>
 

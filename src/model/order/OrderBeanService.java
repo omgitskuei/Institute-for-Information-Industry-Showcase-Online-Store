@@ -1,5 +1,6 @@
 package model.order;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,16 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 		return oDAO.selectAll();
 	}
 
-	public void saveOrder(OrderBean insertThisOrder) {
+	public void insertOrder(OrderBean insertThisOrder) {
 		oDAO.insertOrder(insertThisOrder);
 	}
 	
-	public OrderBean getOrder(int orderID) {
-		return oDAO.getOrder(orderID);
+	public OrderBean selectOrder(int orderID) {
+		return oDAO.selectOrder(orderID);
+	}
+	
+	public List<OrderBean> selectOrder(int userID, int total, Date orderTime) {
+		return oDAO.selectOrder(userID, total, orderTime);
 	}
 	
 	public void deleteOrder(int orderID) {
@@ -41,15 +46,16 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 		System.out.println("BEGIN: OrderBeanService.insert(OrderBean)");
 		// Local variables
 		boolean success = false;
-		String address = insertThisBean.getMailingAddress();
-		String phone = insertThisBean.getMailingPhone();
+//		String address = insertThisBean.getMailingAddress();
+//		String phone = insertThisBean.getMailingPhone();
 		// Validate input values
-		if (validateAddress(address) && validatePhone(phone)) {
+//		if (validateAddress(address)) {
 			oDAO.insertOrder(insertThisBean);
 			System.out.println("Insert successful");
-		} else {
-			System.out.println("Insert failed");
-		}
+			success = true;
+//		} else {
+//			System.out.println("Insert failed");
+//		}
 		System.out.println("FINISH: OrderBeanService.insert(OrderBean)");
 		return success;
 	}
@@ -70,13 +76,20 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 	
 	public boolean updatePhone(OrderBean thisBean) {
 		System.out.println("BEGIN: OrderBeanService.updatePhone(OrderBean)");
-		boolean success = false;
-		if (validatePhone(thisBean.getMailingPhone())) {
-			success = true;
-			oDAO.updateMailingPhone(thisBean, thisBean.getMailingPhone());
-			System.out.println("Update successful");
-		} else {
+		boolean success;
+		try {
+			success = false;
+//			if (validatePhone(thisBean.getMailingPhone())) {
+				success = true;
+				oDAO.updateMailingPhone(thisBean, thisBean.getMailingPhone());
+				System.out.println("Update successful");
+//			} else {
+				
+//			}
+		} catch (Exception e) {
+			success = false;
 			System.out.println("Update failed");
+			e.printStackTrace();
 		}
 		System.out.println("BEGIN: OrderBeanService.updatePhone(OrderBean)");
 		return success;
@@ -94,18 +107,5 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 		return valid;
 	}
 
-	private static boolean validatePhone(String thisPhone) {
-		boolean valid = false;
-		try {
-			CheckSubstring util = new CheckSubstring();
-			// All letters must be numbers
-			if (util.countNums(thisPhone)==thisPhone.length()) {
-				valid = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return valid;
-	}
 
 }

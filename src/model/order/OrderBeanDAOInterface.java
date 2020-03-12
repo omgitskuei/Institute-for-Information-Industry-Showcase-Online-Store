@@ -4,7 +4,7 @@ public interface OrderBeanDAOInterface {
 	//Create
 	public boolean insertOrder(OrderBean insertThisOrder);
 	//Read
-	public OrderBean selectOrder(OrderBean selectThisOrder);
+//	public OrderBean selectOrder(OrderBean selectThisOrder);
 	//Update
 	public boolean updateTotal(OrderBean updateThisOrder, int newTotal);
 	public boolean updateMailingAddress(OrderBean updateThisOrder, String newMailingAddress);
@@ -12,5 +12,5 @@ public interface OrderBeanDAOInterface {
 	//Delete
 	public boolean deleteOrder(OrderBean deleteThisOrder);
 	public void deleteOrder(int orderID);
-	public OrderBean getOrder(int orderID);
+	public OrderBean selectOrder(int orderID);
 }

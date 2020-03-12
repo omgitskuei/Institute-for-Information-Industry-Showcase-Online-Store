@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -35,38 +34,6 @@
 <!-- 	<!-- NAVBAR --> 
 <%-- 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%> --%>
 
-<!-- 	<!-- HEADER --> 
-<!-- 	<header id="main-header" class="py-2 bg-success text-white"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-6"> -->
-<!-- 					<h1> -->
-<!-- 						<i class="fas fa-pencil-alt"> 訂單管理明細</i> -->
-<!-- 					</h1> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</header> -->
-
-<!-- 	<!-- SEARCH --> 
-<!-- 	<section id="search" class="py-4 mb-4 bg-light"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-6 ml-auto"> -->
-<!-- 					<div class="input-group"> -->
-<%-- 						<form action="<c:url value='orderDetails.do?orderID=${orderID}'/>" --%>
-<%-- 							class="input-group"> --%>
-<!-- 							<input type="text" class="form-control" placeholder="請輸入訂單編號..." -->
-<!-- 								name="orderID"> -->
-<!-- 							<div class="input-group-append"> -->
-<!-- 								<button class="btn btn-success">搜尋</button> -->
-<!-- 							</div> -->
-<%-- 						</form> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</section> -->
 
 	<section id="order&Details">
 		<div class="container">
@@ -128,7 +95,7 @@
 										<td>${orderDetailsList.productPrice}</td>
 										<td>${orderDetailsList.productCount}</td>
 										<td>${orderDetailsList.productPrice*orderDetailsList.productCount}</td>
-										<c:set var="subtotal"
+										<jstl:set var="subtotal"
 											value="${subtotal+orderDetailsList.productPrice*orderDetailsList.productCount}" />
 									</tr>
 								</jstl:forEach>

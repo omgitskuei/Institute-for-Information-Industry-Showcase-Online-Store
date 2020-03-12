@@ -45,35 +45,24 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		System.out.println("FINISH: OrderBeanDAO.insertOrder(OrderBean insertThisOrder)");
 		return false;
 	}
-
-	@Override
-	public OrderBean selectOrder(OrderBean selectThisOrder) {
-		System.out.println("BEGIN: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<OrderBean> selectOrder(int userID, int total, Date orderDate) {
+		System.out.println("BEGIN: OrderBeanDAO.selectOrder(int, int, Date)");
 
 		try {
-			if (selectThisOrder != null) {
-				System.out.println("Looking for this order: ");
-				System.out.println("OrderID:" + selectThisOrder.getOrderID());
-				System.out.println("orderUserID:" + selectThisOrder.getUserID());
-				System.out.println("orderTotal:" + selectThisOrder.getTotal());
-				System.out.println("orderMailingAddress:" + selectThisOrder.getMailingAddress());
-				System.out.println("orderMailingPhone:" + selectThisOrder.getMailingPhone());
-				System.out.println("OrderTime:" + selectThisOrder.getOrderTime());
-				
-				Session session = sessionFactory.getCurrentSession();
-				// Hibernate Query Language 
-				String hqlString = "FROM OrderBean WHERE UserID=:thisID AND Total=thisTotal";
-				Query q = session.createQuery(hqlString);
-				q.setParameter("thisID", selectThisOrder.getUserID());
-				q.setParameter("thisTotal", selectThisOrder.getTotal());
-				OrderBean existingOrder = (OrderBean) q.uniqueResult();
+			Session session = sessionFactory.getCurrentSession();
+			// Hibernate Query Language
+			String hqlString = "FROM OrderBean WHERE UserID=:thisID AND Total=:thisTotal AND OrderTime=:orderDate";
+			Query q = session.createQuery(hqlString);
+			q.setParameter("thisID", userID);
+			q.setParameter("thisTotal", total);
+			List<OrderBean> results = (List<OrderBean>) q.list();
 
-				if (existingOrder != null) {
-					System.out.println("Order found: OrderID " + existingOrder.getOrderID() + ", Total "
-							+ existingOrder.getTotal());
-					System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
-					return existingOrder;
-				}
+			if (results != null) {
+				System.out.println("Order results: "+results);
+				System.out.println("FINISH: OrderBeanDAO.selectOrder(int, int, Date)");
+				return results;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,6 +71,38 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<OrderBean> selectOrder(int userID, int total) {
+		System.out.println("BEGIN: OrderBeanDAO.selectOrder(int, int)");
+
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			// Hibernate Query Language
+			String hqlString = "FROM OrderBean WHERE UserID=:thisID AND Total=:thisTotal";
+			Query q = session.createQuery(hqlString);
+			q.setParameter("thisID", userID);
+			q.setParameter("thisTotal", total);
+			List<OrderBean> results = (List<OrderBean>) q.list();
+
+			if (results != null) {
+				System.out.println("Order results: "+results);
+				System.out.println("FINISH: OrderBeanDAO.selectOrder(int, int)");
+				return results;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("FINISH: OrderBeanDAO.selectOrder(OrderBean selectThisOrder)");
+		return null;
+	}
+
+	@Override
+	public OrderBean selectOrder(int orderID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
+	}
+	
 	public List<OrderBean> selectAll() {
 		System.out.println("BEGIN: OrderBeanDAO.selectAll()");
 		Session session = sessionFactory.getCurrentSession();
@@ -106,7 +127,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		System.out.println("FINISH: OrderBeanDAO.selectAll()");
 		return results;
 	}
-	
+
 	public List<OrderBean> selectOrdersByUserID(int userID) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("From OrderBean where UserID=:thisUserID");
@@ -114,13 +135,20 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		List<OrderBean> results = (List<OrderBean>) query.list();
 		return results;
 	}
-	
+
 	public List<OrderBean> selectByOrderID(int orderID) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("From OrderBean where OrderID=:thisOrderID");
 		query.setParameter("thisOrderID", orderID);
 		List<OrderBean> results = (List<OrderBean>) query.list();
 		return results;
+	}
+
+	public OrderBean selectOrder(OrderBean beanWithID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		int orderID = beanWithID.getOrderID();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
 	}
 	
 	@Override
@@ -213,25 +241,12 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		System.out.println("FINISH: OrderBeanDAO.deleteOrder(OrderBean deleteThisOrder)");
 		return false;
 	}
-	@Override
-	public OrderBean getOrder(int orderID) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
-		return theOrder;
-	}
-	
-	public OrderBean getOrder(OrderBean beanWithID) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		int orderID = beanWithID.getOrderID();
-		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
-		return theOrder;
-	}
-	
+
 	@Override
 	public void deleteOrder(int orderID) {
-	Session session = sessionFactory.getCurrentSession();
-	OrderBean thisorder = session.byId(OrderBean.class).load(orderID);
-	session.delete(thisorder);
+		Session session = sessionFactory.getCurrentSession();
+		OrderBean thisorder = session.byId(OrderBean.class).load(orderID);
+		session.delete(thisorder);
 	}
-
+	
 }

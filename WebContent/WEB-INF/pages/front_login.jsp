@@ -123,8 +123,11 @@
 							<div class="col-md-6 mx-auto mt-2">
 								<form action="?" method="POST" >
      								<div style="resize: horizontal;" class="g-recaptcha" data-sitekey="6LdDltsUAAAAACnxxFD8oacBBWlWdgPE7X-2VyCp" data-theme="light" data-size="normal"></div>
-									<br/>
-									<input onclick="autofillSignIn()" type="button" value="一鍵輸入" class="btn btn-success text-white btn-block" id="submit">
+									<div class="mx-auto col-md-8">
+									<br>
+										<input onclick="autofillSignIn()" type="button" value="登入 Demo" class="btn btn-secondary text-white btn-block" id="submit">
+										<input onclick="autofillSignIn2()" type="button" value="注冊後　Demo" class="btn btn-secondary text-white btn-block" id="submit">
+									</div>
 								</form>
 							</div>
 						</div>
@@ -239,9 +242,16 @@
 			userPwd.value = "Qq22222!";
 		};
 		
+		function autofillSignIn2() {
+			var userEmail = document.getElementById("userEmail");
+			var userPwd = document.getElementById("userPwd");
+			userEmail.value = "demouserEEIT111@gmail.com"
+			userPwd.value = "Qq22222!";
+		};
+		
 		function autofillSignUp() {
 			var userEmail = document.getElementById("newEmail");
-			userEmail.value = "kueifengtungchris@gmail.com"
+			userEmail.value = "demouserEEIT111@gmail.com"
 			var userPwd = document.getElementById("newPwd");
 			userPwd.value = "Qq22222!";
 			var confirmPwd = document.getElementById("confirmPwd");

@@ -35,21 +35,23 @@ public class UpdateOrderController {
 
 	@PostMapping("/saveOrder")
 	public String saveOrder(@ModelAttribute("order") @Valid OrderBean theOrder) {
-		orderService.saveOrder(theOrder);
+		orderService.insertOrder(theOrder);
 		return "redirect:/orders";
 	}
 
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("orderID") int orderID, Model m) {
 		if (orderID != 0) {
-			OrderBean theOrder = orderService.getOrder(orderID);
+			OrderBean theOrder = orderService.selectOrder(orderID);
 			m.addAttribute("order", theOrder);
-			return "OrderAdding";
-		} else {
-			OrderBean theOrder = new OrderBean();
-			m.addAttribute("order", theOrder);
-			return "OrderAdding2";
-		}
+			
+		} 
+		return "OrderAdding";
+//		else {
+//			OrderBean theOrder = new OrderBean();
+//			m.addAttribute("order", theOrder);
+//			return "OrderAdding2";
+//		}
 	}
 
 	@GetMapping("/delete")

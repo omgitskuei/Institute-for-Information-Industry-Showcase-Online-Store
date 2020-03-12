@@ -133,7 +133,6 @@
 								<label for="cardCvc">卡片背面後3碼 (CVC) </label>
 								<input type="text" class="form-control " name="cardCvc" id="cardCvc" placeholder="Card CVC (###)" maxlength="3" required>
 							</div>
-				</div>
 						<!-- Group 2 - Receipt type -->
 							<div class="form-group col-md-6">
 								<label for="receipt">發票</label>
@@ -162,18 +161,23 @@
 					<!-- Row 4 -->
 						<div class="form-row text-left">
 						<!-- Group 1 - buttons -->
-							<div class="form-group col-md-12">
-								<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3">繼續選購</a>
-								<a href="<jstl:url value="/directStripeCheckoutStep1"/>" type="submit" class="btn btn-warning text-white mr-3">回上一頁</a>
-								<input type="submit" value="確認付款" class="btn btn-success text-white mr-3">
+							<div class="mx-auto col-md-4">
+								<a href=<jstl:url value="/directservices"/> class="btn btn-secondary mr-3 btn-block">繼續選購</a>
 							</div>
+							<div class="mx-auto col-md-4">
+								<a href="<jstl:url value="/directStripeCheckoutStep1"/>" type="submit" class="btn btn-warning text-white mr-3 btn-block">回上一頁</a>
+							</div>
+							<div class="mx-auto col-md-4">
+								<input type="submit" value="確認付款" class="btn btn-success text-white mr-3 btn-block">
+							</div>
+						</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 						<div class="col-md-6 mx-auto md-12">
-							<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-secondary btn-block" id="submit">
+							<input onclick="autofill()" type="button" value="一鍵輸入" class="btn btn-secondary btn-block cleanLocalStripes" id="submit">
 						</div>
 						<script>
 							function autofill() {
@@ -190,6 +194,11 @@
 								couponCode.value = "MAR2020LIKEFB";
 								walletAmount.value = "0.00";
 							};
+						</script>
+						<script>
+							$(".cleanLocalStripes").click(function(event){
+								localStorage.clear();
+				   			});
 						</script>
 						<script>
 							var style = {

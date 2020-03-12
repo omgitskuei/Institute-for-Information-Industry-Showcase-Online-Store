@@ -17,7 +17,7 @@
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
 <!-- 這標題到時後可以的話，用EL依照修改項目標題改一下名稱 -->
-<title>Admin's Order Detail | 管理者修改各訂單頁面</title>
+<title>Farmville | 修改各訂單</title>
 <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 <!-- Dictate which Stylesheets to use for this webpage -->
 

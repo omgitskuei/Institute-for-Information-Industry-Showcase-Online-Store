@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>管理者查看特定使用者設定 Setting</title>
+<title>Farmville | 使用者設定 Setting</title>
 </head>
 <body>
 <!-- NAVBAR -->

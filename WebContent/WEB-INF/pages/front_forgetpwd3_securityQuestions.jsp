@@ -50,7 +50,7 @@
                   <input
                   	type="text"
                   	class="form-control"
-                  	placeholder="新的密碼 Enter New Password"
+                  	placeholder="輸入您安全問題的答案"
                   	name="securityAnswer"
                   	value="">
                   <span style="color: red;">${errors.validateError}</span>

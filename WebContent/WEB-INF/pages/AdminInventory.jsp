@@ -16,7 +16,7 @@
   	crossorigin="anonymous">
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
   	crossorigin="anonymous">
-    <title>Admin's Inventory | 管理者庫存頁</title>
+    <title>Farmville | 管理者庫存頁</title>
     <!-- Stylesheet for HTML5 backward compatibility; normalize.css -->
 
     <!-- Dictate which Stylesheets to use for this webpage -->

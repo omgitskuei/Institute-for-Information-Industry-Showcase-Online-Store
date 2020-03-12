@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>管理員修改電子錢包</title>
+<title>Farmville | 修改電子錢包</title>
 </head>
 <body>
 

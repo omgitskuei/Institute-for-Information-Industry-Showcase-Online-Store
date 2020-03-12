@@ -13,7 +13,7 @@
     	<%@include file="/WEB-INF/css/bootstrap.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-<title>使用者更改安全問題</title>
+<title>Farmville | 更改安全問題</title>
 </head>
 <body>
 
