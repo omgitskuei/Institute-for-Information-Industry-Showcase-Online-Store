@@ -119,10 +119,9 @@
                 <div class="col-6 col-sm-3">
                	<form action=<jstl:url value="/greenPay.controller"/> method="post" >
                		<input id="green" type="hidden" name="greenTestForm"/>
-                		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界"/>
+                		<input type="submit" class="btn btn-lg btn-block btn-success text-white" value="綠界" id="cleanLocalGreenPay"/>
                 	</form> 
                 	
-                <button onclick="addToOrder()" class="btn-lg mt-2"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"  alt=""/></button>
                 	
                 </div>
                 <!-- Stripe Checkout button -->
@@ -437,6 +436,18 @@
           var count = Number($(this).val());
           shoppingCart.setCountForItem(name, count);
           displayCart();
+        });
+		
+        // 清除綠界 
+        $("#cleanLocalGreenPay").click(function(event){
+        	shoppingCart.clearCart();
+        	displayCart();
+        });
+        	
+        // 清除Stripes
+        $("#cleanLocalStripes").click(function(event){
+        	shoppingCart.clearCart();
+        	displayCart();
         });
 
 
