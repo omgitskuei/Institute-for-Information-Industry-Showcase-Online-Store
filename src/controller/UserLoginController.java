@@ -212,7 +212,7 @@ public class UserLoginController {
 				System.out.println("	new password is valid!");
 				
 				System.out.println("FINISH: /userForgotPwd3");
-				return "front_intro_loginSuccess";
+				return "front_intro_forgotPwdSuccess";
 			} else {
 				System.out.println("	invalid password");
 				Map<String, String> errors = new HashMap<String, String>();

@@ -133,7 +133,6 @@
 								<label for="cardCvc">卡片背面後3碼 (CVC) </label>
 								<input type="text" class="form-control " name="cardCvc" id="cardCvc" placeholder="Card CVC (###)" maxlength="3" required>
 							</div>
-				</div>
 						<!-- Group 2 - Receipt type -->
 							<div class="form-group col-md-6">
 								<label for="receipt">發票</label>

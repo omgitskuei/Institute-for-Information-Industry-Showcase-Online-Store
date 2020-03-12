@@ -53,6 +53,7 @@
                   	class="form-control"
                   	placeholder="請輸入電子信箱　Email"
                   	name="userEmail"
+                  	id="userEmail"
                   	value="">
                   
                   <span style="color: red;">${errors.validateError}</span>
@@ -63,9 +64,24 @@
                   <input type="submit" class="btn btn-success btn-block text-white" value="送出驗證信">
                 </div>
                 <span style="color: grey;">Farmville, Taiwan 不會以任何理由要求您轉帳匯款，嚴防詐騙</span>
+				
+				<br>
+				<br>
+				<div class="mx-auto col-md-4">
+				<input onclick="autofillSignIn3()" type="button" value="忘記密碼　Demo" class="btn btn-secondary text-white btn-block" id="submit">
+				</div>
               </div>
             </div>
           </form>
+         
+          
+									
+          <script>
+        	  function autofillSignIn3() {
+				var userEmail = document.getElementById("userEmail");
+				userEmail.value = "demouserEEIT111@gmail.com"
+			};
+		</script>
           </div>
         </div>
       </div>
