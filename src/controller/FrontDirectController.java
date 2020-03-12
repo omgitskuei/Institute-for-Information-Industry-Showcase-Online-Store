@@ -639,7 +639,7 @@ public class FrontDirectController {
 			obj.setTradeDesc("FarmVille一些商品");
 			obj.setItemName("FarmVille一堆商品");
 			obj.setReturnURL("http://211.23.128.214:5000");
-			obj.setClientBackURL("http://localhost:8080/SpringMvcWebProject/front_intro.jsp");
+			obj.setClientBackURL("http://localhost:8080/EEIT111FinalProject/front_intro.jsp");
 			obj.setNeedExtraPaidInfo("N");
 			String form = all.aioCheckOut(obj, null);
 			
