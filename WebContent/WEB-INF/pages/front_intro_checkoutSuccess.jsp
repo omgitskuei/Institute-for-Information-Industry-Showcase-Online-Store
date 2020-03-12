@@ -17,13 +17,13 @@
     	<%@include file="/WEB-INF/css/frontpage.css"%>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
-    <title>Farmville | 結賬成功</title>
+    <title>Farmville | 結帳成功</title>
 </head>
 <body>
 <div id="main" class="is-loading">
         <div class="container text-center">
             <h1>
-                FarmVille　｜　結賬成功
+                FarmVille　｜　結帳成功
             </h1>
             <div  class="is-loading row mt-3">
                 <div class="col-md-12">
