@@ -12,5 +12,5 @@ public interface OrderBeanDAOInterface {
 	//Delete
 	public boolean deleteOrder(OrderBean deleteThisOrder);
 	public void deleteOrder(int orderID);
-	public OrderBean getOrder(int orderID);
+	public OrderBean selectOrder(int orderID);
 }

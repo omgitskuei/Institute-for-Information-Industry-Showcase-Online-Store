@@ -6,9 +6,9 @@ public interface OrderBeanServiceInterface {
 
 	public List<OrderBean> selectAll();
 
-	public void saveOrder(OrderBean insertThisOrder);
+	public void insertOrder(OrderBean insertThisOrder);
 
-	public OrderBean getOrder(int orderID);
+	public OrderBean selectOrder(int orderID);
 
 	public void deleteOrder(int orderID);
 

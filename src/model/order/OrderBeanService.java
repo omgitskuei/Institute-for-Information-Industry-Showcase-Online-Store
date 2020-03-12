@@ -24,12 +24,12 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 		return oDAO.selectAll();
 	}
 
-	public void saveOrder(OrderBean insertThisOrder) {
+	public void insertOrder(OrderBean insertThisOrder) {
 		oDAO.insertOrder(insertThisOrder);
 	}
 	
-	public OrderBean getOrder(int orderID) {
-		return oDAO.getOrder(orderID);
+	public OrderBean selectOrder(int orderID) {
+		return oDAO.selectOrder(orderID);
 	}
 	
 	public List<OrderBean> selectOrder(int userID, int total, Date orderTime) {
@@ -107,18 +107,5 @@ public class OrderBeanService implements OrderBeanServiceInterface{
 		return valid;
 	}
 
-//	private static boolean validatePhone(String thisPhone) {
-//		boolean valid = false;
-//		try {
-//			CheckSubstring util = new CheckSubstring();
-//			// All letters must be numbers
-//			if (util.countNums(thisPhone)==thisPhone.length()) {
-//				valid = true;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return valid;
-//	}
 
 }

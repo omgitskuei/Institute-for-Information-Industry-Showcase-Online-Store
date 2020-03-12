@@ -32,7 +32,7 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		if (insertThisOrder != null) {
 			System.out.println("insertThisOrder!=null");
 
-			session.save(insertThisOrder);
+			session.saveOrUpdate(insertThisOrder);
 			System.out.println("OrderBean inserted:");
 			System.out.println("orderTotal:" + insertThisOrder.getTotal());
 			System.out.println("orderMailingAddress:" + insertThisOrder.getMailingAddress());
@@ -96,6 +96,13 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		return null;
 	}
 
+	@Override
+	public OrderBean selectOrder(int orderID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
+	}
+	
 	public List<OrderBean> selectAll() {
 		System.out.println("BEGIN: OrderBeanDAO.selectAll()");
 		Session session = sessionFactory.getCurrentSession();
@@ -137,6 +144,13 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 		return results;
 	}
 
+	public OrderBean selectOrder(OrderBean beanWithID) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		int orderID = beanWithID.getOrderID();
+		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
+		return theOrder;
+	}
+	
 	@Override
 	public boolean updateTotal(OrderBean updateThisOrder, int newTotal) {
 		System.out.println("BEGIN: OrderBeanDAO.updateTotal(OrderBean updateThisOrder, int newTotal)");
@@ -229,26 +243,10 @@ public class OrderBeanDAO implements OrderBeanDAOInterface {
 	}
 
 	@Override
-	public OrderBean getOrder(int orderID) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
-		return theOrder;
-	}
-
-	public OrderBean getOrder(OrderBean beanWithID) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		int orderID = beanWithID.getOrderID();
-		OrderBean theOrder = currentSession.get(OrderBean.class, orderID);
-		return theOrder;
-	}
-
-	@Override
 	public void deleteOrder(int orderID) {
 		Session session = sessionFactory.getCurrentSession();
 		OrderBean thisorder = session.byId(OrderBean.class).load(orderID);
 		session.delete(thisorder);
 	}
-
 	
-
 }
