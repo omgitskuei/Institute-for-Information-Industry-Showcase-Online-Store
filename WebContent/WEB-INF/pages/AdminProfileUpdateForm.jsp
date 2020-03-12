@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>管理者編輯使用資訊</title>
+<title>Farmville | 編輯使用者資訊</title>
 <style>.errMsgJS {
   color: red;
 }
