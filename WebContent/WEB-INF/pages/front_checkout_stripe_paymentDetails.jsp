@@ -41,8 +41,13 @@
 			// Get the current year for copyright
 			$("#year").text(new Date().getFullYear());
 		</script>
-	<title>結帳</title>
+		<script>
+			var stripe = Stripe('pk_test_Duy0yIyahW97FmFzVqBDG0wh00Pwl5FMks');
+			var elements = stripe.elements();
+		</script>
+		<title>結帳</title>
 	</head>
+	
 <body>
     <!-- START -->
 	<%@include file="/WEB-INF/pages/front_navbar.jsp" %>
@@ -104,19 +109,20 @@
 					<div class="card-header border-0">
 						<div class="h3 mt-1"> 付款資訊 </div>
 					</div>
-					<form action="<jstl:url value="/directCheckoutSuccess"/>" method=POST class="needs-validation">
+					<form action="<jstl:url value="/directCheckoutSuccess"/>" method=POST class="needs-validation" id="payment-form">
+				<div id="card-element">
 					<!-- Row 1 -->
 						<div class="form-row text-left mt-2">
 						<!-- Group 1 - Card number -->
 							<div class="form-group col-md-8">
-								<label for="cardNum">信用卡卡號</label>
-								<input type="text" class="form-control " name="cardNum" id="cardNum" placeholder="Card number">
+								<label for="cardNumber">信用卡卡號</label>
+								<input type="text" class="form-control " name="cardNumber" id="cardNumber" placeholder="Card number" required>
 								<div class="cardNumError"></div>
 							</div>
 						<!-- Group 2 - Expiration date -->
 							<div class="form-group col-md-4">
-								<label for="expiry">有效期限</label>
-								<input type="text" class="form-control " name="expiry" id="expiry" placeholder="Card expiration Year (MM/YY)" maxlength="5">
+								<label for="cardExpiry">有效期限</label>
+								<input type="text" class="form-control " name="cardExpiry" id="cardExpiry" placeholder="Card expiration Year (MM/YY)" maxlength="5" required>
 								<div class="expDateError"></div>
 							</div>
 						</div>
@@ -124,9 +130,10 @@
 						<div class="form-row text-left">
 						<!-- Group 1 - CVC 3-digit-code -->
 							<div class="form-group col-md-6">
-								<label for="cvCode">卡片背面後3碼 (CVC) </label>
-								<input type="text" class="form-control " name="cvCode" id="cvCode" placeholder="Card CVC (###)" maxlength="3">
+								<label for="cardCvc">卡片背面後3碼 (CVC) </label>
+								<input type="text" class="form-control " name="cardCvc" id="cardCvc" placeholder="Card CVC (###)" maxlength="3" required>
 							</div>
+				</div>
 						<!-- Group 2 - Receipt type -->
 							<div class="form-group col-md-6">
 								<label for="receipt">發票</label>
@@ -148,7 +155,8 @@
 						<!-- Group 2 - wallet -->
 							<div class="form-group col-md-4">
 								<label for="walletAmount">會員錢包: ${walletAmount}</label>
-								<input type="text" class="form-control" name="walletAmount" id="walletAmount" placeholder="0.00" required>
+								<input type="text" class="form-control" name="walletAmount" id="walletAmount" placeholder="0.00">
+								
 							</div>
 						</div>
 					<!-- Row 4 -->
@@ -169,9 +177,9 @@
 						</div>
 						<script>
 							function autofill() {
-								var cardNum = document.getElementById("cardNum");
-								var expiry = document.getElementById("expiry");
-								var cvCode = document.getElementById("cvCode");
+								var cardNum = document.getElementById("cardNumber");
+								var expiry = document.getElementById("cardExpiry");
+								var cvCode = document.getElementById("cardCvc");
 								var receipt = document.getElementById("receipt");
 								var couponCode = document.getElementById("couponCode");
 								var walletAmount = document.getElementById("walletAmount");
@@ -179,10 +187,56 @@
 								expiry.value = "09/26";
 								cvCode.value = "335";
 								receipt.value = "personalReceipt";
-								couponCode.value = "";
-								walletAmount.value = "";
+								couponCode.value = "MAR2020LIKEFB";
+								walletAmount.value = "0.00";
 							};
 						</script>
+						<script>
+							var style = {
+								  base: {
+								    color: "#32325d",
+								  }
+								};
+
+							var card = elements.create("card", { style: style });
+								card.mount("#card-element");
+								card.addEventListener('change', function(event) {
+									  var displayError = document.getElementById('card-errors');
+									  if (event.error) {
+									    displayError.textContent = event.error.message;
+									  } else {
+									    displayError.textContent = '';
+									  }
+									});
+								var form = document.getElementById('payment-form');
+
+								form.addEventListener('submit', function(ev) {
+								  ev.preventDefault();
+								  stripe.confirmCardPayment(clientSecret, {
+								    payment_method: {
+								      card: card,
+								      billing_details: {
+								        name: 'Jenny Rosen'
+								      }
+								    }
+								  }).then(function(result) {
+								    if (result.error) {
+								      // Show error to your customer (e.g., insufficient funds)
+								      console.log(result.error.message);
+								    } else {
+								      // The payment has been processed!
+								      if (result.paymentIntent.status === 'succeeded') {
+								        // Show a success message to your customer
+								        // There's a risk of the customer closing the window before callback
+								        // execution. Set up a webhook or plugin to listen for the
+								        // payment_intent.succeeded event that handles any business critical
+								        // post-payment actions.
+								      }
+								    }
+								  });
+								});
+						</script>
+						
 	</div>
 </section>
 

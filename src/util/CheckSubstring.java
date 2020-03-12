@@ -135,6 +135,16 @@ public class CheckSubstring {
 		return slicedStrings;
 	}
 
+	public ArrayList<String> removeEmptyValues(ArrayList<String> targetArrayList) {
+		ArrayList<String> result = new ArrayList<String>();
+		for (int index=0; index<targetArrayList.size(); index++) {
+			if (targetArrayList.get(index).length()!=0) {
+				result.add(targetArrayList.get(index));
+			}
+		}
+		return result;
+	}
+	
 	public ArrayList<String> delimitAtAnyChar(String delimitThisString, String delimiterChar) {
 		ArrayList<Integer> delimiterIndex = new ArrayList<Integer>();
 		// Add first

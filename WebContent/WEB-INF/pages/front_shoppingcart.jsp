@@ -126,8 +126,32 @@
                 </div>
                 <!-- Stripe Checkout button -->
                 <div class="col-6 col-sm-3 border-5 border-dark">
-                    <a href="<jstl:url value="/directStripeCheckoutStep1"/>" class=""><img src="https://imgur.com/ByLq6Pg.png" class="rounded-lg" width=200px alt="Stripe checkout Button"/></a>
+                    <a href="<jstl:url value="/directStripeCheckoutStep1"/>" onclick="writeCartCookie()" class=""><img src="https://imgur.com/ByLq6Pg.png" class="rounded-lg" width=200px alt="Stripe checkout Button"/></a>
                 </div>
+                <script> 
+					function writeCartCookie() {
+						var buyData = $('table#cartTable tbody tr:has(td)').map(function() {
+						var $td =  $('td', this);
+               	        return {
+							ProductID: $td.eq(0).text(), // 第一行
+							ProductName: $td.eq(1).text(), // 第二行
+							ProductCount: $td.eq(3).find("input").val(), // 是input的第三行
+							ProductPrice: $td.eq(4).text() // 第四行              
+						}
+					}).get(); 
+					var cart = JSON.stringify(buyData);
+			        cart = cart.replace(/[\])}[{(]:\s/g, ".");
+			        
+			        cart = cart.replace(/[:",{}/]/g," ");
+			        cart = cart.replace('\[', '.');
+			        cart = cart.replace('\]','.');
+			        cart = cart.replace(/\s/g, '.');
+			        console.log(cart);
+			        
+			       	cart = cart.trim();
+					document.cookie = 'cartCookie='+cart;
+                }
+                </script>
             </div>
         </div>
     </div>
@@ -183,10 +207,12 @@
         	                 ProductPrice: $td.eq(4).text() // 第四行              
         	               }
         	}).get(); 
-       console.log("buyData Array are: ")
+       console.log("buyData Array are: ");
        console.log(buyData); // 1 arrayJson
        console.log(JSON.stringify(buyData)); //2 JSON.stringify, 可能這兩種資料
-       // console.log(JSON.parse(JSON.stringify(buyData))); 
+       
+       
+ 
   		
   		$.ajax({
   			type : 'POST', // 送資料POST

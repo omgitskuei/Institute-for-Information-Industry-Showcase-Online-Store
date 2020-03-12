@@ -63,23 +63,23 @@ public class StripePaymentController {
 		return orderItem;
 	}
 	
-	private Customer createNewCustomer (String email) throws StripeException {
-		System.out.println("	BEGIN: createNewCustomer(String)");
-		// Create new Stripe Customer
-		Map<String, Object> customerParam = new HashMap<String, Object>();
-		customerParam.put("email", email);
-		System.out.println("Customer"+customerParam);
-		
-		Customer newCustomer = Customer.create(customerParam);
-		System.out.println("New created customer ID: " + newCustomer.getId());
-
-		// Print out all customer info
-		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gson.toJson(customerParam));
-		System.out.println("	FINISH: createNewCustomer(String)");
-		return newCustomer;
-	}
+//	private Customer createNewCustomer (String email) throws StripeException {
+//		System.out.println("	BEGIN: createNewCustomer(String)");
+//		// Create new Stripe Customer
+//		Map<String, Object> customerParam = new HashMap<String, Object>();
+//		customerParam.put("email", email);
+//		System.out.println("Customer"+customerParam);
+//		
+//		Customer newCustomer = Customer.create(customerParam);
+//		System.out.println("New created customer ID: " + newCustomer.getId());
+//
+//		// Print out all customer info
+//		
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//		System.out.println(gson.toJson(customerParam));
+//		System.out.println("	FINISH: createNewCustomer(String)");
+//		return newCustomer;
+//	}
 	
 	@RequestMapping(path="/stripeCheckout", method = RequestMethod.POST)
 	public void callStripePay(
@@ -122,12 +122,9 @@ public class StripePaymentController {
 			lineItem.put("quantity", 1);
 			lineItems.add(lineItem);
 			params.put("line_items", lineItems);
-
 			HttpSession thisSession = request.getSession(false);
-			
 			params.put("success_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directCheckoutSuccess?session_id="+thisSession.getId());
 			params.put("cancel_url", "https://420b76e4.ngrok.io/EEIT111FinalProject/directshoppingcart");
-
 			Session session = Session.create(params);
 			
 			
