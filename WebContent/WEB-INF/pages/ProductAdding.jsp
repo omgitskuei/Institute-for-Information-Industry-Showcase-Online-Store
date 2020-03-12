@@ -14,7 +14,7 @@
 <body>
 <!-- NAVBAR -->
 	<%@include file="/WEB-INF/pages/AdminNavbar.jsp"%>
-
+<div class="container">
 	<h1>庫存資料內容修改</h1>
 
 	<form:form method="POST" action="saveProduct" modelAttribute="product">
@@ -79,3 +79,4 @@
 							 value="儲存"
 								>儲存</form:button>
 			</form:form>
+			  </div>
