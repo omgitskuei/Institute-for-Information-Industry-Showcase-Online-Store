@@ -1,6 +1,6 @@
-# Welcome to EEIT111FinalProject
+# Welcome to 
 
-This is Taiwan 資策會 Digital Talent Cultivation Center/Digital Education Institute, EEIT Class 111 Java development class Team 1 Final Project. It's an online shopping cart website for selling fruits. Its features include; Login, Search products, Add products to cart, Check out cart, Send security emails to users, Send receipt emails to users, Make payments, Admin login, Admin inventory management, Admin users database management, Admin catalogue management.
+This is Taiwan Institute for Information Industry (資訊工業策進會)'s Digital Talent Cultivation Center/Digital Education Institute (EEIT), Java Cross-platform Development (Java跨平臺軟體工程師養成班), Class 111  Team 1 Final Project. It's an online store for selling groceries. Its features include; Login, Search products, Add products to cart, Check out cart, Send security emails to users, Send receipt emails to users, Make payments, Admin login, Admin inventory management, Admin users database management, Admin catalogue management.
 
 ## Goals
 This project should demonstrate application of back-end development technical skills and principles;
