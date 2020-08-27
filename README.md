@@ -31,8 +31,7 @@ This project should demonstrate application of back-end development technical sk
 Kuei - omgitskuei | Jerry - studentmkp | Thomas Lu - Thomas85198 | Aming - mingjuang | Zhongchen - yoyyoyman | Alex - alexslashland | Zach - CHIA-HAOKUO
 
 ## Links
-Our [Github repository](https://github.com/omgitskuei/EEIT111FinalProject).
-Our [Github pages](https://omgitskuei.github.io/EEIT111FinalProject/).
+Our [Github repository](https://github.com/omgitskuei/Institute-for-Information-Industry-Showcase-Online-Store).
 
 ## Support
 Kuei - omgitskuei
