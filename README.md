@@ -5,27 +5,25 @@ Source code is made available here on Github for education purposes and job hunt
 
 ## Goals
 This project should demonstrate application of back-end development technical skills and principles;
-1) MVC structure
+1) Spring MVC
 2) Hibernate
-3) Spring MVC
 4) MSSQL, T-SQL
 5) Java 8 (Openjdk 1.8.0)
 6) Git, Github, Github Desktop
-7) Notepad++, Atom
-8) Eclipse
-9) Apache Tomcat 9
-10) Google Tink
-11) Ajax
-12) Apache Common Email
-13) Javascript
-14) JQuery
-15) HTML
-16) CSS
-17) VS Code
-18) Maven
-19) Stripe Credit Card Payment API
-20) Paypal Payment API
-21) Reading/Writing encrypted Cookies
+7) Eclipse, VSCode, Notepad++, Atom
+8) Apache Tomcat 9
+9) Google Tink
+10) JQuery Ajax
+11) Apache Common Email
+12) Javascript
+13) JQuery
+14) HTML
+15) CSS
+16) Maven
+17) Stripe Credit Card Payment API
+18) Paypal Payment API
+19) Reading/Writing encrypted Cookies
+20) Reading/Writing to Browser Cache
 
 ## Members/Contributors
 Kuei - omgitskuei | Jerry - studentmkp | Thomas Lu - Thomas85198 | Aming - mingjuang | Zhongchen - yoyyoyman | Alex - alexslashland | Zach - CHIA-HAOKUO
